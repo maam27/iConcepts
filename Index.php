@@ -11,6 +11,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/fontawesome/fontawesome-all.css" rel="stylesheet">
 </head>
 
 <body>
@@ -56,6 +57,9 @@
             <h1 class="display-3">Hello, world!</h1>
             <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
             <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+
+            <i class="fas fa-code-branch"></i>
+
         </div>
     </div>
 
