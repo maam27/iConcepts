@@ -2,6 +2,10 @@
     font-family: 'Nanum Gothic', sans-serif;
 }
 
+body{
+    background-color: #D0BDA6;
+}
+
 h1,h2,h3,h4,h5,h6{
     font-family: 'Roboto Condensed', sans-serif;
 }
@@ -37,6 +41,7 @@ main > div.container{
 }
 
 .kleineMargin{
+    color:black;
     margin: 10px;
 
 }
@@ -62,6 +67,12 @@ nav a.paginatitel{
 
 nav{
     background-color: #F4512C ;
+    height:56px;
+}
+
+nav img{
+    position:relative;
+    right:16px;
 }
 
 

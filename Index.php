@@ -19,6 +19,7 @@
         ?>
 
         <main>
+            <br><br><br>
             <div class="container">
                 <div class="row">
                     <h2>Veilingen die bijna verlopen.</h2>
