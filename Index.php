@@ -21,8 +21,24 @@
         <main>
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6">
-                        ding 1
+                    <h2>Veilingen die bijna verlopen.</h2>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">1</div>
+                            <div class="col-4">2</div>
+                            <div class="col-4">3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h2>Veilingen die bijna verlopen.</h2>
+                    <div class="col-12">
+                        <div class="d-flex justify-content-around">
+                            <div class="">1</div>
+                            <div class="">2</div>
+                            <div class="">3</div>
+                        </div>
                     </div>
                 </div>
             </div>
