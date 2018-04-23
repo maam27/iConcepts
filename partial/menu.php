@@ -12,7 +12,7 @@
                 <a href="#">Registreren</a>
             </li>
             <li class="nav-item">
-                <a href="#">Inl2323oggen</a>
+                <a href="#">Inloggen</a>
             </li>
         </ul>
 
@@ -22,4 +22,21 @@
         </form>
     </div>
 </nav>
+<br><br><br>
+
+<div class="d-none d-lg-block submenu">
+    <ul class="navbar-nav mr-auto d-flex flex-row flex-wrap justify-content-around">
+        <li><a class="kleineMargin" href="#">Category1</a></li>
+        <li><a class="kleineMargin" href="#">Category1</a></li>
+        <li><a class="kleineMargin" href="#">Category1</a></li>
+        <li><a class="kleineMargin" href="#">Category1</a></li>
+        <li><a class="kleineMargin" href="#">Category1</a></li>
+        <li><a class="kleineMargin" href="#">Category1</a></li>
+        <li><a class="kleineMargin" href="#">Category1</a></li>
+        <li><a class="kleineMargin" href="#">Category1</a></li>
+    </ul>
+</div>
+
+
+
 

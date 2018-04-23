@@ -21,6 +21,7 @@ main > div.container{
     main > div.container{
         margin-top: 70px;
     }
+
 }
 
 @media (min-width: 992px) {
@@ -33,6 +34,11 @@ main > div.container{
     main > div.container{
         margin-top: 56px;
     }
+}
+
+.kleineMargin{
+    margin: 10px;
+
 }
 
 nav div ul{
@@ -58,8 +64,17 @@ nav{
     background-color: #F4512C ;
 }
 
+
 nav form button{
     background-color:white;
     border-color: white;
     color:black;
+}
+
+.submenu{
+    width:100%;
+    background-color: #F9CB9C;
+    padding:20px;
+    position:fixed;
+    top:50px;
 }
