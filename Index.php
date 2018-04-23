@@ -24,9 +24,9 @@
                     <h2>Veilingen die bijna verlopen.</h2>
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-4">1</div>
-                            <div class="col-4">2</div>
-                            <div class="col-4">3</div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">1</div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">2</div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">3</div>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     <h2>Veilingen die bijna verlopen.</h2>
                     <div class="col-12">
                         <div class="d-flex justify-content-around">
-                            <div class="" style="background:salmon;width:200px;">1</div>
+                            <div class="d-hidden d-md-block" style="background:salmon;width:200px;">1</div>
                             <div class="" style="background:salmon;width:200px;">2</div>
                             <div class="" style="background:salmon;width:200px;">3</div>
                         </div>
