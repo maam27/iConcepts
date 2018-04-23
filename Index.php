@@ -12,6 +12,7 @@
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
         <link href="css/fontawesome/fontawesome-all.css" rel="stylesheet">
+        <link href="css/iconcepts.css" rel="stylesheet">
     </head>
 
     <body>
@@ -62,7 +63,7 @@
         <footer class="container">
             <p>&copy; Company 2017-2018</p>
         </footer>
-        
+
         <?php
             include_once 'partial/scripts.php';
         ?>
