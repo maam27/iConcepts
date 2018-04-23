@@ -18,7 +18,11 @@
             include_once 'partial/menu.php';
         ?>
 
-        <main role="main">
+
+
+
+
+
 
             <!-- Main jumbotron for a primary marketing message or call to action -->
             <div class="jumbotron">
