@@ -18,6 +18,14 @@
             include_once 'partial/menu.php';
         ?>
 
+        <main>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        ding 1
+                    </div>
+                </div>
+            </div>
 
 
 
