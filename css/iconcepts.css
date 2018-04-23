@@ -6,31 +6,8 @@ h1,h2,h3,h4,h5,h6{
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-/* offset for the top menu*/
-main > div.container{
-    margin-top: 56px;
+
+nav div ul{
+    width: 100% ;
 }
 
-@media (min-width: 576px) {
-    main > div.container{
-        margin-top: 56px;
-    }
-}
-
-@media (min-width: 768px) {
-    main > div.container{
-        margin-top: 70px;
-    }
-}
-
-@media (min-width: 992px) {
-    main > div.container{
-        margin-top: 56px;
-    }
-}
-
-@media (min-width: 1200px) {
-    main > div.container{
-        margin-top: 56px;
-    }
-}
