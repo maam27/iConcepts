@@ -36,7 +36,7 @@
                     <div class="col-12">
                         <div class="d-flex justify-content-around">
                             <div class="" style="background:salmon;width:200px;">1</div>
-                            <div class="" style="background:salmon;width:200px;">2</div>
+                            <div class="" style="background:salmon;width:20px;">2</div>
                             <div class="" style="background:salmon;width:200px;">3</div>
                         </div>
                     </div>
