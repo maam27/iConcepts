@@ -11,3 +11,27 @@ nav div ul{
     width: 100% ;
 }
 
+nav div ul li a{
+    color:black;
+    font-weight:normal;
+}
+
+nav a.paginatitel{
+    color:black;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    font-weight:bold;
+}
+
+
+nav{
+    background-color: #F4512C ;
+}
+
+nav form button{
+    background-color:white;
+    border-color: white;
+    color:black;
+}

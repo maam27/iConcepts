@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bd184906-a3d0-4a56-a4b7-89fd7a075f66" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/bootstrap/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/bootstrap/bootstrap.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/iconcepts.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/iconcepts.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/partial/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/partial/menu.php" afterDir="false" />
     </list>
@@ -15,29 +16,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="menu.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="menu.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/partial/menu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+            <state relative-caret-position="51">
+              <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="iconcepts.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="iconcepts.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/iconcepts.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+              <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -45,8 +37,8 @@
       <file leaf-file-name="bootstrap.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/bootstrap/bootstrap.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="1842" column="5" selection-start-line="1842" selection-start-column="1" selection-end-line="1842" selection-end-column="5" />
+            <state relative-caret-position="276">
+              <caret line="3948" column="21" lean-forward="true" selection-start-line="3945" selection-start-column="2" selection-end-line="3948" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -66,6 +58,10 @@
       <find>md-center</find>
       <find>min-width</find>
       <find>form</find>
+      <find>@media</find>
+      <find>@media (min-width:</find>
+      <find>form-inline</find>
+      <find>navbar-brand</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -158,12 +154,12 @@
       <updated>1524471262423</updated>
       <workItem from="1524471263527" duration="17000" />
       <workItem from="1524471418700" duration="1860000" />
-      <workItem from="1524473430659" duration="3843000" />
+      <workItem from="1524473430659" duration="5957000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5307000" />
+    <option name="totallyTimeSpent" value="7421000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -268,29 +264,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="85">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/bootstrap/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="1842" column="5" selection-start-line="1842" selection-start-column="1" selection-end-line="1842" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/partial/menu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+        <state relative-caret-position="276">
+          <caret line="3948" column="21" lean-forward="true" selection-start-line="3945" selection-start-column="2" selection-end-line="3948" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/iconcepts.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/partial/menu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
         </state>
       </provider>
     </entry>
