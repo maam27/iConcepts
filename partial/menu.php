@@ -22,7 +22,7 @@
         </form>
     </div>
 </nav>
-<br><br><br>
+
 
 <div class="d-none d-lg-block submenu">
     <ul class="navbar-nav mr-auto d-flex flex-row flex-wrap justify-content-around">
