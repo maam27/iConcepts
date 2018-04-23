@@ -23,21 +23,12 @@
                 <div class="row">
                     <h2>Veilingen die bijna verlopen.</h2>
                     <div class="col-12">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6 col-lg-4">1</div>
-                            <div class="col-sm-12 col-md-6 col-lg-4">2</div>
-                            <div class="col-sm-12 col-md-6 col-lg-4">3</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <h2>Veilingen die bijna verlopen.</h2>
-                    <div class="col-12">
-                        <div class="d-flex justify-content-around">
-                            <div class="d-hidden d-md-block" style="background:salmon;width:200px;">1</div>
-                            <div class="" style="background:salmon;width:200px;">2</div>
-                            <div class="" style="background:salmon;width:200px;">3</div>
+                        <div class="d-flex justify-content-around flex-wrap">
+                            <div class="" style="background:salmon;width:200px;">altijd</div>
+                            <div class="" style="background:salmon;width:200px;">altijd</div>
+                            <div class="d-none d-md-block" style="background:salmon;width:200px;">tablet+</div>
+                            <div class="d-none d-lg-block" style="background:salmon;width:200px;">laptop+</div>
+                            <div class="d-none d-xl-block" style="background:salmon;width:200px;">large monitors+</div>
                         </div>
                     </div>
                 </div>
@@ -86,7 +77,6 @@
         <footer class="container">
             <p>&copy; Company 2017-2018</p>
         </footer>
-
         <?php
             include_once 'partial/scripts.php';
         ?>
