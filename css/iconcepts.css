@@ -9,33 +9,81 @@ body{
 h1,h2,h3,h4,h5,h6{
     font-family: 'Roboto Condensed', sans-serif;
 }
+/*top navigatie*/
+
+nav div ul{
+    width: 100% ;
+}
+
+nav div ul li a{
+    color:black;
+    font-weight:normal;
+}
+
+nav div ul li a:hover{
+    color:white;
+}
+
+nav a.paginatitel{
+    color:black;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    font-weight:bold;
+}
+
+nav{
+    background-color: #F4512C;
+}
+
+nav img{
+    position:relative;
+    margin:-8px;
+    right:8px;
+    max-width: 200px;
+    max-height: 56px;
+    width: auto;
+}
+
+nav form button{
+    background-color:white;
+    border-color: white;
+    color:black;
+}
+
+@media (max-width: 767px) {
+    nav div ul li:first-child {
+        margin-top: 1em;
+    }
+}
 
 /* offset for the top menu*/
 main > div.container{
-    margin-top: 56px;
+    margin-top: 62px;
 }
 
 @media (min-width: 576px) {
     main > div.container{
-        margin-top: 56px;
+        margin-top: 62px;
     }
 }
 
 @media (min-width: 768px) {
     main > div.container{
-        margin-top: 56px;
+        margin-top: 62px;
     }
 }
 
 @media (min-width: 992px) {
     main > div.container{
-        margin-top: 100px;
+        margin-top: 108px;
     }
 }
 
 @media (min-width: 1200px) {
     main > div.container{
-        margin-top: 100px;
+        margin-top: 108px;
     }
 }
 
@@ -66,43 +114,6 @@ main > div.container{
 
 }
 
-nav div ul{
-    width: 100% ;
-}
-
-nav div ul li a{
-    color:black;
-    font-weight:normal;
-}
-
-nav a.paginatitel{
-    color:black;
-    padding-top: 0.3125rem;
-    padding-bottom: 0.3125rem;
-    margin-right: 1rem;
-    font-size: 1.25rem;
-    font-weight:bold;
-}
-
-
-nav{
-    background-color: #F4512C;
-
-}
-
-nav img{
-    position:relative;
-    margin:-8px;
-    padding:5px;
-    right:8px;
-}
-
-
-nav form button{
-    background-color:white;
-    border-color: white;
-    color:black;
-}
 
 .submenu{
     width:100%;
