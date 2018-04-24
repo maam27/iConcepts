@@ -86,13 +86,15 @@ nav a.paginatitel{
 
 
 nav{
-    background-color: #F4512C ;
-    height:56px;
+    background-color: #F4512C;
+
 }
 
 nav img{
     position:relative;
-    right:16px;
+    margin:-8px;
+    padding:5px;
+    right:8px;
 }
 
 
@@ -108,6 +110,7 @@ nav form button{
     padding:10px;
     position:fixed;
     top:56px;
+    z-index:10;
 }
 
 .veilingsPaginaImage{
@@ -148,4 +151,6 @@ nav form button{
 }
 .biedingenSection ul li{
 font-size:0.9rem;
+    margin-top:5px;
+    
 }
