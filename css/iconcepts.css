@@ -23,20 +23,19 @@ main > div.container{
 
 @media (min-width: 768px) {
     main > div.container{
-        margin-top: 70px;
+        margin-top: 56px;
     }
-
 }
 
 @media (min-width: 992px) {
     main > div.container{
-        margin-top: 56px;
+        margin-top: 100px;
     }
 }
 
 @media (min-width: 1200px) {
     main > div.container{
-        margin-top: 56px;
+        margin-top: 100px;
     }
 }
 
