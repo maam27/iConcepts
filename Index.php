@@ -25,7 +25,13 @@
                     <h2>Veilingen die bijna verlopen.</h2>
                     <div class="col-12">
                         <div class="d-flex justify-content-around flex-wrap">
-                            <div class="" style="background:salmon;width:200px;">altijd</div>
+                            <div class="productblock">
+                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>altijd</p>
+                                </div>
+
+                            </div>
                             <div class="" style="background:salmon;width:200px;">altijd</div>
                             <div class="d-none d-md-block" style="background:salmon;width:200px;">tablet+</div>
                             <div class="d-none d-lg-block" style="background:salmon;width:200px;">laptop+</div>
@@ -44,7 +50,15 @@
             <div class="jumbotron">
                 <div class="container">
                     <h1 class="display-3">Hello, world!</h1>
-                    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                    <p>Lorem Ipsum is unattractive, both inside and out. I fully understand why it’s former users left it for something else. They made a good decision. You're telling the enemy exactly what you're going to do. No wonder you've been fighting Lorem Ipsum your entire adult life.
+
+                        You know, it really doesn’t matter what you write as long as you’ve got a young, and beautiful, piece of text.
+
+                        I’m the best thing that ever happened to placeholder text. I think the only difference between me and the other placeholder text is that I’m more honest and my words are more beautiful. Lorem Ipsum better hope that there are no "tapes" of our conversations before he starts leaking to the press! I'm speaking with myself, number one, because I have a very good brain and I've said a lot of things.
+
+                        The concept of Lorem Ipsum was created by and for the Chinese in order to make U.S. design jobs non-competitive. I know words. I have the best words. When other websites give you text, they’re not sending the best. They’re not sending you, they’re sending words that have lots of problems and they’re bringing those problems with us. They’re bringing mistakes. They’re bringing misspellings. They’re typists… And some, I assume, are good words. We have so many things that we have to do better... and certainly ipsum is one of them.
+
+                        I think the only difference between me and the other placeholder text is that I’m more honest and my words are more beautiful. This placeholder text is gonna be HUGE.</p>
                     <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
                 </div>
             </div>
