@@ -12,30 +12,30 @@ h1,h2,h3,h4,h5,h6{
 
 /* offset for the top menu*/
 main > div.container{
-    margin-top: 56px;
+    margin-top: 62px;
 }
 
 @media (min-width: 576px) {
     main > div.container{
-        margin-top: 56px;
+        margin-top: 62px;
     }
 }
 
 @media (min-width: 768px) {
     main > div.container{
-        margin-top: 56px;
+        margin-top: 62px;
     }
 }
 
 @media (min-width: 992px) {
     main > div.container{
-        margin-top: 100px;
+        margin-top: 108px;
     }
 }
 
 @media (min-width: 1200px) {
     main > div.container{
-        margin-top: 100px;
+        margin-top: 108px;
     }
 }
 
@@ -75,6 +75,10 @@ nav div ul li a{
     font-weight:normal;
 }
 
+nav div ul li a:hover{
+    color:white;
+}
+
 nav a.paginatitel{
     color:black;
     padding-top: 0.3125rem;
@@ -84,7 +88,6 @@ nav a.paginatitel{
     font-weight:bold;
 }
 
-
 nav{
     background-color: #F4512C;
 
@@ -93,15 +96,19 @@ nav{
 nav img{
     position:relative;
     margin:-8px;
-    padding:5px;
     right:8px;
 }
-
 
 nav form button{
     background-color:white;
     border-color: white;
     color:black;
+}
+
+@media (max-width: 767px) {
+    nav div ul li:first-child {
+        margin-top: 1em;
+    }
 }
 
 .submenu{
@@ -152,5 +159,4 @@ nav form button{
 .biedingenSection ul li{
 font-size:0.9rem;
     margin-top:5px;
-    
 }

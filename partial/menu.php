@@ -13,10 +13,10 @@
                     <button class="btn my-2 my-sm-0" type="submit">Zoeken</button>
                 </form></li>
             <li class="nav-item">
-                <a href="#">Registreren</a>
+                <a href="registreer.php">Registreren</a>
             </li>
             <li class="nav-item">
-                <a href="#">Inloggen</a>
+                <a href="login.php">Inloggen</a>
             </li>
         </ul>
     </div>
