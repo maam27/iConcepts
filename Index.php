@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <!--<link rel="icon" href="favicon.ico">-->
+        <link rel="icon" href="favicon.ico">
 
         <title>Jumbotron Template for Bootstrap Lool</title>
         <?php
@@ -32,11 +32,35 @@
                                 </div>
 
                             </div>
-                            <div class="" style="background:salmon;width:200px;">altijd</div>
-                            <div class="d-none d-md-block" style="background:salmon;width:200px;">tablet+</div>
-                            <div class="d-none d-lg-block" style="background:salmon;width:200px;">laptop+</div>
-                            <div class="d-none d-xl-block" style="background:salmon;width:200px;">large monitors+</div>
-                        </div>
+                            <div class="productblock d-none d-sm-block">
+                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+
+                            </div>
+                            <div class="productblock d-none d-md-block">
+                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+
+                            </div>
+                            <div class="productblock d-none d-lg-block">
+                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+
+                            </div>
+                            <div class="productblock d-none d-xl-block">
+                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+
+                            </div>
+                         </div>
                     </div>
                 </div>
             </div>
