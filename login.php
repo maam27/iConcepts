@@ -19,7 +19,19 @@ include_once 'partial/menu.php';
 ?>
 
 <main>
-    <br><br><br>
+    <div class="container">
+        <form class="form-inline mt-2 mt-md-0 d-flex flex-row flex-nowrap">
+            <input class="form-control mr-sm-2" type="text" placeholder="Vul hier zoektermen in" aria-label="Search">
+            <button class="btn my-2 my-sm-0" type="submit">Zoeken</button>
+        </form>
+    </div>
 </main>
+
+<footer class="container">
+    <p>&copy; Company 2017-2018</p>
+</footer>
+<?php
+include_once 'partial/scripts.php';
+?>
 </body>
 </html>
