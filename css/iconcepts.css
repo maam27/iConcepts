@@ -39,6 +39,23 @@ main > div.container{
     }
 }
 
+/*product block*/
+.productblock{
+    background:#F2552C;
+    width:200px;
+    padding:0.2em;
+    margin-bottom: 1em;
+}
+
+.productblock > .img-thumbnail{
+    padding:0;
+    border:none;
+}
+
+.productblock p {
+    margin:0;
+}
+
 .kleineMargin{
     color:black;
     margin: 10px;
