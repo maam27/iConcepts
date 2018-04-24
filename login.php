@@ -20,10 +20,14 @@ include_once 'partial/menu.php';
 
 <main>
     <div class="container">
-        <form class="form-inline mt-2 mt-md-0 d-flex flex-row flex-nowrap">
-            <input class="form-control mr-sm-2" type="text" placeholder="Vul hier zoektermen in" aria-label="Search">
-            <button class="btn my-2 my-sm-0" type="submit">Zoeken</button>
+        <h1>Login</h1>
+        <form method="Post" action="#">
+            <input id="username" name="username" type="email"        placeholder="E-mail"    required    value="<?=if_set('username','post')?>">
+            <input id="password" name="password" type="password"    placeholder="Wachtwoord"  required>
+            <button>login</button>
         </form>
+        <p>Heeft u nog geen account klik <a class="no-margin" href="abonnementen.php">hier</a> om naar registratie te gaan</p>
+
     </div>
 </main>
 
