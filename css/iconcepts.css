@@ -1,5 +1,5 @@
 *{
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 body{
@@ -54,8 +54,12 @@ main > div.container{
 
 .productblock p {
     margin:0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
+/**/
 .kleineMargin{
     color:black;
     margin: 10px;
