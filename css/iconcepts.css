@@ -160,3 +160,18 @@ nav form button{
 font-size:0.9rem;
     margin-top:5px;
 }
+
+.loginRegistreerSection{
+    padding:5%;
+    border-radius:20px;
+    height:100%;
+    margin-top: 20%;
+    background-color:white;
+}
+
+.loginRegistreerSection button{
+    margin-top:1rem;
+}
+.onderkantLoginRegistreer{
+    margin-top:1rem;
+}
