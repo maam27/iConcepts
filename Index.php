@@ -19,7 +19,6 @@
         ?>
 
         <main>
-            <br><br><br>
             <div class="container">
                 <div class="row">
                     <h2>Veilingen die bijna verlopen.</h2>
@@ -30,37 +29,63 @@
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
-
                             </div>
                             <div class="productblock d-none d-sm-block">
                                 <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
-
                             </div>
                             <div class="productblock d-none d-md-block">
                                 <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
-
                             </div>
                             <div class="productblock d-none d-lg-block">
                                 <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
-
                             </div>
                             <div class="productblock d-none d-xl-block">
                                 <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
-
                             </div>
-                         </div>
+
+                            <div class="productblock d-none d-xl-block">
+                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock d-none d-xl-block">
+                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock d-none d-xl-block">
+                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock d-none d-xl-block">
+                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock d-none d-xl-block">
+                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
