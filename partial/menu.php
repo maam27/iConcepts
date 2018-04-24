@@ -23,6 +23,7 @@
 </nav>
 
 
+
 <div class="d-none d-lg-block submenu">
     <ul class="navbar-nav mr-auto d-flex flex-row flex-wrap justify-content-around">
         <li><a class="kleineMargin" href="#">Category1</a></li>
@@ -35,7 +36,6 @@
         <li><a class="kleineMargin" href="#">Category8</a></li>
     </ul>
 </div>
-
 
 
 

@@ -108,5 +108,44 @@ nav form button{
     padding:10px;
     position:fixed;
     top:56px;
+}
 
+.veilingsPaginaImage{
+   width:552px;
+    height:750px;
+    margin-bottom:20px;
+}
+
+.timerText{
+
+}
+
+.verkoperSection{
+    border-radius:20px;
+    padding: 20px;
+    background-color:white;
+    margin-bottom:100px;
+}
+
+.verkoperSection h4{
+    color:#F4512C;
+    margin-bottom:1.5rem;
+}
+
+.biedingenSection{
+    border-radius:20px;
+    padding: 20px;
+    background-color:white;
+}
+
+.biedingenSection h4{
+    color:#F4512C;
+    margin-bottom:1.5rem;
+}
+
+.biedingenSection ul{
+    list-style-type:none;
+}
+.biedingenSection ul li{
+font-size:0.9rem;
 }
