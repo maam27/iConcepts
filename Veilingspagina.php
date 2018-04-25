@@ -24,7 +24,7 @@ include_once 'partial/menu.php';
         <div class="row">
             <div class="col-md-6">
                 <figure class="d-flex flex-column justify-content-between align-items-start">
-                    <img class="img-thumbnail veilingsPaginaImage" src="images/TrumpPlaceholder.jpg"> </img>
+                    <img class="img-thumbnail auction-page-image" src="images/TrumpPlaceholder.jpg"> </img>
                     <p>Hier komt de productsomschrijving te staan, dit kan natuurlijk een heel lang verhaal zijn. Daarom moet je
                         er goed voor zorgen dat je de breedte aan laat passen. Want voor je het weet heb je een hele muur aan text,
                         en verandert de pagina niet goed mee. Dat zou zeer jammer zijn, en daarom proberen we dit ook te
@@ -42,7 +42,7 @@ include_once 'partial/menu.php';
                         <p> Bestaand uit verschillende zinnen.</p>
                         <p>Ook komen er bepaalde attributen te staan.</p>
                     </div>
-                    <div class="d-flex flex-column justify-content-end align-items-start biedingenSection">
+                    <div class="d-flex flex-column justify-content-end align-items-start auction-section">
                         <h4> Hier komen de biedingen te staan. </h4>
                         <ul>
                             <li>Bod 1 - Barry</li>

@@ -24,14 +24,14 @@
 
 <div class="d-none d-lg-block submenu">
     <ul class="navbar-nav mr-auto d-flex flex-row flex-wrap justify-content-around">
-        <li><a class="kleineMargin" href="#">Category1</a></li>
-        <li><a class="kleineMargin" href="#">Category2</a></li>
-        <li><a class="kleineMargin" href="#">Category3</a></li>
-        <li><a class="kleineMargin" href="#">Category4</a></li>
-        <li><a class="kleineMargin" href="#">Category5</a></li>
-        <li><a class="kleineMargin" href="#">Category6</a></li>
-        <li><a class="kleineMargin" href="#">Category7</a></li>
-        <li><a class="kleineMargin" href="#">Category8</a></li>
+        <li><a class="text-black-50" href="#">Category1</a></li>
+        <li><a class="text-black-50" href="#">Category2</a></li>
+        <li><a class="text-black-50" href="#">Category3</a></li>
+        <li><a class="text-black-50" href="#">Category4</a></li>
+        <li><a class="text-black-50" href="#">Category5</a></li>
+        <li><a class="text-black-50" href="#">Category6</a></li>
+        <li><a class="text-black-50" href="#">Category7</a></li>
+        <li><a class="text-black-50" href="#">Category8</a></li>
     </ul>
 </div>
 

@@ -21,7 +21,7 @@ include_once 'partial/menu.php';
     </div>
     <div class="container">
         <!-- Example row of columns -->
-        <div class="row">
+      <!-- --> <div class="row">
             <div class="col-md-6">
                 <div class="border-veiling-preview d-flex flex-column justify-content-end align-items-center">
                     <h1> Broodjeeeeh kebab</h1>
@@ -58,7 +58,7 @@ include_once 'partial/menu.php';
                         </figure>
 
                     </div>
-                    <div class="d-flex flex-column justify-content-end align-items-start biedingenSection">
+                    <div class="d-flex flex-column justify-content-end align-items-start auction-section">
                         <h4> Hier komen 'opmerkingen' te staan, gepost door andere gebruikers. </h4>
                         <ul>
                             <li>Super goede verkoper, echt blij mee. </li>
@@ -74,6 +74,8 @@ include_once 'partial/menu.php';
                 </div>
             </div>
         </div>
+       <!-- -->
+        <p>Hier komen advertenties.</p>
     </div> <!-- /container -->
 </main>
 
