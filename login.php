@@ -38,7 +38,6 @@ if(isset($_POST)){
             <p class="bottom-login-register-form">Heeft u al een account klik <a class="no-margin" href="login.php">hier</a> om naar inloggen te gaan</p>
         </div>
     </div>
-
 </main>
 
 <?php

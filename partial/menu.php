@@ -13,11 +13,12 @@ if( !isset($_SESSION)){
             <li class="nav-item">
                 <a href="index.php">Thuispagina<span class="sr-only">(current)</span></a>
             </li>
-            <li>  <form class="form-inline mt-2 mt-md-0 d-flex flex-row flex-nowrap" method="get" action="veilingspagina.php">
+            <li>
+                <form class="form-inline mt-2 mt-md-0 d-flex flex-row flex-nowrap" method="get" action="veilingspagina.php">
                     <input class="form-control mr-sm-2" type="text" placeholder="Vul hier zoektermen in" aria-label="Search">
                     <button class="btn my-2 my-sm-0" type="submit">Zoeken</button>
-                </form></li>
-
+                </form>
+            </li>
             <?php
             if(!isset($_SESSION['user'])) {
             ?>
@@ -30,7 +31,9 @@ if( !isset($_SESSION)){
             <?php
                 } else{
                 ?>
+                <li class="nav-item">
                     <a href="logout.php">Uitloggen</a>
+                </li>
                 <?php
             }
             ?>
