@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse " id="navbarCollapse">
         <ul class="navbar-nav mr-auto d-flex justify-content-around align-items-center">
             <li class="nav-item">
-                <a href="#">Thuispagina<span class="sr-only">(current)</span></a>
+                <a href="index.php">Thuispagina<span class="sr-only">(current)</span></a>
             </li>
             <li>  <form class="form-inline mt-2 mt-md-0 d-flex flex-row flex-nowrap">
                     <input class="form-control mr-sm-2" type="text" placeholder="Vul hier zoektermen in" aria-label="Search">
@@ -21,8 +21,6 @@
         </ul>
     </div>
 </nav>
-
-
 
 <div class="d-none d-lg-block submenu">
     <ul class="navbar-nav mr-auto d-flex flex-row flex-wrap justify-content-around">
