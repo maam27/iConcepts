@@ -17,7 +17,6 @@ if(isset($_POST)){
         if(login_user($db,$_POST['username'],$_POST['password'])){
             redirect("index.php");
         }
-
     }
 }
 ?>
