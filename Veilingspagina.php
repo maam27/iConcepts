@@ -1,10 +1,7 @@
-<?
+<?php
 require_once 'partial/page_head.php';
 ?>
     <title>Jumbotron Template for Bootstrap Lool</title>
-    <?php
-        require_once 'partial/styles.php';
-    ?>
 </head>
 
 <body>
@@ -13,7 +10,7 @@ include_once 'partial/menu.php';
 ?>
 
 <main>
-<br><br>
+
     <div class="container">
         <div class="row justify-content-center">
             <h2 class="text-center">[Naam van wat er wordt geveildtdt]</h2>
@@ -25,12 +22,13 @@ include_once 'partial/menu.php';
             <div class="col-md-6">
                 <figure class="d-flex flex-column justify-content-between align-items-start">
                     <img class="img-thumbnail auction-page-image" src="images/TrumpPlaceholder.jpg"> </img>
-                    <p>Hier komt de productsomschrijving te staan, dit kan natuurlijk een heel lang verhaal zijn. Daarom moet je
+                    <p><strong>Hoofdcategory -> subcategory1 -> ... subcategory6</strong></p>
+                    <p><strong>Veilingnummer</strong> : 14</p>
+                    <p><strong>Productomschrijving</strong>: Hier komt de productsomschrijving te staan, dit kan natuurlijk een heel lang verhaal zijn. Daarom moet je
                         er goed voor zorgen dat je de breedte aan laat passen. Want voor je het weet heb je een hele muur aan text,
                         en verandert de pagina niet goed mee. Dat zou zeer jammer zijn, en daarom proberen we dit ook te
                         voorkomen, zodat de pagina er leuk uitziet.</p>
-                    <p><strong>Veilingnummer</strong> : 14</p>
-                    <p>Hoofdcategory -> subcategory1 -> ... subcategory6</p>
+
                 </figure>
             </div>
             <div class="col-md-6">

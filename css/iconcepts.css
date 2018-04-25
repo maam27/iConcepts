@@ -179,10 +179,6 @@ main > div.container{
 .auction-section ul li{
 font-size:0.9rem;
     margin-top:5px;
-    size:auto;
-}
-.auction-section p{
-    display:inline-flex;
 }
 
 /* ======================================================================================
@@ -229,11 +225,6 @@ form p {
     border-radius:10px;
     padding: 0% -5%;
     margin:5% 0%;
+
 }
-.auction-thumbnail{
-    max-width: 200px;
-}
-.auction-thumbnail p{
-    display:inline-flex;
-    max-width: 600px;
-}
+

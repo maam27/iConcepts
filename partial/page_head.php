@@ -1,3 +1,9 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,3 +12,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
+<?php
+require_once 'partial/styles.php';
+require_once 'php/database.php';
+require_once 'php/generic_functions.php';
+
+$db = get_db_connection();
+?>
+
+
