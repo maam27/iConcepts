@@ -6,3 +6,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
+<?php
+require_once 'partial/styles.php';
+?>

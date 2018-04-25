@@ -2,9 +2,6 @@
 require_once 'partial/page_head.php';
 ?>
         <title>Jumbotron Template for Bootstrap Lool</title>
-        <?php
-            require_once 'partial/styles.php';
-        ?>
     </head>
 
     <body>
