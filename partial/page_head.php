@@ -1,3 +1,9 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,4 +14,9 @@
     <link rel="icon" href="favicon.ico">
 <?php
 require_once 'partial/styles.php';
+require_once 'php/database.php';
+
+$db = get_db_connection();
 ?>
+
+

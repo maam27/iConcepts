@@ -3,8 +3,5 @@ function get_db_connection()
 {
     require_once 'credentials.php';
     $dbh = new PDO ("sqlsrv:Server=$hostname;Database=$dbname;ConnectionPooling=0", "$username", "$pw");
-    $data = $dbh->query("SELECT * FROM [Country]");
-    while ($row = $data->fetch()) {
-        echo "$row[country_name]</br>";
-    }
+    return $dbh;
 }
