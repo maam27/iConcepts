@@ -20,14 +20,20 @@ include_once 'partial/menu.php';
 
 <main>
     <div class="container">
-        <div class="loginRegistreerSection text-left">
-        <h1>Login</h1>
-        <form method="Post" action="#">
-            <input id="username" name="username" type="email"        placeholder="E-mail"    required><br><br>
-            <input id="password" name="password" type="password"    placeholder="Wachtwoord"  required>
-            <button>login</button>
-        </form>
-        <p class="onderkantLoginRegistreer">Heeft u nog geen account klik <a class="no-margin" href="registreer.php">hier</a> om naar registratie te gaan</p>
+        <div class="login-register-section text-left">
+            <h1>Login</h1>
+            <form method="Post" action="#">
+                <p>E-Mail:</p>
+                <input id="username" name="username" type="email"        placeholder="E-mail"    required>
+                <br>
+                <p>Wachtwoord:</p>
+                <input id="password" name="password" type="password"    placeholder="Wachtwoord"  required>
+                <br>
+
+
+                <button>login</button>
+            </form>
+            <p class="bottom-login-register-form">Heeft u al een account klik <a class="no-margin" href="login.php">hier</a> om naar inloggen te gaan</p>
         </div>
 
 </main>
