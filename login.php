@@ -1,5 +1,6 @@
 <?php
 require_once 'partial/page_head.php';
+require_once 'php/user_functions.php';
 ?>
     <title>Jumbotron Template for Bootstrap Lool</title>
 </head>
@@ -7,6 +8,18 @@ require_once 'partial/page_head.php';
 <body>
 <?php
 include_once 'partial/menu.php';
+
+if(isset($_POST)){
+    if(isset($_POST['username']) && isset($_POST['password'])){
+        //validate user and pass
+
+        //hash pass
+        if(login_user($db,$_POST['username'],$_POST['password'])){
+            redirect("index.php");
+        }
+
+    }
+}
 ?>
 
 <main>
@@ -14,11 +27,11 @@ include_once 'partial/menu.php';
         <div class="login-register-section text-left">
             <h1>Login</h1>
             <form method="Post" action="#">
-                <p>E-Mail:</p>
-                <input id="username" name="username" type="email"        placeholder="E-mail"    required>
+                <p>Gebruikersnaam:</p>
+                <input id="username" name="username" type="text"        placeholder="Gebruikersnaam"    required>
                 <br>
                 <p>Wachtwoord:</p>
-                <input id="password" name="password" type="password"    placeholder="Wachtwoord"  required>
+                <input id="password" name="password" type="password"    placeholder="Wachtwoord"  required minlength="8">
                 <br>
                 <button>login</button>
             </form>

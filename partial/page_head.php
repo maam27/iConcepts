@@ -15,6 +15,7 @@ if (!isset($_SESSION)) {
 <?php
 require_once 'partial/styles.php';
 require_once 'php/database.php';
+require_once 'php/generic_functions.php';
 
 $db = get_db_connection();
 ?>
