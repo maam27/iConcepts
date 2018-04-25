@@ -133,7 +133,6 @@ main > div.container{
     border-radius:20px;
     padding: 20px;
     background-color:white;
-    margin-bottom:75px;
 }
 
 .verkoperSection h4{
@@ -158,8 +157,6 @@ main > div.container{
 }
 
 .auction-page-image{
-    width:552px;
-    height:750px;
     margin-bottom:20px;
 }
 
@@ -204,9 +201,8 @@ form p {
 
 
 .user-image{
-    width:12%;
-    height:20%;
-    margin-bottom:20px;
+    width:300px;
+
 }
 
 .border-auction-preview{
@@ -215,6 +211,27 @@ form p {
     border-radius:10px;
     padding: 0% -5%;
     margin:5% 0%;
+}
+
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||| Balken||||||||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+
+.grey-background-bar{
+    background-color:lightsalmon;
 
 }
 
+.white-background-bar{
+    background-color:white;
+}
+
+.margin-top-50{
+    margin-top:50px;
+}
+
+.margin-bottom-50{
+    margin-bottom:50px;
+}
