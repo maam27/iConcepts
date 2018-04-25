@@ -1,5 +1,5 @@
 <?php
-require_once 'page_head';
+require_once 'partial/page_head.php';
 ?>
         <title>Jumbotron Template for Bootstrap Lool</title>
         <?php
@@ -163,4 +163,4 @@ require_once 'page_head';
 
             </div> <!-- /container -->
         </main>
-<?php require_once 'page_footer';?>
+<?php require_once 'partial/page_footer.php';?>

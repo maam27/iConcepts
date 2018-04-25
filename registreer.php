@@ -1,12 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-
+<?
+require_once 'partial/page_head.php';
+?>
     <title>Jumbotron Template for Bootstrap Lool</title>
     <?php
     require_once 'partial/styles.php';
@@ -44,11 +38,6 @@ include_once 'partial/menu.php';
 
 </main>
 
-<footer class="container">
-    <p>&copy; Company 2017-2018</p>
-</footer>
 <?php
-include_once 'partial/scripts.php';
+require_once 'partial/page_footer.php';
 ?>
-</body>
-</html>
