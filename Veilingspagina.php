@@ -13,7 +13,7 @@ include_once 'partial/menu.php';
 ?>
 
 <main>
-<br><br>
+
     <div class="container">
         <div class="row justify-content-center">
             <h2 class="text-center">[Naam van wat er wordt geveildtdt]</h2>

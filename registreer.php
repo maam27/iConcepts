@@ -35,12 +35,11 @@ include_once 'partial/menu.php';
                 <p>Ander ding4:</p>
                 <input id="password" name="password" type="password"    placeholder="Wachtwoord"  required>
                 <br>
-
                 <button>login</button>
             </form>
             <p class="bottom-login-register-form">Heeft u al een account klik <a class="no-margin" href="login.php">hier</a> om naar inloggen te gaan</p>
         </div>
-
+    </div>
 </main>
 
 <?php
