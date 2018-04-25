@@ -1,12 +1,6 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="icon" href="favicon.ico">
-
+<?php
+require_once 'partial/page_head.php';
+?>
         <title>Jumbotron Template for Bootstrap Lool</title>
         <?php
             require_once 'partial/styles.php';
@@ -25,62 +19,99 @@
                     <div class="col-12">
                         <div class="d-flex justify-content-around flex-wrap">
                             <div class="productblock">
-                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
                             </div>
                             <div class="productblock d-none d-sm-block">
-                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
                             </div>
                             <div class="productblock d-none d-md-block">
-                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
                             </div>
                             <div class="productblock d-none d-lg-block">
-                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
                             </div>
                             <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <h2>Meest recent gestarte veilingen.</h2>
+                    <div class="col-12">
+                        <div class="d-flex justify-content-around flex-wrap">
+                            <div class="productblock">
+                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock d-none d-sm-block">
+                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock d-none d-md-block">
+                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock d-none d-lg-block">
+                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock d-none d-xl-block">
+                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
                             </div>
 
                             <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
                             </div>
                             <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
                             </div>
                             <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
                             </div>
                             <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
                             </div>
                             <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/trump.jpg" class="img-thumbnail"/>
+                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
                                 <div>
                                     <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
                                 </div>
@@ -131,14 +162,5 @@
                 <hr>
 
             </div> <!-- /container -->
-
         </main>
-
-        <footer class="container">
-            <p>&copy; Company 2017-2018</p>
-        </footer>
-        <?php
-            include_once 'partial/scripts.php';
-        ?>
-    </body>
-</html>
+<?php require_once 'partial/page_footer.php';?>
