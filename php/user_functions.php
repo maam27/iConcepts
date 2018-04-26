@@ -20,25 +20,28 @@ function login_user($dbh, $user, $pass)
     return false;
 }
 
-function register_user($dbh, $plan, $email, $voornaam, $achternaam, $username, $password, $paymentmethod, $cardnumber, $country, $gender, $birthdate)
+function register_user($dbh, $username, $password, $firstname, $lastname, $birthdate, $email, $country, $city, $addressfield, $addressfield2, $postcode, $securityquestion, $answer)
 {
     try {
-        $query = "insert into customer ([customer_mail_address],[lastname],[firstname],[payment_method],[payment_card_number],[contract_type],[subscription_start],[user_name],[password],[country_name],[gender],[birth_date])
-			values   (:mail,:anaam,:vnaam,:payment,:cardnr,:plan,:date,
-			:user,:pass,:country,:gender,:birth)";
+        $query = "insert into Gebruiker ([Gebruikersnaam],[Voornaam],[Achternaam],[Adresregel1],[Adresregel2],[Postcode],[Plaatsnaam],[Land],[GeboorteDag],[Mailbox],[Wachtwoord],[Vraag], [Antwoordtekst], [Verkoper])
+			values(:username,:voornaam,:achternaam,:adresveld1,:adresveld2,:postcode,:stad,:land,:geboortedatum,:e-mail,:wachtwoord, :veiligheidsvraag, :antwoord, :verkoper)";
         $statement = $dbh->prepare($query);
         $statement->execute(array(':mail' => $email
-        , ':anaam' => $achternaam
-        , ':vnaam' => $voornaam
-        , ':payment' => $paymentmethod
-        , ':cardnr' => $cardnumber
-        , ':plan' => $plan
-        , ':date' => date("Y-m-d")
-        , ':user' => $username
-        , ':pass' => $password
-        , ':country' => $country
-        , ':gender' => $gender
-        , ':birth' => $birthdate));
+        , ':username' => $username
+        , ':wachtwoord' => $password
+        , ':voornaam' => $firstname
+        , ':achternaam' => $lastname
+        , ':geboortedatum' => $birthdate
+        , ':e-mail' => $email
+        , ':land' => $country
+        , ':stad' => $city
+        , ':adresveld1' => $addressfield
+        , ':adresveld2' => $addressfield2
+        , ':postcode' => $postcode
+        , ':veiligheidsvraag' => $securityquestion
+        , ':antwoord' => $answer
+        , ':verkoper' => 0
+            ));
         if ($statement->rowCount() == 1)
             return true;
         return false;
@@ -47,4 +50,3 @@ function register_user($dbh, $plan, $email, $voornaam, $achternaam, $username, $
     }
 }
 
-?>

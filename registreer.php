@@ -10,7 +10,7 @@ require_once 'php/user_functions.php';
 include_once 'partial/menu.php';
 
 $melding = '';
-if(!empty($_POST['username']) and !empty($_POST['password']) and !empty($_POST['password2']) and !empty($_POST['first-name']) and !empty($_POST['last-name']) and !empty($_POST['birthdate']) and !empty($_POST['e-mail']) and !empty($_POST['country']) and !empty($_POST['city']) and !empty($_POST['address-field']) and !empty($_POST['address-field2']) and !empty($_POST['postcode']) and !empty($_POST['security-question']) and !empty($_POST['answer'])
+if(!empty($_POST['username']) and !empty($_POST['password']) and !empty($_POST['password2']) and !empty($_POST['first-name']) and !empty($_POST['last-name']) and !empty($_POST['birth-date']) and !empty($_POST['e-mail']) and !empty($_POST['country']) and !empty($_POST['city']) and !empty($_POST['address-field']) and !empty($_POST['address-field2']) and !empty($_POST['postcode']) and !empty($_POST['security-question']) and !empty($_POST['answer'])
 ){
     if($_POST['password'] == $_POST['password2']){
         if(register_user($dbh,
@@ -18,7 +18,7 @@ if(!empty($_POST['username']) and !empty($_POST['password']) and !empty($_POST['
             $_POST['password'],
             $_POST['first-name'],
             $_POST['last-name'],
-            $_POST['birthdate'],
+            $_POST['birth-date'],
             $_POST['e-mail'],
             $_POST['country'],
             $_POST['city'],
@@ -35,7 +35,7 @@ if(!empty($_POST['username']) and !empty($_POST['password']) and !empty($_POST['
                 $melding .=  'Het opgegeven email adres heeft al een account';
             }
             else if(username_exists($dbh,$_POST['username'])){
-                $melding .=  'De opgegeven gebruikers naam bestaat al';
+                $melding .=  'De opgegeven gebruikersnaam bestaat al';
             }else{
                 $melding .= 'Er ging iets mis tijdens het registreren';
             }
@@ -54,7 +54,7 @@ else{
 
     <main>
         <div class="container">
-            <div class="login-register-section text-left">
+            <div class="register-section">
                 <h1>Registreer</h1>
                 <form method="Post" action="#">
                     <div class="row">
@@ -76,7 +76,7 @@ else{
                             <input id="last-name" name="last-name" type="text" placeholder="Badpak" required>
                             <br>
                             <p>Geboortedatum:</p>
-                            <input id="birthdate" name="username" type="date"  required>
+                            <input id="birth-date" name="birth-date" type="date"  required>
                             <br>
                             <p>E-Mail:</p>
                             <input id="e-mail" name="e-mail" type="email" placeholder="E-mail" required>
