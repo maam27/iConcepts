@@ -78,6 +78,12 @@ else{
         $melding = 'u heeft niet een of meerdere velden niet ingevuld';
     }
 }
+
+
+                               $stmt = $db-> prepare ("SELECT * FROM Vraag");
+                               $stmt->execute();
+                               $data1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
     <main>
@@ -128,12 +134,11 @@ else{
                             <br>
                             <p>Veiligheidsvraag: </p>
                             <select name="security-question">
-                                <option value="1">Hier komt de eerste vraag?</option>
-                                <option value="2">Of was het de tweede?</option>
-                                <option value="3">Maar als de tweede daar staat, waar komt de derde?</option>
-                                <option value="4">Dat zijn de echte vragen toch?</option>
-                                <option value="5">Ja man G, denk het?</option>
-                                <option value="6">okay?</option>
+                                <?php
+                                    foreach($data1 as $key => $value){
+                                        echo '<option value="'. $value['Vraagnummer'].'">'.$value['TekstVraag'].'</option>';
+                                    }
+                                ?>
                             </select>
                             <br>
                             <p>Antwoord:</p>
