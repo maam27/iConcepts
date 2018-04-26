@@ -9,7 +9,7 @@ require_once 'php/user_functions.php';
 <?php
 include_once 'partial/menu.php';
 
-$message;
+$message ='';
 if(isset($_POST)){
     if(isset($_POST['username']) && isset($_POST['password'])){
         $pass = $_POST['password'];
@@ -33,19 +33,29 @@ if(isset($_POST)){
 
 <main>
     <div class="container">
-        <div class="login-register-section text-left">
-            <h1>Login</h1>
-            <form method="Post" action="#">
-                <p>Gebruikersnaam:</p>
-                <input id="username" name="username" type="text"        placeholder="Gebruikersnaam"    required>
-                <br>
-                <p>Wachtwoord:</p>
-                <input id="password" name="password" type="password"    placeholder="Wachtwoord"  required minlength="8">
-                <br>
-                <button>login</button>
-            </form>
-            <p class="bottom-login-register-form">Heeft u al een account klik <a class="no-margin" href="login.php">hier</a> om naar inloggen te gaan</p>
-        </div>
+        <form method="Post" action="#">
+            <div class="row login-register-section text-left">
+                <div class="col-12">
+                    <h1>Login</h1>
+                </div>
+                    <div class="col-12 col-sm-6">
+                        <p>Gebruikersnaam:</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <input id="username" name="username" type="text"        placeholder="Gebruikersnaam"    required     value="<?php echo if_set('username','post'); ?>"   >
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <p>Wachtwoord:</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <input id="password" name="password" type="password"    placeholder="Wachtwoord"        required minlength="8">
+                    </div>
+                    <div class="col-12">
+                        <button class="button">login</button>
+                    </div>
+                <p class="bottom-login-register-form">Heeft u nog geen account klik <a class="no-margin" href="registreer.php">hier</a> om te registreren.</p>
+            </div>
+        </form>
     </div>
 </main>
 
