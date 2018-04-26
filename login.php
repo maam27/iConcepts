@@ -53,7 +53,10 @@ if(isset($_POST)){
                 <div class="col-12 col-sm-6">
                     <input id="password" name="password" type="password"    placeholder="Wachtwoord"        required minlength="8">
                 </div>
-                <div class="col-12">
+                <div class="col-12 col-sm-8">
+                    <a href="wachtwoordvergeten.php">wachtwoord vergeten?</a>
+                </div>
+                <div class="col-12 col-sm-4">
                     <button class="btn btn-primary float-right">login</button>
                 </div>
                 <div class="col-12">

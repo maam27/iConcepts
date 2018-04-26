@@ -260,3 +260,11 @@ form p {
 .error-message{
     color:red;
 }
+
+margin-top{
+    margin-top: 1rem;
+}
+
+padding-top{
+    padding-top: 1rem;
+}
