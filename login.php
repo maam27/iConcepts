@@ -32,9 +32,9 @@ if(isset($_POST)){
 ?>
 
 <main>
-    <div class="container">
+    <div class="container login">
         <form method="Post" action="#">
-            <div class="row login-register-section text-left">
+            <div class="row login-register-section">
                 <div class="col-12">
                     <h1>Login</h1>
                 </div>

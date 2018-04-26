@@ -186,7 +186,8 @@ font-size:0.9rem;
 |||||||||||||||||||||||||||||||| Login en registreer formulier||||||||||||||||||||||||||||
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
  =======================================================================================*/
-.login-register-section{
+.login-section,
+.register-section{
     padding:5%;
     border-radius:20px;
     height:100%;
@@ -194,9 +195,11 @@ font-size:0.9rem;
     background-color:white;
 }
 
-.login-register-section button{
+.login-section button,
+.register-section button{
     margin-top:1rem;
 }
+
 .bottom-login-register-form{
     margin-top:1rem;
 }
