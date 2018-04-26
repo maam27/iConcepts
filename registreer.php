@@ -1,5 +1,6 @@
 <?php
 require_once 'partial/page_head.php';
+require_once 'php/user_functions.php';
 ?>
     <title>Jumbotron Template for Bootstrap Lool</title>
     </head>
@@ -7,6 +8,48 @@ require_once 'partial/page_head.php';
     <body>
 <?php
 include_once 'partial/menu.php';
+
+$melding = '';
+if(!empty($_POST['username']) and !empty($_POST['password']) and !empty($_POST['password2']) and !empty($_POST['first-name']) and !empty($_POST['last-name']) and !empty($_POST['birthdate']) and !empty($_POST['e-mail']) and !empty($_POST['country']) and !empty($_POST['city']) and !empty($_POST['address-field']) and !empty($_POST['address-field2']) and !empty($_POST['postcode']) and !empty($_POST['security-question']) and !empty($_POST['answer'])
+){
+    if($_POST['password'] == $_POST['password2']){
+        if(register_user($dbh,
+            $_POST['username'],
+            $_POST['password'],
+            $_POST['first-name'],
+            $_POST['last-name'],
+            $_POST['birthdate'],
+            $_POST['e-mail'],
+            $_POST['country'],
+            $_POST['city'],
+            $_POST['address-field'],
+            $_POST['address-field2'],
+            $_POST['postcode'],
+            $_POST['security-question'],
+            $_POST['answer']))
+        {
+            login_user($dbh, $_POST['email'], $_POST['password']);
+        }
+        else{
+            if(email_exists($dbh,$_POST['email'])){
+                $melding .=  'Het opgegeven email adres heeft al een account';
+            }
+            else if(username_exists($dbh,$_POST['username'])){
+                $melding .=  'De opgegeven gebruikers naam bestaat al';
+            }else{
+                $melding .= 'Er ging iets mis tijdens het registreren';
+            }
+        }
+    }
+    else{
+        $melding = 'Het wachtwoord komt niet overeen';
+    }
+}
+else{
+    if(isset($_POST['submit'])){
+        $melding = 'u heeft niet een of meerdere velden niet ingevuld';
+    }
+}
 ?>
 
     <main>
@@ -33,7 +76,7 @@ include_once 'partial/menu.php';
                             <input id="last-name" name="last-name" type="text" placeholder="Badpak" required>
                             <br>
                             <p>Geboortedatum:</p>
-                            <input id="birthday" name="username" type="date"  required>
+                            <input id="birthdate" name="username" type="date"  required>
                             <br>
                             <p>E-Mail:</p>
                             <input id="e-mail" name="e-mail" type="email" placeholder="E-mail" required>
@@ -56,18 +99,17 @@ include_once 'partial/menu.php';
                             <input id="postcode" name="postcode" type="text" placeholder="4323DK" required>
                             <br>
                             <p>Veiligheidsvraag: </p>
-                            <select name="Veiligheidsvraag">
+                            <select name="security-question">
                                 <option value="1">Hier komt de eerste vraag?</option>
                                 <option value="2">Of was het de tweede?</option>
                                 <option value="3">Maar als de tweede daar staat, waar komt de derde?</option>
                                 <option value="4">Dat zijn de echte vragen toch?</option>
                                 <option value="5">Ja man G, denk het?</option>
                                 <option value="6">okay?</option>
-
                             </select>
                             <br>
                             <p>Antwoord:</p>
-                            <input id="username" name="username" type="email" placeholder="Antwoord" required>
+                            <input id="answer" name="answer" type="text" placeholder="Antwoord" required>
                             <br>
                             <button type="submit">Registreer</button>
                         </div>
