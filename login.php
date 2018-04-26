@@ -9,14 +9,24 @@ require_once 'php/user_functions.php';
 <?php
 include_once 'partial/menu.php';
 
+$message;
 if(isset($_POST)){
     if(isset($_POST['username']) && isset($_POST['password'])){
+        $pass = $_POST['password'];
         //validate user and pass
-
-        //hash pass
-        if(login_user($db,$_POST['username'],$_POST['password'])){
-            redirect("index.php");
+        if(!preg_match('/[A-Z]/', $pass) || !preg_match('/[0-9]/', $pass)){
+            $message .= 'foutmelding';
         }
+
+        if(empty($message)){
+            $pass = $_POST['password']; //md5($_POST['password']);
+            if(login_user($db,$_POST['username'],$pass)){
+                redirect("index.php");
+            }
+        }else{
+            echo $message;
+        }
+
     }
 }
 ?>

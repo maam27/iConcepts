@@ -16,26 +16,97 @@ h1,h2,h3,h4,h5,h6{
 |||||||||||||||||||||||||||||||||||||||Menu & submenu||||||||||||||||||||||||||||||||||||
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
  =======================================================================================*/
-nav{background-color: #F4512C;}
-nav img{position:relative;margin:-8px;right:8px;max-width: 200px;max-height: 56px;width: auto;}
-nav form button{background-color:white;border-color: white;color:black;}
-nav div ul{width: 100%;}
-nav div ul li a{color:black;font-weight:normal;}
-nav div ul li a:hover{color:white;}
-.submenu{width:100%;background-color: #F9CB9C;padding:10px;position:fixed;top:56px;z-index:10;}
+nav div ul{
+    width: 100% ;
+}
+
+nav div ul li a{
+    color:black;
+    font-weight:normal;
+}
+
+nav div ul li a:hover{
+    color:white;
+}
+
+nav a.paginatitel{
+    color:black;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    font-weight:bold;
+}
+
+nav{
+    background-color: #F4512C;
+}
+
+nav img{
+    position:relative;
+    margin:-8px;
+    right:8px;
+    max-width: 200px;
+    max-height: 56px;
+    width: auto;
+}
+
+nav form button{
+    background-color:white;
+    border-color: white;
+    color:black;
+}
+
+
+.submenu{
+    width:100%;
+    background-color: #F9CB9C;
+    padding:10px;
+    position:fixed;
+    top:56px;
+    z-index:10;
+}
+
 
 /* ======================================================================================
 ////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 |||||||||||||||||||||||||||||||||||||||Menu @media|||||||||||||||||||||||||||||||||||||||
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
  =======================================================================================*/
-@media (max-width: 767px) {nav div ul li:first-child {margin-top: 1em;}}
+@media (max-width: 767px) {
+    nav div ul li:first-child {
+        margin-top: 1em;
+    }
+}
+
 /* offset for the top menu*/
-main > div.container{margin-top: 62px;}
-@media (min-width: 576px) {main > div.container{margin-top: 62px;}}
-@media (min-width: 768px) {main > div.container{margin-top: 62px;}}
-@media (min-width: 992px) {main > div.container{margin-top: 108px;}}
-@media (min-width: 1200px) {main > div.container{margin-top: 108px;}}
+main > div.container{
+    margin-top: 62px;
+}
+
+@media (min-width: 576px) {
+    main > div.container{
+        margin-top: 62px;
+    }
+}
+
+@media (min-width: 768px) {
+    main > div.container{
+        margin-top: 62px;
+    }
+}
+
+@media (min-width: 992px) {
+    main > div.container{
+        margin-top: 108px;
+    }
+}
+
+@media (min-width: 1200px) {
+    main > div.container{
+        margin-top: 108px;
+    }
+}
 
 /* ======================================================================================
 ////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -72,6 +143,7 @@ main > div.container{margin-top: 62px;}
     border-radius:20px;
     padding: 20px;
     background-color:white;
+    margin-bottom:75px;
 }
 
 .verkoperSection h4{
@@ -96,6 +168,8 @@ main > div.container{margin-top: 62px;}
 }
 
 .auction-page-image{
+    width:552px;
+    height:750px;
     margin-bottom:20px;
 }
 
@@ -139,9 +213,10 @@ form p {
  =======================================================================================*/
 
 
-.user-image{
-    width:300px;
-
+.gebruikeresImage{
+    width:12%;
+    height:20%;
+    margin-bottom:20px;
 }
 
 .border-auction-preview{
@@ -150,27 +225,6 @@ form p {
     border-radius:10px;
     padding: 0% -5%;
     margin:5% 0%;
-}
-
-/* ======================================================================================
-////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-|||||||||||||||||||||||||||||||||||||||| Balken||||||||||||||||||||||||||||||||||||||||||
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
- =======================================================================================*/
-
-.grey-background-bar{
-    background-color:lightsalmon;
 
 }
 
-.white-background-bar{
-    background-color:white;
-}
-
-.margin-top-50{
-    margin-top:50px;
-}
-
-.margin-bottom-50{
-    margin-bottom:50px;
-}
