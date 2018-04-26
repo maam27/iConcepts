@@ -13,7 +13,7 @@ $melding = '';
 if(!empty($_POST['username']) and !empty($_POST['password']) and !empty($_POST['password2']) and !empty($_POST['first-name']) and !empty($_POST['last-name']) and !empty($_POST['birth-date']) and !empty($_POST['e-mail']) and !empty($_POST['country']) and !empty($_POST['city']) and !empty($_POST['address-field']) and !empty($_POST['address-field2']) and !empty($_POST['postcode']) and !empty($_POST['security-question']) and !empty($_POST['answer'])
 ){
     if($_POST['password'] == $_POST['password2']){
-        if(register_user($dbh,
+        if(register_user($db,
             $_POST['username'],
             $_POST['password'],
             $_POST['first-name'],
@@ -28,13 +28,13 @@ if(!empty($_POST['username']) and !empty($_POST['password']) and !empty($_POST['
             $_POST['security-question'],
             $_POST['answer']))
         {
-            login_user($dbh, $_POST['email'], $_POST['password']);
+            login_user($db, $_POST['email'], $_POST['password']);
         }
         else{
-            if(email_exists($dbh,$_POST['email'])){
+            if(email_exists($db,$_POST['email'])){
                 $melding .=  'Het opgegeven email adres heeft al een account';
             }
-            else if(username_exists($dbh,$_POST['username'])){
+            else if(username_exists($db,$_POST['username'])){
                 $melding .=  'De opgegeven gebruikersnaam bestaat al';
             }else{
                 $melding .= 'Er ging iets mis tijdens het registreren';
