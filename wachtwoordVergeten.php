@@ -1,42 +1,4 @@
-<?php
-require_once 'partial/page_head.php';
-require_once 'php/user_functions.php';
-?>
-    <title>Jumbotron Template for Bootstrap Lool</title>
-    </head>
-
-    <body>
-<?php
-include_once 'partial/menu.php';
-
-//
-//function register_user($dbh, $plan, $email, $voornaam, $achternaam, $username, $password, $paymentmethod, $cardnumber, $country, $gender, $birthdate)
-//{
-//    try {
-//        $query = "insert into customer ([customer_mail_address],[lastname],[firstname],[payment_method],[payment_card_number],[contract_type],[subscription_start],[user_name],[password],[country_name],[gender],[birth_date])
-//			values   (:mail,:anaam,:vnaam,:payment,:cardnr,:plan,:date,
-//			:user,:pass,:country,:gender,:birth)";
-//        $statement = $dbh->prepare($query);
-//        $statement->execute(array(':mail' => $email
-//        , ':anaam' => $achternaam
-//        , ':vnaam' => $voornaam
-//        , ':payment' => $paymentmethod
-//        , ':cardnr' => $cardnumber
-//        , ':plan' => $plan
-//        , ':date' => date("Y-m-d")
-//        , ':user' => $username
-//        , ':pass' => $password
-//        , ':country' => $country
-//        , ':gender' => $gender
-//        , ':birth' => $birthdate));
-//        if ($statement->rowCount() == 1)
-//            return true;
-//        return false;
-//    } catch (PDOException $e) {
-//        echo $e;
-//    }
-//}
-
+<!--
 try{
     $query = "INSERT INTO Gebruiker	(Gebruikersnaam,voornaam,achternaam,Adresregel1,Adresregel2,Postcode,Plaatsnaam,Land,GeboorteDag,Mailbox,Wachtwoord,Vraag,Antwoordtekst,Verkoper)
 			            	VALUES  (':user',':fname',':lname',':adress1',':adress2',':zipcode',':city',':country',':birthdate',':mail',':password',':question',':answer',':seller')";
@@ -62,12 +24,40 @@ try{
 }catch(PDOException $e){
     echo $e->getMessage();
 }
+-->
+
+<?php
+require_once 'partial/page_head.php';
+require_once 'php/user_functions.php';
+?>
+    <title>Wachtwoord Vergeten</title>
+    </head>
+
+    <body>
+<?php
+include_once 'partial/menu.php';
 ?>
 
-    <main>
-        <div class="container">
-        </div>
-    </main>
+<main>
+    <div class="container login">
+        <form method="Post" action="#">
+            <div class="row login-section">
+                <div class="col-12">
+                    <h1>Wachtwoord vergeten</h1>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <p>email:</p>
+                </div>
+                <div class="col-12 col-sm-9">
+                    <input id="email" name="email" type="email" placeholder="email" required value="<?php echo if_set('email','post'); ?>"   >
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary float-right">Verzenden</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
 
 <?php
 require_once 'partial/page_footer.php';
