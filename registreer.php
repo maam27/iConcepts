@@ -1,29 +1,5 @@
 <!--
-try{
-    $query = "INSERT INTO Gebruiker	(Gebruikersnaam,voornaam,achternaam,Adresregel1,Adresregel2,Postcode,Plaatsnaam,Land,GeboorteDag,Mailbox,Wachtwoord,Vraag,Antwoordtekst,Verkoper)
-			            	VALUES  (':user',':fname',':lname',':adress1',':adress2',':zipcode',':city',':country',':birthdate',':mail',':password',':question',':answer',':seller')";
-    $statement = $db->prepare($query);
-    $statement->execute(
-    array(':user' => "marleyBob++++++"
-    , ':fname' => "vnaam"
-    , ':lname' => "aNaMe"
-    , ':adress1' => "hier"
-    , ':adress2' => "en daar"
-    , ':zipcode' => "1594AZ"
-    , ':city' => "weet je zeluf"
-    , ':country' => "ussr"
-    , ':birthdate' => date("Y-m-d")
-    , ':mail' => "bobske"
-    , ':password' => "pass"
-    , ':question' => 1
-    , 'answer' => "wat dan"
-    , 'seller' => 0));
-    if ($statement->rowCount() == 1){
-        echo 'works';
-    }
-}catch(PDOException $e){
-    echo $e->getMessage();
-}
+
 -->
 
 <?php
@@ -37,52 +13,36 @@ require_once 'php/user_functions.php';
 <?php
 include_once 'partial/menu.php';
 
+$stmt = $db-> prepare ("SELECT * FROM Vraag");
+$stmt->execute();
+$data1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 $melding = '';
-if(!empty($_POST['username']) and !empty($_POST['password']) and !empty($_POST['password2']) and !empty($_POST['first-name']) and !empty($_POST['last-name']) and !empty($_POST['birth-date']) and !empty($_POST['e-mail']) and !empty($_POST['country']) and !empty($_POST['city']) and !empty($_POST['address-field']) and !empty($_POST['address-field2']) and !empty($_POST['postcode']) and !empty($_POST['security-question']) and !empty($_POST['answer'])
-){
-    if($_POST['password'] == $_POST['password2']){
-        if(register_user($db,
-            $_POST['username'],
-            $_POST['password'],
-            $_POST['first-name'],
-            $_POST['last-name'],
-            $_POST['birth-date'],
-            $_POST['e-mail'],
-            $_POST['country'],
-            $_POST['city'],
-            $_POST['address-field'],
-            $_POST['address-field2'],
-            $_POST['postcode'],
-            $_POST['security-question'],
-            $_POST['answer']))
-        {
-            login_user($db, $_POST['email'], $_POST['password']);
-        }
-        else{
-            if(email_exists($db,$_POST['email'])){
-                $melding .=  'Het opgegeven email adres heeft al een account';
-            }
-            else if(username_exists($db,$_POST['username'])){
-                $melding .=  'De opgegeven gebruikersnaam bestaat al';
-            }else{
-                $melding .= 'Er ging iets mis tijdens het registreren';
-            }
-        }
-    }
-    else{
-        $melding = 'Het wachtwoord komt niet overeen';
-    }
+
+if( email_exists($db, $_POST['e-mail']) ){
+    $melding = 'Het opgegeven mail-adres is al in gebruik.';
 }
-else{
-    if(isset($_POST['submit'])){
-        $melding = 'u heeft niet een of meerdere velden niet ingevuld';
-    }
+
+else if($_POST['password'] != $_POST['password2']){
+    $melding = 'Het wachtwoord komt niet overeen met de verificatie.';
+}
+
+else if(!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST['password2']) AND !empty($_POST['first-name'])
+    AND !empty($_POST['last-name']) AND !empty($_POST['birth-date']) AND !empty($_POST['e-mail']) AND !empty($_POST['country'])
+    AND !empty($_POST['city']) AND !empty($_POST['address-field']) AND !empty($_POST['postcode']) AND !empty($_POST['security-question'])
+    AND !empty($_POST['answer'])
+)
+{
+register_user_test($db, $_POST['username'], $_POST['first-name'],$_POST['last-name'],$_POST['address-field'],
+    $_POST['address-field2'],$_POST['postcode'], $_POST['city'],$_POST['country'],$_POST['birth-date'],$_POST['e-mail'],
+    $_POST['password'],$_POST['security-question'], $_POST['answer']);
 }
 
 
-                               $stmt = $db-> prepare ("SELECT * FROM Vraag");
-                               $stmt->execute();
-                               $data1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
 
 ?>
 
@@ -93,44 +53,47 @@ else{
                 <form method="Post" action="#">
                     <div class="row">
                         <div class="col-md-6">
+                            <?php
+                            if(isset($melding)){echo '<p>' . $melding . '</p>';}
+                            ?>
                             <p>Gebruikersnaam:</p>
-                            <input id="username" name="username" type="text" placeholder="BarryBadpak" required>
+                            <input id="username" name="username" type="text" placeholder="BarryBadpak" value="Kutzooi123" required>
                             <br>
                             <p>Wachtwoord:</p>
-                            <input id="password" name="password" type="password" placeholder="Wachtwoord" required>
+                            <input id="password" name="password" type="password" placeholder="Wachtwoord" value="teringwachtwoord" required>
                             <br>
                             <p>Bevestig wachtwoord:</p>
-                            <input id="password2" name="password2" type="password" placeholder="Wachtwoord123!"
+                            <input id="password2" name="password2" type="password" placeholder="Wachtwoord123!" value="teringwachtwoord"
                                    required>
                             <br>
                             <p>Voornaam:</p>
-                            <input id="first-name" name="first-name" type="text" placeholder="Barry" required>
+                            <input id="first-name" name="first-name" type="text" placeholder="Barry" value="Rotnaam" required>
                             <br>
                             <p>Achternaam:</p>
-                            <input id="last-name" name="last-name" type="text" placeholder="Badpak" required>
+                            <input id="last-name" name="last-name" type="text" placeholder="Badpak" value="LeukeAchternaam" required>
                             <br>
                             <p>Geboortedatum:</p>
                             <input id="birth-date" name="birth-date" type="date"  required>
                             <br>
                             <p>E-Mail:</p>
-                            <input id="e-mail" name="e-mail" type="email" placeholder="E-mail" required>
+                            <input id="e-mail" name="e-mail" type="email" placeholder="E-mail" value="Rotformulier@mail" required>
                             <br>
                         </div>
                         <div class="col-md-6">
                             <p>Land:</p>
-                            <input id="country" name="country" type="text" placeholder="Nederland" required>
+                            <input id="country" name="country" type="text" placeholder="Nederland" value="BoeitNiet" required>
                             <br>
                             <p>Stad:</p>
-                            <input id="city" name="city" type="text" placeholder="Arnhem" required>
+                            <input id="city" name="city" type="text" placeholder="Arnhem" value="Stad123" required>
                             <br>
                             <p>Adresregel 1:</p>
-                            <input id="address-field" name="address-field" type="text" placeholder="Straatnaam 15" required>
+                            <input id="address-field" name="address-field" type="text" placeholder="Straatnaam 15" value="Adress 14" required>
                             <br>
                             <p>Adresregel 2:</p>
                             <input id="address-field2" name="address-field2" type="text" placeholder="Toevoeging adresregel">
                             <br>
                             <p>Postcode: </p>
-                            <input id="postcode" name="postcode" type="text" placeholder="4323DK" required>
+                            <input id="postcode" name="postcode" type="text" placeholder="4323DK" value="4232WK" required>
                             <br>
                             <p>Veiligheidsvraag: </p>
                             <select name="security-question">
@@ -142,7 +105,7 @@ else{
                             </select>
                             <br>
                             <p>Antwoord:</p>
-                            <input id="answer" name="answer" type="text" placeholder="Antwoord" required>
+                            <input id="answer" name="answer" type="text" placeholder="Antwoord" value="Nee" required>
                             <br>
                             <button type="submit">Registreer</button>
                         </div>
