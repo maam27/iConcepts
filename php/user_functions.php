@@ -20,9 +20,7 @@ function login_user($dbh, $user, $pass)
     return false;
 }
 
-
-
-function register_user_test($dbh, $username, $firstname, $lastname, $adres1, $adres2, $postalcode, $city, $country, $birthdate, $mail, $password, $securityquestion, $answer)
+function register_user($dbh, $username, $password, $firstname, $lastname, $birthdate, $email, $country, $city, $addressfield, $addressfield2, $postcode, $securityquestion, $answer)
 {
     try{
         $stmt = $dbh->prepare("INSERT INTO Gebruiker (Gebruikersnaam, Voornaam, Achternaam, Adresregel1, Adresregel2, Postcode, Plaatsnaam, Land, GeboorteDag, Mailbox, Wachtwoord, Vraag, Antwoordtekst, Verkoper)
@@ -59,5 +57,53 @@ function email_exists($dbh, $email){
         return true;
     return false;
 }
+function username_exists($dbh, $username){
+    $statement = $dbh->prepare("SELECT Gebruikersnaam FROM Gebruiker where Gebruikersnaam = :gebruiker");
+    $statement->execute(array(':gebruiker' => $username));
+    $result = $statement->fetch();
+    if(isset($result['Gebruikersnaam']))
+        return true;
+    return false;
+}
 
+function get_user_question($email, $dbh){
+    try{
+        $statement = $dbh->prepare("SELECT TekstVraag FROM Gebruiker join Vraag on vraag.Vraagnummer = Gebruiker.Vraag where mailbox = :email ");
+        $statement->execute(array(':email' => $email));
+        $result = $statement->fetch();
+        return $result['TekstVraag'];
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+    return null;
+}
+function check_user_answer($email, $answer, $dbh){
+    try{
+        $statement = $dbh->prepare("SELECT count(*) FROM Gebruiker join Vraag on vraag.Vraagnummer = Gebruiker.Vraag where Mailbox = :email and Antwoordtekst = :antwoord ");
+        $statement->execute(array(':email' => $email, ':antwoord' => $answer));
+        $result = $statement->fetchColumn();
+        if($result == 1)
+            return true;
+        return false;
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+    return false;
+}
 
+function reset_password($email, $password, $dbh){
+    try{
+        $statement = $dbh->prepare("update Gebruiker set Wachtwoord = :password where Mailbox = :email ");
+        $statement->execute(array(':password' => $password, ':email' => $email));
+        $result = $statement->rowCount();
+        if($result == '1')
+            return true;
+        return false;
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+    return false;
+}

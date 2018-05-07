@@ -32,6 +32,9 @@ if( !isset($_SESSION)){
                 } else{
                 ?>
                 <li class="nav-item">
+                    <a href="Gebruikersprofiel.php">Mijn profiel</a>
+                </li>
+                <li class="nav-item">
                     <a href="logout.php">Uitloggen</a>
                 </li>
                 <?php
