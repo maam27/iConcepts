@@ -22,61 +22,39 @@ function login_user($dbh, $user, $pass)
 
 function register_user($dbh, $username, $password, $firstname, $lastname, $birthdate, $email, $country, $city, $addressfield, $addressfield2, $postcode, $securityquestion, $answer)
 {
-    try {
-        $query = "insert into Gebruiker ([Gebruikersnaam],[Voornaam],[Achternaam],[Adresregel1],[Adresregel2],[Postcode],[Plaatsnaam],[Land],[GeboorteDag],[Mailbox],[Wachtwoord],[Vraag], [Antwoordtekst], [Verkoper])
-			values(:username,:voornaam,:achternaam,:adresveld1,:adresveld2,:postcode,:stad,:land,:geboortedatum,:e-mail,:wachtwoord, :veiligheidsvraag, :antwoord, :verkoper)";
-        $statement = $dbh->prepare($query);
-        $statement->execute(array(':mail' => $email
-        , ':username' => $username
-        , ':voornaam' => $firstname
-        , ':achternaam' => $lastname
-        , ':adresveld1' => $addressfield
-        , ':adresveld2' => $addressfield2
-        , ':postcode' => $postcode
-        , ':stad' => $city
-        , ':land' => $country
-        , ':geboortedatum' => $birthdate
-        , ':e-mail' => $email
-        , ':wachtwoord' => $password
-        , ':veiligheidsvraag' => $securityquestion
-        , ':antwoord' => $answer
-        , ':verkoper' => 0
-            ));
-        if ($statement->rowCount() == 1)
-            return true;
-        return false;
-    } catch (PDOException $e) {
-        echo $e;
+    try{
+        $stmt = $dbh->prepare("INSERT INTO Gebruiker (Gebruikersnaam, Voornaam, Achternaam, Adresregel1, Adresregel2, Postcode, Plaatsnaam, Land, GeboorteDag, Mailbox, Wachtwoord, Vraag, Antwoordtekst, Verkoper)
+        VALUES (:gebruiker, :voornaam, :achternaam, :adresregel1, :adresregel2, :postcode, :plaatsnaam, :land, :geboortedag, :mailbox, :wachtwoord, :vraag, :antwoordtekst, 0)");
+        $stmt -> execute(
+            [
+                ':gebruiker' => $username,
+                ':voornaam' => $firstname,
+                ':achternaam' => $lastname,
+                ':adresregel1' => $adres1,
+                ':adresregel2' => $adres2,
+                ':postcode' => $postalcode,
+                ':plaatsnaam' => $city,
+                ':land' => $country,
+                ':geboortedag' => $birthdate,
+                ':mailbox' => $mail,
+                ':wachtwoord' => $password,
+                ':vraag' => $securityquestion,
+                ':antwoordtekst' => $answer
+            ]);
+
+    }
+
+    catch(PDOException $e){
+        echo $e->getMessage();
     }
 }
 
-function get_user_question($email, $dbh){
-    try{
-        $statement = $dbh->prepare("SELECT TekstVraag FROM Gebruiker join Vraag on vraag.Vraagnummer = Gebruiker.Vraag where mailbox = :email ");
-        $statement->execute(array(':email' => $email));
-        $result = $statement->fetch();
-        return $result['TekstVraag'];
-    }
-    catch(PDOException $e){
-        echo $e;
-    }
-    return null;
-}
-
-function check_user_answer($email, $answer, $dbh){
-    try{
-        $statement = $dbh->prepare("SELECT count(*) FROM Gebruiker join Vraag on vraag.Vraagnummer = Gebruiker.Vraag where Mailbox = :email and Antwoordtekst = :antwoord ");
-        $statement->execute(array(':email' => $email, ':antwoord' => $answer));
-        $result = $statement->rowCount();
-
-        echo $result;
-
-        if($result == 1)
-            return true;
-        return false;
-    }
-    catch(PDOException $e){
-        echo $e;
-    }
+function email_exists($dbh, $email){
+    $statement = $dbh->prepare("SELECT Gebruikersnaam FROM Gebruiker where Mailbox = :mail");
+    $statement->execute(array(':mail' => $email));
+    $result = $statement->fetch();
+    if(isset($result['Gebruikersnaam']))
+        return true;
     return false;
 }
+

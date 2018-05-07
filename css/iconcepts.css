@@ -66,6 +66,43 @@ nav form button{
     top:56px;
     z-index:10;
 }
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||| side nav bar |||||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+.sidebar1 {
+    background: #F17153;
+    /* For browsers that do not support gradients */
+    position:fixed;
+    margin-top: 100px;
+    min-height: 100%;
+    width:200px;
+}
+.list {
+    color: #fff;
+    list-style: none;
+    padding-left: 0px;
+}
+.list::first-line {
+    color: rgba(255, 255, 255, 0.5);
+}
+.list> li, h5 {
+    padding: 5px 0px 5px 40px;
+}
+.list>li:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-left: 5px solid white;
+    color: white;
+    font-weight: bolder;
+    padding-left: 35px;
+}.main-content{
+     margin: 100px auto auto 200px;
+
+     padding: 3px;
+     border: 3px solid black;
+     border-radius: 100%;
+ }
 
 
 /* ======================================================================================
@@ -241,8 +278,9 @@ form p {
     margin:5% 0%;
 
 }
-.action-thumbnail{
-    size:200px;
+img.auction-thumbnail{
+    max-width: 200px;
+    max-height: 200px;
 }
 
 
