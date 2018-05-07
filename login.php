@@ -51,7 +51,8 @@ if(isset($_POST)){
                     <p>Wachtwoord:</p>
                 </div>
                 <div class="col-12 col-sm-6">
-                    <input id="password" name="password" type="password"    placeholder="Wachtwoord"        required minlength="8">
+                    <input id="password" name="password" type="password"    placeholder="Wachtwoord"   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                           title="Het wachtwoord moet minimaal 1 nummer, 1 hoofdletter en 1 kleine letter bevatten. Minimum aantal karakters is 8."    required minlength="8">
                 </div>
                 <div class="col-12 col-sm-8">
                     <a href="wachtwoordvergeten.php">wachtwoord vergeten?</a>

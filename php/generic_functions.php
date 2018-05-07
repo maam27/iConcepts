@@ -15,3 +15,16 @@ function if_set($var, $method){
         }
     }
 }
+
+function post_set($name, $method){
+    if(isset($_GET[$name])||isset($_POST[$name])){
+        switch($method){
+            case 'get':
+                return "value=$_GET[$name]";
+            case 'post':
+                return "value=$_POST[$name]";
+            default:
+                return "";
+        }
+    }
+}

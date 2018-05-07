@@ -57,4 +57,12 @@ function email_exists($dbh, $email){
         return true;
     return false;
 }
+function username_exists($dbh, $username){
+    $statement = $dbh->prepare("SELECT Gebruikersnaam FROM Gebruiker where Gebruikersnaam = :gebruiker");
+    $statement->execute(array(':gebruiker' => $username));
+    $result = $statement->fetch();
+    if(isset($result['Gebruikersnaam']))
+        return true;
+    return false;
+}
 
