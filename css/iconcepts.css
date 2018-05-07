@@ -271,7 +271,8 @@ margin-top{
 padding-top{
     padding-top: 1rem;
 }
-
+option,
 input{
-    width: 100%;
+    width:100%;
+    max-width: 100%;
 }
