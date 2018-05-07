@@ -17,7 +17,14 @@ if(isset($_POST['email'])){
 if(isset($_POST['answer'])){
     $questionCorrect = check_user_answer($_POST['email'] ,$_POST['answer'],$db);
 }
-echo $question;
+if(isset($_POST['nWachtwoord1'])){
+    if($_POST['nWachtwoord1'] == $_POST['nWachtwoord2']){
+        $password = md5($_POST['nWachtwoord1']);
+        if(reset_password($_POST['email'], $password, $db)){
+            redirect("login.php");
+        }
+    }
+}
 ?>
 
 <main>
@@ -50,9 +57,30 @@ echo $question;
                 <div class="col-12">
                     <button class="btn btn-primary float-right">Verzenden</button>
                 </div>
-                <?php echo $_POST['email']?>
             </div>
         <?php } else { ?>
+            <div class="row login-section">
+                <div class="col-12">
+                    <h1>Wachtwoord vergeten</h1>
+                </div>
+                <div class="col-12 col-sm-5">
+                    <p>nieuw wachtwoord:</p>
+                </div>
+                <div class="col-12 col-sm-7">
+                    <input id="nWachtwoord1" name="nWachtwoord1" type="password" required  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Het wachtwoord moet minimaal 1 nummer, 1 hoofdletter en 1 kleine letter bevatten. Minimum aantal karakters is 8." >
+                </div>
+                <div class="col-12 col-sm-5">
+                    <p>nieuw wachtwoord:</p>
+                </div>
+                <div class="col-12 col-sm-7">
+                    <input id="nWachtwoord2" name="nWachtwoord2" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Het wachtwoord moet minimaal 1 nummer, 1 hoofdletter en 1 kleine letter bevatten. Minimum aantal karakters is 8." >
+                </div>
+                <input id="email" name="email" type="hidden" required value="<?php echo $_POST['email']; ?>">
+                <input id="answer" name="answer" type="hidden" required value="<?php echo $_POST['answer']; ?>">
+                <div class="col-12">
+                    <button class="btn btn-primary float-right">Verzenden</button>
+                </div>
+            </div>
         <?php } ?>
         </form>
     </div>
