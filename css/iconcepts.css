@@ -341,8 +341,8 @@ input{
 }
 
 input:read-only {
-    color: #DCDAD1;
+    color: black;
     padding: 2px;
     margin: 0 0 0 0;
-    background-color: salmon;
+    background-color: lightgray;
 }
