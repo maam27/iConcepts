@@ -17,12 +17,57 @@ $statement = $db->prepare("SELECT * FROM Gebruiker where Gebruikersnaam = :gebru
 $statement->execute(array(':gebruiker' => $_SESSION['user']));
 $data1 = $statement->fetch();
 
+if(isset($_POST['btnBecomeSeller'])){
+    $statement2 = $db->prepare("UPDATE Gebruiker SET verkoper = 1 where Gebruikersnaam = :gebruiker");
+    $statement2->execute(array(':gebruiker' => $_SESSION['user']));
+    redirect('Gebruikersprofiel.php');
+}
 ?>
 
     <main>
         <div class="container">
             <div class="row">
-                <div class="col-md-12 margin-bottom-50 margin-top-50 user-section">
+                <div class="col-md-6"> <h2>Veiling waarop je hebt geboden.</h2>
+                        <div class="d-flex justify-content-around flex-wrap">
+                            <div class="productblock">
+                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock d-none d-sm-block">
+                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock d-none d-md-block">
+                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock d-none d-lg-block">
+                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock d-none d-xl-block">
+                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                            <div class="productblock">
+                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
+                                <div>
+                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-md-6 d-flex flex-column justify-content-center  user-section">
                     <p><strong>Gebruikersnaam:</strong>
                         <?php echo $data1['Gebruikersnaam']; ?>
                     </p>
@@ -64,7 +109,26 @@ $data1 = $statement->fetch();
                             }
                             ?>
                     </p>
-                </div>
+
+                        <form class="row" method="post">
+
+                            <a class="btn btn-primary col-md-5 user-section-button-margin" href="UpdateUserInformation.php">Pas gegevens aan</a>
+
+                            <?php
+                                if($data1['Verkoper'] == 1 || isset($_POST['btnBecomeSeller'])){
+                                    echo '<a class="btn btn-primary col-md-5 user-section-button-margin" href="Verkoper.php"> Mijn advertenties </a>';
+
+                                }
+                                    else{
+                                        echo '<input class="col-md-5 btn btn-primary user-section-button-margin" type="submit" name="btnBecomeSeller" value="Word verkoper"/>';
+                                    }
+                            ?>
+
+
+                        </form>
+
+                    </div>
+
             </div>
         </div>
     </main>
