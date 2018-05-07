@@ -16,7 +16,7 @@ if(isset($_POST)){
         $pass = $_POST['password'];
         if (preg_match('/[A-Z]/', $pass) && preg_match('/[0-9]/', $pass)) {
             if (empty($message)) {
-                $pass = $_POST['password']; //md5($_POST['password']);
+                $pass = md5($_POST['password']);
                 if (login_user($db, $_POST['username'], $pass)) {
                     redirect("index.php");
                 }

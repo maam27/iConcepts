@@ -21,7 +21,7 @@ if(isset($_POST['nWachtwoord1'])){
     if($_POST['nWachtwoord1'] == $_POST['nWachtwoord2']){
         $password = md5($_POST['nWachtwoord1']);
         if(reset_password($_POST['email'], $password, $db)){
-            redirect("login");
+            redirect("login.php");
         }
     }
 }

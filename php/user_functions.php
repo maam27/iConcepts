@@ -98,7 +98,7 @@ function reset_password($email, $password, $dbh){
         $statement = $dbh->prepare("update Gebruiker set Wachtwoord = :password where Mailbox = :email ");
         $statement->execute(array(':password' => $password, ':email' => $email));
         $result = $statement->rowCount();
-        if($result == 1)
+        if($result == '1')
             return true;
         return false;
     }
