@@ -30,6 +30,10 @@ if( email_exists($db, $_POST['e-mail']) ){
     $melding = 'Het opgegeven mail-adres is al in gebruik.';
 }
 
+else if(username_exists($db, $_POST['username'])){
+    $melding = 'De opgegeven gebruikersnaam is al in gebruik.';
+}
+
 else if($_POST['password'] != $_POST['password2']){
     $melding = 'Het wachtwoord komt niet overeen met de verificatie.';
 }
