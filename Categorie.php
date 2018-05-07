@@ -33,28 +33,43 @@ include_once 'partial/menu.php';
             </div>
         </div>
         <div class="auction-section">
-            <div class="d-flex justify-content-around flex-wrap">
-                <table style="width:100%">
-                    <tr>
-                        <th><img src="images/thumb/placeholder.jpg"  class="auction-thumbnail"/></th>
-                        <th><p>hier kan een product naam of titel komen,maar komt hier dan ook de juiste informatie bij de afbeelding?</p></th>
-                        <th><p>prijs<strong>€300 </strong></p></th>
-                    </tr>
-                </table>
+
+
+
+            <?php foreach($Voorwerp as $key=>$value): ?>
+                <div class="d-flex justify-content-around flex-wrap">
+                    <a href="veilingspagina.php?Voorwerpnummer=<?php echo $Voorwerp[$key] ['Voorwerpnummer'];?>">
+                        <table style="width:100%">
+                            <tr>
+                                <th><img src="images/thumb/placeholder.jpg"  class="auction-thumbnail"/></th>
+                                <th><p>hier kan een product naam of titel komen,maar komt hier dan ook de juiste informatie bij de afbeelding?</p></th>
+                                <th><p> prijs €300</p></th>
+                            </tr>
+                        </table><img src="<?php echo "images/thumb/" .$Voorwerp[$key] ['image']; ?>" alt="<?php echo $Voorwerp[$key] ['image']; ?>"/></a>
+                </div>
+            <?php endforeach; ?>
+
+<!--                <table style="width:100%">-->
+<!--                    <tr>-->
+<!--                        <th><img src="images/thumb/placeholder.jpg"  class="auction-thumbnail"/></th>-->
+<!--                        <th><p>hier kan een product naam of titel komen,maar komt hier dan ook de juiste informatie bij de afbeelding?</p></th>-->
+<!--                        <th><p> prijs €300</p></th>-->
+<!--                    </tr>-->
+<!--                </table>-->
 
             </div>
         </div>
 
-        <div class="row auction-section">
-            <div class="col-sm-12 col-xl-3 col-md-5">
-               <img src="images/thumb/placeholder.jpg"  class="auction-thumbnail"/>
-            </div>
-            <div class="col-sm-12 col-xl-7 col-md-9">
-                <p>hier kan een product naam of titel komen,maar komt hier dan ook de juiste informatie bij de afbeelding?</p></div>
-
-            <div class="col-xl-2 col-sm-12 col-md-6">  <p>prijs<strong>€300 </strong></p></div>
-            </div>
-        </div>
+<!--        <div class="row auction-section">-->
+<!--            <div class="col-sm-12 col-xl-3 col-md-5">-->
+<!--               <img src="images/thumb/placeholder.jpg"  class="auction-thumbnail"/>-->
+<!--            </div>-->
+<!--            <div class="col-sm-12 col-xl-7 col-md-9">-->
+<!--                <p>hier kan een product naam of titel komen,maar komt hier dan ook de juiste informatie bij de afbeelding?</p></div>-->
+<!---->
+<!--            <div class="col-xl-2 col-sm-12 col-md-6">  <p> prijs €300 </p></div>-->
+<!--            </div>-->
+<!--        </div>-->
 
 
 <footer class="container">

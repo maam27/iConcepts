@@ -241,8 +241,9 @@ form p {
     margin:5% 0%;
 
 }
-.action-thumbnail{
-    size:200px;
+img.auction-thumbnail{
+    max-width: 200px;
+    max-height: 200px;
 }
 
 
