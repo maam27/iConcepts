@@ -50,3 +50,33 @@ function register_user($dbh, $username, $password, $firstname, $lastname, $birth
     }
 }
 
+function get_user_question($email, $dbh){
+    try{
+        $statement = $dbh->prepare("SELECT TekstVraag FROM Gebruiker join Vraag on vraag.Vraagnummer = Gebruiker.Vraag where mailbox = :email ");
+        $statement->execute(array(':email' => $email));
+        $result = $statement->fetch();
+        return $result['TekstVraag'];
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+    return null;
+}
+
+function check_user_answer($email, $answer, $dbh){
+    try{
+        $statement = $dbh->prepare("SELECT count(*) FROM Gebruiker join Vraag on vraag.Vraagnummer = Gebruiker.Vraag where Mailbox = :email and Antwoordtekst = :antwoord ");
+        $statement->execute(array(':email' => $email, ':antwoord' => $answer));
+        $result = $statement->rowCount();
+
+        echo $result;
+
+        if($result == 1)
+            return true;
+        return false;
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+    return false;
+}
