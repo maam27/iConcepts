@@ -92,13 +92,13 @@ else {register_user($db, $_POST['username'], $_POST['first-name'],$_POST['last-n
                             <input id="city" name="city" type="text" placeholder="Arnhem" <?php echo post_set('city', 'post');?> required>
                             <br>
                             <p>Adresregel 1:</p>
-                            <input id="address-field" name="address-field" type="text" placeholder="Straatnaam 15" <?php echo post_set('address-field', 'post');?> required>
+                            <input id="address-field" name="address-field" type="text" placeholder="Straatnaam 15" <?php echo post_set('address-field', 'post');?> pattern="([A-Za-z])+( )?([0-9])+" title="Straatnaam gevolgd door nummer." required>
                             <br>
                             <p>Adresregel 2:</p>
                             <input id="address-field2" name="address-field2" type="text" placeholder="Toevoeging adresregel" <?php echo post_set('address-field2', 'post');?>>
                             <br>
                             <p>Postcode: </p>
-                            <input id="postcode" name="postcode" type="text" placeholder="4323DK" <?php echo post_set('postcode', 'post');?> required>
+                            <input id="postcode" name="postcode" type="text" placeholder="4323DK" <?php echo post_set('postcode', 'post');?> pattern="([0-9]){4}( )?([A-Za-z]){2}" title="4 cijfers gevolgd door 2 letters." required>
                             <br>
                             <p>Veiligheidsvraag: </p>
                             <select name="security-question">
