@@ -236,6 +236,7 @@ main > div.container{
 
 .auction-section ul{
     list-style-type:none;
+    padding-left:0px;
 }
 .auction-section ul li{
 font-size:0.9rem;
@@ -346,9 +347,11 @@ input:read-only {
     background-color: lightgray;
 }
 
-.center{margin:auto;
-}
+.center{margin:auto;}
 
+.hide{
+    display:none;
+}
 /* ======================================================================================
 ////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 |||||||||||||||||||||||||||||||||||||||| footer ||||||||||||||||||||||||||||||||||||||||||
