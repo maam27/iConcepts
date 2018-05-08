@@ -105,7 +105,7 @@ include_once 'partial/menu.php';
 <!--        </div>-->
 
 
-<footer class="container">
+<footer class="container rubriekfooter">
     <p>&copy; Company 2017-2018</p>
 </footer>
 <?php
