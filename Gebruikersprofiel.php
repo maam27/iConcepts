@@ -68,21 +68,25 @@ if(isset($_POST['btnBecomeSeller'])){
                         </div>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-center  user-section">
-                    <p><strong>Gebruikersnaam:</strong>
-                        <?php echo $data1['Gebruikersnaam']; ?>
-                    </p>
+
                     <p><strong>Voornaam:</strong>
                         <?php echo $data1['Voornaam']; ?>
                     </p>
                     <p><strong>Achternaam:</strong>
                         <?php echo $data1['Achternaam']; ?>
                     </p>
+                    <p><strong>Gebruikersnaam:</strong>
+                        <?php echo $data1['Gebruikersnaam']; ?>
+                    </p>
                     <p><strong>Adresregel1:</strong>
                         <?php echo $data1['Adresregel1']; ?>
                     </p>
-                    <p><strong>Adresregel2:</strong>
+                    <?php if($data1['Adresregel2']!= ''){
+                        ?>
+                        <p><strong>Adresregel2:</strong>
                         <?php echo $data1['Adresregel2']; ?>
                     </p>
+                    <?php } ?>
                     <p><strong>Postcode:</strong>
                         <?php echo $data1['Postcode']; ?>
                     </p><p><strong>Plaatsnaam:</strong>

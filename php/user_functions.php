@@ -20,8 +20,9 @@ function login_user($dbh, $user, $pass)
     return false;
 }
 
-function register_user($dbh, $username, $password, $firstname, $lastname, $birthdate, $email, $country, $city, $addressfield, $addressfield2, $postcode, $securityquestion, $answer)
+function register_user($dbh, $username, $firstname, $lastname, $addressfield, $addressfield2, $postcode, $city, $country, $birthdate, $email, $password, $securityquestion, $answer)
 {
+    $encryptedPassword = MD5($password);
     try{
         $stmt = $dbh->prepare("INSERT INTO Gebruiker (Gebruikersnaam, Voornaam, Achternaam, Adresregel1, Adresregel2, Postcode, Plaatsnaam, Land, GeboorteDag, Mailbox, Wachtwoord, Vraag, Antwoordtekst, Verkoper)
         VALUES (:gebruiker, :voornaam, :achternaam, :adresregel1, :adresregel2, :postcode, :plaatsnaam, :land, :geboortedag, :mailbox, :wachtwoord, :vraag, :antwoordtekst, 0)");
@@ -30,23 +31,26 @@ function register_user($dbh, $username, $password, $firstname, $lastname, $birth
                 ':gebruiker' => $username,
                 ':voornaam' => $firstname,
                 ':achternaam' => $lastname,
-                ':adresregel1' => $adres1,
-                ':adresregel2' => $adres2,
-                ':postcode' => $postalcode,
+                ':adresregel1' => $addressfield,
+                ':adresregel2' => $addressfield2,
+                ':postcode' => $postcode,
                 ':plaatsnaam' => $city,
                 ':land' => $country,
                 ':geboortedag' => $birthdate,
-                ':mailbox' => $mail,
-                ':wachtwoord' => $password,
+                ':mailbox' => $email,
+                ':wachtwoord' => $encryptedPassword,
                 ':vraag' => $securityquestion,
                 ':antwoordtekst' => $answer
             ]);
 
+        return true;
     }
 
     catch(PDOException $e){
         echo $e->getMessage();
+
     }
+    return false;
 }
 
 function email_exists($dbh, $email){
@@ -65,6 +69,7 @@ function username_exists($dbh, $username){
         return true;
     return false;
 }
+
 
 function get_user_question($email, $dbh){
     try{
@@ -106,4 +111,38 @@ function reset_password($email, $password, $dbh){
         echo $e;
     }
     return false;
+}
+
+
+function update_user($dbh, $username, $firstname, $lastname, $addressfield, $addressfield2, $postcode, $city, $country, $birthdate, $email, $securityquestion, $answer)
+{
+
+
+    try{
+        $stmt = $dbh->prepare("UPDATE Gebruiker SET Gebruikersnaam = :gebruiker, Voornaam = :voornaam, Achternaam = :achternaam, Adresregel1 = :adresregel1, Adresregel2 = :adresregel2,
+                      Postcode = :postcode, Plaatsnaam = :plaatsnaam, Land = :land, GeboorteDag = :geboortedag, Mailbox = :mailbox,
+                      Vraag = :vraag, Antwoordtekst = :antwoordtekst 
+                      WHERE Gebruikersnaam = :ingelogdeUser");
+        $stmt -> execute(
+            [
+                ':gebruiker' => $username,
+                ':voornaam' => $firstname,
+                ':achternaam' => $lastname,
+                ':adresregel1' => $addressfield,
+                ':adresregel2' => $addressfield2,
+                ':postcode' => $postcode,
+                ':plaatsnaam' => $city,
+                ':land' => $country,
+                ':geboortedag' => $birthdate,
+                ':mailbox' => $email,
+                ':vraag' => $securityquestion,
+                ':antwoordtekst' => $answer,
+                ':ingelogdeUser' => $_SESSION['user']
+            ]);
+
+    }
+
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
 }
