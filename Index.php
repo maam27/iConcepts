@@ -1,7 +1,7 @@
 <?php
 require_once 'partial/page_head.php';
 ?>
-        <title>Jumbotron Template for Bootstrap Lool</title>
+        <title>Home | eenmaalAndermaal</title>
     </head>
 
     <body>

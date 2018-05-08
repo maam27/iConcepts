@@ -1,46 +1,61 @@
 <?php
 require_once 'partial/page_head.php';
+require_once 'php/database.php';
+require_once 'php/item_functions.php';
 ?>
-    <title>Jumbotron Template for Bootstrap Lool</title>
+    <title></title>
 </head>
 
 <body>
 <?php
 include_once 'partial/menu.php';
+$itemId = $_GET['item'];
+
 ?>
 
 <main>
-
     <div class="container">
         <div class="row justify-content-center">
-            <h2 class="text-center">[Naam van wat er wordt geveildtdt]</h2>
+            <h2 class="text-center"><?php echo get_item_name($itemId, $db);?></h2>
         </div>
     </div>
     <div class="container">
         <!-- Example row of columns -->
         <div class="row">
-            <div class="col-md-6">
-                <figure class="d-flex flex-column justify-content-between align-items-start">
-                    <img class="img-thumbnail auction-page-image" src="images/TrumpPlaceholder.jpg"> </img>
-                    <p><strong>Hoofdcategory -> subcategory1 -> ... subcategory6</strong></p>
-                    <p><strong>Veilingnummer</strong> : 14</p>
-                    <p><strong>Productomschrijving</strong>: Hier komt de productsomschrijving te staan, dit kan natuurlijk een heel lang verhaal zijn. Daarom moet je
-                        er goed voor zorgen dat je de breedte aan laat passen. Want voor je het weet heb je een hele muur aan text,
-                        en verandert de pagina niet goed mee. Dat zou zeer jammer zijn, en daarom proberen we dit ook te
-                        voorkomen, zodat de pagina er leuk uitziet.</p>
-
-                </figure>
+            <div class="col-md-6 d-flex flex-column justify-content-between align-items-start">
+               <div class="row">
+                   <div class="col-12">
+                        <img class="img-thumbnail auction-page-image" src="images/TrumpPlaceholder.jpg"> </img>
+                   </div>
+                   <div class="col-12">
+                        <p>
+                            <strong>Hoofdcategory -> subcategory1 -> ... subcategory6</strong>
+                        </p>
+                   </div>
+                   <div class="col-12">
+                        <p>
+                            <strong>Veilingnummer :</strong> <?php echo $itemId; ?>
+                        </p>
+                   </div>
+                   <div class="col-12">
+                        <p>
+                            <strong>Productomschrijving :</strong><?php echo get_item_description($itemId, $db); ?>
+                        </p>
+                   </div>
+               </div>
             </div>
             <div class="col-md-6">
-                <div class="container d-flex flex-column justify-content-start align-items-center">
-                    <p class="timerText"> Timer in hoeveel tijd veiling eindigt</p>
-                    <div class="d-flex flex-column justify-content-end verkoperSection">
+                <div class="row d-flex flex-column justify-content-start align-items-center">
+                    <div class="col-12">
+                        <p class="timerText"> Timer in hoeveel tijd veiling eindigt</p>
+                    </div>
+                    <div class="col-12 d-flex flex-column justify-content-end verkoperSection">
                         <h4> Hier komt informatie over de verkoper</h4>
                         <p> En hier komt text te staan over de verkoper</p>
                         <p> Bestaand uit verschillende zinnen.</p>
                         <p>Ook komen er bepaalde attributen te staan.</p>
                     </div>
-                    <div class="d-flex flex-column justify-content-end align-items-start auction-section">
+                    <div class="col-12 auction-section">
                         <h4> Hier komen de biedingen te staan. </h4>
                         <ul>
                             <li>Bod 1 - Barry</li>
@@ -54,7 +69,7 @@ include_once 'partial/menu.php';
                             <li>Bod 9 - Barry</li>
                             <li>Bod 10 - Barry</li>
                         </ul>
-                        <p class="align-self-end"><a class="btn btn-secondary" href="#" role="button">Plaats bod &raquo;</a></p>
+                        <p class="float-right"><a class="btn btn-secondary" href="#" role="button">Plaats bod &raquo;</a></p>
                     </div>
                 </div>
             </div>
@@ -62,6 +77,7 @@ include_once 'partial/menu.php';
     </div> <!-- /container -->
 </main>
 
-<?
-require_once 'partial/page_footer.php';
+
+<?php
+    require_once 'partial/page_footer.php';
 ?>
