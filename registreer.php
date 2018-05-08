@@ -80,7 +80,7 @@ else {register_user($db, $_POST['username'], $_POST['first-name'],$_POST['last-n
                             <input id="birth-date" name="birth-date" type="date" <?php echo post_set('birth-date', 'post');?> required>
                             <br>
                             <p>E-Mail:</p>
-                            <input id="e-mail" name="e-mail" type="email" placeholder="E-mail" <?php echo post_set('e-mail', 'post');?> required>
+                            <input id="e-mail" name="e-mail" type="email" placeholder="E-mail" <?php echo post_set('e-mail', 'post');?> pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required>
                             <br>
                         </div>
                         <div class="col-md-6">
