@@ -348,3 +348,7 @@ input:read-only {
 }
 
 .center{margin:auto;}
+
+.hide{
+    display:none;
+}
