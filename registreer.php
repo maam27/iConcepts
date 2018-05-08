@@ -38,9 +38,10 @@ else if($_POST['password'] != $_POST['password2']){
     $melding = 'Het wachtwoord komt niet overeen met de verificatie.';
 }
 
-else {register_user_test($db, $_POST['username'], $_POST['first-name'],$_POST['last-name'],$_POST['address-field'],
+else {register_user($db, $_POST['username'], $_POST['first-name'],$_POST['last-name'],$_POST['address-field'],
     $_POST['address-field2'],$_POST['postcode'], $_POST['city'],$_POST['country'],$_POST['birth-date'],$_POST['e-mail'],
     $_POST['password'],$_POST['security-question'], $_POST['answer']);
+    redirect('login.php');
 }
 }
 
