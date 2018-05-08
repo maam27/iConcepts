@@ -39,7 +39,7 @@ if(isset($_POST['nWachtwoord1'])){
                     <p>email:</p>
                 </div>
                 <div class="col-12 col-sm-9">
-                    <input id="email" name="email" type="email" placeholder="email" required value="<?php echo if_set('email','post');?>" <?php if(!is_null($question) || !empty($question)) { echo 'readonly'; } ?>>
+                    <input id="email" name="email" type="email" placeholder="email" required value="<?php echo if_set('email','post');?>" <?php if(!is_null($question) || !empty($question)) { echo 'readonly'; } else {echo 'autofocus';} ?>>
                 </div>
                 <?php if(!is_null($question) || !empty($question)) { ?>
                 <div class="col-12">
@@ -51,7 +51,7 @@ if(isset($_POST['nWachtwoord1'])){
                     <p>Antwoord:</p>
                 </div>
                 <div class="col-12 col-sm-9">
-                    <input id="answer" name="answer" type="text" placeholder="antwoord" required value="<?php echo if_set('answer','post'); ?>"   >
+                    <input autofocus id="answer" name="answer" type="text" placeholder="antwoord" required value="<?php echo if_set('answer','post'); ?>"   >
                 </div>
                 <?php } ?>
                 <div class="col-12">
@@ -63,11 +63,14 @@ if(isset($_POST['nWachtwoord1'])){
                 <div class="col-12">
                     <h1>Wachtwoord vergeten</h1>
                 </div>
+                <div id="passwordMatchWarning" class="col-12 error-message hide">
+                    <p>De ingevoerde wachtwoorden komen niet overeen.</p>
+                </div>
                 <div class="col-12 col-sm-5">
                     <p>nieuw wachtwoord:</p>
                 </div>
                 <div class="col-12 col-sm-7">
-                    <input id="nWachtwoord1" name="nWachtwoord1" type="password" required  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Het wachtwoord moet minimaal 1 nummer, 1 hoofdletter en 1 kleine letter bevatten. Minimum aantal karakters is 8." >
+                    <input autofocus id="nWachtwoord1" name="nWachtwoord1" type="password" required  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Het wachtwoord moet minimaal 1 nummer, 1 hoofdletter en 1 kleine letter bevatten. Minimum aantal karakters is 8." >
                 </div>
                 <div class="col-12 col-sm-5">
                     <p>nieuw wachtwoord:</p>
@@ -89,3 +92,19 @@ if(isset($_POST['nWachtwoord1'])){
 <?php
 require_once 'partial/page_footer.php';
 ?>
+
+<script>
+    $("form").submit(function(e){
+        $pw1 = $('#nWachtwoord1');
+        $pw2 = $('#nWachtwoord2');
+        $pwMatchWarning = $('#passwordMatchWarning');
+        if($pw1 != null && $pw2 != null){
+            if($pw1.val() != $pw2.val()){
+                $pwMatchWarning.show();
+                e.preventDefault();
+            }else{
+                $pwMatchWarning.hide();
+            }
+        }
+    });
+</script>
