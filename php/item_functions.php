@@ -25,12 +25,17 @@ function get_item_description($itemId ,$dbh){
     return null;
 }
 
-function get_item_diz($itemId ,$dbh){
+
+function get_item_bids($itemId ,$dbh){
     try{
-        $statement = $dbh->prepare("select titel from voorwerp where voorwerpnummer = :item ");
+        $statement = $dbh->prepare("SELECT TOP (10) [Bodbedrag] as 'amount', [Gebruiker] as 'user', [BodDag] as 'day',[BodTijdstip] as 'time' FROM [Bod] where Voorwerp = :item order by Bodbedrag desc ");
         $statement->execute(array(':item' => $itemId));
-        $result = $statement->fetch();
-        return $result['titel'];
+
+        $result = array();
+        foreach($statement->fetch() as $bid){
+            array_push($result,$bid);
+        }
+        return $result;
     }
     catch(PDOException $e){
         echo $e;
@@ -38,17 +43,18 @@ function get_item_diz($itemId ,$dbh){
     return null;
 }
 
-function reset_password($email, $password, $dbh){
-    try{
-        $statement = $dbh->prepare("update Gebruiker set Wachtwoord = :password where Mailbox = :email ");
-        $statement->execute(array(':password' => $password, ':email' => $email));
-        $result = $statement->rowCount();
-        if($result == '1')
-            return true;
-        return false;
-    }
-    catch(PDOException $e){
-        echo $e;
-    }
-    return false;
-}
+
+//
+//
+//function get_item_diz($itemId ,$dbh){
+//    try{
+//        $statement = $dbh->prepare("select titel from voorwerp where voorwerpnummer = :item ");
+//        $statement->execute(array(':item' => $itemId));
+//        $result = $statement->fetch();
+//        return $result['titel'];
+//    }
+//    catch(PDOException $e){
+//        echo $e;
+//    }
+//    return null;
+//}

@@ -9,6 +9,9 @@ require_once 'php/item_functions.php';
 <body>
 <?php
 include_once 'partial/menu.php';
+if($_GET['item'] == null){
+    redirect('categorie.php');
+}
 $itemId = $_GET['item'];
 
 ?>
@@ -45,11 +48,11 @@ $itemId = $_GET['item'];
                </div>
             </div>
             <div class="col-md-6">
-                <div class="row d-flex flex-column justify-content-start align-items-center">
+                <div class="row">
                     <div class="col-12">
                         <p class="timerText"> Timer in hoeveel tijd veiling eindigt</p>
                     </div>
-                    <div class="col-12 d-flex flex-column justify-content-end verkoperSection">
+                    <div class="col-12 verkoperSection">
                         <h4> Hier komt informatie over de verkoper</h4>
                         <p> En hier komt text te staan over de verkoper</p>
                         <p> Bestaand uit verschillende zinnen.</p>
@@ -58,6 +61,10 @@ $itemId = $_GET['item'];
                     <div class="col-12 auction-section">
                         <h4> Hier komen de biedingen te staan. </h4>
                         <ul>
+                            <?php
+                            $bids = get_item_bids($itemId,$db);
+                            print_r($bids);
+                            ?>
                             <li>Bod 1 - Barry</li>
                             <li>Bod 2 - Barry</li>
                             <li>Bod 3 - Barry</li>
