@@ -69,9 +69,7 @@ if(!empty($_POST['username']) AND !empty($_POST['first-name'])
                         <br>
                         <p>Geboortedatum:</p>
                         <input id="birth-date" name="birth-date" type="date" value='<?php
-                        $date = new DateTime($data2['GeboorteDag']);
-                        $result = $date->format('d-m-Y');
-                        echo $result ?>' required>
+                        echo $data2['GeboorteDag']; ?>' required>
                         <br>
                         <p>E-Mail:</p>
                         <input id="e-mail" name="e-mail" type="email" placeholder="E-mail" value='<?php echo $data2['Mailbox'] ?>' required>

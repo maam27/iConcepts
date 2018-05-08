@@ -43,14 +43,14 @@ function register_user($dbh, $username, $firstname, $lastname, $addressfield, $a
                 ':antwoordtekst' => $answer
             ]);
 
-        return true;
-    }
+        if ($stmt->rowCount() == 1)
+        {return true;}
+        else{return false;}
 
+    }
     catch(PDOException $e){
         echo $e->getMessage();
-
     }
-    return false;
 }
 
 function email_exists($dbh, $email){
