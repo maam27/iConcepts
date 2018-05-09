@@ -10,6 +10,7 @@
     <title>Categorie</title>
     <?php
     require_once 'partial/styles.php';
+
     ?>
 
 </head>
@@ -17,19 +18,22 @@
 <body>
 <?php
 include_once 'partial/menu.php';
+require_once 'php/database.php';
+$dbh = get_db_connection();
 
-$Rubriek = isset($_GET['Rubrieknaam']) ? $_GET['Rubrieknaam'] : '';
 ?>
 
 <main>
 <!--    SideNavigation Bar    -->
 
     <?php
-    $query = $db->prepare("SELECT [rubrieknaam] FROM Rubriek ");
-    $query->execute(array(':rubrieknaam' => $Rubriek));
-    $result = $query->fetch();
+$sql = ("SELECT Rubrieknaam FROM Rubriek");
 
-    $Categorie.=<<<rubriek
+    $query = $dbh->prepare($sql);
+    $query->execute();
+    $Rubriek = $query->fetchAll();
+?>
+
     <div class="container-fluid">
         <div class="row">
             <div class="sidebar1">
@@ -47,9 +51,10 @@ $Rubriek = isset($_GET['Rubrieknaam']) ? $_GET['Rubrieknaam'] : '';
 
                     <ul class="list">
                     <h5><strong>Alle categorieën </strong></h5>
-                   <?php foreach($Rubriek as $key=>$value){
-                        <li><a href="categorie.php?id=$Rubriek[$key] ['Rubrieknaam'];"></a></li>
-                     } 
+                   <?php foreach($Rubriek as $row ):?>
+                        <li><a href="categorie.php?id=<?php echo $row ['Rubrieknaam'];?>"><?php echo $row ['Rubrieknaam'];?></a> </li>
+                     <?php endforeach; ?>
+                     
                      
                     </ul>
                 </div>
@@ -70,9 +75,7 @@ $Rubriek = isset($_GET['Rubrieknaam']) ? $_GET['Rubrieknaam'] : '';
                         </div>
                     </div>
                     <div class="auction-section">
-rubriek;
-    echo $Categorie;
-?>
+
 
     <!--    advertentie Sectie   -->
 
