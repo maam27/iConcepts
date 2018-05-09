@@ -30,11 +30,7 @@ function get_item_bids($itemId ,$dbh){
     try{
         $statement = $dbh->prepare("SELECT TOP (10) [Bodbedrag] as 'amount', [Gebruiker] as 'user', [BodDag] as 'day',[BodTijdstip] as 'time' FROM [Bod] where Voorwerp = :item order by Bodbedrag desc ");
         $statement->execute(array(':item' => $itemId));
-
-        $result = array();
-        foreach($statement->fetch() as $bid){
-            array_push($result,$bid);
-        }
+        $result = $statement->fetchall();
         return $result;
     }
     catch(PDOException $e){
