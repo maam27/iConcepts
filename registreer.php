@@ -19,30 +19,41 @@ $stmt->execute();
 $data1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $melding = '';
-$encryptWachtwoord = md5($_POST['password']);
+$vandaag = date("Y/m/d");
+
+
 if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST['password2']) AND !empty($_POST['first-name'])
     AND !empty($_POST['last-name']) AND !empty($_POST['birth-date']) AND !empty($_POST['e-mail']) AND !empty($_POST['country'])
     AND !empty($_POST['city']) AND !empty($_POST['address-field']) AND !empty($_POST['postcode']) AND !empty($_POST['security-question'])
     AND !empty($_POST['answer'])) {
     if ($_POST['password'] == $_POST['password2']) {
 
-        if (register_user($db, $_POST['username'], $_POST['first-name'], $_POST['last-name'], $_POST['address-field'],
-            $_POST['address-field2'], $_POST['postcode'], $_POST['city'], $_POST['country'], $_POST['birth-date'], $_POST['e-mail'],
-            $_POST['password'], $_POST['security-question'], $_POST['answer'])) {
 
-            login_user($db, $_POST['username'], $encryptWachtwoord);
-            redirect('Index.php');
+        $datetime2 = new DateTime(date('Y-m-d'));
+        $datetime1 = new DateTime($_POST['birth-date']);
+        $interval = $datetime1->diff($datetime2);
+
+        if($interval->format('%a') < 5844){
+            $melding = 'U bent niet oud genoeg om een account te maken';
         }
-
-        if (email_exists($db, $_POST['e-mail'])) {
+        else if (email_exists($db, $_POST['e-mail'])) {
             $melding = 'Het opgegeven mail-adres is al in gebruik.';
         } else if (username_exists($db, $_POST['username'])) {
             $melding = 'De opgegeven gebruikersnaam is al in gebruik.';
         }
+       else if (register_user($db, $_POST['username'], $_POST['first-name'], $_POST['last-name'], $_POST['address-field'],
+            $_POST['address-field2'], $_POST['postcode'], $_POST['city'], $_POST['country'], $_POST['birth-date'], $_POST['e-mail'],
+            $_POST['password'], $_POST['security-question'], $_POST['answer'])) {
+           $encryptWachtwoord = md5($_POST['password']);
+            login_user($db, $_POST['username'], $encryptWachtwoord);
+            redirect('Index.php');
+        }
 
     }
 
-      else{$melding = 'Het wachtwoord komt niet overeen met de verificatie.';}
+
+    else{$melding = 'Het wachtwoord komt niet overeen met de verificatie.';
+  }
 
 
 }

@@ -58,25 +58,37 @@ $itemId = $_GET['item'];
                         <p> Bestaand uit verschillende zinnen.</p>
                         <p>Ook komen er bepaalde attributen te staan.</p>
                     </div>
-                    <div class="col-12 auction-section">
-                        <h4> Hier komen de biedingen te staan. </h4>
-                        <ul>
+                    <div id="biddings" class="col-12 auction-section">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4> Hier komen de biedingen te staan. </h4>
+                            </div>
                             <?php
                             $bids = get_item_bids($itemId,$db);
-                            print_r($bids);
+                            $minimumBid = $bids[0]['amount'] + 50;
+                            for($i =0; $i< count($bids);$i++){
+                                $dateTime = new DateTime($bids[$i]['day'].$bids[$i]['time']);
+                                $bodNr = $i+1;
+                                echo "<div class='row'>";
+                                echo "<div class='col-2'> bod ". $bodNr ." :</div>";
+                                echo "<div class='col-2'>". $bids[$i]['amount']. "</div>";
+                                echo "<div class='col-3'>". $bids[$i]['user']. "</div>";
+                                echo "<div class='col-3'>". $dateTime->format('d-m-Y'). "</div>";
+                                echo "<div class='col-2 d-none d-lg-block'>". $dateTime->format('H:i:s'). "</div>";
+                                echo "</div>";
+                            }
                             ?>
-                            <li>Bod 1 - Barry</li>
-                            <li>Bod 2 - Barry</li>
-                            <li>Bod 3 - Barry</li>
-                            <li>Bod 4 - Barry</li>
-                            <li>Bod 5 - Barry</li>
-                            <li>Bod 6 - Barry</li>
-                            <li>Bod 7 - Barry</li>
-                            <li>Bod 8 - Barry</li>
-                            <li>Bod 9 - Barry</li>
-                            <li>Bod 10 - Barry</li>
-                        </ul>
-                        <p class="float-right"><a class="btn btn-secondary" href="#" role="button">Plaats bod &raquo;</a></p>
+                        </div>
+                        <form method="post" target="">
+                             <div class="row">
+                                <div class="col-8">
+                                    <input id="bid" name="bid" type="number" min="<?php echo $minimumBid;?>" value="<?php echo $minimumBid;?>" step="any"/>
+                                </div>
+                                <div class="col-4">
+                                    <input id="placeBid" name="placeBid" type="submit" class="btn btn-secondary" value="Plaats bod &raquo;"/>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
