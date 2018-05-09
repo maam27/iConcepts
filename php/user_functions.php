@@ -119,6 +119,9 @@ function update_user($dbh, $username, $firstname, $lastname, $addressfield, $add
 
 
     try{
+
+
+
         $stmt = $dbh->prepare("UPDATE Gebruiker SET Gebruikersnaam = :gebruiker, Voornaam = :voornaam, Achternaam = :achternaam, Adresregel1 = :adresregel1, Adresregel2 = :adresregel2,
                       Postcode = :postcode, Plaatsnaam = :plaatsnaam, Land = :land, GeboorteDag = :geboortedag, Mailbox = :mailbox,
                       Vraag = :vraag, Antwoordtekst = :antwoordtekst 
@@ -142,6 +145,31 @@ function update_user($dbh, $username, $firstname, $lastname, $addressfield, $add
 
     }
 
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function upgrade_to_seller($dbh, $username, $bank, $bankrekening, $controleoptie, $CreditCard){
+
+    if($CreditCard == ""){$CreditCard = NULL;}
+
+    try{
+        $stmt = $dbh ->prepare("INSERT into Verkoper (Gebruiker, Bank, Bankrekening, ControleOptie, Creditcard)
+        VALUES (:gebruiker, :bank, :rekening, :controleoptie, :creditcard)");
+        $stmt -> execute(
+            [
+             ':gebruiker' => $username,
+             ':bank' => $bank,
+             ':rekening' => $bankrekening,
+             ':controleoptie' => $controleoptie,
+             ':creditcard' => $CreditCard
+            ]
+        );
+
+        $statement2 = $dbh->prepare("UPDATE Gebruiker SET verkoper = 1 where Gebruikersnaam = :gebruiker");
+        $statement2->execute(array(':gebruiker' => $username));
+    }
     catch(PDOException $e){
         echo $e->getMessage();
     }
