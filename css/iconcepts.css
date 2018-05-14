@@ -1,5 +1,5 @@
 *{
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 body{
@@ -10,41 +10,12 @@ h1,h2,h3,h4,h5,h6{
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-/* offset for the top menu*/
-main > div.container{
-    margin-top: 56px;
-}
 
-@media (min-width: 576px) {
-    main > div.container{
-        margin-top: 56px;
-    }
-}
-
-@media (min-width: 768px) {
-    main > div.container{
-        margin-top: 56px;
-    }
-}
-
-@media (min-width: 992px) {
-    main > div.container{
-        margin-top: 100px;
-    }
-}
-
-@media (min-width: 1200px) {
-    main > div.container{
-        margin-top: 100px;
-    }
-}
-
-.kleineMargin{
-    color:black;
-    margin: 10px;
-
-}
-
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||Menu & submenu||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
 nav div ul{
     width: 100% ;
 }
@@ -52,6 +23,10 @@ nav div ul{
 nav div ul li a{
     color:black;
     font-weight:normal;
+}
+
+nav div ul li a:hover{
+    color:white;
 }
 
 nav a.paginatitel{
@@ -63,17 +38,18 @@ nav a.paginatitel{
     font-weight:bold;
 }
 
-
 nav{
-    background-color: #F4512C ;
-    height:56px;
+    background-color: #F4512C;
 }
 
 nav img{
     position:relative;
-    right:16px;
+    margin:-8px;
+    right:8px;
+    max-width: 200px;
+    max-height: 56px;
+    width: auto;
 }
-
 
 nav form button{
     background-color:white;
@@ -81,11 +57,307 @@ nav form button{
     color:black;
 }
 
+
 .submenu{
     width:100%;
     background-color: #F9CB9C;
     padding:10px;
     position:fixed;
     top:56px;
+    z-index:10;
+}
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||| side nav bar |||||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+.sidebar1 {
+    background: #F17153;
+    /* For browsers that do not support gradients */
+    position:fixed;
+    margin-top: 100px;
+    min-height: 100%;
+    width:200px;
+}
+.list {
+    color: #fff;
+    list-style: none;
+    padding-left: 0px;
+}
+.list::first-line {
+    color: rgba(255, 255, 255, 0.5);
+}
+.list> li, h5 {
+    padding: 5px 0px 5px 40px;
+}
+.list>li:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-left: 5px solid white;
+    color: white;
+    font-weight: bolder;
+    padding-left: 35px;
+}.main-content{
+     margin: 100px auto auto 200px;
+     padding: 3px;
+     border: 3px solid black;
+     border-radius: 100%;
+ }
 
+
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||Menu @media|||||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+@media (max-width: 767px) {
+    nav div ul li:first-child {
+        margin-top: 1em;
+    }
+}
+
+/* offset for the top menu*/
+main > div.container{
+    margin-top: 62px;
+}
+
+@media (min-width: 576px) {
+    main > div.container{
+        margin-top: 62px;
+    }
+}
+
+@media (min-width: 768px) {
+    main > div.container{
+        margin-top: 62px;
+    }
+}
+
+@media (min-width: 992px) {
+    main > div.container{
+        margin-top: 108px;
+    }
+}
+
+@media (min-width: 1200px) {
+    main > div.container{
+        margin-top: 108px;
+    }
+}
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+||||||||||||||||||||||||||||||||||||UserProfileBlock|||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+.user-section{
+    padding-bottom:10%; padding-top: 10%;
+    border-radius:20px;
+    height:100%;
+    background-color:white;
+    margin:auto;
+}
+
+.user-section p{
+    margin: 1rem;
+}
+
+
+
+.user-section-button-margin{
+    margin:1rem;
+}
+
+
+
+
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||Product block|||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+.productblock{
+    background:#F2552C;
+    width:200px;
+    padding:0.2em;
+    margin-bottom: 1em;
+}
+
+.productblock > .img-thumbnail{
+    padding:0;
+    border:none;
+}
+
+.productblock p {
+    margin:0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||Verkoper block||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+
+.verkoperSection{
+    border-radius:20px;
+    padding: 20px;
+    background-color:white;
+    margin-bottom:75px;
+}
+
+.verkoperSection h4{
+    color:#F4512C;
+    margin-bottom:1.5rem;
+}
+
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||Auction section|||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+.auction-section{
+    border-radius:20px;
+    padding: 20px;
+    background-color:white;
+}
+
+.auction-section h4{
+    color:#F4512C;
+    margin-bottom:1.5rem;
+}
+
+.auction-page-image{
+    width:552px;
+    height:750px;
+    margin-bottom:20px;
+}
+
+.auction-section ul{
+    list-style-type:none;
+    padding-left:0px;
+}
+.auction-section ul li{
+font-size:0.9rem;
+    margin-top:5px;
+}
+
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||| Login en registreer formulier||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+.verkoopaanvraag-section,
+.login-section,
+.register-section{
+    padding:5%;
+    border-radius:20px;
+    height:100%;
+    margin-top: 20%;
+    background-color:white;
+}
+.verkoopaanvraag-section,
+.login-section{
+    max-width: 550px;
+    margin: auto;
+}
+.verkoopaanvraag-section,
+.login-section button,
+.register-section button{
+    margin-top:1rem;
+}
+.verkoopaanvraag-section,
+.bottom-login-register-form{
+    margin-top:1rem;
+}
+
+form p {
+    margin-top:10px;
+    margin-bottom:0px;
+}
+
+@media (max-width: 575px) {
+    .login input{
+        width: 100%;
+    }
+}
+
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||| Images||||||||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+
+
+.gebruikeresImage{
+    width:12%;
+    height:20%;
+    margin-bottom:20px;
+}
+
+.border-auction-preview{
+    z-index:8;
+    border:2px solid #F4512C;
+    border-radius:10px;
+    padding: 0% -5%;
+    margin:5% 0%;
+
+}
+img.auction-thumbnail{
+    max-width: 200px;
+    max-height: 200px;
+}
+
+
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||| input ||||||||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+.btn.btn-primary{
+    background:#f2552c;
+}
+
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||| generic ||||||||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+.error-message{
+    color:red;
+}
+
+margin-top{
+    margin-top: 1rem;
+}
+
+padding-top{
+    padding-top: 1rem;
+}
+option,
+input{
+    width:100%;
+    max-width: 100%;
+}
+input:-moz-read-only,
+input:read-only {
+    color: black;
+    padding: 2px;
+    margin: 0 0 0 0;
+    background-color: black;
+}
+
+.center{margin:auto;}
+
+.hide{
+    display:none;
+}
+/* ======================================================================================
+////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+|||||||||||||||||||||||||||||||||||||||| footer ||||||||||||||||||||||||||||||||||||||||||
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
+ =======================================================================================*/
+footer.container.rubriekfooter{
+margin-left: 200px;
 }
