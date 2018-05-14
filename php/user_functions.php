@@ -174,3 +174,27 @@ function upgrade_to_seller($dbh, $username, $bank, $bankrekening, $controleoptie
         echo $e->getMessage();
     }
 }
+
+function provide_feedback($dbh, $productnummer, $soortFeedback, $beoordeling, $opmerking){
+
+        try{
+            $stmt = $dbh->prepare("INSERT INTO Feedback (Voorwerp, SoortGebruiker, Feedbacksoort, Dag, Tijdstip, Commentaar)
+        VALUES (:voorwerp, :gebruiker, :beoordeling, :datum, :tijd, :commentaar)");
+            $stmt -> execute(
+                [
+                    ':voorwerp' => $productnummer,
+                    ':gebruiker' => $soortFeedback,
+                    ':beoordeling' => $beoordeling,
+                    ':datum' => date("Y/m/d"),
+                    ':tijd' => date('H:i:s'),
+                    ':commentaar' => $opmerking
+                ]);
+            return true;
+        }
+
+        catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+    return false;
+}
