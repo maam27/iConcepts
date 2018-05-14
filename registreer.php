@@ -72,7 +72,7 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
                     <div class="col-md-6">
                         <p>Gebruikersnaam:</p>
                         <input id="username" name="username" type="text"
-                               placeholder="BarryBadpak" <?php echo post_set('username', 'post'); ?> required>
+                               placeholder="Gebruikersnaam" <?php echo post_set('username', 'post'); ?> required>
                         <br>
                         <p>Wachtwoord:</p>
                         <input id="password" name="password" type="password" placeholder="Wachtwoord"
@@ -88,11 +88,11 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
                         <br>
                         <p>Voornaam:</p>
                         <input id="first-name" name="first-name" type="text"
-                               placeholder="Barry" <?php echo post_set('first-name', 'post'); ?> required>
+                               placeholder="Voornaam" <?php echo post_set('first-name', 'post'); ?> required>
                         <br>
                         <p>Achternaam:</p>
                         <input id="last-name" name="last-name" type="text"
-                               placeholder="Badpak" <?php echo post_set('last-name', 'post'); ?> required>
+                               placeholder="Achternaam" <?php echo post_set('last-name', 'post'); ?> required>
                         <br>
                         <p>Geboortedatum:</p>
                         <input id="birth-date" name="birth-date"
@@ -108,20 +108,20 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
 
                         <p>Land:</p>
                         <input id="country" name="country" type="text"
-                               placeholder="Nederland" <?php echo post_set('country', 'post'); ?> required>
+                               placeholder="Land" <?php echo post_set('country', 'post'); ?> required>
                         <br>
                         <p>Stad:</p>
                         <input id="city" name="city" type="text"
-                               placeholder="Arnhem" <?php echo post_set('city', 'post'); ?> required>
+                               placeholder="Stad" <?php echo post_set('city', 'post'); ?> required>
                         <br>
                         <p>Adresregel 1:</p>
                         <input id="address-field" name="address-field" type="text"
-                               placeholder="Straatnaam 15" <?php echo post_set('address-field', 'post'); ?>
+                               placeholder="Straatnaam nummer" <?php echo post_set('address-field', 'post'); ?>
                                title="Straatnaam gevolgd door nummer." required>
                         <br>
                         <p>Adresregel 2:</p>
                         <input id="address-field2" name="address-field2" type="text"
-                               placeholder="Toevoeging adresregel" <?php echo post_set('address-field2', 'post'); ?>>
+                               placeholder="straatnaam nummer" <?php echo post_set('address-field2', 'post'); ?>>
                         <br>
                         <p>Postcode: </p>
                         <input id="postcode" name="postcode" type="text"
