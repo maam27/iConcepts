@@ -9,11 +9,10 @@ require_once 'php/item_functions.php';
 <body>
 <?php
 include_once 'partial/menu.php';
-if($_GET['item'] == null){
+if($_GET['item'] == null || !is_existing_product($_GET['item'], $db)){
     redirect('categorie.php');
 }
 $itemId = $_GET['item'];
-
 ?>
 
 <main>
@@ -70,10 +69,10 @@ $itemId = $_GET['item'];
                                 $dateTime = new DateTime($bids[$i]['day'].$bids[$i]['time']);
                                 $bodNr = $i+1;
                                 echo "<div class='row'>";
-                                echo "<div class='col-2'> bod ". $bodNr ." :</div>";
-                                echo "<div class='col-2'>". $bids[$i]['amount']. "</div>";
-                                echo "<div class='col-3'>". $bids[$i]['user']. "</div>";
-                                echo "<div class='col-3'>". $dateTime->format('d-m-Y'). "</div>";
+                                echo "<div class='col-2 col-lg-3'> bod ". $bodNr ." :</div>";
+                                echo "<div class='col-2 col-lg-3'>". $bids[$i]['amount']. "</div>";
+                                echo "<div class='col-3 col-lg-3'>". $bids[$i]['user']. "</div>";
+                                echo "<div class='col-3 col-lg-3'>". $dateTime->format('d-m-Y'). "</div>";
                                 echo "<div class='col-2 d-none d-lg-block'>". $dateTime->format('H:i:s'). "</div>";
                                 echo "</div>";
                             }

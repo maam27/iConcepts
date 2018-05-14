@@ -40,6 +40,22 @@ function get_item_bids($itemId ,$dbh){
 }
 
 
+function is_existing_product($itemId ,$dbh){
+    try{
+        $statement = $dbh->prepare("select titel from voorwerp where voorwerpnummer = :item ");
+        $statement->execute(array(':item' => $itemId));
+        $result = $statement->fetch();
+        if(!empty($result['titel'])){
+            return true;
+        }
+        return false;
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+    return false;
+}
+
 //
 //
 //function get_item_diz($itemId ,$dbh){
