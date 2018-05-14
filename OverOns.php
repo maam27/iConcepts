@@ -35,17 +35,26 @@ include_once 'partial/menu.php';
             <div id="map" style="width:300px;height:300px;">
           </div>
           </div>
-<script>
-function myMap() {
-    var mapOptions = {
-        center: new google.maps.LatLng(51.9881152, 5.9475224999999991),
-        zoom: 10,
-        mapTypeId: google.maps.MapTypeId.MAP
-    }
-var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-//var marker = new google.maps.Marker({position: 51.9881152, 5.9475224999999991 ,map: map});
-}
-</script>
+          <script>
+
+              function initMap() {
+                var myLatLng = {lat: 51.9881152, lng: 5.9475224999999991};
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 14,
+                  center: myLatLng
+
+                });
+
+                var marker = new google.maps.Marker({
+                  position: myLatLng,
+                  map: map,
+                });
+              }
+            </script>
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA11dvgjXGSh7UKPxb18pz93S7srwMIyqY&callback=initMap">
+            </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
