@@ -29,7 +29,7 @@ include_once 'partial/menu.php';
             <li>6826 CC Arnhem</li>
             <li>Postbus 2217</li>
             <li><a href = mailto:IProjectGroep14@hotmail.com>IProjectGroep14@hotmail.com</a></li>
-            <li><a href = tel:(026) 369 19 11>(026) 369 19 11</a></li>
+            <li><a href = tel:(026) 369 19 11> (026) 369 19 11</a></li>
           </div>
           <div class="col-6">
             <div id="map" style="width:300px;height:300px;">
