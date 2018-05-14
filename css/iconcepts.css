@@ -335,6 +335,9 @@ margin-top{
 padding-top{
     padding-top: 1rem;
 }
+.margin-bottom{
+    margin-top: 1rem;
+}
 option,
 input{
     width:100%;

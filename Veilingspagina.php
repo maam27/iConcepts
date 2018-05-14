@@ -9,10 +9,10 @@ require_once 'php/item_functions.php';
 <body>
 <?php
 include_once 'partial/menu.php';
-if($_GET['item'] == null || !is_existing_product($_GET['item'], $db)){
+if($_GET['voorwerp'] == null || !is_existing_product($_GET['voorwerp'], $db)){
     redirect('categorie.php');
 }
-$itemId = $_GET['item'];
+$itemId = $_GET['voorwerp'];
 ?>
 
 <main>
@@ -24,10 +24,10 @@ $itemId = $_GET['item'];
     <div class="container">
         <!-- Example row of columns -->
         <div class="row">
-            <div class="col-md-6 d-flex flex-column justify-content-between align-items-start">
+            <div class="col-md-6">
                <div class="row">
                    <div class="col-12">
-                        <img class="img-thumbnail auction-page-image" src="images/TrumpPlaceholder.jpg"> </img>
+                        <img class="img-thumbnail margin-bottom" src="images/TrumpPlaceholder.jpg"> </img>
                    </div>
                    <div class="col-12">
                         <p>
@@ -62,21 +62,20 @@ $itemId = $_GET['item'];
                             <div class="col-12">
                                 <h4> Hier komen de biedingen te staan. </h4>
                             </div>
+                            <div class="col-12">
                             <?php
                             $bids = get_item_bids($itemId,$db);
                             $minimumBid = $bids[0]['amount'] + 50;
                             for($i =0; $i< count($bids);$i++){
-                                $dateTime = new DateTime($bids[$i]['day'].$bids[$i]['time']);
                                 $bodNr = $i+1;
                                 echo "<div class='row'>";
-                                echo "<div class='col-2 col-lg-3'> bod ". $bodNr ." :</div>";
-                                echo "<div class='col-2 col-lg-3'>". $bids[$i]['amount']. "</div>";
-                                echo "<div class='col-3 col-lg-3'>". $bids[$i]['user']. "</div>";
-                                echo "<div class='col-3 col-lg-3'>". $dateTime->format('d-m-Y'). "</div>";
-                                echo "<div class='col-2 d-none d-lg-block'>". $dateTime->format('H:i:s'). "</div>";
+                                echo "<div class='col-4 col-sm-3'> bod ". $bodNr ." :</div>";
+                                echo "<div class='col-4 '>". $bids[$i]['amount']. "</div>";
+                                echo "<div class='col-4 col-sm-5'>". $bids[$i]['user']. "</div>";
                                 echo "</div>";
                             }
                             ?>
+                            </div>
                         </div>
                         <form method="post" target="">
                              <div class="row">
