@@ -56,9 +56,6 @@ include_once 'partial/menu.php';
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA11dvgjXGSh7UKPxb18pz93S7srwMIyqY&callback=initMap">
             </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
-  type="text/javascript"></script>
         </div>
     </main>
 
