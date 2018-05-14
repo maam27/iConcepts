@@ -22,12 +22,15 @@ if( !isset($_SESSION)){
             <?php
             if(!isset($_SESSION['user'])) {
             ?>
+
                 <li class="nav-item">
+
+                    <a href="login.php">Inloggen</a>
+                    /
                     <a href="registreer.php">Registreren</a>
                 </li>
-                <li class="nav-item">
-                    <a href="login.php">Inloggen</a>
-                </li>
+
+
             <?php
                 } else{
                 ?>
