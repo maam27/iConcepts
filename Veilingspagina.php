@@ -13,6 +13,18 @@ if($_GET['voorwerp'] == null || !is_existing_product($_GET['voorwerp'], $db)){
     redirect('categorie.php');
 }
 $itemId = $_GET['voorwerp'];
+
+if(isset($_POST)){
+    if(isset($_POST['bid'])){
+        if(!is_null($_POST['bid'])){
+            if($_POST['bid'] >= get_minimum_bid_increase() + get_heighest_bid($itemId, $db)){
+                if(place_bid($itemId,$_POST['bid'],$_SESSION['user'],$db)){
+
+                }
+            }
+        }
+    }
+}
 ?>
 
 <main>
@@ -65,7 +77,7 @@ $itemId = $_GET['voorwerp'];
                             <div class="col-12">
                             <?php
                             $bids = get_item_bids($itemId,$db);
-                            $minimumBid = $bids[0]['amount'] + 50;
+                            $minimumBid = $bids[0]['amount'] + get_minimum_bid_increase();
                             for($i =0; $i< count($bids);$i++){
                                 $bodNr = $i+1;
                                 echo "<div class='row'>";
@@ -79,10 +91,10 @@ $itemId = $_GET['voorwerp'];
                         </div>
                         <form method="post" target="">
                              <div class="row">
-                                <div class="col-8">
+                                <div class="col-7">
                                     <input id="bid" name="bid" type="number" min="<?php echo $minimumBid;?>" value="<?php echo $minimumBid;?>" step="any"/>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-5">
                                     <input id="placeBid" name="placeBid" type="submit" class="btn btn-secondary" value="Plaats bod &raquo;"/>
                                 </div>
                             </div>
