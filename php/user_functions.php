@@ -119,9 +119,6 @@ function update_user($dbh, $username, $firstname, $lastname, $addressfield, $add
 
 
     try{
-
-
-
         $stmt = $dbh->prepare("UPDATE Gebruiker SET Gebruikersnaam = :gebruiker, Voornaam = :voornaam, Achternaam = :achternaam, Adresregel1 = :adresregel1, Adresregel2 = :adresregel2,
                       Postcode = :postcode, Plaatsnaam = :plaatsnaam, Land = :land, GeboorteDag = :geboortedag, Mailbox = :mailbox,
                       Vraag = :vraag, Antwoordtekst = :antwoordtekst 
@@ -175,26 +172,3 @@ function upgrade_to_seller($dbh, $username, $bank, $bankrekening, $controleoptie
     }
 }
 
-function provide_feedback($dbh, $productnummer, $soortFeedback, $beoordeling, $opmerking){
-
-        try{
-            $stmt = $dbh->prepare("INSERT INTO Feedback (Voorwerp, SoortGebruiker, Feedbacksoort, Dag, Tijdstip, Commentaar)
-        VALUES (:voorwerp, :gebruiker, :beoordeling, :datum, :tijd, :commentaar)");
-            $stmt -> execute(
-                [
-                    ':voorwerp' => $productnummer,
-                    ':gebruiker' => $soortFeedback,
-                    ':beoordeling' => $beoordeling,
-                    ':datum' => date("Y/m/d"),
-                    ':tijd' => date('H:i:s'),
-                    ':commentaar' => $opmerking
-                ]);
-            return true;
-        }
-
-        catch(PDOException $e){
-            echo $e->getMessage();
-            return false;
-        }
-    return false;
-}

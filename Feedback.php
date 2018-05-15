@@ -28,29 +28,69 @@ $statement->execute(array(':voorwerp' => $voorwerpNummer));
 $data2 = $statement->fetch();
 
 $soortGebruiker;
-if($data2['Verkoper']==$_SESSION['user']){$soortGebruiker = 'Verkoper';} else{$soortGebruiker = 'Koper';}
+if ($data2['Verkoper'] == $_SESSION['user']) {
+    $soortGebruiker = 'Verkoper';
+} else {
+    $soortGebruiker = 'Koper';
+}
 
 
 $feedbackGegeven = false;
-if(!empty($_POST['beoordeling'])){
-    if(provide_feedback($db, $voorwerpNummer, $soortGebruiker, $_POST['beoordeling'], $_POST['opmerking'])){
-        $feedbackGegeven=true;
+if (!empty($_POST['beoordeling'])){
+    if (provide_feedback($db, $voorwerpNummer, $soortGebruiker, $_POST['beoordeling'], $_POST['opmerking'])) {
+        $feedbackGegeven = true;
     };
 
 }
 
+else{
 ?>
+
 
 <main>
     <div class="container">
         <div class="register-section">
-
             <?php
-            if($data2['VeilingGesloten'] == 1   AND $data2['Verkoper'] == $_SESSION['user'] OR $data2['Koper'] == $_SESSION['user'] AND $feedbackGegeven==false) {
+
+            if(empty($_SESSION['user'])){
+                redirect('login.php');
+            }
+
+            else if (empty($_GET['voorwerp'])){
+                echo '<p> Deze pagina bestaat niet </p>';
+
+            }
+
+            else if ($feedbackGegeven == true) {
+                echo '<p> U heeft succesvol feedback gegeven </p>';
+            }
+
+            else if ($data2['VeilingGesloten'] == 0) {
                 ?>
 
+                <p>Deze veiling is nog niet voorbij, en u kunt hier geen feedback op geven.</p>
+                <p>Klik <a href="index.php">hier</a> om terug te gaan naar de homepage.</p>
+
+                <?php
+            }
+
+            else if ($data2['Verkoper'] != $_SESSION['user'] AND $data2['Koper'] != $_SESSION['user']) { ?>
+                <p>Je hebt niks met deze veiling te maken.</p>
+                <p>Daarom mag je geen feedback geven.</p>
+            <?php }
+
+            else if(seller_feedback_given($db, $voorwerpNummer)==true AND $soortGebruiker == 'Verkoper'){
+                echo '<p> Je hebt al feedback gegeven als verkoper </p>';
+            }
+
+            else if(buyer_feedback_given($db, $voorwerpNummer)==true AND $soortGebruiker == 'Koper'){
+                echo '<p> Je hebt al feedback gegeven als koper </p>';
+            }
+
+            else {
+                ?>
                 <h2>Feedback formulier</h2>
-                <p><strong>U beoordeelt het als een:</strong> <?php echo $soortGebruiker?></p>
+                <p><strong>U beoordeelt het als een:</strong> <?php echo $soortGebruiker ?></p>
                 <p><strong>U beoordeelt het volgende product:</strong> <?php echo $data2['Titel'] ?> </p>
 
                 <form role="form" method="post" action="#">
@@ -60,7 +100,8 @@ if(!empty($_POST['beoordeling'])){
                             <label><strong>Uw beoordeling:</strong></label>
                             <p>
                                 <label class="radio-inline">
-                                    <input type="radio" name="beoordeling" id="radio_experience" value="Zeer slecht" required>
+                                    <input type="radio" name="beoordeling" id="radio_experience" value="Zeer slecht"
+                                           required>
                                     Zeer slecht
                                 </label>
                                 <label class="radio-inline">
@@ -88,7 +129,8 @@ if(!empty($_POST['beoordeling'])){
                             <label for="opmerking">
                                 <strong>Opmerkingen:</strong></label>
                             <textarea class="form-control" type="textarea" name="opmerking" id="opmerking"
-                                      placeholder="Plaats hier uw opmerking (100 karakters max)." maxlength="100" rows="7"></textarea>
+                                      placeholder="Plaats hier uw opmerking (100 karakters max)." maxlength="100"
+                                      rows="7"></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -120,22 +162,10 @@ if(!empty($_POST['beoordeling'])){
                     echo '<p class="error-message">' . $melding . '</p>';
                 }
             }
-            else if($feedbackGegeven == true){
-                echo '<p> U heeft succesvol feedback gegeven </p>';
             }
-            else if($data2['VeilingGesloten']==0){
-
-
             ?>
-            <p>Deze veiling is nog niet verlopen, en u kunt hier geen feedback op geven.</p>
-            <p>Klik <a href="index.php">hier</a> om terug te gaan naar de homepage.</p>
 
-            <?php }
 
-            else if($data2['Verkoper'] != $_SESSION['user'] AND $data2['Koper'] != $_SESSION['user']){?>
-            <p>Je hebt niks met deze veiling te maken.</p>
-            <p>Daarom mag je geen feedback geven.</p>
-            <?php }?>
         </div>
     </div>
 </main>
