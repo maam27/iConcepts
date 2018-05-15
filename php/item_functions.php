@@ -56,6 +56,65 @@ function is_existing_product($itemId ,$dbh){
     return false;
 }
 
+function provide_feedback($dbh, $itemId, $soortFeedback, $beoordeling, $opmerking){
+
+    try{
+        $stmt = $dbh->prepare("INSERT INTO Feedback (Voorwerp, SoortGebruiker, Feedbacksoort, Dag, Tijdstip, Commentaar)
+        VALUES (:voorwerp, :gebruiker, :beoordeling, :datum, :tijd, :commentaar)");
+        $stmt -> execute(
+            [
+                ':voorwerp' => $itemId,
+                ':gebruiker' => $soortFeedback,
+                ':beoordeling' => $beoordeling,
+                ':datum' => date("Y/m/d"),
+                ':tijd' => date('H:i:s'),
+                ':commentaar' => $opmerking
+            ]);
+        return true;
+    }
+
+    catch(PDOException $e){
+        echo $e->getMessage();
+        return false;
+    }
+    return false;
+}
+
+function buyer_feedback_given($dbh, $itemId){
+
+    try{ $statement = $dbh->prepare("SELECT count(*) FROM Feedback WHERE Voorwerp = :item AND SoortGebruiker = 'Koper'");
+    $statement -> execute(array(':item' => $itemId));
+    $result = $statement->fetchColumn();
+
+    if($result ==1)
+        return true;
+    return false;
+    }
+
+    catch(PDOException $e){
+       echo $e;
+   }
+}
+
+
+
+function seller_feedback_given($dbh, $itemId){
+    try{ $statement = $dbh->prepare("SELECT count(*) FROM Feedback WHERE Voorwerp = :item AND SoortGebruiker = 'Verkoper'");
+        $statement -> execute(array(':item' => $itemId));
+        $result = $statement->fetchColumn();
+
+        if($result ==1)
+            return true;
+        return false;
+    }
+
+    catch(PDOException $e){
+        echo $e;
+    }
+}
+
+//
+//
 function get_heighest_bid($itemId, $dbh){
     try{
         $statement = $dbh->prepare("select top 1 Bodbedrag from bod where Voorwerp = :item order by Bodbedrag ");
