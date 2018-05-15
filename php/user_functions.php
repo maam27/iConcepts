@@ -214,5 +214,10 @@ function get_sum_feedback_seller($dbh, $verkoper){
 }
 
 function calculate_average_feedback_seller($dbh, $verkoper){
-    return (get_sum_feedback_seller($dbh, $verkoper)/get_ammount_feedback_seller($dbh, $verkoper));
+    if(get_ammount_feedback_seller($dbh, $verkoper) == 0){
+        return 'Geen feedback ontvangen';
+    }
+    else {
+        return number_format((get_sum_feedback_seller($dbh, $verkoper) / get_ammount_feedback_seller($dbh, $verkoper)), 2);
+    }
 }
