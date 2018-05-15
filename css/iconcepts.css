@@ -204,7 +204,6 @@ main > div.container{
     border-radius:20px;
     padding: 20px;
     background-color:white;
-    margin-bottom:75px;
 }
 
 .verkoperSection h4{
@@ -335,8 +334,12 @@ margin-top{
 padding-top{
     padding-top: 1rem;
 }
-.margin-bottom{
+.margin-top{
     margin-top: 1rem;
+}
+
+.margin-bottom{
+    margin-bottom: 1rem;
 }
 option,
 input{

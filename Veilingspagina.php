@@ -8,12 +8,12 @@ require_once 'php/item_functions.php';
 
 <body>
 <?php
-http_response_code(418);
 include_once 'partial/menu.php';
 if($_GET['voorwerp'] == null || !is_existing_product($_GET['voorwerp'], $db)){
     redirect('categorie.php');
 }
 $itemId = $_GET['voorwerp'];
+$errorMessage = "";
 
 if(isset($_POST)){
     if(isset($_POST['bid'])){
@@ -21,10 +21,13 @@ if(isset($_POST)){
             redirect('login.php');
         }
         if(!is_null($_POST['bid'])){
-            if($_POST['bid'] >= get_minimum_bid_increase() + get_heighest_bid($itemId, $db)){
-                if(place_bid($itemId,$_POST['bid'],$_SESSION['user'],$db)){
-
-                }
+            if($_POST['bid'] < get_minimum_bid_increase() + get_heighest_bid($itemId, $db)) {
+                $errorMessage = 1;
+            }
+            else if($_SESSION['user'] == ){
+                $errorMessage = 2;
+            }
+            else if(place_bid($itemId,$_POST['bid'],$_SESSION['user'],$db)){
             }
         }
     }
@@ -65,7 +68,7 @@ if(isset($_POST)){
                     <div class="col-12">
                         <p class="timerText"> Timer in hoeveel tijd veiling eindigt</p>
                     </div>
-                    <div class="col-12 verkoperSection">
+                    <div class="col-12 verkoperSection margin-bottom">
                         <h4> Hier komt informatie over de verkoper</h4>
                         <p> En hier komt text te staan over de verkoper</p>
                         <p> Bestaand uit verschillende zinnen.</p>
@@ -101,6 +104,13 @@ if(isset($_POST)){
                                 </div>
                             </div>
                         </form>
+                        <row>
+                            <div class="col-12">
+                                <p class="error-message">
+                                    <?php echo $errorMessage; ?>
+                                </p>
+                            </div>
+                        </row>
                     </div>
                 </div>
             </div>
