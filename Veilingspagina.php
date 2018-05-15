@@ -22,10 +22,10 @@ if(isset($_POST)){
         }
         if(!is_null($_POST['bid'])){
             if($_POST['bid'] < get_minimum_bid_increase() + get_heighest_bid($itemId, $db)) {
-                $errorMessage = 1;
+                $errorMessage = "";
             }
-            else if($_SESSION['user'] == ){
-                $errorMessage = 2;
+            else if($_SESSION['user'] == 'bob' && 1==2){
+                $errorMessage = "U mag niet op uw eigen producten bieden.";
             }
             else if(place_bid($itemId,$_POST['bid'],$_SESSION['user'],$db)){
             }
