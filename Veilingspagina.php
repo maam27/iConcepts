@@ -68,15 +68,8 @@ if(isset($_POST)){
             </div>
             <div class="col-md-6">
                 <div class="row">
-                    <div class="col-12">
-                        <p class="timerText"> Timer in hoeveel tijd veiling eindigt</p>
-                    </div>
+
                     <div class="col-12 verkoperSection margin-bottom">
-                        <h4> Hier komt informatie over de verkoper</h4>
-                        <p> En hier komt text te staan over de verkoper</p>
-                        <p> Bestaand uit verschillende zinnen.</p>
-                        <p>Ook komen er bepaalde attributen te staan.</p>
-                    <div class="col-12 verkoperSection">
                         <h4>Gebruiker: <?php echo $veilinginformatie['Gebruikersnaam'];?></h4>
                         <p><strong>Voornaam:</strong> <?php echo $veilinginformatie['Voornaam'] ?></p>
                         <p><strong>Achternaam:</strong> <?php echo $veilinginformatie['Achternaam'] ?></p>
