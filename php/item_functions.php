@@ -117,7 +117,7 @@ function seller_feedback_given($dbh, $itemId){
 //
 function get_heighest_bid($itemId, $dbh){
     try{
-        $statement = $dbh->prepare("select top 1 Bodbedrag from bod where Voorwerp = :item order by Bodbedrag ");
+        $statement = $dbh->prepare("select top 1 Bodbedrag from bod where Voorwerp = :item order by Bodbedrag desc ");
         $statement->execute(array(':item' => $itemId));
         $result = $statement->fetch();
         if(!empty($result['Bodbedrag'])){
@@ -145,6 +145,19 @@ function place_bid($itemId,$bid,$user,$dbh){
     catch(PDOException $e){
         echo $e;
     }
+    return false;
+}
+
+function get_minimum_price($itemId, $dbh){
+     try{
+         $statement = $dbh->prepare("select startprijs from voorwerp where Voorwerpnummer = :item ");
+         $statement->execute(array(':item' => $itemId));
+         $result = $statement->fetch();
+        return $result['startprijs'];
+     }
+     catch(PDOException $e){
+         echo $e;
+     }
     return false;
 }
 

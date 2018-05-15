@@ -23,7 +23,9 @@ if(isset($_POST)){
             redirect('login.php');
         }
         if(!is_null($_POST['bid'])){
-            if($_POST['bid'] < get_minimum_bid_increase() + get_heighest_bid($itemId, $db)) {
+            if(1 < 1){
+                $errorMessage ="Deze veiling is gesloten";
+            }else if($_POST['bid'] < get_minimum_bid_increase() + get_heighest_bid($itemId, $db)) {
                 $errorMessage = "U moet mininaal €". get_minimum_bid_increase() ." meer bieden dan het hoogste bod.";
             }
             else if($_SESSION['user'] == $veilinginformatie['Gebruikersnaam']){
@@ -84,18 +86,25 @@ if(isset($_POST)){
                     <div id="biddings" class="col-12 auction-section">
                         <div class="row">
                             <div class="col-12">
-                                <h4> Hier komen de biedingen te staan. </h4>
+                                <h4>Meest recente biedingen: </h4>
                             </div>
                             <div class="col-12">
                             <?php
                             $bids = get_item_bids($itemId,$db);
-                            $minimumBid = $bids[0]['amount'] + get_minimum_bid_increase();
-                            for($i =0; $i< count($bids);$i++){
-                                $bodNr = $i+1;
+                            if($bids != null) {
+                                $minimumBid = $bids[0]['amount'] + get_minimum_bid_increase();
+                            }
+                            else{
+                                $minimumBid = get_minimum_price($itemId,$db);
+                                echo "<div class='row'><div class='col-12'>Er zijn nog geen biedingen voor dit product.</div></div>";
+                            }
+
+                            for ($i = 0; $i < count($bids); $i++) {
+                                $bodNr = $i + 1;
                                 echo "<div class='row'>";
-                                echo "<div class='col-4 col-sm-3'> bod ". $bodNr ." :</div>";
-                                echo "<div class='col-4 '>€". currency($bids[$i]['amount']). "</div>";
-                                echo "<div class='col-4 col-sm-5'>". $bids[$i]['user']. "</div>";
+                                echo "<div class='col-4 col-sm-3'> bod " . $bodNr . " :</div>";
+                                echo "<div class='col-4 '>€" . currency($bids[$i]['amount']) . "</div>";
+                                echo "<div class='col-4 col-sm-5'>" . $bids[$i]['user'] . "</div>";
                                 echo "</div>";
                             }
                             ?>
