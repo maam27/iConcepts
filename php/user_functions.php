@@ -187,3 +187,32 @@ function get_seller_and_auction_info($dbh, $itemId){
     }
 }
 
+function get_ammount_feedback_seller($dbh, $verkoper){
+
+  try{
+      $stmt = $dbh -> prepare (" select  count(verkoper) as HoeveelFeedback, verkoper from voorwerp v join feedback f on v.voorwerpnummer = f.Voorwerp where verkoper = :verkoper and soortgebruiker='Koper'
+                                 group by Verkoper");
+      $stmt -> execute (array(':verkoper' => $verkoper));
+      $data1 = $stmt->fetch();
+
+      return $data1['HoeveelFeedback'];
+
+  }
+
+  catch(PDOException $e){
+      echo $e->getMessage();
+  }
+}
+
+function get_sum_feedback_seller($dbh, $verkoper){
+    $stmt = $dbh -> prepare ("select sum(Feedbacksoort) as totaalcijfer, verkoper from voorwerp v join feedback f on v.voorwerpnummer = f.Voorwerp where verkoper = :verkoper and soortgebruiker='Koper'
+                                group by Verkoper");
+    $stmt -> execute (array(':verkoper' => $verkoper));
+    $data2 = $stmt->fetch();
+
+    return $data2['totaalcijfer'];
+}
+
+function calculate_average_feedback_seller($dbh, $verkoper){
+    return (get_sum_feedback_seller($dbh, $verkoper)/get_ammount_feedback_seller($dbh, $verkoper));
+}
