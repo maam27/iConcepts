@@ -100,25 +100,25 @@ else{
                             <label><strong>Uw beoordeling:</strong></label>
                             <p>
                                 <label class="radio-inline">
-                                    <input type="radio" name="beoordeling" id="radio_experience" value="Zeer slecht"
+                                    <input type="radio" name="beoordeling" id="radio_experience" value="1"
                                            required>
                                     Zeer slecht
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="beoordeling" id="radio_experience" value="Slecht">
+                                    <input type="radio" name="beoordeling" id="radio_experience" value="2">
                                     Slecht
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="beoordeling" id="radio_experience" value="Gemiddeld">
+                                    <input type="radio" name="beoordeling" id="radio_experience" value="3">
                                     Gemiddeld
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="beoordeling" id="radio_experience" value="Goed">
+                                    <input type="radio" name="beoordeling" id="radio_experience" value="4">
                                     Goed
                                 </label>
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="beoordeling" id="radio_experience" value="Zeer goed">
+                                    <input type="radio" name="beoordeling" id="radio_experience" value="5">
                                     Zeer goed
                                 </label>
                             </p>

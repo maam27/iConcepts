@@ -2,6 +2,7 @@
 require_once 'partial/page_head.php';
 require_once 'php/database.php';
 require_once 'php/item_functions.php';
+require_once 'php/user_functions.php';
 ?>
     <title></title>
 </head>
@@ -13,6 +14,8 @@ if($_GET['voorwerp'] == null || !is_existing_product($_GET['voorwerp'], $db)){
     redirect('categorie.php');
 }
 $itemId = $_GET['voorwerp'];
+
+$veilinginformatie = get_seller_and_auction_info($db, $itemId);
 
 if(isset($_POST)){
     if(isset($_POST['bid'])){
@@ -64,10 +67,16 @@ if(isset($_POST)){
                         <p class="timerText"> Timer in hoeveel tijd veiling eindigt</p>
                     </div>
                     <div class="col-12 verkoperSection">
-                        <h4> Hier komt informatie over de verkoper</h4>
-                        <p> En hier komt text te staan over de verkoper</p>
-                        <p> Bestaand uit verschillende zinnen.</p>
-                        <p>Ook komen er bepaalde attributen te staan.</p>
+                        <h4>Gebruiker: <?php echo $veilinginformatie['Gebruikersnaam'];?></h4>
+                        <p><strong>Voornaam:</strong> <?php echo $veilinginformatie['Voornaam'] ?></p>
+                        <p><strong>Achternaam:</strong> <?php echo $veilinginformatie['Achternaam'] ?></p>
+                        <p><strong>Land:</strong><?php echo $veilinginformatie['Verkoopland']?></p>
+                        <p><strong>Plaats: </strong><?php echo $veilinginformatie['Verkoopplaats']?></p>
+                        <p><strong>Betalingswijze: </strong><?php echo $veilinginformatie['Betalingswijze']?></p>
+                        <?php if(!empty($veilinginformatie['Betalingsinstructie'])){
+                            echo '<p><strong>Betalingsinstructie:</strong> '.$veilinginformatie['Betalingsinstructie'].'</p>';
+                        } ?>
+                        <p><strong>Gemiddelde beoordeling:</strong> <?php ?></p>
                     </div>
                     <div id="biddings" class="col-12 auction-section">
                         <div class="row">

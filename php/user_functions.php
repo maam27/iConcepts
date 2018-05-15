@@ -172,3 +172,18 @@ function upgrade_to_seller($dbh, $username, $bank, $bankrekening, $controleoptie
     }
 }
 
+function get_seller_and_auction_info($dbh, $itemId){
+
+    try{
+        $stmt = $dbh -> prepare ("SELECT *, vp.Land as Verkoopland, G.Land as Verkoperland, vp.plaatsnaam as Verkoopplaats FROM Verkoper v join Voorwerp vp on v.Gebruiker=vp.Verkoper
+                                  JOIN gebruiker g on vp.verkoper = g.gebruikersnaam where voorwerpnummer = :item");
+        $stmt -> execute (array(':item' => $itemId));
+        $data1 = $stmt->fetch();
+        return $data1;
+    }
+    
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
