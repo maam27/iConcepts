@@ -24,12 +24,13 @@ if(isset($_POST)){
         }
         if(!is_null($_POST['bid'])){
             if($_POST['bid'] < get_minimum_bid_increase() + get_heighest_bid($itemId, $db)) {
-                $errorMessage = "";
+                $errorMessage = "U moet mininaal €". get_minimum_bid_increase() ." meer bieden dan het hoogste bod.";
             }
             else if($_SESSION['user'] == $veilinginformatie['Gebruikersnaam']){
                 $errorMessage = "U mag niet op uw eigen producten bieden.";
             }
-            else if(place_bid($itemId,$_POST['bid'],$_SESSION['user'],$db)){
+            else if(!place_bid($itemId,floor_with_precision($_POST['bid'],2),$_SESSION['user'],$db)){
+                $errorMessage = "Er is iets fout gegaan tijdens het bieden, probeert u het later opnieuw";
             }
         }
     }
@@ -93,7 +94,7 @@ if(isset($_POST)){
                                 $bodNr = $i+1;
                                 echo "<div class='row'>";
                                 echo "<div class='col-4 col-sm-3'> bod ". $bodNr ." :</div>";
-                                echo "<div class='col-4 '>". $bids[$i]['amount']. "</div>";
+                                echo "<div class='col-4 '>€". currency($bids[$i]['amount']). "</div>";
                                 echo "<div class='col-4 col-sm-5'>". $bids[$i]['user']. "</div>";
                                 echo "</div>";
                             }
