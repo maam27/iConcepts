@@ -8,6 +8,7 @@ require_once 'php/item_functions.php';
 
 <body>
 <?php
+http_response_code(418);
 include_once 'partial/menu.php';
 if($_GET['voorwerp'] == null || !is_existing_product($_GET['voorwerp'], $db)){
     redirect('categorie.php');
@@ -16,6 +17,9 @@ $itemId = $_GET['voorwerp'];
 
 if(isset($_POST)){
     if(isset($_POST['bid'])){
+        if(!user_is_logged_in()){
+            redirect('login.php');
+        }
         if(!is_null($_POST['bid'])){
             if($_POST['bid'] >= get_minimum_bid_increase() + get_heighest_bid($itemId, $db)){
                 if(place_bid($itemId,$_POST['bid'],$_SESSION['user'],$db)){
@@ -32,8 +36,6 @@ if(isset($_POST)){
         <div class="row justify-content-center">
             <h2 class="text-center"><?php echo get_item_name($itemId, $db);?></h2>
         </div>
-    </div>
-    <div class="container">
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-6">

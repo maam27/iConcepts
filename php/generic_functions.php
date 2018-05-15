@@ -28,3 +28,10 @@ function post_set($name, $method){
         }
     }
 }
+
+function user_is_logged_in(){
+    if(isset($_SESSION['user'])){
+        return true;
+    }
+    return false;
+}

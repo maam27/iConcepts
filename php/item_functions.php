@@ -136,9 +136,9 @@ function get_minimum_bid_increase(){
 
 function place_bid($itemId,$bid,$user,$dbh){
     try{
-    $statement = $dbh->prepare("SELECT count(*) FROM Gebruiker join Vraag on vraag.Vraagnummer = Gebruiker.Vraag where Mailbox = :email and Antwoordtekst = :antwoord ");
-    $statement->execute(array(':email' => $email, ':antwoord' => $answer));
-    $result = $statement->fetchColumn();
+    $statement = $dbh->prepare("  insert into Bod (Voorwerp, Bodbedrag, Gebruiker, BodDag, BodTijdstip) values (:item, :bid, :user, :bidDay, :bidTime) ");
+    $statement->execute(array(':item' => $itemId, ':bid' => $bid, ':user' => $user, ':bidDay' => date('Y/m/d'), ':bidTime' => date('H:i:s')));
+    $result = $statement->rowCount();
     if($result == 1)
         return true;
     }

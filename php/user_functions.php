@@ -171,4 +171,3 @@ function upgrade_to_seller($dbh, $username, $bank, $bankrekening, $controleoptie
         echo $e->getMessage();
     }
 }
-
