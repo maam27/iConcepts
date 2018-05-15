@@ -72,7 +72,7 @@ if(isset($_POST)){
                 <div class="row">
 
                     <div class="col-12 verkoperSection margin-bottom">
-                        <h4>Gebruiker: <?php echo $veilinginformatie['Gebruikersnaam'];?></h4>
+                        <h4>Verkoper: <?php echo $veilinginformatie['Gebruikersnaam'];?></h4>
                         <p><strong>Voornaam:</strong> <?php echo $veilinginformatie['Voornaam'] ?></p>
                         <p><strong>Achternaam:</strong> <?php echo $veilinginformatie['Achternaam'] ?></p>
                         <p><strong>Land: </strong><?php echo $veilinginformatie['Verkoopland']?></p>
@@ -81,7 +81,7 @@ if(isset($_POST)){
                         <?php if(!empty($veilinginformatie['Betalingsinstructie'])){
                             echo '<p><strong>Betalingsinstructie:</strong> '.$veilinginformatie['Betalingsinstructie'].'</p>';
                         } ?>
-                        <p><strong>Gemiddelde beoordeling:</strong> <?php echo number_format(calculate_average_feedback_seller($db, $veilinginformatie['Gebruikersnaam']), 2)?></p>
+                        <p><strong>Gemiddelde beoordeling:</strong> <?php echo calculate_average_feedback_seller($db, $veilinginformatie['Gebruikersnaam'])?></p>
                     </div>
                     <div id="biddings" class="col-12 auction-section">
                         <div class="row">
