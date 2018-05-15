@@ -14,9 +14,8 @@ if($_GET['voorwerp'] == null || !is_existing_product($_GET['voorwerp'], $db)){
     redirect('categorie.php');
 }
 $itemId = $_GET['voorwerp'];
-$errorMessage = "";
-
 $veilinginformatie = get_seller_and_auction_info($db, $itemId);
+$errorMessage = "";
 
 if(isset($_POST)){
     if(isset($_POST['bid'])){
@@ -27,7 +26,7 @@ if(isset($_POST)){
             if($_POST['bid'] < get_minimum_bid_increase() + get_heighest_bid($itemId, $db)) {
                 $errorMessage = "";
             }
-            else if($_SESSION['user'] == 'bob' && 1==2){
+            else if($_SESSION['user'] == $veilinginformatie['Gebruikersnaam']){
                 $errorMessage = "U mag niet op uw eigen producten bieden.";
             }
             else if(place_bid($itemId,$_POST['bid'],$_SESSION['user'],$db)){
@@ -72,11 +71,6 @@ if(isset($_POST)){
                         <p class="timerText"> Timer in hoeveel tijd veiling eindigt</p>
                     </div>
                     <div class="col-12 verkoperSection margin-bottom">
-                        <h4> Hier komt informatie over de verkoper</h4>
-                        <p> En hier komt text te staan over de verkoper</p>
-                        <p> Bestaand uit verschillende zinnen.</p>
-                        <p>Ook komen er bepaalde attributen te staan.</p>
-                    <div class="col-12 verkoperSection">
                         <h4>Gebruiker: <?php echo $veilinginformatie['Gebruikersnaam'];?></h4>
                         <p><strong>Voornaam:</strong> <?php echo $veilinginformatie['Voornaam'] ?></p>
                         <p><strong>Achternaam:</strong> <?php echo $veilinginformatie['Achternaam'] ?></p>
