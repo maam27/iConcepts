@@ -181,7 +181,7 @@ function get_seller_and_auction_info($dbh, $itemId){
         $data1 = $stmt->fetch();
         return $data1;
     }
-    
+
     catch(PDOException $e){
         echo $e->getMessage();
     }

@@ -14,16 +14,23 @@ if($_GET['voorwerp'] == null || !is_existing_product($_GET['voorwerp'], $db)){
     redirect('categorie.php');
 }
 $itemId = $_GET['voorwerp'];
+$errorMessage = "";
 
 $veilinginformatie = get_seller_and_auction_info($db, $itemId);
 
 if(isset($_POST)){
     if(isset($_POST['bid'])){
+        if(!user_is_logged_in()){
+            redirect('login.php');
+        }
         if(!is_null($_POST['bid'])){
-            if($_POST['bid'] >= get_minimum_bid_increase() + get_heighest_bid($itemId, $db)){
-                if(place_bid($itemId,$_POST['bid'],$_SESSION['user'],$db)){
-
-                }
+            if($_POST['bid'] < get_minimum_bid_increase() + get_heighest_bid($itemId, $db)) {
+                $errorMessage = "";
+            }
+            else if($_SESSION['user'] == 'bob' && 1==2){
+                $errorMessage = "U mag niet op uw eigen producten bieden.";
+            }
+            else if(place_bid($itemId,$_POST['bid'],$_SESSION['user'],$db)){
             }
         }
     }
@@ -35,8 +42,6 @@ if(isset($_POST)){
         <div class="row justify-content-center">
             <h2 class="text-center"><?php echo get_item_name($itemId, $db);?></h2>
         </div>
-    </div>
-    <div class="container">
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-6">
@@ -66,6 +71,11 @@ if(isset($_POST)){
                     <div class="col-12">
                         <p class="timerText"> Timer in hoeveel tijd veiling eindigt</p>
                     </div>
+                    <div class="col-12 verkoperSection margin-bottom">
+                        <h4> Hier komt informatie over de verkoper</h4>
+                        <p> En hier komt text te staan over de verkoper</p>
+                        <p> Bestaand uit verschillende zinnen.</p>
+                        <p>Ook komen er bepaalde attributen te staan.</p>
                     <div class="col-12 verkoperSection">
                         <h4>Gebruiker: <?php echo $veilinginformatie['Gebruikersnaam'];?></h4>
                         <p><strong>Voornaam:</strong> <?php echo $veilinginformatie['Voornaam'] ?></p>
@@ -108,6 +118,13 @@ if(isset($_POST)){
                                 </div>
                             </div>
                         </form>
+                        <row>
+                            <div class="col-12">
+                                <p class="error-message">
+                                    <?php echo $errorMessage; ?>
+                                </p>
+                            </div>
+                        </row>
                     </div>
                 </div>
             </div>
