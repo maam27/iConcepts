@@ -199,6 +199,13 @@ main > div.container{
 |||||||||||||||||||||||||||||||||||||||Verkoper block||||||||||||||||||||||||||||||||||||
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
  =======================================================================================*/
+.grey-background-bar{
+    background-color:grey;
+}
+
+.white-background-bar{
+    background-color:white;
+}
 
 .verkoperSection{
     border-radius:20px;

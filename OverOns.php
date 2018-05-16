@@ -1,7 +1,7 @@
 <?php
 require_once 'partial/page_head.php';
 ?>
-    <title>Over Ons EenmaalAndermaal</title>
+    <title>Over Ons | EenmaalAndermaal</title>
     </head>
 
     <body>
