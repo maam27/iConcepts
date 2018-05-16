@@ -4,7 +4,7 @@ if( !isset($_SESSION)){
 }
 ?>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
-    <img src="images/Logo.png" alt="eenmaalandermaal logo">
+    <a href="Index.php"><img src="images/Logo.png" alt="eenmaalandermaal logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -22,12 +22,15 @@ if( !isset($_SESSION)){
             <?php
             if(!isset($_SESSION['user'])) {
             ?>
+
                 <li class="nav-item">
+
+                    <a href="login.php">Inloggen</a>
+                    /
                     <a href="registreer.php">Registreren</a>
                 </li>
-                <li class="nav-item">
-                    <a href="login.php">Inloggen</a>
-                </li>
+
+
             <?php
                 } else{
                 ?>

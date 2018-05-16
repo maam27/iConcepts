@@ -119,9 +119,6 @@ function update_user($dbh, $username, $firstname, $lastname, $addressfield, $add
 
 
     try{
-
-
-
         $stmt = $dbh->prepare("UPDATE Gebruiker SET Gebruikersnaam = :gebruiker, Voornaam = :voornaam, Achternaam = :achternaam, Adresregel1 = :adresregel1, Adresregel2 = :adresregel2,
                       Postcode = :postcode, Plaatsnaam = :plaatsnaam, Land = :land, GeboorteDag = :geboortedag, Mailbox = :mailbox,
                       Vraag = :vraag, Antwoordtekst = :antwoordtekst 
@@ -173,4 +170,152 @@ function upgrade_to_seller($dbh, $username, $bank, $bankrekening, $controleoptie
     catch(PDOException $e){
         echo $e->getMessage();
     }
+}
+
+function get_seller_and_auction_info($dbh, $itemId){
+
+    try{
+        $stmt = $dbh -> prepare ("SELECT *, vp.Land as Verkoopland, G.Land as Verkoperland, vp.plaatsnaam as Verkoopplaats FROM Verkoper v join Voorwerp vp on v.Gebruiker=vp.Verkoper
+                                  JOIN gebruiker g on vp.verkoper = g.gebruikersnaam where voorwerpnummer = :item");
+        $stmt -> execute (array(':item' => $itemId));
+        $data1 = $stmt->fetch();
+        return $data1;
+    }
+
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function check_if_seller_has_feedback($dbh, $verkoper){
+    try{
+        $stmt = $dbh -> prepare ("select count(*) from voorwerp v join feedback f on v.voorwerpnummer = f.Voorwerp where verkoper = :verkoper and soortgebruiker='Koper' ");
+        $stmt -> execute (array(':verkoper' => $verkoper));
+        $result = $stmt->fetchColumn();
+
+        if($result >= 1){
+            return true;
+        }
+
+        else{
+            return false;
+        }
+    }
+
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function get_feedback_seller($dbh, $verkoper){
+    try{
+        $stmt = $dbh -> prepare("select top 5 Voorwerp, Feedbacksoort, Commentaar, Dag, Koper from voorwerp v join feedback f on v.voorwerpnummer = f.Voorwerp where verkoper = :verkoper and soortgebruiker='Koper'");
+        $stmt -> execute (array(':verkoper' => $verkoper));
+        return $result = $stmt -> fetchAll();
+
+
+    }
+
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function get_ammount_feedback_seller($dbh, $verkoper){
+
+  try{
+      $stmt = $dbh -> prepare (" select  count(verkoper) as HoeveelFeedback, verkoper from voorwerp v join feedback f on v.voorwerpnummer = f.Voorwerp where verkoper = :verkoper and soortgebruiker='Koper'
+                                 group by Verkoper");
+      $stmt -> execute (array(':verkoper' => $verkoper));
+      $data1 = $stmt->fetch();
+
+      return $data1['HoeveelFeedback'];
+
+  }
+
+  catch(PDOException $e){
+      echo $e->getMessage();
+  }
+}
+
+function get_sum_feedback_seller($dbh, $verkoper){
+    $stmt = $dbh -> prepare ("select sum(Feedbacksoort) as totaalcijfer, verkoper from voorwerp v join feedback f on v.voorwerpnummer = f.Voorwerp where verkoper = :verkoper and soortgebruiker='Koper'
+                                group by Verkoper");
+    $stmt -> execute (array(':verkoper' => $verkoper));
+    $data2 = $stmt->fetch();
+
+    return $data2['totaalcijfer'];
+}
+
+function calculate_average_feedback_seller($dbh, $verkoper){
+    if(get_ammount_feedback_seller($dbh, $verkoper) == 0){
+        return 'Geen feedback ontvangen';
+    }
+    else {
+        return '' . number_format((get_sum_feedback_seller($dbh, $verkoper) / get_ammount_feedback_seller($dbh, $verkoper)), 2) . '/5';
+    }
+}
+
+function check_if_seller($dbh, $verkoper){
+    try {
+        $stmt = $dbh->prepare("select count(*) from Gebruiker g join Verkoper v on g.Gebruikersnaam = v.Gebruiker where Gebruikersnaam = :verkoper");
+        $stmt->execute(array(':verkoper' => $verkoper));
+        $result = $stmt->fetchColumn();
+
+        if ($result == 1) {
+            return true;}
+
+        else{
+            return false;}
+    }
+
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function get_information_user($dbh, $gebruiker){
+    $statement = $dbh->prepare("SELECT * FROM Gebruiker where Gebruikersnaam = :gebruiker");
+    $statement->execute(array(':gebruiker' => $gebruiker));
+    return $data1 = $statement->fetch();
+}
+
+function check_if_phonenumber($dbh, $gebruiker){
+    try {
+        $statement = $dbh->prepare("SELECT count(*) FROM GebruikersTelefoon WHERE Gebruiker = :gebruiker");
+        $statement->execute(array(':gebruiker' => $gebruiker));
+        $result = $statement->fetchColumn();
+
+        if ($result >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function get_phonenumber($dbh, $gebruiker){
+ try {
+     $statement = $dbh->prepare("SELECT * From GebruikersTelefoon WHERE Gebruiker = :gebruiker");
+     $statement->execute(array(':gebruiker' => $gebruiker));
+     return $result = $statement->fetch();
+ }
+ catch(PDOException $e){
+     echo $e->getMessage();
+ }
+
+}
+
+function get_active_auctions_from_seller($dbh, $gebruiker){
+  try {
+      $statement = $dbh->prepare("select count(*) from Gebruiker g join Voorwerp v on g.Gebruikersnaam = v.Verkoper where Gebruikersnaam = :gebruiker AND VeilingGesloten = 1");
+      $statement->execute(array(':gebruiker' => $gebruiker));
+      return $result = $statement->fetchColumn();
+  }
+  catch(PDOException $e){
+      echo $e->getMessage();
+  }
 }

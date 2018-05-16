@@ -2,7 +2,7 @@
 require_once 'partial/page_head.php';
 require_once 'php/user_functions.php';
 ?>
-    <title>Jumbotron Template for Bootstrap Lool</title>
+    <title>Login | EenmaalAndermaal</title>
 </head>
 
 <body>
@@ -38,7 +38,7 @@ if(isset($_POST)){
                 ?>
                 <div class="col-12 error-message">
                     <i class="fas fa-exclamation-circle"></i>
-                    De combinatie van gebruikersnaam en wachtwoord is niet geldig.
+                    De combinatie van gebruikersnaam en wachtwoord is onjuist.
                 </div>
                 <?php } ?>
                 <div class="col-12 col-sm-6">

@@ -28,3 +28,20 @@ function post_set($name, $method){
         }
     }
 }
+
+function user_is_logged_in(){
+    if(isset($_SESSION['user'])){
+        return true;
+    }
+    return false;
+}
+
+function currency($amount){
+    return number_format($amount,2,',','.');
+}
+
+function floor_with_precision($val, $precision)
+{
+    $mult = pow(10, $precision); // Can be cached in lookup table
+    return floor($val * $mult) / $mult;
+}

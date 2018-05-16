@@ -7,7 +7,7 @@ require_once 'partial/page_head.php';
 require_once 'php/user_functions.php';
 require_once 'php/generic_functions.php';
 ?>
-<title>Jumbotron Template for Bootstrap Lool</title>
+<title>Registreren | EenmaalAndermaal</title>
 </head>
 
 <body>
@@ -70,35 +70,35 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
             <form method="Post" action="#">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>Gebruikersnaam:</p>
+                        <p>Gebruikersnaam: *</p>
                         <input id="username" name="username" type="text"
-                               placeholder="BarryBadpak" <?php echo post_set('username', 'post'); ?> required>
+                               placeholder="Gebruikersnaam" <?php echo post_set('username', 'post'); ?> required>
                         <br>
-                        <p>Wachtwoord:</p>
+                        <p>Wachtwoord: *</p>
                         <input id="password" name="password" type="password" placeholder="Wachtwoord"
                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                title="Het wachtwoord moet minimaal 1 nummer, 1 hoofdletter en 1 kleine letter bevatten. Minimum aantal karakters is 8."
                                required>
                         <br>
-                        <p>Bevestig wachtwoord:</p>
+                        <p>Bevestig wachtwoord: *</p>
                         <input id="password2" name="password2" type="password" placeholder="Wachtwoord"
                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                title="Het wachtwoord moet minimaal 1 nummer, 1 hoofdletter en 1 kleine letter bevatten. Minimum aantal karakters is 8."
                                required>
                         <br>
-                        <p>Voornaam:</p>
+                        <p>Voornaam: *</p>
                         <input id="first-name" name="first-name" type="text"
-                               placeholder="Barry" <?php echo post_set('first-name', 'post'); ?> required>
+                               placeholder="Voornaam" <?php echo post_set('first-name', 'post'); ?> required>
                         <br>
-                        <p>Achternaam:</p>
+                        <p>Achternaam: *</p>
                         <input id="last-name" name="last-name" type="text"
-                               placeholder="Badpak" <?php echo post_set('last-name', 'post'); ?> required>
+                               placeholder="Achternaam" <?php echo post_set('last-name', 'post'); ?> required>
                         <br>
-                        <p>Geboortedatum:</p>
+                        <p>Geboortedatum: *</p>
                         <input id="birth-date" name="birth-date"
                                type="date" <?php echo post_set('birth-date', 'post'); ?> required>
                         <br>
-                        <p>E-Mail:</p>
+                        <p>E-Mail: *</p>
                         <input id="e-mail" name="e-mail" type="email"
                                placeholder="E-mail" <?php echo post_set('e-mail', 'post'); ?>
                                pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required>
@@ -106,29 +106,29 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
                     </div>
                     <div class="col-md-6">
 
-                        <p>Land:</p>
+                        <p>Land: *</p>
                         <input id="country" name="country" type="text"
-                               placeholder="Nederland" <?php echo post_set('country', 'post'); ?> required>
+                               placeholder="Land" <?php echo post_set('country', 'post'); ?> required>
                         <br>
-                        <p>Stad:</p>
+                        <p>Stad: *</p>
                         <input id="city" name="city" type="text"
-                               placeholder="Arnhem" <?php echo post_set('city', 'post'); ?> required>
+                               placeholder="Stad" <?php echo post_set('city', 'post'); ?> required>
                         <br>
-                        <p>Adresregel 1:</p>
+                        <p>Adresregel 1: *</p>
                         <input id="address-field" name="address-field" type="text"
-                               placeholder="Straatnaam 15" <?php echo post_set('address-field', 'post'); ?>
+                               placeholder="Straatnaam nummer" <?php echo post_set('address-field', 'post'); ?>
                                title="Straatnaam gevolgd door nummer." required>
                         <br>
                         <p>Adresregel 2:</p>
                         <input id="address-field2" name="address-field2" type="text"
-                               placeholder="Toevoeging adresregel" <?php echo post_set('address-field2', 'post'); ?>>
+                               placeholder="straatnaam nummer" <?php echo post_set('address-field2', 'post'); ?>>
                         <br>
-                        <p>Postcode: </p>
+                        <p>Postcode: *</p>
                         <input id="postcode" name="postcode" type="text"
                                placeholder="4323DK" <?php echo post_set('postcode', 'post'); ?>
                                pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" title="4 cijfers gevolgd door 2 letters." required>
                         <br>
-                        <p>Veiligheidsvraag: </p>
+                        <p>Veiligheidsvraag: *</p>
                         <select name="security-question">
                             <?php
                             foreach ($data1 as $key => $value) {
@@ -137,7 +137,7 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
                             ?>
                         </select>
                         <br>
-                        <p>Antwoord:</p>
+                        <p>Antwoord: *</p>
                         <input id="answer" name="answer" type="text" placeholder="Antwoord" required>
                         <br>
                         <button type="submit">Registreer</button>
