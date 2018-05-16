@@ -14,6 +14,7 @@ if($_GET['voorwerp'] == null || !is_existing_product($_GET['voorwerp'], $db)){
     redirect('categorie.php');
 }
 $itemId = $_GET['voorwerp'];
+$heighestBid = get_heighest_bid($itemId, $db);
 
 $veilinginformatie = get_seller_and_auction_info($db, $itemId);
 $item = get_item($itemId,$db);
@@ -28,7 +29,9 @@ if(isset($_POST)){
         if(!is_null($_POST['bid'])){
             if($item['VeilingGesloten'] == 1){
                 $errorMessage ="Deze veiling is gesloten";
-            }else if($_POST['bid'] < get_minimum_bid_increase() + get_heighest_bid($itemId, $db)) {
+            }else if(get_heighest_bidder($itemId,$db) == $_SESSION['user']){
+                $errorMessage = "het is niet toegestaan uw zelf te overbieden.";
+            }else if($_POST['bid'] < get_minimum_bid_increase() + $heighestBid) {
                 $errorMessage = "U moet mininaal €". get_minimum_bid_increase() ." meer bieden dan het hoogste bod.";
             }
             else if($_SESSION['user'] == $veilinginformatie['Gebruikersnaam']){
@@ -52,7 +55,7 @@ if(isset($_POST)){
             <div class="col-md-6">
                <div class="row">
                    <div class="col-12">
-                        <img class="img-thumbnail margin-bottom" src="images/TrumpPlaceholder.jpg"> </img>
+                        <img class="img-thumbnail margin-bottom product-image" src="images/TrumpPlaceholder.jpg"> </img>
                    </div>
                    <div class="col-12">
                         <p>
@@ -71,10 +74,10 @@ if(isset($_POST)){
                    </div>
                </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 seperator-none seperator-left-md">
                 <div class="row">
 
-                    <div class="col-12 verkoperSection margin-bottom">
+                    <div class="col-12 verkoperSection margin-bottom seperator-bottom-md">
                         <h4>Verkoper: <?php echo $veilinginformatie['Gebruikersnaam'];?></h4>
                         <p><strong>Voornaam:</strong> <?php echo $veilinginformatie['Voornaam'] ?></p>
                         <p><strong>Achternaam:</strong> <?php echo $veilinginformatie['Achternaam'] ?></p>
@@ -95,7 +98,7 @@ if(isset($_POST)){
                             <?php
                             $bids = get_item_bids($itemId,$db);
                             if($bids != null) {
-                                $minimumBid = $bids[0]['amount'] + get_minimum_bid_increase();
+                                $minimumBid = $bids[0]['amount'] + get_minimum_bid_increase($heighestBid);
                             }
                             else{
                                 $minimumBid = $item['Startprijs'];

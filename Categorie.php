@@ -10,26 +10,42 @@
     <title>Categorie | EenmaalAndermaal</title>
     <?php
     require_once 'partial/styles.php';
+
     ?>
 
 </head>
 
 <body>
 <?php
-include_once 'partial/menu.php';
+//include_once 'partial/menu.php';
+require_once 'php/database.php';
+$dbh = get_db_connection();
 
-$Rubriek = isset($_GET['Rubrieknaam']) ? $_GET['Rubrieknaam'] : '';
 ?>
 
 <main>
 <!--    SideNavigation Bar    -->
 
     <?php
-    $query = $db->prepare("SELECT [rubrieknaam] FROM Rubriek ");
-    $query->execute(array(':rubrieknaam' => $Rubriek));
-    $result = $query->fetch();
+$sql = ("SELECT * FROM Rubriek");
+$advertenties =( "select v.*, r.Rubrieknaam, r.Rubrieknummer from voorwerp v inner join VoorwerpInRubriek k
+on v.Voorwerpnummer = k.Voorwerp
+left join Rubriek r
+on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
+"
+);
+    $query = $dbh->prepare($sql);
+    $query->execute();
+    $Rubriek = $query->fetchAll();
 
-    $Categorie.=<<<rubriek
+
+    $statement = $dbh->prepare($advertenties);
+    $statement->execute ();
+    $Artikelen = $statement-> fetchAll();
+
+
+?>
+
     <div class="container-fluid">
         <div class="row">
             <div class="sidebar1">
@@ -46,10 +62,11 @@ $Rubriek = isset($_GET['Rubrieknaam']) ? $_GET['Rubrieknaam'] : '';
                     <br>
 
                     <ul class="list">
-                    <h5><strong>Alle categorieën </strong></h5>
-                   <?php foreach($Rubriek as $key=>$value){
-                        <li><a href="categorie.php?id=$Rubriek[$key] ['Rubrieknaam'];"></a></li>
-                     } 
+                    <h5><strong> Alle categorieën </strong></h5>
+                   <?php foreach($Rubriek as $row ):?>
+                       <li> <a href="categorie.php?id=<?php echo $row ['Rubrieknaam'];?>" name="Rubriek" onclick="<?php $_GET['Rubriek'] = $row ['Rubrieknaam']; ?>"><?php echo $row ['Rubrieknaam'];?></a> </li>
+                     <?php $C = isset($_GET[$_GET['Rubriek']]); endforeach;?>
+                     
                      
                     </ul>
                 </div>
@@ -59,7 +76,7 @@ $Rubriek = isset($_GET['Rubrieknaam']) ? $_GET['Rubrieknaam'] : '';
                 <!--    Main content    -->
                 <br><br><br>
                     <div class="row">
-                        <h2>Categorie: TRUMP</h2>
+                        <h2>  Categorie: <?php echo $C;?></h2>
                         <div class="col-12">
                             <div class="d-flex justify-content-around flex-wrap">
                                 <div class="" style="background:salmon;width:200px;">altijd<img src="images/thumb/placeholder.jpg" class="img-thumbnail"/></div>
@@ -70,17 +87,20 @@ $Rubriek = isset($_GET['Rubrieknaam']) ? $_GET['Rubrieknaam'] : '';
                         </div>
                     </div>
                     <div class="auction-section">
-rubriek;
-    echo $Categorie;
-?>
+
 
     <!--    advertentie Sectie   -->
 
                 <table style="width:100%">
                     <tr>
+                        <th><p><?php echo $Artikelen [5]['Voorwerpnummer']  ?> &nbsp <?php echo $Artikelen [5]['Titel'];?></p></th>
+                    </tr>
+                    <tr>
                         <th><img src="images/thumb/placeholder.jpg"  class="auction-thumbnail"/></th>
-                        <th><p>hier kan een product naam of titel komen,maar komt hier dan ook de juiste informatie bij de afbeelding?</p></th>
-                        <th><p> prijs €300</p></th>
+                        <th><?php
+                            echo htmlspecialchars($_GET["Rubrieknaam"]);
+                            ?></th>
+                        <th><p> Start prijs <?php echo $Artikelen [5]['Startprijs'];?></p></th>
                     </tr>
                 </table>
 
