@@ -130,8 +130,17 @@ function get_heighest_bidder($itemId, $dbh){
 }
 
 
-function get_minimum_bid_increase(){
-    return 1;
+function get_minimum_bid_increase($currentBid){
+    if($currentBid < 50)
+        return 0.50;
+    if($currentBid < 500)
+        return 1;
+    if($currentBid < 1000)
+        return 5;
+    if($currentBid < 1000)
+        return 10;
+    return 50;
+
 }
 
 function place_bid($itemId,$bid,$user,$dbh){

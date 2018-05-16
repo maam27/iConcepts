@@ -14,6 +14,7 @@ if($_GET['voorwerp'] == null || !is_existing_product($_GET['voorwerp'], $db)){
     redirect('categorie.php');
 }
 $itemId = $_GET['voorwerp'];
+$heighestBid = get_heighest_bid($itemId, $db);
 
 $veilinginformatie = get_seller_and_auction_info($db, $itemId);
 $item = get_item($itemId,$db);
@@ -30,7 +31,7 @@ if(isset($_POST)){
                 $errorMessage ="Deze veiling is gesloten";
             }else if(get_heighest_bidder($itemId,$db) == $_SESSION['user']){
                 $errorMessage = "het is niet toegestaan uw zelf te overbieden.";
-            }else if($_POST['bid'] < get_minimum_bid_increase() + get_heighest_bid($itemId, $db)) {
+            }else if($_POST['bid'] < get_minimum_bid_increase() + $heighestBid) {
                 $errorMessage = "U moet mininaal €". get_minimum_bid_increase() ." meer bieden dan het hoogste bod.";
             }
             else if($_SESSION['user'] == $veilinginformatie['Gebruikersnaam']){
@@ -97,7 +98,7 @@ if(isset($_POST)){
                             <?php
                             $bids = get_item_bids($itemId,$db);
                             if($bids != null) {
-                                $minimumBid = $bids[0]['amount'] + get_minimum_bid_increase();
+                                $minimumBid = $bids[0]['amount'] + get_minimum_bid_increase($heighestBid);
                             }
                             else{
                                 $minimumBid = $item['Startprijs'];
