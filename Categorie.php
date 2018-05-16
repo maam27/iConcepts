@@ -64,8 +64,8 @@ on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
                     <ul class="list">
                     <h5><strong> Alle categorieën </strong></h5>
                    <?php foreach($Rubriek as $row ):?>
-                       <li> <a href="categorie.php?id=<?php echo $row ['Rubrieknaam'];?>" name="Rubriek" onclick="<?php$tellert= $row ['Rubrieknummer']; echo $tellert;?>"><?php echo $row ['Rubrieknaam'];?></a> </li>
-                     <?php endforeach;?>
+                       <li> <a href="categorie.php?id=<?php echo $row ['Rubrieknaam'];?>" name="Rubriek" onclick="<?php $_GET['Rubriek'] = $row ['Rubrieknaam']; ?>"><?php echo $row ['Rubrieknaam'];?></a> </li>
+                     <?php $C = isset($_GET[$_GET['Rubriek']]); endforeach;?>
                      
                      
                     </ul>
@@ -76,7 +76,7 @@ on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
                 <!--    Main content    -->
                 <br><br><br>
                     <div class="row">
-                        <h2>  Categorie: <?php echo $Rubriek [2]['Rubrieknaam'] ;?></h2>
+                        <h2>  Categorie: <?php echo $C;?></h2>
                         <div class="col-12">
                             <div class="d-flex justify-content-around flex-wrap">
                                 <div class="" style="background:salmon;width:200px;">altijd<img src="images/thumb/placeholder.jpg" class="img-thumbnail"/></div>
