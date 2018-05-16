@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <!--<link rel="icon" href="favicon.ico">-->
 
-    <title>Categorie</title>
+    <title>Categorie | EenmaalAndermaal</title>
     <?php
     require_once 'partial/styles.php';
     ?>

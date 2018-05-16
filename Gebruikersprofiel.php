@@ -1,7 +1,7 @@
 <?php
 require_once 'partial/page_head.php';
 ?>
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>Gebruikersprofiel | EenmaalAndermaal</title>
     </head>
 
     <body>

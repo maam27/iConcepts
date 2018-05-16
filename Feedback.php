@@ -8,7 +8,7 @@ require_once 'php/user_functions.php';
 require_once 'php/generic_functions.php';
 require_once 'php/item_functions.php';
 ?>
-<title>Jumbotron Template for Bootstrap Lool</title>
+<title>Feedback Formulier | EenmaalAndermaal</title>
 </head>
 
 <body>

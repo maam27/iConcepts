@@ -4,7 +4,7 @@ require_once 'php/database.php';
 require_once 'php/item_functions.php';
 require_once 'php/user_functions.php';
 ?>
-    <title></title>
+    <title>Veilingspagina | EenmaalAndermaal</title>
 </head>
 
 <body>

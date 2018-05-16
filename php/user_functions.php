@@ -218,6 +218,57 @@ function calculate_average_feedback_seller($dbh, $verkoper){
         return 'Geen feedback ontvangen';
     }
     else {
-        return number_format((get_sum_feedback_seller($dbh, $verkoper) / get_ammount_feedback_seller($dbh, $verkoper)), 2);
+        return '' . number_format((get_sum_feedback_seller($dbh, $verkoper) / get_ammount_feedback_seller($dbh, $verkoper)), 2) . '/5';
     }
+}
+
+function check_if_seller($dbh, $verkoper){
+    try {
+        $stmt = $dbh->prepare("select count(*) from Gebruiker g join Verkoper v on g.Gebruikersnaam = v.Gebruiker where Gebruikersnaam = :verkoper");
+        $stmt->execute(array(':verkoper' => $verkoper));
+        $result = $stmt->fetchColumn();
+
+        if ($result == 1) {
+            return true;}
+
+        else{
+            return false;}
+    }
+
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function get_information_user($dbh, $gebruiker){
+    $statement = $dbh->prepare("SELECT * FROM Gebruiker where Gebruikersnaam = :gebruiker");
+    $statement->execute(array(':gebruiker' => $gebruiker));
+    return $data1 = $statement->fetch();
+}
+
+function check_if_phonenumber($dbh, $gebruiker){
+    $statement = $dbh->prepare ("SELECT count(*) FROM GebruikersTelefoon WHERE Gebruiker = :gebruiker");
+    $statement->execute(array(':gebruiker' => $gebruiker));
+    $result = $statement->fetchColumn();
+
+    if($result >= 1){
+        return true;
+    }
+
+    else{
+        return false;
+    }
+}
+
+function get_phonenumber($dbh, $gebruiker){
+    $statement = $dbh->prepare ("SELECT * From GebruikersTelefoon WHERE Gebruiker = :gebruiker");
+    $statement->execute(array(':gebruiker' => $gebruiker));
+    return $result = $statement->fetch();
+
+}
+
+function get_active_auctions_from_seller($dbh, $gebruiker){
+    $statement = $dbh->prepare("select count(*) from Gebruiker g join Voorwerp v on g.Gebruikersnaam = v.Verkoper where Gebruikersnaam = :gebruiker AND VeilingGesloten = 1");
+    $statement->execute(array(':gebruiker' => $gebruiker));
+    return $result = $statement -> fetchColumn();
 }
