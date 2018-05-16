@@ -30,9 +30,9 @@ if(isset($_POST)){
             if($item['VeilingGesloten'] == 1){
                 $errorMessage ="Deze veiling is gesloten";
             }else if(get_heighest_bidder($itemId,$db) == $_SESSION['user']){
-                $errorMessage = "het is niet toegestaan uw zelf te overbieden.";
+                $errorMessage = "het is niet toegestaan uwzelf te overbieden.";
             }else if($_POST['bid'] < get_minimum_bid_increase($heighestBid) + $heighestBid) {
-                $errorMessage = "U moet mininaal €". get_minimum_bid_increase() ." meer bieden dan het hoogste bod.";
+                $errorMessage = "U moet mininaal €". get_minimum_bid_increase($heighestBid) ." meer bieden dan het hoogste bod.";
             }
             else if($_SESSION['user'] == $veilinginformatie['Gebruikersnaam']){
                 $errorMessage = "U mag niet op uw eigen producten bieden.";
