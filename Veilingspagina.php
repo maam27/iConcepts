@@ -31,11 +31,12 @@ if(isset($_POST)){
                 $errorMessage ="Deze veiling is gesloten";
             }else if(get_heighest_bidder($itemId,$db) == $_SESSION['user']){
                 $errorMessage = "het is niet toegestaan uwzelf te overbieden.";
-            }else if($_POST['bid'] < get_minimum_bid_increase($heighestBid) + $heighestBid) {
-                $errorMessage = "U moet mininaal €". get_minimum_bid_increase($heighestBid) ." meer bieden dan het hoogste bod.";
             }
             else if($_SESSION['user'] == $veilinginformatie['Gebruikersnaam']){
                 $errorMessage = "U mag niet op uw eigen producten bieden.";
+            }
+            else if($_POST['bid'] < get_minimum_bid_increase($heighestBid) + $heighestBid) {
+                $errorMessage = "U moet mininaal €". get_minimum_bid_increase($heighestBid) ." meer bieden dan het hoogste bod.";
             }
             else if(!place_bid($itemId,floor_with_precision($_POST['bid'],2),$_SESSION['user'],$db)){
                 $errorMessage = "Er is iets fout gegaan tijdens het bieden, probeert u het later opnieuw";
