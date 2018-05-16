@@ -12,8 +12,19 @@ require_once 'php/user_functions.php';
 include_once 'partial/menu.php';
 
 if(1>1){
-    }
 
+    }
+    else if(check_if_seller($db, $_GET['id'])== false){
+
+    ?>
+        <main>
+            <div class="container">
+                <h2> Deze verkoper bestaat niet.<h2>
+            </div>
+        </main>
+
+
+        <?php }
     else if(check_if_seller($db, $_GET['id'])){
         $data=get_information_user($db, $_GET['id']);
         $phone=get_phonenumber($db, $_GET['id'])
@@ -54,6 +65,19 @@ if(1>1){
                         ?>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-6 margin-top margin-bottom feedbackBlockBorder feedbackBlock">
+                <h4>Meest recente feedback</h4>
+                <?php if(check_if_seller_has_feedback($db, $_GET['id'])){
+                   $feedback = get_feedback_seller($db, $_GET['id']);
+                   for ($i = 0; $i < count($feedback); $i++) {
+
+                        echo '<p>"'.$feedback[$i]['Commentaar'].'" - '.$feedback[$i]['Feedbacksoort'].'/5 </p>';
+                        echo '<p class="eindeFeedback">'.'-'.$feedback[$i]['Koper']. ',  ' . $feedback[$i]['Dag'];
+                        echo '<p> </p>';
+                    }
+                }
+                ?>
             </div>
         </div>
         <div class="row margin-top">

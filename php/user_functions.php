@@ -187,6 +187,40 @@ function get_seller_and_auction_info($dbh, $itemId){
     }
 }
 
+function check_if_seller_has_feedback($dbh, $verkoper){
+    try{
+        $stmt = $dbh -> prepare ("select count(*) from voorwerp v join feedback f on v.voorwerpnummer = f.Voorwerp where verkoper = :verkoper and soortgebruiker='Koper' ");
+        $stmt -> execute (array(':verkoper' => $verkoper));
+        $result = $stmt->fetchColumn();
+
+        if($result >= 1){
+            return true;
+        }
+
+        else{
+            return false;
+        }
+    }
+
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function get_feedback_seller($dbh, $verkoper){
+    try{
+        $stmt = $dbh -> prepare("select top 5 Voorwerp, Feedbacksoort, Commentaar, Dag, Koper from voorwerp v join feedback f on v.voorwerpnummer = f.Voorwerp where verkoper = :verkoper and soortgebruiker='Koper'");
+        $stmt -> execute (array(':verkoper' => $verkoper));
+        return $result = $stmt -> fetchAll();
+
+
+    }
+
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
 function get_ammount_feedback_seller($dbh, $verkoper){
 
   try{
@@ -247,28 +281,41 @@ function get_information_user($dbh, $gebruiker){
 }
 
 function check_if_phonenumber($dbh, $gebruiker){
-    $statement = $dbh->prepare ("SELECT count(*) FROM GebruikersTelefoon WHERE Gebruiker = :gebruiker");
-    $statement->execute(array(':gebruiker' => $gebruiker));
-    $result = $statement->fetchColumn();
+    try {
+        $statement = $dbh->prepare("SELECT count(*) FROM GebruikersTelefoon WHERE Gebruiker = :gebruiker");
+        $statement->execute(array(':gebruiker' => $gebruiker));
+        $result = $statement->fetchColumn();
 
-    if($result >= 1){
-        return true;
+        if ($result >= 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
-    else{
-        return false;
+catch(PDOException $e){
+        echo $e->getMessage();
     }
 }
 
 function get_phonenumber($dbh, $gebruiker){
-    $statement = $dbh->prepare ("SELECT * From GebruikersTelefoon WHERE Gebruiker = :gebruiker");
-    $statement->execute(array(':gebruiker' => $gebruiker));
-    return $result = $statement->fetch();
+ try {
+     $statement = $dbh->prepare("SELECT * From GebruikersTelefoon WHERE Gebruiker = :gebruiker");
+     $statement->execute(array(':gebruiker' => $gebruiker));
+     return $result = $statement->fetch();
+ }
+ catch(PDOException $e){
+     echo $e->getMessage();
+ }
 
 }
 
 function get_active_auctions_from_seller($dbh, $gebruiker){
-    $statement = $dbh->prepare("select count(*) from Gebruiker g join Voorwerp v on g.Gebruikersnaam = v.Verkoper where Gebruikersnaam = :gebruiker AND VeilingGesloten = 1");
-    $statement->execute(array(':gebruiker' => $gebruiker));
-    return $result = $statement -> fetchColumn();
+  try {
+      $statement = $dbh->prepare("select count(*) from Gebruiker g join Voorwerp v on g.Gebruikersnaam = v.Verkoper where Gebruikersnaam = :gebruiker AND VeilingGesloten = 1");
+      $statement->execute(array(':gebruiker' => $gebruiker));
+      return $result = $statement->fetchColumn();
+  }
+  catch(PDOException $e){
+      echo $e->getMessage();
+  }
 }
