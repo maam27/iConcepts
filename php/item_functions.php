@@ -1,30 +1,16 @@
 <?php
-function get_item_name($itemId ,$dbh){
+function get_item($itemId ,$dbh){
     try{
-        $statement = $dbh->prepare("select titel from voorwerp where voorwerpnummer = :item ");
+        $statement = $dbh->prepare("select [Titel]      ,[Beschrijving]      ,[Startprijs]      ,[Betalingswijze]      ,[Plaatsnaam]      ,[Land]      ,[Verzendkosten]      ,[Verzendinstructies]      ,[Verkoper]      ,[LooptijdeindeDag]      ,[LooptijdeindeTijdstip]      ,[VeilingGesloten] from voorwerp where voorwerpnummer = :item ");
         $statement->execute(array(':item' => $itemId));
         $result = $statement->fetch();
-        return $result['titel'];
+        return $result;
     }
     catch(PDOException $e){
         echo $e;
     }
     return null;
 }
-
-function get_item_description($itemId ,$dbh){
-    try{
-        $statement = $dbh->prepare("select beschrijving from voorwerp where voorwerpnummer = :item ");
-        $statement->execute(array(':item' => $itemId));
-        $result = $statement->fetch();
-        return $result['beschrijving'];
-    }
-    catch(PDOException $e){
-        echo $e;
-    }
-    return null;
-}
-
 
 function get_item_bids($itemId ,$dbh){
     try{
@@ -148,18 +134,6 @@ function place_bid($itemId,$bid,$user,$dbh){
     return false;
 }
 
-function get_minimum_price($itemId, $dbh){
-     try{
-         $statement = $dbh->prepare("select startprijs from voorwerp where Voorwerpnummer = :item ");
-         $statement->execute(array(':item' => $itemId));
-         $result = $statement->fetch();
-        return $result['startprijs'];
-     }
-     catch(PDOException $e){
-         echo $e;
-     }
-    return false;
-}
 
 //try{
 

@@ -14,16 +14,19 @@ if($_GET['voorwerp'] == null || !is_existing_product($_GET['voorwerp'], $db)){
     redirect('categorie.php');
 }
 $itemId = $_GET['voorwerp'];
-$veilinginformatie = get_seller_and_auction_info($db, $itemId);
-$errorMessage = "";
 
+$veilinginformatie = get_seller_and_auction_info($db, $itemId);
+$item = get_item($itemId,$db);
+
+/* place new bid*/
+$errorMessage = "";
 if(isset($_POST)){
     if(isset($_POST['bid'])){
         if(!user_is_logged_in()){
             redirect('login.php');
         }
         if(!is_null($_POST['bid'])){
-            if(1 < 1){
+            if($item['VeilingGesloten'] == 1){
                 $errorMessage ="Deze veiling is gesloten";
             }else if($_POST['bid'] < get_minimum_bid_increase() + get_heighest_bid($itemId, $db)) {
                 $errorMessage = "U moet mininaal €". get_minimum_bid_increase() ." meer bieden dan het hoogste bod.";
@@ -42,7 +45,7 @@ if(isset($_POST)){
 <main>
     <div class="container">
         <div class="row justify-content-center">
-            <h2 class="text-center"><?php echo get_item_name($itemId, $db);?></h2>
+            <h2 class="text-center"><?php echo $item['Titel'];?></h2>
         </div>
         <!-- Example row of columns -->
         <div class="row">
@@ -63,7 +66,7 @@ if(isset($_POST)){
                    </div>
                    <div class="col-12">
                         <p>
-                            <strong>Productomschrijving :</strong><?php echo get_item_description($itemId, $db); ?>
+                            <strong>Productomschrijving :</strong><?php echo $item['Beschrijving']; ?>
                         </p>
                    </div>
                </div>
@@ -95,16 +98,16 @@ if(isset($_POST)){
                                 $minimumBid = $bids[0]['amount'] + get_minimum_bid_increase();
                             }
                             else{
-                                $minimumBid = get_minimum_price($itemId,$db);
+                                $minimumBid = $item['Startprijs'];
                                 echo "<div class='row'><div class='col-12'>Er zijn nog geen biedingen voor dit product.</div></div>";
                             }
 
                             for ($i = 0; $i < count($bids); $i++) {
                                 $bodNr = $i + 1;
                                 echo "<div class='row'>";
-                                echo "<div class='col-4 col-sm-3'> bod " . $bodNr . " :</div>";
-                                echo "<div class='col-4 '>€" . currency($bids[$i]['amount']) . "</div>";
-                                echo "<div class='col-4 col-sm-5'>" . $bids[$i]['user'] . "</div>";
+                                echo "<div class='d-none d-lg-block d-xl-block col-lg-1'>" . $bodNr . ":</div>";
+                                echo "<div class='col-6 col-lg-6 no-overflow'>€" . currency($bids[$i]['amount']) . "</div>";
+                                echo "<div class='col-6 col-lg-5 no-overflow'>" . $bids[$i]['user'] . "</div>";
                                 echo "</div>";
                             }
                             ?>
@@ -116,7 +119,7 @@ if(isset($_POST)){
                                     <input id="bid" name="bid" type="number" min="<?php echo $minimumBid;?>" value="<?php echo $minimumBid;?>" step="any"/>
                                 </div>
                                 <div class="col-5">
-                                    <input id="placeBid" name="placeBid" type="submit" class="btn btn-secondary" value="Plaats bod &raquo;"/>
+                                    <input id="placeBid" name="placeBid" type="submit" class="btn btn-secondary" value="Plaats bod &raquo;" <?php if($item['VeilingGesloten']==1) echo 'disabled';?>/>
                                 </div>
                             </div>
                         </form>

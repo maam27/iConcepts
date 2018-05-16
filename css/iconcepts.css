@@ -269,7 +269,6 @@ font-size:0.9rem;
     padding:5%;
     border-radius:20px;
     height:100%;
-    margin-top: 20%;
     background-color:white;
 }
 .verkoopaanvraag-section,
@@ -292,19 +291,11 @@ form p {
     margin-bottom:0px;
 }
 
-@media (max-width: 575px) {
-    .login input{
-        width: 100%;
-    }
-}
-
 /* ======================================================================================
 ////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 |||||||||||||||||||||||||||||||||||||||| Images||||||||||||||||||||||||||||||||||||||||||
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////////
  =======================================================================================*/
-
-
 .gebruikeresImage{
     width:12%;
     height:20%;
@@ -334,6 +325,20 @@ img.auction-thumbnail{
     background:#f2552c;
 }
 
+option,
+input{
+    width:100%;
+    max-width: 100%;
+}
+
+input:-moz-read-only,
+input:read-only {
+    color: black;
+    padding: 2px;
+    margin: 0 0 0 0;
+    background-color: black;
+}
+
 /* ======================================================================================
 ////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 |||||||||||||||||||||||||||||||||||||||| generic ||||||||||||||||||||||||||||||||||||||||||
@@ -357,24 +362,18 @@ padding-top{
 .margin-bottom{
     margin-bottom: 1rem;
 }
-option,
-input{
-    width:100%;
-    max-width: 100%;
-}
-input:-moz-read-only,
-input:read-only {
-    color: black;
-    padding: 2px;
-    margin: 0 0 0 0;
-    background-color: black;
-}
-
 .center{margin:auto;}
 
 .hide{
     display:none;
 }
+
+.no-overflow{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* ======================================================================================
 ////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 |||||||||||||||||||||||||||||||||||||||| footer ||||||||||||||||||||||||||||||||||||||||||
@@ -382,4 +381,8 @@ input:read-only {
  =======================================================================================*/
 footer.container.rubriekfooter{
 margin-left: 200px;
+}
+
+.container{
+    background-color: white;
 }
