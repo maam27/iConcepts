@@ -55,6 +55,19 @@ if(1>1){
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 margin-top margin-bottom border-auction-preview feedbackBlock">
+                <h4>Meest recente feedback</h4>
+                <?php if(check_if_seller_has_feedback($db, $_GET['id'])){
+                   $feedback = get_feedback_seller($db, $_GET['id']);
+                   for ($i = 0; $i < count($feedback); $i++) {
+
+                        echo '<p>"'.$feedback[$i]['Commentaar'].'" - '.$feedback[$i]['Feedbacksoort'].'/5 </p>';
+                        echo '<p class="eindeFeedback">'.'-'.$feedback[$i]['Koper']. ',  ' . $feedback[$i]['Dag'];
+                        echo '<p> </p>';
+                    }
+                }
+                ?>
+            </div>
         </div>
         <div class="row margin-top">
             <h2>Veilingen van deze verkoper.</h2>
