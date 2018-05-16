@@ -99,8 +99,6 @@ function seller_feedback_given($dbh, $itemId){
     }
 }
 
-//
-//
 function get_heighest_bid($itemId, $dbh){
     try{
         $statement = $dbh->prepare("select top 1 Bodbedrag from bod where Voorwerp = :item order by Bodbedrag desc ");
@@ -115,6 +113,22 @@ function get_heighest_bid($itemId, $dbh){
     }
     return "0.00";
 }
+
+function get_heighest_bidder($itemId, $dbh){
+    try{
+        $statement = $dbh->prepare("select top 1 [Gebruiker] from bod where Voorwerp = :item order by Bodbedrag desc ");
+        $statement->execute(array(':item' => $itemId));
+        $result = $statement->fetch();
+        if(!empty($result['Gebruiker'])){
+            return $result['Gebruiker'];
+        }
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+    return null;
+}
+
 
 function get_minimum_bid_increase(){
     return 1;

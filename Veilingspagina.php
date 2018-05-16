@@ -28,6 +28,8 @@ if(isset($_POST)){
         if(!is_null($_POST['bid'])){
             if($item['VeilingGesloten'] == 1){
                 $errorMessage ="Deze veiling is gesloten";
+            }else if(get_heighest_bidder($itemId,$db) == $_SESSION['user']){
+                $errorMessage = "het is niet toegestaan uw zelf te overbieden.";
             }else if($_POST['bid'] < get_minimum_bid_increase() + get_heighest_bid($itemId, $db)) {
                 $errorMessage = "U moet mininaal €". get_minimum_bid_increase() ." meer bieden dan het hoogste bod.";
             }
@@ -52,7 +54,7 @@ if(isset($_POST)){
             <div class="col-md-6">
                <div class="row">
                    <div class="col-12">
-                        <img class="img-thumbnail margin-bottom" src="images/TrumpPlaceholder.jpg"> </img>
+                        <img class="img-thumbnail margin-bottom product-image" src="images/TrumpPlaceholder.jpg"> </img>
                    </div>
                    <div class="col-12">
                         <p>
@@ -71,10 +73,10 @@ if(isset($_POST)){
                    </div>
                </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 seperator-none seperator-left-md">
                 <div class="row">
 
-                    <div class="col-12 verkoperSection margin-bottom">
+                    <div class="col-12 verkoperSection margin-bottom seperator-bottom-md">
                         <h4>Verkoper: <?php echo $veilinginformatie['Gebruikersnaam'];?></h4>
                         <p><strong>Voornaam:</strong> <?php echo $veilinginformatie['Voornaam'] ?></p>
                         <p><strong>Achternaam:</strong> <?php echo $veilinginformatie['Achternaam'] ?></p>
