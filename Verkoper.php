@@ -18,8 +18,12 @@ if(1>1){
 
     ?>
         <main>
-            <div class="container">
-                <h2> Deze verkoper bestaat niet.<h2>
+            <div class="container error-box d-flex flex-row justify-content-center align-items-center">
+                <div>
+                    <h2 class="error-message text-center">Deze pagina bestaat niet. </h2>
+                    <p class="text-center">Er is waarschijnlijk een foute gebruikersnaam gebruikt.</p>
+                    <p class="text-center">Als u niks in de adresbalk heeft verandert, neem contact op met de beheerders.</p>
+                </div>
             </div>
         </main>
 

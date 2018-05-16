@@ -113,6 +113,17 @@ function reset_password($email, $password, $dbh){
     return false;
 }
 
+function get_user($dbh, $username){
+    try{
+        $statement = $dbh->prepare("SELECT * FROM Gebruiker where Gebruikersnaam = :gebruiker");
+        $statement->execute(array(':gebruiker' => $username));
+        return $data = $statement->fetch();
+    }
+
+    catch(PDOException $e){
+        echo $e;
+        }
+    }
 
 function update_user($dbh, $username, $firstname, $lastname, $addressfield, $addressfield2, $postcode, $city, $country, $birthdate, $email, $securityquestion, $answer)
 {
