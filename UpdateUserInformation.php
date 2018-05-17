@@ -14,14 +14,12 @@ require_once 'php/generic_functions.php';
 <?php
 include_once 'partial/menu.php';
 
-$stmt = $db-> prepare ("SELECT * FROM Vraag");
-$stmt->execute();
-$data1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$data1 = get_security_question($db);
 
+if(isset($_SESSION['user'])){
+    $data2 = get_information_user($db, $_SESSION['user']);
+}
 
-$statement = $db->prepare("SELECT * FROM Gebruiker where Gebruikersnaam = :gebruiker");
-$statement->execute(array(':gebruiker' => $_SESSION['user']));
-$data2 = $statement->fetch();
 
 $melding = '';
 $aanpassing = false;
@@ -49,6 +47,8 @@ if(!empty($_POST['username']) AND !empty($_POST['first-name'])
         }
 
 }
+
+if(isset($_SESSION['user'])){
 ?>
 
 <main>
@@ -113,7 +113,21 @@ if(!empty($_POST['username']) AND !empty($_POST['first-name'])
         </div>
     </div>
 </main>
+<?php }
+
+else{
+?>
+<main>
+    <div class="container error-box d-flex flex-row justify-content-center align-items-center">
+        <div>
+            <h2 class="error-message text-center">U bent niet ingelogd. </h2>
+            <p class="text-center">Klik <a href="login.php">hier</a> om in te loggen</p>
+        </div>
+    </div>
+</main>
+
 
 <?php
+}
 require_once 'partial/page_footer.php';
 ?>

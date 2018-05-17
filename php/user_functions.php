@@ -330,3 +330,10 @@ function get_active_auctions_from_seller($dbh, $gebruiker){
       echo $e->getMessage();
   }
 }
+
+function get_security_question($dbh){
+    $stmt = $dbh->prepare("SELECT * FROM Vraag");
+    $stmt->execute();
+    return $data1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+}

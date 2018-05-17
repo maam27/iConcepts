@@ -24,6 +24,7 @@ if(isset($_POST)){
         }
     }
 }
+if(empty($_SESSION['user'])){
 ?>
 
 <main>
@@ -67,7 +68,19 @@ if(isset($_POST)){
         </form>
     </div>
 </main>
+<?php }
+else {
+    ?>
 
-<?php
+    <main>
+        <div class="container error-box d-flex flex-row justify-content-center align-items-center">
+            <div>
+                <h2 class="error-message text-center">U bent al ingelogd en kan niet nog een keer inloggen. </h2>
+                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de beheerders.</p>
+            </div>
+        </div>
+    </main>
+    <?php
+}
     require_once 'partial/page_footer.php';
 ?>
