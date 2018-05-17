@@ -105,9 +105,9 @@ else if(check_if_seller($db, $_GET['id'])){
 
             if(!empty($data)){?>
                 <div class="row margin-top">
-                    <h2>Actieve veilingen van deze verkoper.</h2>
                     <div class="col-12">
-                        <div class="d-flex justify-content-around flex-wrap">
+                    <h2>Actieve veilingen van deze verkoper.</h2>
+                                            <div class="d-flex justify-content-around flex-wrap">
                             <?php
                             for($i = 0; $i <count($data); $i++){
                                 echo '<div class="productblock col-md-5 col-lg-2">';
@@ -123,8 +123,9 @@ else if(check_if_seller($db, $_GET['id'])){
 
             if(!empty($data2)){?>
                 <div class="row margin-top">
-                    <h2>Gesloten veilingen van deze verkoper.</h2>
                     <div class="col-12">
+                    <h2>Gesloten veilingen van deze verkoper.</h2>
+
                         <div class="d-flex justify-content-around flex-wrap">
                             <?php
                             for($i = 0; $i <count($data2); $i++) {
