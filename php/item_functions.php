@@ -12,6 +12,8 @@ function get_item($itemId ,$dbh){
     return null;
 }
 
+
+
 function get_item_bids($itemId ,$dbh){
     try{
         $statement = $dbh->prepare("SELECT TOP (10) [Bodbedrag] as 'amount', [Gebruiker] as 'user', [BodDag] as 'day',[BodTijdstip] as 'time' FROM [Bod] where Voorwerp = :item order by Bodbedrag desc ");
@@ -157,6 +159,29 @@ function place_bid($itemId,$bid,$user,$dbh){
     return false;
 }
 
+function get_sellers_open_auctions($dbh, $verkoper){
+    try{
+        $statement = $dbh->prepare("SELECT * FROM Voorwerp where Verkoper = :verkoper AND VeilingGesloten=0");
+        $statement->execute(array(':verkoper' => $verkoper));
+        $result = $statement->fetchall();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+}
+
+function get_sellers_closed_auctions($dbh, $verkoper){
+    try{
+        $statement = $dbh->prepare("SELECT * FROM Voorwerp where Verkoper = :verkoper AND VeilingGesloten=1");
+        $statement->execute(array(':verkoper' => $verkoper));
+        $result = $statement->fetchall();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+}
 
 function get_images_for_item($itemId,$dbh){
     try{
