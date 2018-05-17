@@ -65,7 +65,7 @@ if(isset($_POST)){
                    </div>
                    <div class="col-12">
                         <p>
-                            <strong>Veilingnummer :</strong> <?php echo $itemId; ?>
+                            <strong>Veilingnummer : </strong> <?php echo $itemId ; ?>
                         </p>
                    </div>
                    <div class="col-12">
