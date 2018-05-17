@@ -1,26 +1,16 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!--<link rel="icon" href="favicon.ico">-->
-
-    <title>Categorie | EenmaalAndermaal</title>
-    <?php
-    require_once 'partial/styles.php';
-
-    ?>
-
-</head>
-
-<body>
 <?php
-//include_once 'partial/menu.php';
-require_once 'php/database.php';
-$dbh = get_db_connection();
+require_once 'partial/page_head.php';
+?>
+    <title>Home | EenmaalAndermaal</title>
+    </head>
 
+    <body>
+<?php
+include_once 'partial/menu.php';
+?>
+
+<?php
+$dbh = $db;
 ?>
 
 <main>
