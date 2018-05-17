@@ -152,9 +152,23 @@ function place_bid($itemId,$bid,$user,$dbh){
         return true;
     }
     catch(PDOException $e){
-        echo $e;
+      //  echo $e;
     }
     return false;
+}
+
+
+function get_images_for_item($itemId,$dbh){
+    try{
+        $statement = $dbh->prepare("SELECT filenaam from bestand where Voorwerp = :item");
+        $statement->execute(array(':item' => $itemId));
+        $result = $statement->fetchall();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+    return null;
 }
 
 

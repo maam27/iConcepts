@@ -1,0 +1,4 @@
+//replace the source of the big image with the clicked miniature
+function moveToLarge(smallImage){
+  $("#bigImage").attr("src",$(smallImage).attr("src").replace(/thumb/, ''));
+}

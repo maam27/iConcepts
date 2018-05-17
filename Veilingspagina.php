@@ -14,10 +14,10 @@ if($_GET['voorwerp'] == null || !is_existing_product($_GET['voorwerp'], $db)){
     redirect('categorie.php');
 }
 $itemId = $_GET['voorwerp'];
-$heighestBid = get_heighest_bid($itemId, $db);
-
 $veilinginformatie = get_seller_and_auction_info($db, $itemId);
 $item = get_item($itemId,$db);
+$images = get_images_for_item($itemId,$db);
+$heighestBid = get_heighest_bid($itemId, $db);
 
 /* place new bid*/
 $errorMessage = "";
@@ -55,8 +55,15 @@ if(isset($_POST)){
         <div class="row">
             <div class="col-md-6">
                <div class="row">
-                   <div class="col-12">
-                        <img class="img-thumbnail margin-bottom product-image" src="images/TrumpPlaceholder.jpg"> </img>
+                   <div class="col-12 d-flex justify-content-around">
+                        <img id="bigImage" class="img-thumbnail margin-bottom product-image" src="<?php echo get_image_path($images[0]['filenaam'])?>"> </img>
+                   </div>
+                   <div class="col-12 d-flex justify-content-center margin-bottom">
+                       <?php
+                            foreach($images as $img){
+                                echo '<img class="img-thumbnail miniature margin-bottom product-image" src="'. get_image_path($img['filenaam'],true) .'" onmouseover="moveToLarge(this);"/>';
+                            }
+                       ?>
                    </div>
                    <div class="col-12">
                         <p>
@@ -145,3 +152,5 @@ if(isset($_POST)){
 <?php
     require_once 'partial/page_footer.php';
 ?>
+
+<script src="js/img-highlight"></script>

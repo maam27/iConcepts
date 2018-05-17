@@ -45,3 +45,10 @@ function floor_with_precision($val, $precision)
     $mult = pow(10, $precision); // Can be cached in lookup table
     return floor($val * $mult) / $mult;
 }
+
+function get_image_path($img,$thumbnail = false){
+    if($thumbnail)
+        return "IMG/thumb/".$img;
+    return "IMG/".$img;
+
+}
