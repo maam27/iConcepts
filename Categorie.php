@@ -30,10 +30,13 @@ $dbh = get_db_connection();
     $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
 
     $sql = ("SELECT * FROM Rubriek");
-$advertenties =( "select v.*, r.Rubrieknaam, r.Rubrieknummer from voorwerp v inner join VoorwerpInRubriek k
+$advertenties =( "select v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v inner join VoorwerpInRubriek k
 on v.Voorwerpnummer = k.Voorwerp
 left join Rubriek r
 on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
+inner join Bestand B
+on v.Voorwerpnummer = b.Voorwerp
+where Rubrieknaam = '$categorie'
 "
 );
     $query = $dbh->prepare($sql);
@@ -94,16 +97,16 @@ on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
     <!--    advertentie Sectie   -->
 
                 <table style="width:100%">
+                    <?php foreach($Artikelen as $kavel ):?>
                     <tr>
-                        <th><p><?php echo $Artikelen [5]['Voorwerpnummer']  ?> &nbsp <?php echo $Artikelen [5]['Titel'];?></p></th>
+                        <th><p><?php echo $kavel ['Voorwerpnummer']; ?> &nbsp <?php echo $kavel['Titel'];?></p></th>
                     </tr>
                     <tr>
-                        <th><img src="images/thumb/placeholder.jpg"  class="auction-thumbnail"/></th>
-                        <th><?php
-                            echo htmlspecialchars($_GET["Rubrieknaam"]);
-                            ?></th>
-                        <th><p> Start prijs <?php echo $Artikelen [5]['Startprijs'];?></p></th>
+                        <th><img src="<?phpget_image_path($kavel ['Filenaam'])?>"  class="auction-thumbnail"/></th>
+
+                        <th><p> Start prijs <?php echo $kavel ['Startprijs'];?></p></th>
                     </tr>
+                    <?php endforeach; ?>
                 </table>
 
 </main>
