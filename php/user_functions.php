@@ -20,9 +20,106 @@ function login_user($dbh, $user, $pass)
     return false;
 }
 
-function register_user($dbh, $username, $firstname, $lastname, $addressfield, $addressfield2, $postcode, $city, $country, $birthdate, $email, $password, $securityquestion, $answer)
+
+function aanvraag_register_user($dbh, $username, $firstname, $lastname, $addressfield, $addressfield2, $postcode, $city, $country, $birthdate, $email, $password, $securityquestion, $answer)
 {
     $encryptedPassword = MD5($password);
+    $date = date('Y-m-d H:i:s');
+    $code = MD5($username.$email.$date);
+
+    try{
+        $stmt = $dbh->prepare("INSERT INTO OngevalideerdeGebruiker (Gebruikersnaam, Voornaam, Achternaam, Adresregel1, Adresregel2, Postcode, Plaatsnaam, Land, GeboorteDag, Mailbox, Wachtwoord, Vraag, Antwoordtekst, RegistratieDatum, Activeringscode)
+        VALUES (:gebruiker, :voornaam, :achternaam, :adresregel1, :adresregel2, :postcode, :plaatsnaam, :land, :geboortedag, :mailbox, :wachtwoord, :vraag, :antwoordtekst, :registratiedatum, :code)");
+        $stmt -> execute(
+            [
+                ':gebruiker' => $username,
+                ':voornaam' => $firstname,
+                ':achternaam' => $lastname,
+                ':adresregel1' => $addressfield,
+                ':adresregel2' => $addressfield2,
+                ':postcode' => $postcode,
+                ':plaatsnaam' => $city,
+                ':land' => $country,
+                ':geboortedag' => $birthdate,
+                ':mailbox' => $email,
+                ':wachtwoord' => $encryptedPassword,
+                ':vraag' => $securityquestion,
+                ':antwoordtekst' => $answer,
+                ':registratiedatum' => $date,
+                ':code' => $code
+            ]);
+
+        if ($stmt->rowCount() == 1)
+        {return true;}
+        else{return false;}
+
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function check_for_validatiecode($dbh, $code){
+    try {
+        $stmt = $dbh->prepare("select count(*) from OngevalideerdeGebruiker where Activeringscode = :code");
+        $stmt->execute(array(':code' => $code));
+        $result = $stmt->fetchColumn();
+
+        if ($result == 1) {
+            return true;}
+
+        else{
+            return false;}
+    }
+
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function is_validation_in_time($dbh, $code){
+
+    try {
+        $stmt = $dbh->prepare("select RegistratieDatum from OngevalideerdeGebruiker where Activeringscode = :code");
+        $stmt->execute(array(':code' => $code));
+        $result = $stmt->fetchAll();
+
+        $datetime2 = new DateTime(date('Y-m-d'));
+        $datetime1 = new DateTime($result[0]['RegistratieDatum']);
+        $interval = $datetime1->diff($datetime2);
+
+        if($interval->format('%a') <= 1){
+            return true;
+        }
+
+        else{
+            return false;
+        }
+
+
+    }
+
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function get_gegevens_registratieaanvraag($dbh, $code){
+    try{
+        $statement = $dbh->prepare("SELECT * FROM OngevalideerdeGebruiker where Activeringscode = :code");
+        $statement->execute(array(':code' => $code));
+        return $data = $statement->fetch();
+    }
+
+    catch(PDOException $e){
+        echo $e;
+    }
+}
+
+
+function register_user($dbh, $username, $firstname, $lastname, $addressfield, $addressfield2, $postcode, $city, $country, $birthdate, $email, $password, $securityquestion, $answer, $code)
+{
+
     try{
         $stmt = $dbh->prepare("INSERT INTO Gebruiker (Gebruikersnaam, Voornaam, Achternaam, Adresregel1, Adresregel2, Postcode, Plaatsnaam, Land, GeboorteDag, Mailbox, Wachtwoord, Vraag, Antwoordtekst, Verkoper)
         VALUES (:gebruiker, :voornaam, :achternaam, :adresregel1, :adresregel2, :postcode, :plaatsnaam, :land, :geboortedag, :mailbox, :wachtwoord, :vraag, :antwoordtekst, 0)");
@@ -38,10 +135,17 @@ function register_user($dbh, $username, $firstname, $lastname, $addressfield, $a
                 ':land' => $country,
                 ':geboortedag' => $birthdate,
                 ':mailbox' => $email,
-                ':wachtwoord' => $encryptedPassword,
+                ':wachtwoord' => $password,
                 ':vraag' => $securityquestion,
                 ':antwoordtekst' => $answer
             ]);
+
+        $deleteaanvraag = $dbh -> prepare("DELETE from OngevalideerdeGebruiker where activeringscode = :code");
+        $deleteaanvraag -> execute(
+            [
+                ':code' => $code
+            ]
+        );
 
         if ($stmt->rowCount() == 1)
         {return true;}
@@ -53,6 +157,15 @@ function register_user($dbh, $username, $firstname, $lastname, $addressfield, $a
     }
 }
 
+function unvalidated_email_exists($dbh, $email){
+    $statement = $dbh->prepare("SELECT Gebruikersnaam FROM OngevalideerdeGebruiker where Mailbox = :mail");
+    $statement->execute(array(':mail' => $email));
+    $result = $statement->fetch();
+    if(isset($result['Gebruikersnaam']))
+        return true;
+    return false;
+}
+
 function email_exists($dbh, $email){
     $statement = $dbh->prepare("SELECT Gebruikersnaam FROM Gebruiker where Mailbox = :mail");
     $statement->execute(array(':mail' => $email));
@@ -61,6 +174,16 @@ function email_exists($dbh, $email){
         return true;
     return false;
 }
+
+function unvalidated_username_exists($dbh, $username){
+    $statement = $dbh->prepare("SELECT Gebruikersnaam FROM OngevalideerdeGebruiker where Gebruikersnaam = :gebruiker");
+    $statement->execute(array(':gebruiker' => $username));
+    $result = $statement->fetch();
+    if(isset($result['Gebruikersnaam']))
+        return true;
+    return false;
+}
+
 function username_exists($dbh, $username){
     $statement = $dbh->prepare("SELECT Gebruikersnaam FROM Gebruiker where Gebruikersnaam = :gebruiker");
     $statement->execute(array(':gebruiker' => $username));

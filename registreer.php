@@ -32,17 +32,14 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
         if($interval->format('%a') < 5844){
             $melding = 'U bent niet oud genoeg om een account te maken';
         }
-        else if (email_exists($db, $_POST['e-mail'])) {
+        else if (email_exists($db, $_POST['e-mail']) OR unvalidated_email_exists($db, $_POST['e-mail'])) {
             $melding = 'Het opgegeven mail-adres is al in gebruik.';
-        } else if (username_exists($db, $_POST['username'])) {
+        } else if (username_exists($db, $_POST['username']) OR unvalidated_username_exists($db, $_POST['username'])) {
             $melding = 'De opgegeven gebruikersnaam is al in gebruik.';
         }
-        else if (register_user($db, $_POST['username'], $_POST['first-name'], $_POST['last-name'], $_POST['address-field'],
+        else if (aanvraag_register_user($db, $_POST['username'], $_POST['first-name'], $_POST['last-name'], $_POST['address-field'],
             $_POST['address-field2'], $_POST['postcode'], $_POST['city'], $_POST['country'], $_POST['birth-date'], $_POST['e-mail'],
             $_POST['password'], $_POST['security-question'], $_POST['answer'])) {
-            $encryptWachtwoord = md5($_POST['password']);
-            login_user($db, $_POST['username'], $encryptWachtwoord);
-            redirect('Index.php');
         }
     }
     else{$melding = 'Het wachtwoord komt niet overeen met de verificatie.';
@@ -61,7 +58,7 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
                         <div class="col-md-6">
                             <p>Gebruikersnaam: *</p>
                             <input id="username" name="username" type="text"
-                                   placeholder="Gebruikersnaam" <?php echo post_set('username', 'post'); ?> required>
+                                   placeholder="Gebruikersnaam" pattern="([^<>])+" <?php echo post_set('username', 'post'); ?> required>
                             <br>
                             <p>Wachtwoord: *</p>
                             <input id="password" name="password" type="password" placeholder="Wachtwoord"
@@ -77,11 +74,11 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
                             <br>
                             <p>Voornaam: *</p>
                             <input id="first-name" name="first-name" type="text"
-                                   placeholder="Voornaam" <?php echo post_set('first-name', 'post'); ?> required>
+                                   placeholder="Voornaam" pattern="([^<>])+" <?php echo post_set('first-name', 'post'); ?> required>
                             <br>
                             <p>Achternaam: *</p>
                             <input id="last-name" name="last-name" type="text"
-                                   placeholder="Achternaam" <?php echo post_set('last-name', 'post'); ?> required>
+                                   placeholder="Achternaam" pattern="([^<>])+" <?php echo post_set('last-name', 'post'); ?> required>
                             <br>
                             <p>Geboortedatum: *</p>
                             <input id="birth-date" name="birth-date"
@@ -97,20 +94,20 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
 
                             <p>Land: *</p>
                             <input id="country" name="country" type="text"
-                                   placeholder="Land" <?php echo post_set('country', 'post'); ?> required>
+                                   placeholder="Land" pattern="([^<>])+" <?php echo post_set('country', 'post'); ?> required>
                             <br>
                             <p>Stad: *</p>
                             <input id="city" name="city" type="text"
-                                   placeholder="Stad" <?php echo post_set('city', 'post'); ?> required>
+                                   placeholder="Stad" pattern="([^<>])+" <?php echo post_set('city', 'post'); ?> required>
                             <br>
                             <p>Adresregel 1: *</p>
                             <input id="address-field" name="address-field" type="text"
                                    placeholder="Straatnaam nummer" <?php echo post_set('address-field', 'post'); ?>
-                                   title="Straatnaam gevolgd door nummer." required>
+                                   title="Straatnaam gevolgd door nummer." pattern="^([A-Za-z])+\s([0-9])+([A-Za-z])?" required>
                             <br>
                             <p>Adresregel 2:</p>
                             <input id="address-field2" name="address-field2" type="text"
-                                   placeholder="straatnaam nummer" <?php echo post_set('address-field2', 'post'); ?>>
+                                   placeholder="straatnaam nummer" pattern="^([A-Za-z])+\s([0-9])+([A-Za-z])?" <?php echo post_set('address-field2', 'post'); ?>>
                             <br>
                             <p>Postcode: *</p>
                             <input id="postcode" name="postcode" type="text"
