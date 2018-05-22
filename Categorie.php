@@ -13,6 +13,18 @@ include_once 'partial/menu.php';
 $dbh = $db;
 ?>
 
+<!--keywords-->
+<?php
+if(isset($_GET)){
+    if(isset($_GET['s'])){
+    $keywords = explode(' ',$_GET['s']);
+
+    print_r($keywords);
+    }
+}
+?>
+<!--end keywords-->
+
 <main>
 <!--    SideNavigation Bar    -->
 
@@ -38,6 +50,7 @@ on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
 
 ?>
 
+
     <div class="container-fluid">
         <div class="row">
             <div class="sidebar1">
@@ -58,8 +71,8 @@ on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
                    <?php foreach($Rubriek as $row ):?>
                        <li> <a href="categorie.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
                      <?php endforeach;?>
-                     
-                     
+
+
                     </ul>
                 </div>
             </div>
@@ -97,7 +110,6 @@ on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
                 </table>
 
 </main>
-
 
 
 <footer class="container rubriekfooter">
