@@ -12,31 +12,46 @@ include_once 'partial/menu.php';
 <?php
 $dbh = $db;
 ?>
+
+<!--keywords-->
+<?php
+$filter = ' where 1 = 1';
+if(isset($_GET)){
+    if(isset($_GET['search'])){
+        if(!empty($_GET["search"])){
+            $keywords = explode(' ',$_GET['search']);
+           $filter .= "and (Titel like '%".implode("%' or Titel like '%",$keywords)."%' or Beschrijving like '%".implode("%' or Beschrijving like '%",$keywords)."%')";
+        }
+    }
+    $filter .= isset($_GET['rubriek']) ? " and Rubrieknaam = '". $_GET['rubriek']."'" : '';
+
+
+}
+?>
+<!--end keywords-->
+
+<main>
 <!--    SideNavigation Bar    -->
 
     <?php
-    $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
 
-    $sql = ("SELECT * FROM Rubriek");
-$advertenties =( "select v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v inner join VoorwerpInRubriek k
-on v.Voorwerpnummer = k.Voorwerp
-left join Rubriek r
-on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
-inner join Bestand B
-on v.Voorwerpnummer = b.Voorwerp
-where Rubrieknaam = '$categorie'
-"
-);
+    $sql = "SELECT * FROM Rubriek";
     $query = $dbh->prepare($sql);
     $query->execute();
     $Rubriek = $query->fetchAll();
 
+$query = "select v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v inner join VoorwerpInRubriek k
+on v.Voorwerpnummer = k.Voorwerp
+left join Rubriek r
+on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
+inner join Bestand B
+on v.Voorwerpnummer = b.Voorwerp".$filter;
 
-    $statement = $dbh->prepare($advertenties);
+    $statement = $dbh->query($query);
     $statement->execute ();
     $Artikelen = $statement-> fetchAll();
     $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
-   // require_once 'partial/SideNav.php';
+
 ?>
 
     <!--    SideNavigation Bar    -->
@@ -102,6 +117,7 @@ where Rubrieknaam = '$categorie'
     </div>
 </div>
 
+</main>
 
 
 
