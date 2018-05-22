@@ -31,14 +31,15 @@ if(isset($_GET)){
 <!--end keywords-->
 
 <main>
+
 <!--    SideNavigation Bar    -->
 
-    <?php
+<?php
 
-    $sql = "SELECT * FROM Rubriek";
-    $query = $dbh->prepare($sql);
-    $query->execute();
-    $Rubriek = $query->fetchAll();
+$sql = "SELECT * FROM Rubriek";
+$query = $dbh->prepare($sql);
+$query->execute();
+$Rubriek = $query->fetchAll();
 
 $query = "select v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v inner join VoorwerpInRubriek k
 on v.Voorwerpnummer = k.Voorwerp
@@ -47,10 +48,10 @@ on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
 inner join Bestand B
 on v.Voorwerpnummer = b.Voorwerp".$filter;
 
-    $statement = $dbh->query($query);
-    $statement->execute ();
-    $Artikelen = $statement-> fetchAll();
-    $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
+$statement = $dbh->query($query);
+$statement->execute ();
+$Artikelen = $statement-> fetchAll();
+$categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
 
 ?>
 
