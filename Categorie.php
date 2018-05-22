@@ -12,8 +12,6 @@ include_once 'partial/menu.php';
 <?php
 $dbh = $db;
 ?>
-
-<main>
 <!--    SideNavigation Bar    -->
 
     <?php
@@ -38,9 +36,11 @@ where Rubrieknaam = '$categorie'
     $statement->execute ();
     $Artikelen = $statement-> fetchAll();
     $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
-
+   // require_once 'partial/SideNav.php';
 ?>
 
+    <!--    SideNavigation Bar    -->
+<div class="categorie-content">
     <div class="container-fluid">
         <div class="row">
             <div class="sidebar1">
@@ -57,74 +57,60 @@ where Rubrieknaam = '$categorie'
                     <br>
 
                     <ul class="list">
-                    <h5><strong> Alle categorieën </strong></h5>
-                   <?php foreach($Rubriek as $row ):?>
-                       <li> <a href="categorie.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
-                     <?php endforeach;?>
-                     
-                     
+                        <h5><strong> Alle categorieën </strong></h5>
+                        <?php foreach($Rubriek as $row ):?>
+                            <li> <a href="categorie.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
+                        <?php endforeach;?>
+
+
                     </ul>
                 </div>
             </div>
+        </div>
 
-            <div class="col-md-10 col-sm-8 main-content">
-                <!--    Main content    -->
-                <br><br><br>
-                    <div class="row">
-                        <h2>  Categorie: <?php echo $categorie ;?></h2>
-                        <div class="col-12">
-                            <div class="d-flex justify-content-around flex-wrap">
-                                <div class="" style="background:salmon;width:200px;">altijd<img src="images/thumb/placeholder.jpg" class="img-thumbnail"/></div>
-                                <div class="" style="background:salmon;width:200px;">altijd<img src="images/thumb/placeholder.jpg" class="img-thumbnail"/></div>
-                                <div class="d-none d-md-block" style="background:salmon;width:200px;">tablet+<img src="images/thumb/placeholder.jpg" class="img-thumbnail"/></div>
-                                <div class="d-none d-lg-block" style="background:salmon;width:200px;">laptop+<img src="images/thumb/placeholder.jpg" class="img-thumbnail"/></div>
-                            </div>
-                        </div>
+        <!--    Main content    -->
+        <br><br><br>
+            <div class="row">
+                <h2>  Categorie: <?php echo $categorie ;?></h2>
+                <div class="col-12">
+                    <div class="d-flex justify-content-around flex-wrap">
+                        <div class="" style="background:salmon;width:200px;">altijd<img src="images/thumb/placeholder.jpg" class="img-thumbnail"/></div>
+                        <div class="" style="background:salmon;width:200px;">altijd<img src="images/thumb/placeholder.jpg" class="img-thumbnail"/></div>
+                        <div class="d-none d-md-block" style="background:salmon;width:200px;">tablet+<img src="images/thumb/placeholder.jpg" class="img-thumbnail"/></div>
+                        <div class="d-none d-lg-block" style="background:salmon;width:200px;">laptop+<img src="images/thumb/placeholder.jpg" class="img-thumbnail"/></div>
                     </div>
-                    <div class="auction-section">
+                </div>
+            </div>
 
 
-    <!--    advertentie Sectie   -->
+            <!--    advertentie Sectie   -->
 
-                <table style="width:100%">
-                    <?php foreach($Artikelen as $kavel ):?>
-                    <tr>
-                        <th><p><?php echo $kavel ['Voorwerpnummer']; ?> &nbsp <?php echo $kavel['Titel'];?></p></th>
-                    </tr>
-                    <tr>
-                        <th><img src="./<?php get_image_path( $kavel ['Filenaam']);?>"  class="auction-thumbnail"/></th>
+        <div class="auction-section">
+           <table style="width:100%">
+                <?php foreach($Artikelen as $kavel ):?>
+                <tr>
+                    <th><p><?php echo $kavel ['Voorwerpnummer']; ?> &nbsp <?php echo $kavel['Titel'];?></p></th>
+                </tr>
+                <tr>
+                    <th><img src="http://iproject14.icasites.nl/<?php echo get_image_path( $kavel['Filenaam'],  false);?>"  class="auction-thumbnail"/></th>
 
-                        <th><p> Start prijs <?php echo $kavel ['Startprijs'];?></p></th>
-                    </tr>
-                    <?php endforeach; ?>
-                </table>
+                    <th><p> Start prijs <?php echo $kavel ['Startprijs'];?></p></th>
+                </tr>
+                <?php endforeach; ?>
+           </table>
+        </div>
+    </div>
+</div>
 
-</main>
 
 
 
-<footer class="container rubriekfooter">
-    <p>&copy; Company 2017-2018</p>
-</footer>
+
 <?php
+require_once 'partial/page_footer.php';
 include_once 'partial/scripts.php';
 ?>
 </body>
 </html>
 
 
-                                    <!-- Expirimental Code, not applicable -->
-
-
-<!--                        --><?php //foreach($Voorwerp as $key=>$value): ?>
-<!--                            <div class="d-flex justify-content-around flex-wrap">-->
-<!--                                <a href="veilingspagina.php?Voorwerpnummer=--><?php //echo $Voorwerp[$key] ['Voorwerpnummer'];?><!--">-->
-<!--                                    <table style="width:100%">-->
-<!--                                        <tr>-->
-<!--                                            <th><img src="images/thumb/placeholder.jpg"  class="auction-thumbnail"/></th>-->
-<!--                                            <th><p>hier kan een product naam of titel komen,maar komt hier dan ook de juiste informatie bij de afbeelding?</p></th>-->
-<!--                                            <th><p> prijs €300</p></th>-->
-<!--                                        </tr>-->
-<!--                                    </table><img src="--><?php //echo "images/thumb/" .$Voorwerp[$key] ['image']; ?><!--" alt="--><?php //echo $Voorwerp[$key] ['image']; ?><!--"/></a>-->
-<!--                            </div>-->
-<!--                        --><?php //endforeach; ?>

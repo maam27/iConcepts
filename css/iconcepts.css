@@ -74,7 +74,6 @@ nav form button{
 .sidebar1 {
     background: #F17153;
     /* For browsers that do not support gradients */
-    position:fixed;
     margin-top: 100px;
     min-height: 100%;
     width:200px;
@@ -87,8 +86,12 @@ nav form button{
 .list::first-line {
     color: rgba(255, 255, 255, 0.5);
 }
-.list> li, h5 {
+
+.list> li, h5{
     padding: 5px 0px 5px 40px;
+}
+.list> li, h5 , a{
+    color: white;
 }
 .list>li:hover {
     background-color: rgba(255, 255, 255, 0.2);
@@ -96,10 +99,10 @@ nav form button{
     color: white;
     font-weight: bolder;
     padding-left: 35px;
-}.main-content{
-     margin: 100px auto auto 200px;
-     padding: 3px;
-
+}
+.categorie-content{
+     display:flex;
+    flex-wrap: nowrap;
  }
 
 
