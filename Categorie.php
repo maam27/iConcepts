@@ -92,7 +92,7 @@ where Rubrieknaam = '$categorie'
                         <th><p><?php echo $kavel ['Voorwerpnummer']; ?> &nbsp <?php echo $kavel['Titel'];?></p></th>
                     </tr>
                     <tr>
-                        <th><img src="<?php get_image_path($kavel ['Filenaam'])?>"  class="auction-thumbnail"/></th>
+                        <th><img src="./<?php get_image_path( $kavel ['Filenaam']);?>"  class="auction-thumbnail"/></th>
 
                         <th><p> Start prijs <?php echo $kavel ['Startprijs'];?></p></th>
                     </tr>
