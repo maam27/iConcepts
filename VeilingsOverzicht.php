@@ -2,7 +2,7 @@
 require_once 'partial/page_head.php';
 require_once 'php/item_functions.php';
 ?>
-    <title>Categorie | EenmaalAndermaal</title>
+    <title>Veilingen | EenmaalAndermaal</title>
     </head>
 
     <body>
@@ -75,7 +75,7 @@ $Artikelen = $statement-> fetchAll();
                 <div class="col-12">
                     <ul class="list sidebar">
                         <?php foreach($Rubriek as $row ):?>
-                            <li> <a href="categorie.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
+                            <li> <a href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
                         <?php endforeach;?>
                     </ul>
                 </div>

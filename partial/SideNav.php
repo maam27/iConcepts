@@ -18,7 +18,7 @@
                 <ul class="list">
                     <h5><strong> Alle categorieën </strong></h5>
                     <?php foreach($Rubriek as $row ):?>
-                        <li> <a href="categorie.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
+                        <li> <a href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
                     <?php endforeach;?>
 
 

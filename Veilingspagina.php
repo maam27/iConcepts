@@ -11,7 +11,7 @@ require_once 'php/user_functions.php';
 <?php
 include_once 'partial/menu.php';
 if($_GET['voorwerp'] == null || !is_existing_product($_GET['voorwerp'], $db)){
-    redirect('categorie.php');
+    redirect('VeilingsOverzicht.php');
 }
 $itemId = $_GET['voorwerp'];
 $veilinginformatie = get_seller_and_auction_info($db, $itemId);
