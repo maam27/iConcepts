@@ -131,9 +131,10 @@ if (empty($_SESSION['user'])) {
                 if ($data1['Verkoper'] == 1) {
                     echo '<a class="btn btn-primary col-md-3 user-section-button-margin" href="Verkoper.php"> Mijn advertenties </a>';
 
-                } else {
-                    echo '<a class="col-md-3 btn btn-primary user-section-button-margin" href="AanvraagVerkoperstatus.php"> Wordt Verkoper </a>   ';
+                } else if(check_if_unvalidated_seller($db, $_SESSION['user'])) {
+                    echo '<a class="col-md-3 btn btn-primary user-section-button-margin" href="AfrondenVerkoperstatus.php">Invullen verificatiecode</a>   ';
                 }
+                else{           echo '<a class="col-md-3 btn btn-primary user-section-button-margin" href="AanvraagVerkoperstatus.php"> Word Verkoper </a>   ';}
                 ?>
             </form>
         </div>

@@ -17,6 +17,7 @@ include_once 'partial/menu.php';
 $data1 = get_security_question($db);
 $melding = '';
 $vandaag = date("Y/m/d");
+$registratie = false;
 
 
 if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST['password2']) AND !empty($_POST['first-name'])
@@ -40,6 +41,7 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
         else if (aanvraag_register_user($db, $_POST['username'], $_POST['first-name'], $_POST['last-name'], $_POST['address-field'],
             $_POST['address-field2'], $_POST['postcode'], $_POST['city'], $_POST['country'], $_POST['birth-date'], $_POST['e-mail'],
             $_POST['password'], $_POST['security-question'], $_POST['answer'])) {
+            $registratie = true;
         }
     }
     else{$melding = 'Het wachtwoord komt niet overeen met de verificatie.';
@@ -47,7 +49,7 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
 }
 ?>
 
-<?php if(empty($_SESSION['user'])){
+<?php if($registratie==false){
     ?>
     <main>
         <div class="container">
@@ -143,6 +145,27 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
         </div>
     </main>
 <?php }
+else if ($registratie==true){
+    $code = get_validatiecode_registratie($db, $_POST['username']);
+    // The message
+    $message = "Hallo ".$_POST['first-name']." ".$_POST['last-name'].",\r\n
+    Er is recent een registratiepoging gedaan op dit account op de site van EenmaalAndermaal.\r\n 
+    
+    Om het registratieproces te voltooien, klikt u op de volgende link: \r\n
+    http://iproject14.icasites.nl/afrondenregistratie.php?validatiecode=".$code['Activeringscode'];
+
+    mail($_POST['e-mail'], 'Registratie EenmaalAndermaal', $message);
+    ?>
+    <main>
+        <div class="container error-box d-flex flex-row justify-content-center align-items-center">
+            <div>
+                <h2 class="error-message text-center">U heeft succesvol uw account geregistreerd.. </h2>
+                <p class="text-center">U heeft een mail ontvangen waar een link in staat om het account te activeren.</p>
+            </div>
+        </div>
+    </main>
+    <?php
+}
 else{?>
     <main>
         <div class="container error-box d-flex flex-row justify-content-center align-items-center">

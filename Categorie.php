@@ -80,56 +80,42 @@ $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
                         <?php endforeach;?>
                     </ul>
                 </div>
-
-
             </div>
-
-
         </div>
         <div class="col-10">
             <div class="row">
-                <?php foreach($Artikelen as $kavel ): ?>
-                    <div class="col-3">
-                        <img src="http://iproject14.icasites.nl/<?php echo get_image_path( $kavel['Filenaam'],  false);?>"  class="auction-thumbnail"/>
-                    </div>
-                <div class="col-6">
-                    <p><?php echo $kavel ['Voorwerpnummer']; ?> &nbsp <?php echo $kavel['Titel'];?></p>
+                <div class="col-12">
+                    <?php foreach($Artikelen as $kavel ): ?>
+                        <div class="row margin-top productblock-large">
+                            <div class="col-3">
+                                <img src="http://iproject14.icasites.nl/<?php echo get_image_path( $kavel['Filenaam'],  false);?>"  class="img-fluid"/>
+                            </div>
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <strong><?php echo $kavel['Titel'];?></strong>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="timer float-right" data-auctionEnd="<?php echo $kavel['LooptijdeindeDag']." ". $kavel['LooptijdeindeTijdstip']; ?>"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8 no-overflow">
+                                        <?php echo $kavel['Beschrijving'];?></p>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="float-right">prijs <?php echo $kavel ['Startprijs'];?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-
-
-                    <div class="col-3">
-                        <p> Start prijs <?php echo $kavel ['Startprijs'];?></p>
-                    </div>
-                <?php endforeach; ?>
-
             </div>
         </div>
-
     </div>
 </div>
-
-
-
-
-<!--        SideNavigation Bar    -->
-<!--<div class="categorie-content">-->
-<!--    <div class="container-fluid">-->
-<!---->
-<!---->
-<!--                advertentie Sectie   -->
-<!---->
-<!--        <div class="auction-section">-->
-<!--           <table style="width:100%">-->
-<!---->
-<!--           </table>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
 </main>
-
-
-
 
 <?php
 require_once 'partial/page_footer.php';
@@ -138,4 +124,4 @@ include_once 'partial/scripts.php';
 </body>
 </html>
 
-
+<?php require_once 'partial/timer.php';?>
