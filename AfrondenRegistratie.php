@@ -14,7 +14,7 @@ include_once 'partial/menu.php';
 
 <?php
 if (isset($_GET['validatiecode']) AND empty($_SESSION['user'])) {
-    if (check_for_validatiecode($db, $_GET['validatiecode'])) {
+    if (check_for_validatiecode_registratie($db, $_GET['validatiecode'])) {
         if (is_validation_in_time($db, $_GET['validatiecode'])) {
             ?>
             <main>
