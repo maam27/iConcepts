@@ -49,7 +49,7 @@ if( !isset($_SESSION)){
 
 <div class="d-none d-lg-block submenu">
     <ul class="navbar-nav mr-auto d-flex flex-row flex-wrap justify-content-around">
-        <li><a class="text-black-50" href="#">Category1</a></li>
+        <li><a class="text-black-50" href="<?php echo $row ['Rubrieknaam'];?>"><?php echo $row ['Rubrieknaam'];?></a></li>
         <li><a class="text-black-50" href="#">Category2</a></li>
         <li><a class="text-black-50" href="#">Category3</a></li>
         <li><a class="text-black-50" href="#">Category4</a></li>
