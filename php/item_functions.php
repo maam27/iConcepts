@@ -195,7 +195,12 @@ function get_images_for_item($itemId,$dbh){
     }
     return null;
 }
-
+function get_catagory($dbh){
+    $sql = "SELECT * FROM Rubriek";
+    $query = $dbh->prepare($sql);
+    $query->execute();
+    return $Rubriek = $query->fetchAll();
+}
 
 //try{
 
