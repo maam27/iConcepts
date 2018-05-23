@@ -63,7 +63,7 @@ $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
                     <h5><strong>filters</strong></h5>
                 </div>
                 <div class="col-12">
-                    <ul class="list">
+                    <ul class="list sidebar">
                         <li>Prijs</li>
                         <li>Afstand</li>
                         <li>Staat</li>
@@ -74,7 +74,7 @@ $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
                     <h5><strong> Alle categorieën </strong></h5>
                 </div>
                 <div class="col-12">
-                    <ul class="list">
+                    <ul class="list sidebar">
                         <?php foreach($Rubriek as $row ):?>
                             <li> <a href="categorie.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
                         <?php endforeach;?>
@@ -96,7 +96,7 @@ $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
                                         <strong><?php echo $kavel['Titel'];?></strong>
                                     </div>
                                     <div class="col-4">
-                                        <span class="timer float-right" data-auctionEnd="<?php echo $kavel['LooptijdeindeDag']." ". $kavel['LooptijdeindeTijdstip']; ?>">00:00:00 resterend</span>
+                                        <span class="timer float-right" data-auctionEnd="<?php echo $kavel['LooptijdeindeDag']." ". $kavel['LooptijdeindeTijdstip']; ?>"></span>
                                     </div>
                                 </div>
                                 <div class="row">

@@ -11,7 +11,7 @@ if( !isset($_SESSION)){
     <div class="collapse navbar-collapse " id="navbarCollapse">
         <ul class="navbar-nav mr-auto d-flex justify-content-around align-items-center">
             <li class="nav-item">
-                <a href="index.php">Thuispagina<span class="sr-only">(current)</span></a>
+                <a href="index.php"><i class="fa fa-home"></i> Thuispagina<span class="sr-only">(current)</span></a>
             </li>
             <li>
                 <form class="form-inline mt-2 mt-md-0 d-flex flex-row flex-nowrap" method="get" action="categorie.php">
@@ -25,9 +25,9 @@ if( !isset($_SESSION)){
 
                 <li class="nav-item">
 
-                    <a href="login.php">Inloggen</a>
+                    <a href="login.php"><i class="fa fa-sign-in-alt"></i> Inloggen</a>
                     /
-                    <a href="registreer.php">Registreren</a>
+                    <a href="registreer.php"><i class="fa fa-user-plus"></i> Registreren</a>
                 </li>
 
 
@@ -35,10 +35,10 @@ if( !isset($_SESSION)){
                 } else{
                 ?>
                 <li class="nav-item">
-                    <a href="Gebruikersprofiel.php">Mijn profiel</a>
+                    <a href="Gebruikersprofiel.php"><i class="fa fa-address-card"></i> Mijn profiel</a>
                 </li>
                 <li class="nav-item">
-                    <a href="logout.php">Uitloggen</a>
+                    <a href="logout.php"><i class="fa fa-sign-out-alt"></i> Uitloggen</a>
                 </li>
                 <?php
             }
@@ -49,7 +49,7 @@ if( !isset($_SESSION)){
 
 <div class="d-none d-lg-block submenu">
     <ul class="navbar-nav mr-auto d-flex flex-row flex-wrap justify-content-around">
-        <li><a class="text-black-50" href="#">Category1</a></li>
+        <li><a class="text-black-50" href="<?php echo $row ['Rubrieknaam'];?>"><?php echo $row ['Rubrieknaam'];?></a></li>
         <li><a class="text-black-50" href="#">Category2</a></li>
         <li><a class="text-black-50" href="#">Category3</a></li>
         <li><a class="text-black-50" href="#">Category4</a></li>
