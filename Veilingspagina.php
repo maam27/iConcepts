@@ -91,7 +91,7 @@ if(isset($_POST)){
                 <div class="row">
 
                     <div class="col-12 verkoperSection margin-bottom seperator-bottom-md">
-                        <h4>Verkoper: <?php echo $veilinginformatie['Gebruikersnaam'];?></h4>
+                        <h3>Verkoper: <?php echo '<a href="Verkoper.php?id='.$veilinginformatie['Gebruikersnaam'].'">'.$veilinginformatie['Gebruikersnaam'].'</a>';?></h3>
                         <p><strong>Voornaam:</strong> <?php echo $veilinginformatie['Voornaam'] ?></p>
                         <p><strong>Achternaam:</strong> <?php echo $veilinginformatie['Achternaam'] ?></p>
                         <p><strong>Land: </strong><?php echo $veilinginformatie['Verkoopland']?></p>
