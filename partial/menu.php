@@ -1,7 +1,9 @@
 <?php
+require_once 'php/item_functions.php';
 if( !isset($_SESSION)){
     session_start();
 }
+$Rubriek = get_catagory($db);
 ?>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <a href="Index.php"><img src="images/Logo.png" alt="eenmaalandermaal logo"></a>
@@ -48,15 +50,10 @@ if( !isset($_SESSION)){
 </nav>
 
 <div class="d-none d-lg-block submenu">
-    <ul class="navbar-nav mr-auto d-flex flex-row flex-wrap justify-content-around">
-        <li><a class="text-black-50" href="<?php echo $row ['Rubrieknaam'];?>"><?php echo $row ['Rubrieknaam'];?></a></li>
-        <li><a class="text-black-50" href="#">Category2</a></li>
-        <li><a class="text-black-50" href="#">Category3</a></li>
-        <li><a class="text-black-50" href="#">Category4</a></li>
-        <li><a class="text-black-50" href="#">Category5</a></li>
-        <li><a class="text-black-50" href="#">Category6</a></li>
-        <li><a class="text-black-50" href="#">Category7</a></li>
-        <li><a class="text-black-50" href="#">Category8</a></li>
+    <ul class="navbar-nav sub-nav mr-auto d-flex flex-row flex-wrap justify-content-around">
+        <?php foreach($Rubriek as $row ):?>
+            <li class="hoofd-rubriek"> <a href="categorie.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
+        <?php endforeach;?>
     </ul>
 </div>
 

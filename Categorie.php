@@ -1,5 +1,6 @@
 <?php
 require_once 'partial/page_head.php';
+require_once 'php/item_functions.php';
 ?>
     <title>Categorie | EenmaalAndermaal</title>
     </head>
@@ -36,10 +37,8 @@ if(isset($_GET)){
 
 <?php
 
-$sql = "SELECT * FROM Rubriek";
-$query = $dbh->prepare($sql);
-$query->execute();
-$Rubriek = $query->fetchAll();
+
+$Rubriek = get_catagory($db);
 
 $query = "select v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v inner join VoorwerpInRubriek k
 on v.Voorwerpnummer = k.Voorwerp
@@ -51,7 +50,7 @@ on v.Voorwerpnummer = b.Voorwerp".$filter;
 $statement = $dbh->query($query);
 $statement->execute ();
 $Artikelen = $statement-> fetchAll();
-$categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
+//$categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
 
 ?>
 
