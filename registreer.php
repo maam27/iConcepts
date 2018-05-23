@@ -146,21 +146,68 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
     </main>
 <?php }
 else if ($registratie==true){
-    $code = get_validatiecode_registratie($db, $_POST['username']);
+
+
+
     // The message
+
+
+
+
+
+
+
+    $headers = "From:" . $from;
+
+
+    mail($to,$subject,$message, $headers);
+
+    /*
+     * Enable error reporting
+     */
+    ini_set( 'display_errors', 1 );
+    error_reporting( E_ALL );
+
+    /*
+     * Setup email addresses and change it to your own
+     */
+    $from = "EenmaalAndermaal@supportmail.com";
+    $to = $_POST['e-mail'];
+    $subject = 'Registratie EenmaalAndermaal';
+    $code = get_validatiecode_registratie($db, $_POST['username']);
     $message = "Hallo ".$_POST['first-name']." ".$_POST['last-name'].",\r\n
     Er is recent een registratiepoging gedaan op dit account op de site van EenmaalAndermaal.\r\n 
     
     Om het registratieproces te voltooien, klikt u op de volgende link: \r\n
     http://iproject14.icasites.nl/afrondenregistratie.php?validatiecode=".$code['Activeringscode'];
+    $headers = "From:" . $from;
 
-    mail($_POST['e-mail'], 'Registratie EenmaalAndermaal', $message);
+    /*
+     * Test php mail function to see if it returns "true" or "false"
+     * Remember that if mail returns true does not guarantee
+     * that you will also receive the email
+     */
+    if(mail($to,$subject,$message, $headers))
+    {
+        echo "Test email send.";
+    }
+    else
+    {
+        echo "Failed to send.";
+    }
+?>
     ?>
     <main>
         <div class="container error-box d-flex flex-row justify-content-center align-items-center">
             <div>
                 <h2 class="error-message text-center">U heeft succesvol uw account geregistreerd.. </h2>
                 <p class="text-center">U heeft een mail ontvangen waar een link in staat om het account te activeren.</p>
+                <?php echo $to;
+                echo $subject;
+                echo $code['Activeringscode'];
+                echo $message;
+                echo $message;
+                echo $headers; ?>
             </div>
         </div>
     </main>
