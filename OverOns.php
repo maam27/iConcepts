@@ -21,7 +21,7 @@ include_once 'partial/menu.php';
                Enkele grote veilingwebsites floreren, zonder échte concurrentie te hebben. Dit gat willen wij vullen.</p>
                <br>
             </div>
-            <div class ="col-6">
+            <div class ="col-12 col-md-6">
           <h1>Contact</h1>
           <ul>
             <li>iConcepts</li>
@@ -31,7 +31,7 @@ include_once 'partial/menu.php';
             <li><a href = mailto:IProjectGroep14@hotmail.com>IProjectGroep14@hotmail.com</a></li>
             <li><a href = tel:(026) 369 19 11> (026) 369 19 11</a></li>
           </div>
-          <div class="col-6">
+          <div class="col-12 col-md-6">
             <div id="map" style="width:300px;height:300px;">
           </div>
           </div>
