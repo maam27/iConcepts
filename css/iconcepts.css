@@ -78,9 +78,26 @@ nav form button{
 .main-content{
      margin: 100px auto auto 200px;
      padding: 3px;
-
- }
-
+}
+.sidebar{
+    color:#ffffff;
+    list-style-type: none;
+}
+.sidebar :hover{
+    color:#ffffff;
+    list-style-type: none;
+    font-weight: bolder;
+}
+.sidebar a {
+    color:#ffffff;
+    list-style-type: none;
+    text-decoration:none;
+}
+.sidebar a :hover{
+    color:#ffffff;
+    list-style-type: none;
+    text-decoration:none;
+}
 
 /* ======================================================================================
 ////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

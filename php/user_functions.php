@@ -460,3 +460,9 @@ function get_security_question($dbh){
     return $data1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 }
+function get_catagory($dbh){
+    $sql = "SELECT * FROM Rubriek";
+    $query = $dbh->prepare($sql);
+    $query->execute();
+    return $Rubriek = $query->fetchAll();
+}
