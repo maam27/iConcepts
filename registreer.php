@@ -161,7 +161,6 @@ else if ($registratie==true){
             <div>
                 <h2 class="error-message text-center">U heeft succesvol uw account geregistreerd.. </h2>
                 <p class="text-center">U heeft een mail ontvangen waar een link in staat om het account te activeren.</p>
-                <?php echo '<p>'.$message.'</p>'; ?>
             </div>
         </div>
     </main>

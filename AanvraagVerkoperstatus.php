@@ -102,7 +102,7 @@ if (empty($_SESSION['user'])) {
 } else if ($aanvraag == true) {
    $UnvalidatedSeller = get_unvalidated_seller($db, $_SESSION['user']);
    $gebruikerinformatie = get_user($db, $_SESSION['user']);
-    $message = "Hallo ".$_POST['first-name']." ".$_POST['last-name'].",\r\n
+    $message = "Hallo ".$gebruikerinformatie['Voornaam']." ".$gebruikerinformatie['Achternaam'].",\r\n
     U heeft recent een aanvraag gedaan om verkoper te worden.\r\n 
     Wij zijn blij om te vertellen dat we het verzoek hebben goedgekeurd! \r\n
     
@@ -118,7 +118,7 @@ if (empty($_SESSION['user'])) {
     Met vriendelijke groet,
     \r\n EenmaalAndermaal";
 
-    mail($_POST['e-mail'], 'Registratie EenmaalAndermaal', $message);
+    mail($gebruikerinformatie['Mailbox'], 'Registratie EenmaalAndermaal', $message);
     ?>
     <main>
         <div class="container">
