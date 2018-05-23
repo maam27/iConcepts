@@ -54,7 +54,8 @@ function aanvraag_register_user($dbh, $username, $firstname, $lastname, $address
             return false;
         }
 
-    } catch (PDOException $e) {
+    }
+    catch (PDOException $e) {
         echo $e->getMessage();
     }
 }
@@ -72,6 +73,20 @@ function check_for_validatiecode_registratie($dbh, $code)
             return false;
         }
     } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function get_validatiecode_registratie($dbh, $gebruiker){
+    try {
+        $stmt = $dbh->prepare("select Activeringscode from OngevalideerdeGebruiker where Gebruikersnaam = :gebruiker");
+        $stmt->execute(array(':gebruiker' => $gebruiker));
+        $result = $stmt->fetch();
+
+        return $result;
+
+    }
+    catch (PDOException $e) {
         echo $e->getMessage();
     }
 }
@@ -302,13 +317,15 @@ function request_seller_status($dbh, $username, $bank, $bankrekening, $controleo
             ]
         );
 
-        if ($stmt->rowCount() == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        $result = $stmt->rowCount();
 
-    } catch (PDOException $e) {
+        if($result == 1){
+            return true;
+        }
+        else{return false;}
+
+    }
+    catch (PDOException $e) {
         echo $e->getMessage();
     }
 }
@@ -319,14 +336,17 @@ function get_unvalidated_seller($dbh, $username)
     try {
         $statement = $dbh->prepare("SELECT * FROM OngevalideerdeVerkoper where Gebruiker = :gebruiker");
         $statement->execute([':gebruiker' => $username]);
-        return $data = $statement->fetch();
-    } catch (PDOException $e) {
+        $data = $statement -> fetch();
+        return $data;
+    }
+
+    catch (PDOException $e) {
         echo $e;
     }
 
 }
 
-function get_validation_code($dbh, $user)
+function get_validation_code_seller($dbh, $user)
 {
     try {
         $statement = $dbh->prepare("SELECT * FROM OngevalideerdeVerkoper where Gebruiker = :gebruiker");
@@ -343,13 +363,9 @@ function get_validation_code($dbh, $user)
 
 function upgrade_to_seller($dbh, $username, $bank, $bankrekening, $controleoptie, $creditcard)
 {
-    if ($creditcard == "") {
-        $creditcard = NULL;
-    }
-
     try {
         $stmt = $dbh->prepare("INSERT into Verkoper (Gebruiker, Bank, Bankrekening, ControleOptie, Creditcard)
-        VALUES (:gebruiker, :bank, :rekening, :controleoptie, :creditcard, :code)");
+        VALUES (:gebruiker, :bank, :rekening, :controleoptie, :creditcard)");
         $stmt->execute(
             [
                 ':gebruiker' => $username,
@@ -360,12 +376,17 @@ function upgrade_to_seller($dbh, $username, $bank, $bankrekening, $controleoptie
             ]
         );
 
-        $stmt2 = $dbh->prepare("DELETE from OngevalideerdeVerkoper where Gebruiker = :user ");
-        $stmt2->execute(
-            [
-                ':user' => $username
-            ]
-        );
+        $stmt2 = $dbh->prepare("DELETE from OngevalideerdeVerkoper where Gebruiker = :gebruiker");
+        $stmt2->execute([
+            ':gebruiker' => $username
+        ]
+    );
+
+        $stmt3 = $dbh->prepare("UPDATE Gebruiker set verkoper=1 where Gebruikersnaam = :gebruiker");
+        $stmt3->execute([
+            ':gebruiker' => $username
+        ]);
+
     }
 
     catch (PDOException $e) {
@@ -376,19 +397,13 @@ function upgrade_to_seller($dbh, $username, $bank, $bankrekening, $controleoptie
 
 function check_if_unvalidated_seller($dbh, $username)
 {
+    $statement = $dbh->prepare("SELECT Gebruiker FROM OngevalideerdeVerkoper where Gebruiker = :gebruiker");
+    $statement->execute(array(':gebruiker' => $username));
+    $result = $statement->fetch();
+    if (isset($result['Gebruiker']))
+        return true;
+    return false;
 
-    try {
-        $statement = $dbh->prepare("select count(*) from OngevalideerdeVerkoper where Gebruiker = :gebruiker");
-        $statement->execute(array(':gebruiker' => $username));
-        $result = $statement->fetchColumn();
-        if ($result == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    } catch (PDOException $e) {
-        echo $e;
-    }
 }
 
 function get_seller_and_auction_info($dbh, $itemId)
@@ -472,19 +487,13 @@ function calculate_average_feedback_seller($dbh, $verkoper)
 
 function check_if_seller($dbh, $verkoper)
 {
-    try {
-        $stmt = $dbh->prepare("select count(*) from Gebruiker g join Verkoper v on g.Gebruikersnaam = v.Gebruiker where Gebruikersnaam = :verkoper");
-        $stmt->execute(array(':verkoper' => $verkoper));
-        $result = $stmt->fetchColumn();
+    $statement = $dbh->prepare("SELECT Gebruiker FROM Verkoper where Gebruiker = :gebruiker");
+    $statement->execute(array(':gebruiker' => $verkoper));
+    $result = $statement->fetch();
+    if (isset($result['Gebruiker']))
+        return true;
+    return false;
 
-        if ($result == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
 }
 
 function get_information_user($dbh, $gebruiker)

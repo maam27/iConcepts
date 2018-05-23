@@ -146,12 +146,22 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
     </main>
 <?php }
 else if ($registratie==true){
+    $code = get_validatiecode_registratie($db, $_POST['username']);
+    // The message
+    $message = "Hallo ".$_POST['first-name']." ".$_POST['last-name'].",\r\n
+    Er is recent een registratiepoging gedaan op dit account op de site van EenmaalAndermaal.\r\n 
+    
+    Om het registratieproces te voltooien, klikt u op de volgende link: \r\n
+    http://iproject14.icasites.nl/afrondenregistratie.php?validatiecode=".$code['Activeringscode'];
+
+    mail($_POST['e-mail'], 'Registratie EenmaalAndermaal', $message);
     ?>
     <main>
         <div class="container error-box d-flex flex-row justify-content-center align-items-center">
             <div>
                 <h2 class="error-message text-center">U heeft succesvol uw account geregistreerd.. </h2>
                 <p class="text-center">U heeft een mail ontvangen waar een link in staat om het account te activeren.</p>
+                <?php echo '<p>'.$message.'</p>'; ?>
             </div>
         </div>
     </main>
