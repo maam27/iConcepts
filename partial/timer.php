@@ -2,9 +2,8 @@
     window.setInterval(function(){
         $(".timer").each(function(){
             $endTime = new Date($(this).data('auctionend'));
-            //some have a diffrent timezone, thus lasting 1 hour longer/shorter
             $currentTime = new Date($.now());
-            $timeDiffrence = $endTime - $currentTime;
+            $timeDiffrence = $endTime.getTime() - $currentTime.getTime();
 
             if ($timeDiffrence <= 0) {
                 $(this).text("Verlopen");

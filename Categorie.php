@@ -85,7 +85,9 @@ $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
         <div class="col-12 col-md-10">
             <div class="row">
                 <div class="col-12">
-                    <?php foreach($Artikelen as $kavel ): ?>
+                    <?php foreach($Artikelen as $kavel ):
+                        $endDate = new DateTime($kavel['LooptijdeindeDag']." ". $kavel['LooptijdeindeTijdstip']);
+                        ?>
                         <a class="hidden-link" href="Veilingspagina.php?voorwerp=<?php echo $kavel['Voorwerpnummer'] ?>">
                             <div class="row margin-top productblock-large">
                                 <div class="col-3">
@@ -97,12 +99,12 @@ $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
                                             <strong><?php echo $kavel['Titel'];?></strong>
                                         </div>
                                         <div class="col-4">
-                                            <span class="timer float-right" data-auctionEnd="<?php echo $kavel['LooptijdeindeDag']." ". $kavel['LooptijdeindeTijdstip']; ?>"></span>
+                                            <span class="timer float-right" data-auctionEnd="<?php echo $endDate->format("Y-m-d H:i:s");  ?>"></span>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-8 no-overflow">
-                                            <?php echo $kavel['Beschrijving'];?></p>
+                                            <?php echo $kavel['Beschrijving'];?>
                                         </div>
                                         <div class="col-4">
                                             <span class="float-right">prijs <?php echo $kavel ['Startprijs'];?></span>
@@ -122,8 +124,5 @@ $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
 <?php
 require_once 'partial/page_footer.php';
 include_once 'partial/scripts.php';
+require_once 'partial/timer.php';
 ?>
-</body>
-</html>
-
-<?php require_once 'partial/timer.php';?>
