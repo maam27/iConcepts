@@ -20,15 +20,15 @@
                 $min %= 60;
                 $sec %= 60;
 
-                uren = ("0" + $hour).slice(-2);
-                minuten = ("0" + $min).slice(-2);
+                $hour = ("0" + $hour).slice(-2);
+                $min = ("0" + $min).slice(-2);
                 $sec = ("0" + $sec).slice(-2);
 
                 if($days >= 2){
                     $(this).text($days + " dagen");
                 }else {
                     $(this).text(($days * 24 + $hour) + ":" + $min + ":" + $sec);
-                    if($min < 2){
+                    if($days <= 0 && $hour <= 0 && $min < 2){
                         if(!$(this).hasClass("error-message")){
                             $(this).addClass("error-message");
                         }
