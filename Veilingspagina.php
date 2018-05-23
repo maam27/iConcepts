@@ -54,7 +54,12 @@ if(isset($_POST)){
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-6">
-               <div class="row">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center">
+                        <span class="timer" data-auctionEnd="<?php echo $item['LooptijdeindeDag']." ". $item['LooptijdeindeTijdstip']; ?>"></span>
+                    </div>
+                </div>
+               <div class="row margin-top">
                    <div class="col-12 d-flex justify-content-around">
                         <img id="bigImage" class="img-thumbnail margin-bottom product-image" src="<?php echo get_image_path($images[0]['filenaam'])?>"> </img>
                    </div>
@@ -154,3 +159,4 @@ if(isset($_POST)){
 ?>
 
 <script src="js/img-highlight"></script>
+<?php require_once 'partial/timer.php';?>

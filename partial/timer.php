@@ -28,10 +28,13 @@
                     $(this).text($days + " dagen");
                 }else {
                     $(this).text(($days * 24 + $hour) + ":" + $min + ":" + $sec);
+                    if($min < 2){
+                        if(!$(this).hasClass("error-message")){
+                            $(this).addClass("error-message");
+                        }
+                    }
                 }
             }
-            //eind test
         });
-
     }, 1000);
 </script>

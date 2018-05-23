@@ -96,7 +96,7 @@ $categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
                                         <strong><?php echo $kavel['Titel'];?></strong>
                                     </div>
                                     <div class="col-4">
-                                        <span class="timer float-right" data-auctionEnd="<?php echo $kavel['LooptijdeindeDag']." ". $kavel['LooptijdeindeTijdstip']; ?>">00:00:00 resterend</span>
+                                        <span class="timer float-right" data-auctionEnd="<?php echo $kavel['LooptijdeindeDag']." ". $kavel['LooptijdeindeTijdstip']; ?>"></span>
                                     </div>
                                 </div>
                                 <div class="row">
