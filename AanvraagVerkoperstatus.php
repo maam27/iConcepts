@@ -102,6 +102,19 @@ if (empty($_SESSION['user'])) {
 } else if ($aanvraag == true) {
    $UnvalidatedSeller = get_unvalidated_seller($db, $_SESSION['user']);
    $gebruikerinformatie = get_user($db, $_SESSION['user']);
+
+    /*
+     * Enable error reporting
+     */
+    ini_set( 'display_errors', 1 );
+    error_reporting( E_ALL );
+
+    /*
+     * Setup email addresses and change it to your own
+     */
+    $from = "EenmaalAndermaal@supportmail.com";
+    $to = $gebruikerinformatie['Mailbox'];
+    $subject = 'Verkoperaanvraag EenmaalAndermaal';
     $message = "Hallo ".$gebruikerinformatie['Voornaam']." ".$gebruikerinformatie['Achternaam'].",\r\n
     U heeft recent een aanvraag gedaan om verkoper te worden.\r\n 
     Wij zijn blij om te vertellen dat we het verzoek hebben goedgekeurd! \r\n
@@ -117,8 +130,23 @@ if (empty($_SESSION['user'])) {
     \r\n \r\n 
     Met vriendelijke groet,
     \r\n EenmaalAndermaal";
+    $headers = "From:" . $from;
 
-    mail($gebruikerinformatie['Mailbox'], 'Registratie EenmaalAndermaal', $message);
+    /*
+     * Test php mail function to see if it returns "true" or "false"
+     * Remember that if mail returns true does not guarantee
+     * that you will also receive the email
+     */
+    if(mail($to,$subject,$message, $headers))
+    {
+        echo "Test email send.";
+    }
+    else
+    {
+        echo "Failed to send.";
+    }
+
+
     ?>
     <main>
         <div class="container">
@@ -127,6 +155,9 @@ if (empty($_SESSION['user'])) {
                     <h2 class="error-message text-center">U aanvraag is ontvangen.</h2>
                     <p class="text-center">U zult binnenkort een mail ontvangen waarin een code staat.</p>
                     <p class="text-center">Deze kunt u op uw profiel activeren, onder de knop 'invullen verificatiecode'</p>
+                    <?php
+                    echo $to, $subject, $message, $headers
+                    ?>
                 </div>
             </div>
         </div>
