@@ -100,14 +100,33 @@ if (empty($_SESSION['user'])) {
     <?php
 
 } else if ($aanvraag == true) {
-   $UnvalidatedSeller = get_unvalidated_seller($db, $_SESSION['user'])
+   $UnvalidatedSeller = get_unvalidated_seller($db, $_SESSION['user']);
+   $gebruikerinformatie = get_user($db, $_SESSION['user']);
+    $message = "Hallo ".$gebruikerinformatie['Voornaam']." ".$gebruikerinformatie['Achternaam'].",\r\n
+    U heeft recent een aanvraag gedaan om verkoper te worden.\r\n 
+    Wij zijn blij om te vertellen dat we het verzoek hebben goedgekeurd! \r\n
+    
+    Om een verkoper te worden op EenmaalAndermaal, zult u nog een paar stappen moeten ondernemen. \r\n
+    \r\n U moet naar uw persoonlijke profiel gaan, en op de knop 'invullen verificatiecode' klikken. \r\n
+    Eenmaal hier, moet U de volgende code invullen ".substr($UnvalidatedSeller['Activeringscode'], 0, 10)." \r\n
+    
+    Als alternatief, kunt U ook de volgende link in de browser invullen: \r\n
+    http://iproject14.icasites.nl/AfrondenVerkoperstatus.php \r\n
+    \r\n Wij hopen dat U veel plezier heeft van EenmaalAndermaal als verkoper!
+    
+    \r\n \r\n 
+    Met vriendelijke groet,
+    \r\n EenmaalAndermaal";
+
+    mail($gebruikerinformatie['Mailbox'], 'Registratie EenmaalAndermaal', $message);
     ?>
     <main>
         <div class="container">
             <div class="row">
                 <div class="col-md-6 user-section d-flex align-items-center flex-column">
-                    <h2 class="error-message text-center">Hier komt een brief</h2>
-                    <p class="text-center">Je code is '<?php echo substr($UnvalidatedSeller['Activeringscode'], 0, 10); ?>'</p>
+                    <h2 class="error-message text-center">U aanvraag is ontvangen.</h2>
+                    <p class="text-center">U zult binnenkort een mail ontvangen waarin een code staat.</p>
+                    <p class="text-center">Deze kunt u op uw profiel activeren, onder de knop 'invullen verificatiecode'</p>
                 </div>
             </div>
         </div>
