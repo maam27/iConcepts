@@ -146,22 +146,6 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
     </main>
 <?php }
 else if ($registratie==true){
-
-
-
-    // The message
-
-
-
-
-
-
-
-    $headers = "From:" . $from;
-
-
-    mail($to,$subject,$message, $headers);
-
     /*
      * Enable error reporting
      */
@@ -202,12 +186,7 @@ else if ($registratie==true){
             <div>
                 <h2 class="error-message text-center">U heeft succesvol uw account geregistreerd.. </h2>
                 <p class="text-center">U heeft een mail ontvangen waar een link in staat om het account te activeren.</p>
-                <?php echo $to;
-                echo $subject;
-                echo $code['Activeringscode'];
-                echo $message;
-                echo $message;
-                echo $headers; ?>
+
             </div>
         </div>
     </main>

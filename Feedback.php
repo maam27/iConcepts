@@ -81,7 +81,7 @@ else if (empty($data2)){ ?>
 
 else if ($feedbackGegeven == true) { ?>
     <main>
-        <div class="container error-box d-flex flex-row justify-content-center align-items-center">
+        <div class="container error-box">
             <div>
                 <h2 class="error-message text-center">U heeft succesvol feedback gegeven </h2>
                 <p class="text-center">Bedankt voor beoordelen van deze gebruiker.</p>
