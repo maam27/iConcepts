@@ -18,16 +18,15 @@ include_once 'partial/menu.php';
 
 $soortGebruiker = "Koper";
 $voorwerpNummer = 0;
-if(!empty($_GET['voorwerp']) AND is_numeric($_GET['voorwerp'])){
+if (!empty($_GET['voorwerp']) AND is_numeric($_GET['voorwerp'])) {
     $voorwerpNummer = $_GET['voorwerp'];
 }
 
-if(isset($_SESSION['user'])){
+if (isset($_SESSION['user'])) {
     $data1 = get_user($db, $_SESSION['user']); /* Informatie over de gebruiker */
 }
 
 $data2 = get_item($voorwerpNummer, $db); /* Informatie over het item */
-
 
 
 $soortGebruiker;
@@ -37,22 +36,22 @@ if ($data2['Verkoper'] == $_SESSION['user']) {
     $soortGebruiker = 'Koper';
 }
 
-
 $feedbackGegeven = false;
+
 if (!empty($_POST['beoordeling'])){
     if (provide_feedback($db, $voorwerpNummer, $soortGebruiker, $_POST['beoordeling'], $_POST['opmerking'])) {
         $feedbackGegeven = true;
     };
 }
 
-else{
 ?>
 
 
 
 <?php
 
-if(empty($_SESSION['user'])){?>
+if (empty($_SESSION['user'])){
+    ?>
     <main>
         <div class="container error-box d-flex flex-row justify-content-center align-items-center">
             <div>
@@ -71,7 +70,8 @@ else if (empty($data2)){ ?>
         <div class="container error-box d-flex flex-row justify-content-center align-items-center">
             <div>
                 <h2 class="error-message text-center">Deze pagina bestaat niet. </h2>
-                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de beheerders.</p>
+                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de
+                    beheerders.</p>
             </div>
         </div>
     </main>
@@ -79,9 +79,9 @@ else if (empty($data2)){ ?>
     <?php
 }
 
-else if ($feedbackGegeven == true) { ?>
+else if ($feedbackGegeven==true) { ?>
     <main>
-        <div class="container error-box">
+        <div class="container error-box d-flex flex-row justify-content-center align-items-center">
             <div>
                 <h2 class="error-message text-center">U heeft succesvol feedback gegeven </h2>
                 <p class="text-center">Bedankt voor beoordelen van deze gebruiker.</p>
@@ -99,7 +99,8 @@ else if ($data2['VeilingGesloten'] == 0) {
         <div class="container error-box d-flex flex-row justify-content-center align-items-center">
             <div>
                 <h2 class="error-message text-center">Deze veiling is nog niet gesloten. </h2>
-                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de beheerders.</p>
+                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de
+                    beheerders.</p>
             </div>
         </div>
     </main>
@@ -112,31 +113,35 @@ else if ($data2['Verkoper'] != $_SESSION['user'] AND $data2['Koper'] != $_SESSIO
         <div class="container error-box d-flex flex-row justify-content-center align-items-center">
             <div>
                 <h2 class="error-message text-center">U kunt hier geen feedback geven. </h2>
-                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de beheerders.</p>
+                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de
+                    beheerders.</p>
             </div>
         </div>
     </main>
 <?php }
 
-else if(seller_feedback_given($db, $voorwerpNummer)==true AND $soortGebruiker == 'Verkoper'){?>
+else if (seller_feedback_given($db, $voorwerpNummer) == true AND $soortGebruiker == 'Verkoper'){
+    ?>
     <main>
         <div class="container error-box d-flex flex-row justify-content-center align-items-center">
             <div>
                 <h2 class="error-message text-center">U heeft al feedback gegeven.</h2>
-                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de beheerders.</p>
+                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de
+                    beheerders.</p>
             </div>
         </div>
     </main>
     <?php
 }
 
-else if(buyer_feedback_given($db, $voorwerpNummer)==true AND $soortGebruiker == 'Koper'){
+else if (buyer_feedback_given($db, $voorwerpNummer) == true AND $soortGebruiker == 'Koper'){
     ?>
     <main>
         <div class="container error-box d-flex flex-row justify-content-center align-items-center">
             <div>
                 <h2 class="error-message text-center">U heeft al feedback gegeven.</h2>
-                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de beheerders.</p>
+                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de
+                    beheerders.</p>
             </div>
         </div>
     </main>
@@ -220,7 +225,7 @@ else {
             if (isset($melding)) {
                 echo '<p class="error-message">' . $melding . '</p>';
             }
-            }
+
             }
             ?>
 
