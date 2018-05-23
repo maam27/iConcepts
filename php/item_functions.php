@@ -47,8 +47,7 @@ function is_existing_product($itemId ,$dbh){
 function provide_feedback($dbh, $itemId, $soortFeedback, $beoordeling, $opmerking){
 
     try{
-        $stmt = $dbh->prepare("INSERT INTO Feedback (Voorwerp, SoortGebruiker, Feedbacksoort, Dag, Tijdstip, Commentaar)
-        VALUES (:voorwerp, :gebruiker, :beoordeling, :datum, :tijd, :commentaar)");
+        $stmt = $dbh->prepare("INSERT INTO Feedback VALUES (:voorwerp, :gebruiker, :beoordeling, :datum, :tijd, :commentaar)");
         $stmt -> execute(
             [
                 ':voorwerp' => $itemId,
@@ -58,14 +57,16 @@ function provide_feedback($dbh, $itemId, $soortFeedback, $beoordeling, $opmerkin
                 ':tijd' => date('H:i:s'),
                 ':commentaar' => $opmerking
             ]);
-        return true;
+
+
     }
 
     catch(PDOException $e){
         echo $e->getMessage();
-        return false;
+
     }
-    return false;
+
+    return true;
 }
 
 function buyer_feedback_given($dbh, $itemId){
