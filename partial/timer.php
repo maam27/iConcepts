@@ -27,7 +27,7 @@
                 if($days >= 2){
                     $(this).text($days + " dagen");
                 }else {
-                    $(this).text(($days * 24 + $hour) + ":" + $min + ":" + $sec);
+                    $(this).text(($days * 24 + $hour).slice(-2) + ":" + $min + ":" + $sec);
                     if($days <= 0 && $hour <= 0 && $min < 2){
                         if(!$(this).hasClass("error-message")){
                             $(this).addClass("error-message");
