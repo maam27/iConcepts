@@ -69,10 +69,10 @@ nav form button{
 .hoofd-rubriek  {
     color: #252525;
     }
-.navbar-nav a{
+.sub-nav a{
     color: #252525;
 }
-.navbar-nav :hover{
+.sub-nav :hover{
     color: #252525;
     font-weight: bolder;
     text-decoration: none;
