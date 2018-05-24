@@ -202,6 +202,17 @@ function get_catagory($dbh){
     $query->execute();
     return $Rubriek = $query->fetchAll();
 }
+
+
+
+function get_sub_categories($category, $dbh){
+    $query = $dbh->prepare("SELECT [Rubrieknummer],[Rubrieknaam] FROM Rubriek where Volgnummer = :followNr");
+    $query->execute(array(':followNr' => $category));
+    return $query->fetchAll();
+}
+
+
+
 function get_category_view($dbh, $filter){
     $query = "select top 30 v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v inner join VoorwerpInRubriek k
 on v.Voorwerpnummer = k.Voorwerp

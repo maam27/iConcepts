@@ -33,7 +33,7 @@ if(isset($_GET)){
 <!--    SideNavigation Bar    -->
 
 <?php
-$Rubriek = get_catagory($db);
+$Rubriek = get_sub_categories(-1,$db);
 $Artikelen = get_category_view($db,$filter);
 
 for($i =0; $i< sizeof($Artikelen); $i++){
