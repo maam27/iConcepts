@@ -77,6 +77,23 @@ function check_for_validatiecode_registratie($dbh, $code)
     }
 }
 
+function check_for_validatiecode_wachtwoord_vergeten($dbh, $code)
+{
+    try {
+        $stmt = $dbh->prepare("select count(*) from VergetenWachtwoord where Activeringscode = :code");
+        $stmt->execute(array(':code' => $code));
+        $result = $stmt->fetchColumn();
+
+        if ($result == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
 function get_validatiecode_registratie($dbh, $gebruiker){
     try {
         $stmt = $dbh->prepare("select Activeringscode from OngevalideerdeGebruiker where Gebruikersnaam = :gebruiker");
@@ -237,9 +254,15 @@ function check_user_answer($email, $answer, $dbh)
     return false;
 }
 
-function reset_password($email, $password, $dbh)
+function reset_password($email, $password, $dbh, $code)
 {
     try {
+        $stmt = $dbh->prepare("DELETE FROM WachtwoordVergeten where code = :code");
+        $stmt -> execute([
+            ':code' => $code
+        ]);
+
+
         $statement = $dbh->prepare("update Gebruiker set Wachtwoord = :password where Mailbox = :email ");
         $statement->execute(array(':password' => $password, ':email' => $email));
         $result = $statement->rowCount();
@@ -550,3 +573,92 @@ function get_security_question($dbh)
     return $data1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 }
+
+function insert_password_forgotten_code($dbh, $email){
+
+    $date = date('Y-m-d H:i:s');
+    $code = MD5($email . $date);
+
+
+    try {
+        $stmt = $dbh->prepare("INSERT INTO WachtwoordVergeten VALUES (:mail, :code, :datum)");
+        $stmt->execute(
+            [
+                ':mail' => $email,
+                ':code' => $code,
+                ':datum' => $date
+            ]);
+
+        if ($stmt->rowCount() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+    catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function get_request_forgotten_password($dbh, $mail){
+    try{
+        $stmt = $dbh -> prepare("select * from WachtwoordVergeten WHERE Mailbox = :mail");
+        $stmt -> execute ([
+            ':mail' => $mail
+        ]);
+        $data = $stmt -> fetchAll();
+        return $data;
+    }
+
+    catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function check_if_open_request_forgotten_password($dbh, $mail){
+    $stmt = $dbh->prepare("SELECT COUNT(*) FROM WachtwoordVergeten WHERE Mailbox = :mail");
+    $stmt -> execute ([
+        ':mail' => $mail
+    ]);
+    $result = $stmt->fetchColumn();
+    if($result == 1) {
+        return true;
+    }
+    else {return false;}
+}
+
+function check_if_code_exists_forgotten_password($dbh, $code){
+    try {
+        $stmt = $dbh->prepare("SELECT COUNT(*) FROM WachtwoordVergeten WHERE Activeringscode = :code");
+        $stmt->execute([
+            ':code' => $code
+        ]);
+        $result = $stmt->fetchColumn();
+        if ($result == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function get_mail_with_code($dbh, $code){
+    try{
+        $stmt = $dbh -> prepare("SELECT Mailbox from WachtwoordVergeten WHERE Activeringscode = :code");
+        $stmt -> execute ([
+            ':code' => $code
+        ]);
+        $result = $stmt -> fetch();
+        return $result;
+    }
+
+    catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+
