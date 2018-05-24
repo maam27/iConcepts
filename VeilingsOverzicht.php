@@ -8,6 +8,7 @@ require_once 'php/item_functions.php';
     <body>
 <?php
 include_once 'partial/menu.php';
+$dbh = $db;
 ?>
 
 <!--keywords-->
@@ -105,7 +106,7 @@ $Artikelen = get_category_view($db,$filter);
         </div>
     </div>
 </div>
-<!--end Auction View / Detaill-->
+<!--end Auction View / Detail-->
 </main>
 
 <?php
