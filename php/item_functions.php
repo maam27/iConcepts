@@ -203,7 +203,7 @@ function get_catagory($dbh){
     return $Rubriek = $query->fetchAll();
 }
 function get_category_view($dbh, $filter){
-    $query = "select v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v inner join VoorwerpInRubriek k
+    $query = "select top 30 v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v inner join VoorwerpInRubriek k
 on v.Voorwerpnummer = k.Voorwerp
 left join Rubriek r
 on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
