@@ -155,9 +155,6 @@ if (empty($_SESSION['user'])) {
                     <h2 class="error-message text-center">U aanvraag is ontvangen.</h2>
                     <p class="text-center">U zult binnenkort een mail ontvangen waarin een code staat.</p>
                     <p class="text-center">Deze kunt u op uw profiel activeren, onder de knop 'invullen verificatiecode'</p>
-                    <?php
-                    echo $to, $subject, $message, $headers
-                    ?>
                 </div>
             </div>
         </div>

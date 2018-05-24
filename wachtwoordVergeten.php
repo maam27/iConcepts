@@ -105,7 +105,7 @@ else if ($openverzoek){?>
     <main>
         <div class="container error-box d-flex flex-row justify-content-center align-items-center">
             <div>
-                <h2 class="error-message text-center">U heeft een verkeerde link gevolgd.</h2>
+                <h2 class="error-message text-center">U heeft al een verzoek gestuurd.</h2>
                 <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de beheerders.</p>
             </div>
         </div>

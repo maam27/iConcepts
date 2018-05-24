@@ -102,6 +102,7 @@ if(isset($_POST)){
                             echo '<p><strong>Betalingsinstructie:</strong> '.$veilinginformatie['Betalingsinstructie'].'</p>';
                         } ?>
                         <p><strong>Gemiddelde beoordeling:</strong> <?php echo calculate_average_feedback_seller($db, $veilinginformatie['Gebruikersnaam'])?></p>
+                        <a class="btn btn-primary" href="mailto:<?php echo $veilinginformatie['Mailbox']?>?Subject=Veiling%20<?php echo $item['Titel']?>">Mail de verkoper</a>
                     </div>
                     <div id="biddings" class="col-12 auction-section">
                         <div class="row">
