@@ -71,6 +71,8 @@ $Artikelen = get_category_view($db,$filter);
                 <div class="col-12">
                     <?php foreach($Artikelen as $kavel ):
                         $endDate = new DateTime($kavel['LooptijdeindeDag']." ". $kavel['LooptijdeindeTijdstip']);
+                        $currentPrice = get_heighest_bid($kavel['Voorwerpnummer'],$dbh);
+                        $currentPrice = ($currentPrice == 0)? $kavel['Startprijs']:$currentPrice;
                         ?>
                         <a class="hidden-link" href="Veilingspagina.php?voorwerp=<?php echo $kavel['Voorwerpnummer'] ?>">
                             <div class="row margin-top productblock-large">
@@ -91,7 +93,7 @@ $Artikelen = get_category_view($db,$filter);
                                             <?php echo $kavel['Beschrijving'];?>
                                         </div>
                                         <div class="col-4">
-                                            <span class="float-right">prijs <?php echo $kavel ['Startprijs'];?></span>
+                                            <span class="float-right">€ <?php echo number_format($currentPrice,2,',','.');?></span>
                                         </div>
                                     </div>
                                 </div>

@@ -123,7 +123,7 @@ if(isset($_POST)){
                                 $bodNr = $i + 1;
                                 echo "<div class='row'>";
                                 echo "<div class='d-none d-lg-block d-xl-block col-lg-1'>" . $bodNr . ":</div>";
-                                echo "<div class='col-6 col-lg-6 no-overflow'>€" . currency($bids[$i]['amount']) . "</div>";
+                                echo "<div class='col-6 col-lg-6 no-overflow'>€" . number_format((float) currency($bids[$i]['amount']),2,',','.') . "</div>";
                                 echo "<div class='col-6 col-lg-5 no-overflow'>" . $bids[$i]['user'] . "</div>";
                                 echo "</div>";
                             }
@@ -133,7 +133,7 @@ if(isset($_POST)){
                         <form method="post" target="">
                              <div class="row">
                                 <div class="col-7">
-                                    <input id="bid" name="bid" type="number" min="<?php echo $minimumBid;?>" value="<?php echo $minimumBid;?>" step="any"/>
+                                    <input id="bid" name="bid" type="number" min="<?php echo $minimumBid;?>" value="<?php echo number_format((float) $minimumBid,2,'.','');?>" step="any"/>
                                 </div>
                                 <div class="col-5">
                                     <input id="placeBid" name="placeBid" type="submit" class="btn btn-secondary" value="Plaats bod &raquo;" <?php if($item['VeilingGesloten']==1) echo 'disabled';?>/>
