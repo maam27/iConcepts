@@ -186,7 +186,7 @@ function get_sellers_closed_auctions($dbh, $verkoper){
 
 function get_images_for_item($itemId,$dbh){
     try{
-        $statement = $dbh->prepare("SELECT filenaam from bestand where Voorwerp = :item");
+        $statement = $dbh->prepare("SELECT top 4 filenaam from bestand where Voorwerp = :item");
         $statement->execute(array(':item' => $itemId));
         $result = $statement->fetchall();
         return $result;
@@ -206,7 +206,7 @@ function get_catagory($dbh){
 
 
 function get_sub_categories($category, $dbh){
-    $query = $dbh->prepare("SELECT [Rubrieknummer],[Rubrieknaam] FROM Rubriek where Volgnummer = :followNr");
+    $query = $dbh->prepare("SELECT [Rubrieknummer],[Rubrieknaam] FROM Rubriek where Volgnummer = :followNr order by Rubrieknaam desc");
     $query->execute(array(':followNr' => $category));
     return $query->fetchAll();
 }
