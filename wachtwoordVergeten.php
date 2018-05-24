@@ -62,7 +62,7 @@ if($questionCorrect == true){
     Er is recent een poging gedaan het wachtwoord van dit account te resetten op eenmaal andermaal.\r\n 
     
     Om dit process af te ronden, klik op de volgende link: \r\n
-    http://iproject14.icasites.nl/afrondenregistratie.php?validatiecode=".$code;
+    http://iproject14.icasites.nl/wachtwoordVergeten.php?validatiecode=".$code;
     $headers = "From:" . $from;
 
     /*
@@ -105,7 +105,7 @@ else if ($openverzoek){?>
     <main>
         <div class="container error-box d-flex flex-row justify-content-center align-items-center">
             <div>
-                <h2 class="error-message text-center">U heeft een verkeerde link gevolgd.</h2>
+                <h2 class="error-message text-center">U heeft al een verzoek gestuurd.</h2>
                 <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de beheerders.</p>
             </div>
         </div>
