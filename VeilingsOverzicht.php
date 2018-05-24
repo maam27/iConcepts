@@ -118,7 +118,7 @@ for($i =0; $i< sizeof($Artikelen); $i++){
                         <a class="hidden-link" href="Veilingspagina.php?voorwerp=<?php echo $kavel['Voorwerpnummer'] ?>">
                             <div class="row margin-top productblock-large">
                                 <div class="col-3">
-                                    <img src="http://iproject14.icasites.nl/<?php echo get_image_path( $kavel['Filenaam'],  false);?>"  class="img-fluid"/>
+                                    <img src="<?php echo get_image_path( $kavel['Filenaam'],  false);?>"  class="img-fluid"/>
                                 </div>
                                 <div class="col-9">
                                     <div class="row">
