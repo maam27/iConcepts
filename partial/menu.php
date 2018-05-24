@@ -16,7 +16,7 @@ $Rubriek = get_catagory($db);
                 <a href="index.php"><i class="fa fa-home"></i> Thuispagina<span class="sr-only">(current)</span></a>
             </li>
             <li>
-                <form class="form-inline mt-2 mt-md-0 d-flex flex-row flex-nowrap" method="get" action="categorie.php">
+                <form class="form-inline mt-2 mt-md-0 d-flex flex-row flex-nowrap" method="get" action="VeilingsOverzicht.php">
                     <input class="form-control mr-sm-2" type="text" placeholder="Vul hier zoektermen in" aria-label="Search" name="search">
                     <button class="btn my-2 my-sm-0" type="submit">Zoeken</button>
                 </form>
@@ -52,7 +52,7 @@ $Rubriek = get_catagory($db);
 <div class="d-none d-lg-block submenu">
     <ul class="navbar-nav sub-nav mr-auto d-flex flex-row flex-wrap justify-content-around">
         <?php foreach($Rubriek as $row ):?>
-            <li class="hoofd-rubriek"> <a href="categorie.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
+            <li class="hoofd-rubriek"> <a href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
         <?php endforeach;?>
     </ul>
 </div>
