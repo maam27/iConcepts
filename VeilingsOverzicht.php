@@ -56,18 +56,44 @@ $Artikelen = $statement-> fetchAll();
 
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-2" style="background-color: #F2552C;">
-            <div class="row">
+        <!-- filters-->
+        <div class="col-12 col-md-3 col-xl-2 search-filters">
+            <form method="get" action="VeilingsOverzicht.php">
+                <div class="row">
                 <div class="col-12">
                     <h5><strong>filters</strong></h5>
                 </div>
                 <div class="col-12">
-                    <ul class="list sidebar">
-                        <li>Prijs</li>
-                        <li>Afstand</li>
-                        <li>Staat</li>
-                        <li>Sorteren op</li>
-                    </ul>
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="text" name="filter-search" value="">
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    Prijs
+                                </div>
+                                <div class="col-5 col-md-12">
+                                    <input type="number" name="minValue" value="">
+                                </div>
+                                <div class="col-2 col-md-12">
+                                    tot
+                                </div>
+                                <div class="col-5 col-md-12">
+                                    <input type="number" name="maxValue" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 d-none">
+                            afstand
+                        </div>
+                        <div class="col-12 d-none">
+                            resterende tijd
+                        </div>
+                        <div class="col-12 margin-top">
+                            <input type="submit" value="Zoeken">
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12">
                     <h5><strong> Alle categorieën </strong></h5>
@@ -80,8 +106,11 @@ $Artikelen = $statement-> fetchAll();
                     </ul>
                 </div>
             </div>
+            </form>
         </div>
-        <div class="col-12 col-md-10">
+        <!-- end filters-->
+        <!-- results-->
+        <div class="col-12 col-md-9 col-xl-10">
             <div class="row">
                 <div class="col-12">
                     <?php foreach($Artikelen as $kavel ):
@@ -108,7 +137,7 @@ $Artikelen = $statement-> fetchAll();
                                             <?php echo $kavel['Beschrijving'];?>
                                         </div>
                                         <div class="col-4">
-                                            <span class="float-right">€ <?php echo number_format($currentPrice,2,',','.');?></span>
+                                            <span class="float-right">€<?php echo number_format($currentPrice,2,',','.');?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -118,6 +147,7 @@ $Artikelen = $statement-> fetchAll();
                 </div>
             </div>
         </div>
+        <!-- end results-->
     </div>
 </div>
 </main>
