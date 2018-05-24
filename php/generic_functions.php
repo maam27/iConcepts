@@ -48,7 +48,7 @@ function floor_with_precision($val, $precision)
 
 function get_image_path($img,$thumbnail = false){
     if($thumbnail)
-        return "IMG/thumb/".$img;
-    return "IMG/".$img;
+        return "thumbnails/".$img;
+    return "pics/".$img;
 
 }
