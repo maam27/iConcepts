@@ -11,26 +11,115 @@ require_once 'php/user_functions.php';
 include_once 'partial/menu.php';
 $question = null;
 $questionCorrect = false;
+$openverzoek = false;
 if(isset($_POST['email'])){
     $question = get_user_question($_POST['email'],$db);
+    $openverzoek = check_if_open_request_forgotten_password($db, $_POST['email']);
 }
-if(isset($_POST['answer'])){
-    $questionCorrect = check_user_answer($_POST['email'] ,$_POST['answer'],$db);
+if(isset($_POST['answer'])) {
+    if (check_user_answer($_POST['email'], $_POST['answer'], $db) == true) {
+        $questionCorrect = true;
+        insert_password_forgotten_code($db, $_POST['email']);
+
+    }
 }
+$code_matches=false;
+if(isset($_GET['code'])){
+    if(check_if_code_exists_forgotten_password($db, $_GET['code'])){
+        $code_matches=true;
+    }
+}
+
+
+
+
 if(isset($_POST['nWachtwoord1'])){
     if($_POST['nWachtwoord1'] == $_POST['nWachtwoord2']){
+        $mailadress = get_mail_with_code($db, $_GET['code']);
         $password = md5($_POST['nWachtwoord1']);
-        if(reset_password($_POST['email'], $password, $db)){
+        if(reset_password($mailadress['Mailbox'], $password, $db, $_GET['code'])){
             redirect("login.php");
         }
     }
 }
+
+if($questionCorrect == true){
+    $openverzoek = get_request_forgotten_password($db, $_POST['email']);
+    /*
+    * Enable error reporting
+    */
+    ini_set( 'display_errors', 1 );
+    error_reporting( E_ALL );
+
+    /*
+     * Setup email addresses and change it to your own
+     */
+    $from = "EenmaalAndermaal@supportmail.com";
+    $to = $_POST['email'];
+    $subject = 'Wachtwoord Vergeten - EenmaalAndermaal';
+    $code = $openverzoek[0]['Activeringscode'];
+    $message = "Hallo,\r\n
+    Er is recent een poging gedaan het wachtwoord van dit account te resetten op eenmaal andermaal.\r\n 
+    
+    Om dit process af te ronden, klik op de volgende link: \r\n
+    http://iproject14.icasites.nl/afrondenregistratie.php?validatiecode=".$code;
+    $headers = "From:" . $from;
+
+    /*
+     * Test php mail function to see if it returns "true" or "false"
+     * Remember that if mail returns true does not guarantee
+     * that you will also receive the email
+     */
+    if(mail($to,$subject,$message, $headers))
+    {
+        echo "Test email send.";
+    }
+    else
+    {
+        echo "Failed to send.";
+    }
+    ?>
+    <main>
+        <div class="container error-box d-flex flex-row justify-content-center align-items-center">
+            <div>
+                <h2 class="error-message text-center">U verzoek is ontvangen.</h2>
+                <p class="text-center">Als het goed is ontvangt u spoedig een mailtje met instructies.</p>
+            </div>
+        </div>
+    </main>
+    <?php
+}
+else if(isset($_GET['code']) AND $code_matches==false){ ?>
+    <main>
+        <div class="container error-box d-flex flex-row justify-content-center align-items-center">
+            <div>
+                <h2 class="error-message text-center">U heeft een verkeerde link gevolgd.</h2>
+                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de beheerders.</p>
+            </div>
+        </div>
+    </main>
+    <?php
+
+}
+else if ($openverzoek){?>
+    <main>
+        <div class="container error-box d-flex flex-row justify-content-center align-items-center">
+            <div>
+                <h2 class="error-message text-center">U heeft al een verzoek gestuurd.</h2>
+                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de beheerders.</p>
+            </div>
+        </div>
+    </main>
+
+    <?php
+}
+else{
 ?>
 
 <main>
     <div class="container login">
         <form method="Post" action="">
-        <?php if($questionCorrect == false) {?>
+        <?php if($questionCorrect == false AND !$code_matches) {?>
             <div class="row login-section">
                 <div class="col-12">
                     <h1>Wachtwoord vergeten</h1>
@@ -58,7 +147,7 @@ if(isset($_POST['nWachtwoord1'])){
                     <button class="btn btn-primary float-right">Verzenden</button>
                 </div>
             </div>
-        <?php } else { ?>
+        <?php } else if ($code_matches) { ?>
             <div class="row login-section">
                 <div class="col-12">
                     <h1>Wachtwoord vergeten</h1>
@@ -89,7 +178,7 @@ if(isset($_POST['nWachtwoord1'])){
     </div>
 </main>
 
-<?php
+<?php }
 require_once 'partial/page_footer.php';
 ?>
 

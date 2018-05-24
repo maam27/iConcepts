@@ -33,8 +33,22 @@ if(isset($_GET)){
 <!--    SideNavigation Bar    -->
 
 <?php
-$Rubriek = get_catagory($db);
+$Rubriek = get_sub_categories(-1,$db);
 $Artikelen = get_category_view($db,$filter);
+
+for($i =0; $i< sizeof($Artikelen); $i++){
+    $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
+    $Artikelen[$i]['Beschrijving'] = str_replace(">","&gt;",$Artikelen[$i]['Beschrijving']);
+    $Artikelen[$i]['Beschrijving'] = str_replace("\"","&quot;",$Artikelen[$i]['Beschrijving']);
+    $Artikelen[$i]['Beschrijving'] = str_replace("\'","&#44",$Artikelen[$i]['Beschrijving']);
+
+
+    $Artikelen[$i]['Titel'] = str_replace("<","&lt;",$Artikelen[$i]['Titel']);
+    $Artikelen[$i]['Titel'] = str_replace(">","&gt;",$Artikelen[$i]['Titel']);
+    $Artikelen[$i]['Titel'] = str_replace("\"","&quot;",$Artikelen[$i]['Titel']);
+    $Artikelen[$i]['Titel'] = str_replace("\'","&#44",$Artikelen[$i]['Titel']);
+}
+
 ?>
 
 <div class="container">
@@ -91,10 +105,6 @@ $Artikelen = get_category_view($db,$filter);
             </div>
             </form>
         </div>
-<!--end SideNavigation Bar-->
-
-<!--Auction View / Detaill-->
-        <div class="col-12 col-md-10">
         <!-- end filters-->
         <!-- results-->
         <div class="col-12 col-md-9 col-xl-10">
@@ -108,7 +118,7 @@ $Artikelen = get_category_view($db,$filter);
                         <a class="hidden-link" href="Veilingspagina.php?voorwerp=<?php echo $kavel['Voorwerpnummer'] ?>">
                             <div class="row margin-top productblock-large">
                                 <div class="col-3">
-                                    <img src="http://iproject14.icasites.nl/<?php echo get_image_path( $kavel['Filenaam'],  false);?>"  class="img-fluid"/>
+                                    <img src="<?php echo get_image_path( $kavel['Filenaam'],  false);?>"  class="img-fluid"/>
                                 </div>
                                 <div class="col-9">
                                     <div class="row">
@@ -121,7 +131,7 @@ $Artikelen = get_category_view($db,$filter);
                                     </div>
                                     <div class="row">
                                         <div class="col-8 no-overflow">
-                                            <?php echo $kavel['Beschrijving'];?>
+                                            <span><?php echo $kavel['Beschrijving'];?></span>
                                         </div>
                                         <div class="col-4">
                                             <span class="float-right">€<?php echo number_format($currentPrice,2,',','.');?></span>
@@ -134,10 +144,9 @@ $Artikelen = get_category_view($db,$filter);
                 </div>
             </div>
         </div>
-        <!-- end results-->
     </div>
+        <!-- end results-->
 </div>
-<!--end Auction View / Detail-->
 </main>
 
 <?php
