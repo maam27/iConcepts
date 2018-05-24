@@ -202,7 +202,18 @@ function get_catagory($dbh){
     $query->execute();
     return $Rubriek = $query->fetchAll();
 }
+function get_category_view($dbh, $filter){
+    $query = "select v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v inner join VoorwerpInRubriek k
+on v.Voorwerpnummer = k.Voorwerp
+left join Rubriek r
+on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
+inner join Bestand B
+on v.Voorwerpnummer = b.Voorwerp" . $filter;
 
+    $statement = $dbh->query($query);
+    $statement->execute();
+    return $result = $statement->fetchAll();
+}
 //try{
 
 //catch(PDOException $e){

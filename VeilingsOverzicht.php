@@ -10,10 +10,6 @@ require_once 'php/item_functions.php';
 include_once 'partial/menu.php';
 ?>
 
-<?php
-$dbh = $db;
-?>
-
 <!--keywords-->
 <?php
 $filter = ' where 1 = 1';
@@ -36,22 +32,8 @@ if(isset($_GET)){
 <!--    SideNavigation Bar    -->
 
 <?php
-
-
 $Rubriek = get_catagory($db);
-
-$query = "select v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v inner join VoorwerpInRubriek k
-on v.Voorwerpnummer = k.Voorwerp
-left join Rubriek r
-on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
-inner join Bestand B
-on v.Voorwerpnummer = b.Voorwerp".$filter;
-
-$statement = $dbh->query($query);
-$statement->execute ();
-$Artikelen = $statement-> fetchAll();
-//$categorie = isset($_GET['rubriek']) ? $_GET['rubriek'] : '';
-
+$Artikelen = get_category_view($db,$filter);
 ?>
 
 <div class="container">
@@ -108,6 +90,10 @@ $Artikelen = $statement-> fetchAll();
             </div>
             </form>
         </div>
+<!--end SideNavigation Bar-->
+
+<!--Auction View / Detaill-->
+        <div class="col-12 col-md-10">
         <!-- end filters-->
         <!-- results-->
         <div class="col-12 col-md-9 col-xl-10">
@@ -150,6 +136,7 @@ $Artikelen = $statement-> fetchAll();
         <!-- end results-->
     </div>
 </div>
+<!--end Auction View / Detaill-->
 </main>
 
 <?php
