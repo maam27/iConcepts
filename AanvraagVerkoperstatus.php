@@ -77,8 +77,8 @@ if (empty($_SESSION['user'])) {
                             <br>
                             <p>Controleoptie:</p>
                             <select name="controle-optie">
-                                <option value="Brief">Brief</option>
-                                <option value="PinPas">Andere</option>
+                                <option value="Creditcard">Creditcard</option>
+                                <option value="Post">Post</option>
                             </select>
                             <br>
                             <p>Creditcard:</p>
@@ -116,18 +116,18 @@ if (empty($_SESSION['user'])) {
     $to = $gebruikerinformatie['Mailbox'];
     $subject = 'Verkoperaanvraag EenmaalAndermaal';
     $message = "Hallo ".$gebruikerinformatie['Voornaam']." ".$gebruikerinformatie['Achternaam'].",\r\n
-    U heeft recent een aanvraag gedaan om verkoper te worden.\r\n 
+    U heeft recent een aanvraag gedaan om verkoper te worden.\r\n
     Wij zijn blij om te vertellen dat we het verzoek hebben goedgekeurd! \r\n
-    
+
     Om een verkoper te worden op EenmaalAndermaal, zult u nog een paar stappen moeten ondernemen. \r\n
     \r\n U moet naar uw persoonlijke profiel gaan, en op de knop 'invullen verificatiecode' klikken. \r\n
     Eenmaal hier, moet U de volgende code invullen ".substr($UnvalidatedSeller['Activeringscode'], 0, 10)." \r\n
-    
+
     Als alternatief, kunt U ook de volgende link in de browser invullen: \r\n
     http://iproject14.icasites.nl/AfrondenVerkoperstatus.php \r\n
     \r\n Wij hopen dat U veel plezier heeft van EenmaalAndermaal als verkoper!
-    
-    \r\n \r\n 
+
+    \r\n \r\n
     Met vriendelijke groet,
     \r\n EenmaalAndermaal";
     $headers = "From:" . $from;
