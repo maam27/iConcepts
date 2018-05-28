@@ -1,10 +1,10 @@
 <!-- start joke -->
-<div data-video="1O4Ji-G8amg"
-     data-autoplay="1"
-     data-loop="1"
-     id="youtube-audio"
-     style="display:none"   >
-</div>
+<!--<div data-video="1O4Ji-G8amg"-->
+<!--     data-autoplay="1"-->
+<!--     data-loop="1"-->
+<!--     id="youtube-audio"-->
+<!--     style="display:none"   >-->
+<!--</div>-->
 <script src="https://www.youtube.com/iframe_api"></script>
 <script src="https://cdn.rawgit.com/labnol/files/master/yt.js"></script>
 <!-- end joke -->
