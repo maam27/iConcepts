@@ -64,11 +64,15 @@
         if($(e).parent().children().length > 2){
             hideSubCategory(e);
         } else {
-            
+            $selected = $(e).parent();
+           $(e).parent().parent().children().each(function(e){
+                console.log($(this).closest("div").closest("div"))
+                console.log($(this));
 
-            // $(e).parent().parent().children().each(function(){
-            //     //$(this).closest("div").closest("div").css("color","green");
-            // });
+                if($(this).closest("div").closest("div") != $(this)){
+                 $(this).css("color","green");
+                }
+            });
           getSubCategory(e);
         }
     }
