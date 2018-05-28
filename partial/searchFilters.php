@@ -36,16 +36,42 @@
             </div>
         </div>
         <div class="col-12">
-            <h5><strong> Alle categorieën </strong></h5>
+            <h5><strong> Rubrieken </strong></h5>
         </div>
         <div class="col-12">
             <div class="row">
+                <div class="col-12 no-overflow white-text" href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknummer'];?>"  >
+                    <i class="fa fa-plus-square invisible "></i>
+                    Alle categorieën
+                </div>
                 <?php foreach($Rubriek as $row ):?>
-                 <div class="col-12 no-overflow white-text" href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknummer'];?>"  >
-                     <i class="fa fa-plus-square"></i>
-                     <?php echo $row ['Rubrieknaam'];?></div>
+                    <div class="col-12 no-overflow white-text">
+                    <i class="fa fa-plus-square" onclick="getSubRubirek(this);"></i>
+                    <a href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknummer'];?>" class="hidden-link">
+                        <?php echo $row ['Rubrieknaam'];?>
+                    </a>
+                 </div>
                 <?php endforeach;?>
             </div>
         </div>
     </div>
 </form>
+
+
+<script>
+    function getSubRubirek(e){
+        $element = e;
+
+        $.ajax({
+            type: 'get',
+            url: 'partial/sub-rubrieken.php?rubriek=-1',
+            success: function (data) {
+
+                $($element).parent().after(data);//.append(data);
+
+            }
+        });
+
+    }
+
+</script>
