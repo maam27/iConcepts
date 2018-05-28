@@ -12,8 +12,6 @@ function get_item($itemId ,$dbh){
     return null;
 }
 
-
-
 function get_item_bids($itemId ,$dbh){
     try{
         $statement = $dbh->prepare("SELECT TOP (10) [Bodbedrag] as 'amount', [Gebruiker] as 'user', [BodDag] as 'day',[BodTijdstip] as 'time' FROM [Bod] where Voorwerp = :item order by Bodbedrag desc ");
@@ -26,7 +24,6 @@ function get_item_bids($itemId ,$dbh){
     }
     return null;
 }
-
 
 function is_existing_product($itemId ,$dbh){
     try{
@@ -45,7 +42,6 @@ function is_existing_product($itemId ,$dbh){
 }
 
 function provide_feedback($dbh, $itemId, $soortFeedback, $beoordeling, $opmerking){
-
     try{
         $stmt = $dbh->prepare("INSERT INTO Feedback VALUES (:voorwerp, :gebruiker, :beoordeling, :datum, :tijd, :commentaar)");
         $stmt -> execute(
@@ -57,46 +53,35 @@ function provide_feedback($dbh, $itemId, $soortFeedback, $beoordeling, $opmerkin
                 ':tijd' => date('H:i:s'),
                 ':commentaar' => $opmerking
             ]);
-
-
     }
-
     catch(PDOException $e){
         echo $e->getMessage();
 
     }
-
     return true;
 }
 
 function buyer_feedback_given($dbh, $itemId){
-
     try{ $statement = $dbh->prepare("SELECT count(*) FROM Feedback WHERE Voorwerp = :item AND SoortGebruiker = 'Koper'");
     $statement -> execute(array(':item' => $itemId));
     $result = $statement->fetchColumn();
-
     if($result ==1)
         return true;
     return false;
     }
-
     catch(PDOException $e){
        echo $e;
    }
 }
 
-
-
 function seller_feedback_given($dbh, $itemId){
     try{ $statement = $dbh->prepare("SELECT count(*) FROM Feedback WHERE Voorwerp = :item AND SoortGebruiker = 'Verkoper'");
         $statement -> execute(array(':item' => $itemId));
         $result = $statement->fetchColumn();
-
         if($result ==1)
             return true;
         return false;
     }
-
     catch(PDOException $e){
         echo $e;
     }
@@ -131,7 +116,6 @@ function get_heighest_bidder($itemId, $dbh){
     }
     return null;
 }
-
 
 function get_minimum_bid_increase($currentBid){
     if($currentBid < 50)
@@ -196,6 +180,7 @@ function get_images_for_item($itemId,$dbh){
     }
     return null;
 }
+
 function get_catagory($dbh){
     $sql = "SELECT TOP (6) * FROM Rubriek";
     $query = $dbh->prepare($sql);
@@ -203,44 +188,20 @@ function get_catagory($dbh){
     return $Rubriek = $query->fetchAll();
 }
 
-
-
 function get_sub_categories($category, $dbh){
     $query = $dbh->prepare("SELECT [Rubrieknummer],[Rubrieknaam] FROM Rubriek where Volgnummer = :followNr order by Rubrieknaam desc");
     $query->execute(array(':followNr' => $category));
     return $query->fetchAll();
 }
 
-
-
 function get_category_view($dbh, $filter){
-    $query = "select top 30 v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v inner join VoorwerpInRubriek k
-on v.Voorwerpnummer = k.Voorwerp
-left join Rubriek r
-on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
-inner join Bestand B
-on v.Voorwerpnummer = b.Voorwerp" . $filter;
+    $query = "select top 30 v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v 
+inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
+left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
+inner join Bestand B on v.Voorwerpnummer = b.Voorwerp" . $filter;
 
     $statement = $dbh->query($query);
     $statement->execute();
     return $result = $statement->fetchAll();
 }
-//try{
 
-//catch(PDOException $e){
-//    echo $e;
-//}
-//return false;
-
-//function get_item_diz($itemId ,$dbh){
-//    try{
-//        $statement = $dbh->prepare("select titel from voorwerp where voorwerpnummer = :item ");
-//        $statement->execute(array(':item' => $itemId));
-//        $result = $statement->fetch();
-//        return $result['titel'];
-//    }
-//    catch(PDOException $e){
-//        echo $e;
-//    }
-//    return null;
-//}

@@ -21,22 +21,20 @@ if(isset($_GET)){
            $filter .= "and (Titel like '%".implode("%' or Titel like '%",$keywords)."%' or Beschrijving like '%".implode("%' or Beschrijving like '%",$keywords)."%')";
         }
     }
-    $filter .= isset($_GET['rubriek']) ? " and Rubrieknaam = '". $_GET['rubriek']."'" : '';
-
+    $filter .= isset($_GET['rubriek']) ? " and Rubrieknummer = '". $_GET['rubriek']."'" : '';
 
 }
 ?>
 <!--end keywords-->
 
 <main>
-
 <!--    SideNavigation Bar    -->
 
 <?php
 $Rubriek = get_sub_categories(-1,$db);
 $Artikelen = get_category_view($db,$filter);
 
-for($i =0; $i< sizeof($Artikelen); $i++){
+for($i =0; $i < sizeof($Artikelen); $i++){
     $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
     $Artikelen[$i]['Beschrijving'] = str_replace(">","&gt;",$Artikelen[$i]['Beschrijving']);
     $Artikelen[$i]['Beschrijving'] = str_replace("\"","&quot;",$Artikelen[$i]['Beschrijving']);
@@ -55,55 +53,7 @@ for($i =0; $i< sizeof($Artikelen); $i++){
     <div class="row">
         <!-- filters-->
         <div class="col-12 col-md-3 col-xl-2 search-filters">
-            <form method="get" action="VeilingsOverzicht.php">
-                <div class="row">
-                <div class="col-12">
-                    <h5><strong>filters</strong></h5>
-                </div>
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-12">
-                            <input type="text" name="filter-search" value="">
-                        </div>
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-12">
-                                    Prijs
-                                </div>
-                                <div class="col-5 col-md-12">
-                                    <input type="number" name="minValue" value="">
-                                </div>
-                                <div class="col-2 col-md-12">
-                                    tot
-                                </div>
-                                <div class="col-5 col-md-12">
-                                    <input type="number" name="maxValue" value="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 d-none">
-                            afstand
-                        </div>
-                        <div class="col-12 d-none">
-                            resterende tijd
-                        </div>
-                        <div class="col-12 margin-top">
-                            <input type="submit" value="Zoeken">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <h5><strong> Alle categorieën </strong></h5>
-                </div>
-                <div class="col-12">
-                    <ul class="list sidebar">
-                        <?php foreach($Rubriek as $row ):?>
-                            <li> <a href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
-                        <?php endforeach;?>
-                    </ul>
-                </div>
-            </div>
-            </form>
+            <?php include_once 'partial/searchFilters.php'; ?>
         </div>
         <!-- end filters-->
         <!-- results-->
