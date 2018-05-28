@@ -47,7 +47,7 @@
 
                 <?php foreach($Rubriek as $row ):?>
                     <div class="col-12 no-overflow white-text">
-                    <i class="fa fa-plus-square" onclick="toggleSubRubirek(this);" data-rubriek="<?php echo $row ['Rubrieknummer']; ?>"></i>
+                    <i class="fa fa-plus-square" onclick="toggleSubRubriek(this);" data-rubriek="<?php echo $row ['Rubrieknummer']; ?>"></i>
                     <a href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknummer'];?>" title="<?php echo $row['Rubrieknaam']; ?>" class="hidden-link">
                         <?php echo $row ['Rubrieknaam'];?>
                     </a>
@@ -60,17 +60,13 @@
 
 
 <script>
-    function toggleSubRubirek(e){
+    function toggleSubRubriek(e){
         if($(e).parent().children().length > 2){
             hideSubCategory(e);
         } else {
-            $selected = $(e).parent();
-           $(e).parent().parent().children().each(function(e){
-                console.log($(this).closest("div").closest("div"))
-                console.log($(this));
-
-                if($(this).closest("div").closest("div") != $(this)){
-                 $(this).css("color","green");
+            $(e).parent().siblings().each(function(){
+                if($(this).children().length > 2){
+                    $(this).children().remove();
                 }
             });
           getSubCategory(e);
