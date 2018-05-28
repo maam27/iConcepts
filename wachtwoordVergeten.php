@@ -62,7 +62,7 @@ if($questionCorrect == true){
     Er is recent een poging gedaan het wachtwoord van dit account te resetten op eenmaal andermaal.\r\n 
     
     Om dit process af te ronden, klik op de volgende link: \r\n
-    http://iproject14.icasites.nl/wachtwoordVergeten.php?validatiecode=".$code;
+    http://iproject14.icasites.nl/wachtwoordVergeten.php?code=".$code;
     $headers = "From:" . $from;
 
     /*
