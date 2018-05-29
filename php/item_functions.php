@@ -189,7 +189,8 @@ function get_catagory($dbh){
 }
 
 function get_sub_categories($category, $dbh){
-    $query = $dbh->prepare("SELECT [Rubrieknummer],[Rubrieknaam] FROM Rubriek where Volgnummer = :followNr order by Rubrieknaam asc");
+    // ;
+    $query = $dbh->prepare("select Rubrieknummer, Rubrieknaam, (select count(rub.Rubrieknummer) from Rubriek rub where rub.Volgnummer = riek.Rubrieknummer) as 'subrubrieken' from Rubriek riek where riek.Volgnummer = :followNr order by riek.Rubrieknaam asc");
     $query->execute(array(':followNr' => $category));
     return $query->fetchAll();
 }
