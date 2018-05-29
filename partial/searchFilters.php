@@ -95,7 +95,6 @@
     }
 
     function hideSubCategory(e){
-        console.log($(e).find("i").hasClass("fa-minus-square"));
         if($(e).is("i")){
             $(e).addClass('fa-plus-square').removeClass('fa-minus-square');
         }else{
