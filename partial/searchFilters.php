@@ -71,9 +71,6 @@
         } else {
             $(e).parent().siblings().each(function(){
                 hideSubCategory(this);
-                // if($(this).children().length > 2){
-                //     $(this).children().remove();
-                // }
             });
           getSubCategory(e);
         }
@@ -97,8 +94,8 @@
     }
 
     function hideSubCategory(e){
-        if($(e).hasClass("fa-minus-square")){
-        $(e).addClass('fa-plus-square').removeClass('fa-minus-square');}
+        if($(e).find("i").hasClass("fa-minus-square")){
+        $(e).find("i").addClass('fa-plus-square').removeClass('fa-minus-square');}
         $("div.row",$(e).parent()).remove();
     }
 
