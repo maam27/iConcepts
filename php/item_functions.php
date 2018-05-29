@@ -223,6 +223,18 @@ function add_auction($dbh, $titel, $beschrijving, $looptijd, $country, $city, $s
 {
     $date_open = date('Y-m-d H:i:s');
     $date_close = date('Y-m-d H:i:s');
+
+    if($payment_instructions==''){
+        $payment_instructions=NULL;
+    }
+
+    if($shipment_instructions==''){
+        $shipment_instructions=NULL;
+    }
+
+    if($shipment_cost==0.00){
+        $shipment_cost=NULL;
+    }
     try {
         $stmt = $dbh->prepare("INSERT INTO Voorwerp VALUES (:Voorwerpnummer, :titel, :beschrijving, :startprijs, :betalingswijze, :betalingsinstructie, :plaatsnaam, :land, :looptijd, :looptijdbegindag, :looptijdbegintijdstip, 
                                  :verzendkosten, :verzendinstructies, :verkoper, :koper, :looptijdeindedag, :looptijdeindetijdstip, :veilinggesloten, :verkoopprijs)");
@@ -266,6 +278,19 @@ function add_auction_to_category($dbh, $voorwerpnummer, $genre){
         ':Voorwerp' => $voorwerpnummer,
         ':Rubriek' => $genre
     ]);
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+
+function get_bottom_category($dbh){
+    try{
+        $stmt = $dbh -> prepare("select * from rubriek r left join rubriek k on r.Rubrieknummer = k.volgnummer 
+where k.volgnummer IS NULL order by r.Rubrieknaam asc ");
+        $stmt -> execute();
+        $result = $stmt->fetchall();
+        return $result;
     }
     catch (PDOException $e) {
         echo $e;
