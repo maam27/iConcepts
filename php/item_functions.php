@@ -205,3 +205,69 @@ inner join Bestand B on v.Voorwerpnummer = b.Voorwerp" . $filter;
     return $result = $statement->fetchAll();
 }
 
+function get_highest_auction_number($dbh){
+
+    try{
+        $statement = $dbh -> prepare("select top 1 Voorwerpnummer from voorwerp where voorwerpnummer > 16 AND voorwerpnummer < 110301827613 order by voorwerpnummer desc");
+        $statement -> execute();
+        $result = $statement-> fetch();
+        return $result['Voorwerpnummer'];
+    }
+
+    catch(PDOException $e){
+        echo $e;
+    }
+}
+
+function add_auction($dbh, $titel, $beschrijving, $looptijd, $country, $city, $start_price, $payment_method, $payment_instructions, $shipment_cost, $shipment_instructions, $verkoper, $voorwerpnummer)
+{
+    $date_open = date('Y-m-d H:i:s');
+    $date_close = date('Y-m-d H:i:s');
+    try {
+        $stmt = $dbh->prepare("INSERT INTO Voorwerp VALUES (:Voorwerpnummer, :titel, :beschrijving, :startprijs, :betalingswijze, :betalingsinstructie, :plaatsnaam, :land, :looptijd, :looptijdbegindag, :looptijdbegintijdstip, 
+                                 :verzendkosten, :verzendinstructies, :verkoper, :koper, :looptijdeindedag, :looptijdeindetijdstip, :veilinggesloten, :verkoopprijs)");
+        $stmt->execute([
+            ':Voorwerpnummer' => $voorwerpnummer,
+            ':titel' => $titel,
+            ':beschrijving' => $beschrijving,
+            ':startprijs' => $start_price,
+            ':betalingswijze' => $payment_method,
+            ':betalingsinstructie' => $payment_instructions,
+            ':plaatsnaam' => $city,
+            ':land' => $country,
+            ':looptijd' => $looptijd,
+            ':looptijdbegindag' => $date_open,
+            ':looptijdbegintijdstip' => $date_open,
+            ':verzendkosten' => $shipment_cost,
+            ':verzendinstructies' => $shipment_instructions,
+            ':verkoper' => $verkoper,
+            ':koper' => NULL,
+            ':looptijdeindedag' => date('Y-m-d H:i:s', strtotime($date_close . ' + ' . $looptijd . ' days')),
+            ':looptijdeindetijdstip' => $date_close,
+            ':veilinggesloten' => 0,
+            ':verkoopprijs' => NULL
+
+        ]);
+
+        if ($stmt->rowCount() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (PDOException $e) {
+        echo $e;
+    }
+}
+
+function add_auction_to_category($dbh, $voorwerpnummer, $genre){
+    try{
+    $stmt = $dbh -> prepare("INSERT INTO VoorwerpInRubriek VALUES (:Voorwerp, :Rubriek)");
+    $stmt -> execute([
+        ':Voorwerp' => $voorwerpnummer,
+        ':Rubriek' => $genre
+    ]);
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
