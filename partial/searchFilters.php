@@ -95,8 +95,12 @@
     }
 
     function hideSubCategory(e){
-        if($(e).find("i").hasClass("fa-minus-square")){
-        $(e).find("i").addClass('fa-plus-square').removeClass('fa-minus-square');}
+        console.log($(e).find("i").hasClass("fa-minus-square"));
+        if($(e).is("i")){
+            $(e).addClass('fa-plus-square').removeClass('fa-minus-square');
+        }else{
+            $(e).find("i").addClass('fa-plus-square').removeClass('fa-minus-square');
+        }
         $("div.row",$(e).parent()).remove();
     }
 </script>
