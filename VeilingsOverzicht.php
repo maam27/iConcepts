@@ -105,12 +105,12 @@ require_once 'partial/page_footer.php';
 include_once 'partial/scripts.php';
 require_once 'partial/timer.php';
 ?>
-<script>
-    $('#SearchEngine').submit(
 
+<script>
+    $("#SearchEngine").submit(
         function(form){
             alert(this);
-            form.preventDefault()
+            form.preventDefault();
         }
     );
 </script>
