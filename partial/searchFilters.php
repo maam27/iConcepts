@@ -36,6 +36,9 @@
                 <div class="col-12 margin-top">
                     <input type="submit" value="Zoeken">
                 </div>
+                <div class="col-12 margin-top">
+                    <input type="hidden" id="rubriekFilter" name="rubriek" value="<?php echo if_set("rubriek","get")?>">
+                </div>
             </div>
         </div>
         <div class="col-12">
@@ -45,15 +48,14 @@
             <div class="row">
                 <div class="col-12 no-overflow white-text" href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknummer'];?>"  >
                     <i class="fa fa-plus-square invisible"></i>
-                    <a href="VeilingsOverzicht.php?rubriek=-1" title="<?php echo $row['Rubrieknaam']; ?>" class="hidden-link">
+                    <a href="VeilingsOverzicht.php?rubriek=-1" title="<?php echo $row['Rubrieknaam']; ?>" class="hidden-link rubriek">
                         Alle categorieën
                     </a>
                 </div>
-
                 <?php foreach($Rubriek as $row ):?>
                     <div class="col-12 no-overflow white-text">
                     <i class="fa fa-plus-square" onclick="toggleSubRubriek(this);" data-rubriek="<?php echo $row ['Rubrieknummer']; ?>"></i>
-                    <a href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknummer'];?>" title="<?php echo $row['Rubrieknaam']; ?>" class="hidden-link">
+                    <a href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknummer'];?>" title="<?php echo $row['Rubrieknaam']; ?>" class="hidden-link rubriek">
                         <?php echo $row ['Rubrieknaam'];?>
                     </a>
                  </div>
@@ -62,7 +64,6 @@
         </div>
     </div>
 </form>
-
 
 <script>
     function toggleSubRubriek(e){
@@ -98,5 +99,4 @@
         $(e).find("i").addClass('fa-plus-square').removeClass('fa-minus-square');}
         $("div.row",$(e).parent()).remove();
     }
-
 </script>
