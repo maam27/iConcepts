@@ -1,17 +1,7 @@
-<?php
-/*
- * Enable error reporting
- */
-ini_set( 'display_errors', 1 );
-error_reporting( E_ALL );
+<?
+$date = new DateTime();
+echo $date;
+$date->add(new DateInterval('P1D')); // P1D means a period of 1 day
+$Date2 = $date->format('Y-m-d');
+echo $Date2;
 
-/*
- * Setup email addresses and change it to your own
- */
-$from = "noreply@iproject24.icasites.nl";
-$to = "bcv_neo@hotmail.com";
-$subject = "Simple test for mail function";
-$message = "This is a test to check if php mail function sends out the email";
-$headers = "From:" . $from;
-
-mail($to,$subject,$message, $headers);
