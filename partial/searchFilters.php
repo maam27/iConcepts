@@ -1,4 +1,4 @@
-<form method="get" action="VeilingsOverzicht.php">
+<form id="filters" method="get" action="VeilingsOverzicht.php">
     <div class="row">
         <div class="col-12">
             <h5><strong>filters</strong></h5>
@@ -9,7 +9,7 @@
                     Zoek op keywords
                 </div>
                 <div class="col-12">
-                    <input type="text" name="filter-search" value="">
+                    <input type="text" id="keywords" name="search" value="">
                 </div>
                 <div class="col-12">
                     <div class="row">

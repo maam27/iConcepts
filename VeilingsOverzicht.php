@@ -109,8 +109,11 @@ require_once 'partial/timer.php';
 <script>
     $("#SearchEngine").submit(
         function(form){
-            alert(this);
             form.preventDefault();
+            $value = $("#search").val();
+           $filters = $("#filters");
+           $filters.find("#keywords").val($value);
+            $($filters).submit();
         }
     );
 </script>
