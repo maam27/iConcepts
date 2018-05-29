@@ -98,6 +98,15 @@ for($i =0; $i < sizeof($Artikelen); $i++){
         <!-- end results-->
 </div>
 </main>
+<script>
+    $('#SearchEngine').submit(
+
+        function(form){
+            alert(this);
+            form.preventDefault()
+    }
+    );
+    </script>
 
 <?php
 require_once 'partial/page_footer.php';
