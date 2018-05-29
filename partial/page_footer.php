@@ -1,5 +1,5 @@
 <!-- start joke -->
-<div data-video="PfYnvDL0Qcw"
+<div data-video="4Qu5Pk9uJds"
      data-autoplay="1"
      data-loop="1"
      id="youtube-audio"
