@@ -16,7 +16,7 @@ $Rubriek = get_catagory($db);
                 <a href="index.php"><i class="fa fa-home"></i> Thuispagina<span class="sr-only">(current)</span></a>
             </li>
             <li>
-                <form class="form-inline mt-2 mt-md-0 d-flex flex-row flex-nowrap" method="get" action="VeilingsOverzicht.php">
+                <form class="form-inline mt-2 mt-md-0 d-flex flex-row flex-nowrap" id="SearchEngine" method="get" action="VeilingsOverzicht.php">
                     <input class="form-control mr-sm-2" type="text" placeholder="Vul hier zoektermen in" aria-label="Search" name="search">
                     <button class="btn my-2 my-sm-0" type="submit">Zoeken</button>
                 </form>

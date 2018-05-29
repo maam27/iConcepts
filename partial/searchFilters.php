@@ -6,6 +6,9 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-12">
+                    Zoek op keywords
+                </div>
+                <div class="col-12">
                     <input type="text" name="filter-search" value="">
                 </div>
                 <div class="col-12">
@@ -42,7 +45,9 @@
             <div class="row">
                 <div class="col-12 no-overflow white-text" href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknummer'];?>"  >
                     <i class="fa fa-plus-square invisible"></i>
-                    Alle categorieën
+                    <a href="VeilingsOverzicht.php?rubriek=-1" title="<?php echo $row['Rubrieknaam']; ?>" class="hidden-link">
+                        Alle categorieën
+                    </a>
                 </div>
 
                 <?php foreach($Rubriek as $row ):?>
@@ -65,9 +70,7 @@
             hideSubCategory(e);
         } else {
             $(e).parent().siblings().each(function(){
-                if($(this).children().length > 2){
-                    $(this).children().remove();
-                }
+                hideSubCategory(this);
             });
           getSubCategory(e);
         }
@@ -91,8 +94,9 @@
     }
 
     function hideSubCategory(e){
-        $(e).addClass('fa-plus-square').removeClass('fa-minus-square');
-        $("div",$(e).parent()).remove();
+        if($(e).find("i").hasClass("fa-minus-square")){
+        $(e).find("i").addClass('fa-plus-square').removeClass('fa-minus-square');}
+        $("div.row",$(e).parent()).remove();
     }
 
 </script>

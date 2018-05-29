@@ -99,8 +99,18 @@ for($i =0; $i < sizeof($Artikelen); $i++){
 </div>
 </main>
 
+
 <?php
 require_once 'partial/page_footer.php';
 include_once 'partial/scripts.php';
 require_once 'partial/timer.php';
 ?>
+
+<script>
+    $("#SearchEngine").submit(
+        function(form){
+            alert(this);
+            form.preventDefault();
+        }
+    );
+</script>
