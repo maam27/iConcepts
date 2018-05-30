@@ -13,7 +13,7 @@ $dbh = $db;
 
 <!--keywords-->
 <?php
-$filter = ' where 1 = 1';
+$filter = ' where VeilingGesloten = 0';
 if(isset($_GET)){
     if(isset($_GET['search'])){
         if(!empty($_GET["search"])){
