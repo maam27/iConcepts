@@ -189,10 +189,38 @@ function get_catagory($dbh){
 }
 
 function get_sub_categories($category, $dbh){
-    // ;
     $query = $dbh->prepare("select Rubrieknummer, Rubrieknaam, (select count(rub.Rubrieknummer) from Rubriek rub where rub.Volgnummer = riek.Rubrieknummer) as 'subrubrieken' from Rubriek riek where riek.Volgnummer = :followNr order by riek.Rubrieknaam asc");
     $query->execute(array(':followNr' => $category));
     return $query->fetchAll();
+}
+
+
+function get_all_sub_categories_of($category, $dbh){
+    if(!is_numeric($category)){
+        return null;
+    }
+    $categories = array($category);
+    $lowest = array($category);
+
+    while(1==1) {
+        $tmp = implode(",",$lowest);
+        $query = "select Rubrieknummer from Rubriek where Volgnummer in (".$tmp.")";
+
+        $query = $dbh->prepare($query);
+        $query->execute();
+        $result = $query->fetchAll();
+
+        if(sizeof($result) <= 0 ){
+            break;
+        }else{
+            $lowest = array();
+            foreach($result as $r){
+                array_push($categories, $r['Rubrieknummer']);
+                array_push($lowest, $r['Rubrieknummer']);
+            }
+        }
+    }
+    return $categories;
 }
 
 function get_category_view($dbh, $filter){
