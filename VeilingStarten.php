@@ -20,6 +20,7 @@ if (!empty($_SESSION['user'])) {
 $succesvolletoevoeging = false;
 if (!empty($_POST['voorwerp-titel']) AND $_POST['beschrijving'] != '') {
     echo print_r($_POST);
+
     if (add_auction($db, $_POST['voorwerp-titel'], $_POST['beschrijving'], $_POST['looptijd'], $_POST['country'], $_POST['city'], $_POST['start-price'], $_POST['paymentmethod'], $_POST['payment-instructions'],
         $_POST['shipment-cost'], $_POST['shipment-instructions'], $_SESSION['user'], ($voorwerpnummer = get_highest_auction_number($db) + 1))) {
         $succesvolletoevoeging = true;
@@ -29,54 +30,24 @@ if (!empty($_POST['voorwerp-titel']) AND $_POST['beschrijving'] != '') {
          *                                UPLOADEN VAN EEN IMAGEBESTAND
          *
          *============================================================================================= */
-        extract($_POST);
-        $error=array();
-        $extension=array("jpeg","jpg","png","gif");
-        $index = 0;
-        foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name)
-        {
-            $file_name=$_FILES["files"]["name"][$key];
-            $file_tmp=$_FILES["files"]["tmp_name"][$key];
-            $ext=pathinfo($file_name,PATHINFO_EXTENSION);
-            $newname = '';
-            switch ($index){
-                case 0:
-                    $newname = ''.$voorwerpnummer + 'a.'.$ext;
-                    break;
-                case 1:
-                    $newname = ''.$voorwerpnummer + 'b.'.$ext;
-                    break;
-                case 2:
-                    $newname = ''.$voorwerpnummer + 'c.'.$ext;
-                    break;
-                case 3:
-                    $newname = ''.$voorwerpnummer + 'd.'.$ext;
-                    break;
-            }
 
-            if(in_array($ext,$extension))
-            {
-                if(!file_exists($newname))
-                {
-                    $filename=basename($file_name,$ext);
-                    $target = 'uploads/'.$newname;
-                    move_uploaded_file($file_tmp=$_FILES["files"]["tmp_name"][$key],$target);
-                }
-                else
-                {
-                    $filename=basename($file_name,$ext);
-                    $target = 'uploads/'.$newname;
-                    move_uploaded_file($file_tmp=$_FILES["files"]["tmp_name"][$key],$target);
-                }
-            }
-            else
-            {
-                array_push($error,"$file_name, ");
-            }
+        add_image('image-1', $voorwerpnummer, 'a');
+        if(!empty($_FILES['image-2']['name'])){
+            add_image('image-2', $voorwerpnummer, 'b');
+        }
+        if(!empty($_FILES['image-3']['name'])){
+            add_image('image-3', $voorwerpnummer, 'c');
+        }
+        if(!empty($_FILES['image-4']['name'])){
+            add_image('image-4', $voorwerpnummer, 'd');
         }
 
 
-        add_auction_to_category($db, $voorwerpnummer, $_POST['Rubriek']);
+
+
+
+
+    add_auction_to_category($db, $voorwerpnummer, $_POST['Rubriek']);
         if ($_POST['Rubriek2'] != 'Geen' AND $_POST['Rubriek'] != $_POST['Rubriek2']) {
             add_auction_to_category($db, $voorwerpnummer, $_POST['Rubriek2']);
         }
@@ -157,7 +128,7 @@ else{
                                 <?php
                                 foreach($categorieën as $key => $value){
 
-                                    echo '<option value=["'.$value[0].'"]>'.$value['1'].'</option>';
+                                    echo '<option value="'.$value[0].'">'.$value['1'].'</option>';
                                 }
                                 ?>
                             </select>
@@ -168,7 +139,7 @@ else{
                                 <?php
                                 foreach($categorieën as $key => $value){
 
-                                    echo '<option value=["'.$value[0].'"]>'.$value['1'].'</option>';
+                                    echo '<option value="'.$value[0].'">'.$value['1'].'</option>';
                                 }
                                 ?>
                             </select>
@@ -178,12 +149,12 @@ else{
                         ?>
                         <label for="voorwerp-titel"><strong>Titel*</strong></label>
                         <input id="voorwerp-titel" name="voorwerp-titel" type="text" pattern="([^<>])+"
-                               placeholder="Bureaustoel" maxlength="255" required>
+                               placeholder="Bureaustoel" value="a" maxlength="255" required>
                         <label for="beschrijving"><strong>Beschrijving*</strong></label>
 
                         <textarea class="form-control" name="beschrijving"  id="beschrijving" required
                                   placeholder="Hier komt de door U geschreven beschrijving van het te veilen product staan."
-                                  pattern="([^<>])+" maxlength="4000"
+                                  pattern="([^<>])+" value="a" maxlength="4000"
                                   rows="5"></textarea>
                         <label for="looptijd"><strong>Looptijd*</strong></label><br>
                         <select id="looptijd" name="looptijd">
@@ -194,13 +165,13 @@ else{
                             <option value="1">10 Dagen</option>
                         </select><br>
                         <label for="image-1"><strong>Afbeelding 1*</strong></label>
-                        <input type="file" name="files[]" id="image-1" required>
+                        <input type="file" name="image-1" id="image-1" required>
                         <label for="image-2"><strong>Afbeelding 2</strong></label>
-                        <input type="file" name="files[]" id="image-2">
+                        <input type="file" name="image-2" id="image-2">
                         <label for="image-3"><strong>Afbeelding 3</strong></label>
-                        <input type="file" name="files[]" id="image-3">
+                        <input type="file" name="image-3" id="image-3">
                         <label for="image-4"><strong>Afbeelding 4</strong></label>
-                        <input type="file" name="files[]" id="image-4">
+                        <input type="file" name="image-4" id="image-4">
                     <p class="error-message">Velden met een * zijn verplicht</p>
                     </div>
                     <div class="col-md-6">
