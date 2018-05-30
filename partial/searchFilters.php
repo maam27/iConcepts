@@ -17,13 +17,13 @@
                             Prijs
                         </div>
                         <div class="col-5 col-md-12">
-                            <input type="number" name="minValue" value="">
+                            <input type="number" name="minValue" value="" min="0">
                         </div>
                         <div class="col-2 col-md-12">
                             tot
                         </div>
                         <div class="col-5 col-md-12">
-                            <input type="number" name="maxValue" value="">
+                            <input type="number" name="maxValue" value="" min="0">
                         </div>
                     </div>
                 </div>
