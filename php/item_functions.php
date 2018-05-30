@@ -224,10 +224,13 @@ function get_all_sub_categories_of($category, $dbh){
 }
 
 function get_category_view($dbh, $filter){
-    $query = "select top 30 v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v 
-inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
-left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
-inner join Bestand B on v.Voorwerpnummer = b.Voorwerp" . $filter;
+      $query = "select distinct top 30 * from Voorwerp where Voorwerpnummer in (
+	select Voorwerpnummer from voorwerp v 
+	inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
+	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer".$filter."
+	)";
+
+    //echo $query;
 
     $statement = $dbh->query($query);
     $statement->execute();
