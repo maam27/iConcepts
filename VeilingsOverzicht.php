@@ -21,7 +21,10 @@ if(isset($_GET)){
            $filter .= "and (Titel like '%".implode("%' or Titel like '%",$keywords)."%' or Beschrijving like '%".implode("%' or Beschrijving like '%",$keywords)."%')";
         }
     }
-    $filter .= isset($_GET['rubriek']) ? " and Rubrieknummer = '". $_GET['rubriek']."'" : '';
+    if(isset($_GET['rubriek'])){
+        $tmp = implode(",",get_all_sub_categories_of($_GET["rubriek"],$db));
+        $filter .=  " and Rubrieknummer in (".$tmp.")";
+    }
 
 }
 ?>
