@@ -144,6 +144,42 @@ function place_bid($itemId,$bid,$user,$dbh){
     return false;
 }
 
+function get_auctions_with_open_bid($dbh, $user){
+    try{
+        $statement = $dbh->prepare("select * from voorwerp where voorwerpnummer in (select DISTINCT voorwerp from bod where gebruiker=:user) AND VeilingGesloten = 0");
+        $statement->execute(array(':user' => $user));
+        $result = $statement->fetchall();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+}
+
+function get_auctions_with_closed_bid($dbh, $user){
+    try{
+        $statement = $dbh->prepare("select * from voorwerp where voorwerpnummer in (select DISTINCT voorwerp from bod where gebruiker=:user) AND VeilingGesloten = 1");
+        $statement->execute(array(':user' => $user));
+        $result = $statement->fetchall();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+}
+
+function get_sellers_auctions($dbh, $verkoper){
+    try{
+        $statement = $dbh->prepare("SELECT * FROM Voorwerp where Verkoper = :verkoper");
+        $statement->execute(array(':verkoper' => $verkoper));
+        $result = $statement->fetchall();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+}
+
 function get_sellers_open_auctions($dbh, $verkoper){
     try{
         $statement = $dbh->prepare("SELECT * FROM Voorwerp where Verkoper = :verkoper AND VeilingGesloten=0");
@@ -160,6 +196,18 @@ function get_sellers_closed_auctions($dbh, $verkoper){
     try{
         $statement = $dbh->prepare("SELECT * FROM Voorwerp where Verkoper = :verkoper AND VeilingGesloten=1");
         $statement->execute(array(':verkoper' => $verkoper));
+        $result = $statement->fetchall();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo $e;
+    }
+}
+
+function get_won_auctions($dbh, $gebruiker){
+    try{
+        $statement = $dbh->prepare("SELECT * FROM Voorwerp where Koper = :gebruiker AND VeilingGesloten=1");
+        $statement->execute(array(':gebruiker' => $gebruiker));
         $result = $statement->fetchall();
         return $result;
     }
@@ -326,6 +374,19 @@ where k.volgnummer IS NULL order by r.Rubrieknaam asc ");
     }
 }
 
+function add_image_to_database($dbh, $filenaam, $voorwerpnummer){
+    try{
+        $stmt = $dbh -> prepare("INSERT INTO bestand VALUES (:filenaam, :voorwerpnummer)");
+        $stmt -> execute([
+            ':filenaam' => $filenaam,
+            ':voorwerpnummer' => $voorwerpnummer
+        ]);
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+
 //This function separates the extension from the rest of the file name and returns it
 function get_extension($filename)
 {
@@ -337,7 +398,7 @@ function get_extension($filename)
 }
 
 function add_image($inputveld_naam, $voorwerpnummer, $letter){
-    $target_dir = "pics/";
+    $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES[$inputveld_naam]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));

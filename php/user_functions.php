@@ -460,7 +460,37 @@ function check_if_seller_has_feedback($dbh, $verkoper)
     }
 }
 
-function get_feedback_seller($dbh, $verkoper)
+function get_ungiven_feedback($dbh, $user)
+{
+    try {
+        $stmt = $dbh->prepare("SELECT * FROM Voorwerp v 
+        full join Feedback f on f.Voorwerp = v.Voorwerpnummer
+        where (Verkoper = :gebruiker1 or Koper = :gebruiker2) and f.Voorwerp is null and v.VeilingGesloten=1");
+        $stmt->execute(array(':gebruiker1' => $user, ':gebruiker2' => $user));
+
+        $result = $stmt -> fetchAll();
+        return $result;
+
+
+
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function get_feedback($dbh, $verkoper)
+{
+    try {
+        $stmt = $dbh->prepare("select  Voorwerp, Feedbacksoort, Commentaar, Dag, Koper from voorwerp v join feedback f on v.voorwerpnummer = f.Voorwerp where verkoper = :verkoper and soortgebruiker='Koper'");
+        $stmt->execute(array(':verkoper' => $verkoper));
+        return $result = $stmt->fetchAll();
+
+
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+function get_feedback_seller_top_5($dbh, $verkoper)
 {
     try {
         $stmt = $dbh->prepare("select top 5 Voorwerp, Feedbacksoort, Commentaar, Dag, Koper from voorwerp v join feedback f on v.voorwerpnummer = f.Voorwerp where verkoper = :verkoper and soortgebruiker='Koper'");
