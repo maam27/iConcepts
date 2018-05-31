@@ -18,7 +18,7 @@ if(isset($_GET)){
     if(isset($_GET['search'])){
         if(!empty($_GET["search"])){
             $keywords = explode(' ',$_GET['search']);
-            $filter .= " and (Titel like '%".implode("%' or Titel like '%",$keywords)."%' or Beschrijving like '%".implode("%' or Beschrijving like '%",$keywords)."%')";
+            $filter .= " and (Titel like '%".implode("%' or Titel like '%",$keywords)."%')";// or Beschrijving like '%".implode("%' or Beschrijving like '%",$keywords)."%')";
         }
     }
     if(isset($_GET['rubriek'])){
