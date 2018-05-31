@@ -86,7 +86,7 @@ else if(check_if_seller($db, $_GET['id'])){
                 <div class="col-md-6 margin-top margin-bottom">
                     <h4>Meest recente feedback</h4>
                     <?php if(check_if_seller_has_feedback($db, $_GET['id'])){
-                        $feedback = get_feedback_seller($db, $_GET['id']);
+                        $feedback = get_feedback_seller_top_5($db, $_GET['id']);
                         for ($i = 0; $i < count($feedback); $i++) {
 
                             echo '<p>"'.$feedback[$i]['Commentaar'].'" - '.$feedback[$i]['Feedbacksoort'].'/5 </p>';

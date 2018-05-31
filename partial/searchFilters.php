@@ -1,7 +1,7 @@
 <form id="filters" method="get" action="VeilingsOverzicht.php">
     <div class="row">
         <div class="col-12">
-            <h5><strong>filters</strong></h5>
+            <h5 class="margin-top"><strong>filters</strong></h5>
         </div>
         <div class="col-12">
             <div class="row">
@@ -9,7 +9,7 @@
                     Zoek op keywords
                 </div>
                 <div class="col-12">
-                    <input type="text" id="keywords" name="search" value="">
+                    <input type="text" id="keywords" name="search" value="<?php echo if_set("search","get")?>">
                 </div>
                 <div class="col-12">
                     <div class="row">
@@ -17,13 +17,13 @@
                             Prijs
                         </div>
                         <div class="col-5 col-md-12">
-                            <input type="number" name="minValue" value="">
+                            <input type="number" name="minValue" value="<?php echo if_set("minValue","get")?>" min="0">
                         </div>
                         <div class="col-2 col-md-12">
                             tot
                         </div>
                         <div class="col-5 col-md-12">
-                            <input type="number" name="maxValue" value="">
+                            <input type="number" name="maxValue" value="<?php echo if_set("maxValue","get")?>" min="0">
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                 if(data.length <=0){
                     $(e).addClass('invisible');
                 }
-                $(e).parent().append(data);
+                $(data).hide().appendTo($(e).parent()).show('slow');
             }
         });
     }
@@ -100,6 +100,7 @@
         }else{
             $(e).find("i").addClass('fa-plus-square').removeClass('fa-minus-square');
         }
-        $("div.row",$(e).parent()).remove();
+        $remove = $("div.row",$(e).parent());
+        $remove.hide('slow', function(){ $remove.remove(); });
     }
 </script>

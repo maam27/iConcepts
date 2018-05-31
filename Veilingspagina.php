@@ -124,7 +124,7 @@ if(isset($_POST)){
                                 $bodNr = $i + 1;
                                 echo "<div class='row'>";
                                 echo "<div class='d-none d-lg-block d-xl-block col-lg-1'>" . $bodNr . ":</div>";
-                                echo "<div class='col-6 col-lg-6 no-overflow'>€" . number_format((float) currency($bids[$i]['amount']),2,',','.') . "</div>";
+                                echo "<div class='col-6 col-lg-6 no-overflow'>€" . number_format((float) $bids[$i]['amount'],2,',','.') . "</div>";
                                 echo "<div class='col-6 col-lg-5 no-overflow'>" . $bids[$i]['user'] . "</div>";
                                 echo "</div>";
                             }
