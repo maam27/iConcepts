@@ -455,3 +455,19 @@ function add_image($inputveld_naam, $voorwerpnummer, $letter){
         }
     }
 }
+
+function get_image_name($dbh, $itemId){
+    try{
+        $statement = $dbh->prepare("select top 1 * from bestand  where voorwerp = :item order by filenaam");
+        $statement->execute(array(':item' => $itemId));
+        $result = $statement->fetch();
+
+        return $result['Filenaam'];
+
+
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+
+}

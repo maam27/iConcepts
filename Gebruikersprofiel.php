@@ -172,10 +172,15 @@ if (empty($_SESSION['user'])) {
                                     for($i =0; $i < sizeof($queryResultaat); $i++){
                                         echo '<div class="productblock">';
                                         if($queryResultaat[$i]['Voorwerpnummer']>20 AND $queryResultaat[$i]['Voorwerpnummer']<110301827613){
-
+                                            $locatie = "http://iproject14.icasites.nl/uploads/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
+                                            echo '<img src="'.$locatie.'" alt="a" class="img-thumbnail"/>';
                                         }
-                                        echo '<img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>';
-                                        echo '<div><p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p></div></div>';
+                                        else{
+                                            $locatie= "http://iproject14.icasites.nl/pics/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
+                                            echo '<img src="'.$locatie.'" alt="a"" class="img-thumbnail"/>';
+                                        }
+
+                                        echo '<div><p>'.$queryResultaat[$i]['Titel'].'</p></div></div>';
                                     }
                                     ?>
                                 <?php }
