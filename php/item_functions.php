@@ -279,12 +279,12 @@ function get_category_view($dbh, $filter, $results_per_page){
 	inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
 	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer " . $filter .") ORDER BY Voorwerpnummer asc offset " . $start_from . " ROWS FETCH NEXT " . $results_per_page . "ROWS ONLY" ;
 
+//    echo $query;
 
     $statement = $dbh->query($query);
     $statement->execute();
     return $result = $statement->fetchAll();
 }
-
 
 function get_highest_auction_number($dbh){
 
@@ -423,7 +423,7 @@ function add_image($inputveld_naam, $voorwerpnummer, $letter){
         $uploadOk = 0;
     }
 // Check file size
-    if ($_FILES[$inputveld_naam]["size"] > 500000) {
+    if ($_FILES[$inputveld_naam]["size"] > 5000000) {
         echo "Sorry, your file is too large.";
         $uploadOk = 0;
     }
@@ -450,4 +450,20 @@ function add_image($inputveld_naam, $voorwerpnummer, $letter){
             echo "Sorry, there was an error uploading your file.";
         }
     }
+}
+
+function get_image_name($dbh, $itemId){
+    try{
+        $statement = $dbh->prepare("select top 1 * from bestand  where voorwerp = :item order by filenaam");
+        $statement->execute(array(':item' => $itemId));
+        $result = $statement->fetch();
+
+        return $result['Filenaam'];
+
+
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+
 }

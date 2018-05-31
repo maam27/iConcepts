@@ -47,8 +47,14 @@ function floor_with_precision($val, $precision)
 }
 
 function get_image_path($img,$thumbnail = false){
-    if($thumbnail)
-        return "http://iproject14.icasites.nl/thumbnails/".$img;
-    return "http://iproject14.icasites.nl/pics/".$img;
-
+    $path="";
+    if(file_exists("uploads/".$img)){
+        $path = "uploads/" . $img;
+    }
+    else if($thumbnail) {
+        $path = "thumbnails/" . $img;
+    } else{
+        $path = "pics/".$img;
+    }
+    return "http://iproject14.icasites.nl/".$path;
 }

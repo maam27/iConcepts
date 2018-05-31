@@ -460,17 +460,25 @@ function check_if_seller_has_feedback($dbh, $verkoper)
     }
 }
 
-function get_ungiven_feedback($dbh, $user)
+function get_ungiven_feedback_koper($dbh, $user)
 {
     try {
-        $stmt = $dbh->prepare("SELECT * FROM Voorwerp v 
-        full join Feedback f on f.Voorwerp = v.Voorwerpnummer
-        where (Verkoper = :gebruiker1 or Koper = :gebruiker2) and f.Voorwerp is null and v.VeilingGesloten=1");
+        $stmt = $dbh->prepare("Select * from voorwerp where voorwerpnummer not in (SELECT Voorwerpnummer FROM Voorwerp v full join feedback f on v.Voorwerpnummer = f.voorwerp where Koper = :gebruiker1 AND SoortGebruiker = 'Koper') and koper = :gebruiker2 and veilinggesloten = 1 OR Voorwerpnummer in 
+  (Select Voorwerpnummer from voorwerp where voorwerpnummer not in (SELECT Voorwerpnummer FROM Voorwerp v full join feedback f on v.Voorwerpnummer = f.voorwerp where Verkoper = :gebruiker3 AND SoortGebruiker = 'Verkoper') and verkoper = :gebruiker4 and VeilingGesloten = 0)");
+        $stmt->execute(array(':gebruiker1' => $user, ':gebruiker2' => $user, ':gebruiker3' => $user, ':gebruiker4' => $user));
+        return $result = $stmt->fetchAll();
+
+
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function get_ungiven_feedback_seller($dbh, $user){
+    try {
+        $stmt = $dbh->prepare("Select * from voorwerp where voorwerpnummer not in (SELECT Voorwerpnummer FROM Voorwerp v full join feedback f on v.Voorwerpnummer = f.voorwerp where Verkoper = :gebruiker1 AND SoortGebruiker = 'Verkoper') and verkoper = :gebruiker2 and VeilingGesloten = 0");
         $stmt->execute(array(':gebruiker1' => $user, ':gebruiker2' => $user));
-
-        $result = $stmt -> fetchAll();
-        return $result;
-
+        return $result = $stmt->fetchAll();
 
 
     } catch (PDOException $e) {

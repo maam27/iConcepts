@@ -48,7 +48,7 @@
             <div class="row">
                 <div class="col-12 no-overflow white-text" href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknummer'];?>"  >
                     <i class="fa fa-plus-square invisible"></i>
-                    <a href="VeilingsOverzicht.php?rubriek=-1" title="<?php echo $row['Rubrieknaam']; ?>" class="hidden-link rubriek">
+                    <a href="VeilingsOverzicht.php" title="<?php echo $row['Rubrieknaam']; ?>" class="hidden-link rubriek">
                         Alle categorieën
                     </a>
                 </div>

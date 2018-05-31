@@ -12,28 +12,36 @@ include_once 'partial/menu.php';
 if (isset($_SESSION['user'])) {
     $data1 = get_information_user($db, $_SESSION['user']);
     $queryResultaat = 1;
+
     if (isset($_GET['QuerySoort'])) {
         switch ($_GET['QuerySoort']) {
             case 'MijnVeilingenOpen':
                 $queryResultaat = get_sellers_open_auctions($db, $_SESSION['user']);
+                $text=false;
                 break;
             case 'MijnVeilingenGesloten':
                 $queryResultaat = get_sellers_closed_auctions($db, $_SESSION['user']);
+                $text=false;
                 break;
             case 'MijnBiedingenOpen':
                 $queryResultaat = get_auctions_with_open_bid($db, $_SESSION['user']);
+                $text=false;
                 break;
             case 'MijnBiedingenGesloten':
                 $queryResultaat = get_auctions_with_closed_bid($db, $_SESSION['user']);
+                $text=false;
                 break;
             case 'MijnFeedback':
                 $queryResultaat = get_feedback($db, $_SESSION['user']);
+                $text=true;
                 break;
             case 'FeedbackGeven':
-                $queryResultaat = get_ungiven_feedback($db, $_SESSION['user']);
+                $queryResultaat = get_ungiven_feedback_koper($db, $_SESSION['user']);
+                $text = false;
                 break;
             case 'MijnGewonnenVeilingen':
                 $queryResultaat = get_won_auctions($db, $_SESSION['user']);
+                $text=false;
                 break;
         }
     }
@@ -64,19 +72,19 @@ if (empty($_SESSION['user'])) {
 
                             <ul class="hyperlinklijst d-md-block d-flex flex-column justify-content-center align-items-center">
                                 <?php if ($data1['Verkoper'] == 1) { ?>
-                                    <li><a href="Gebruikersprofiel.php?QuerySoort=MijnVeilingenOpen">Mijn
+                                    <li><a href="Gebruikersprofiel.php?QuerySoort=MijnVeilingenOpen#Jump">Mijn
                                             veilingen(open)</a></li>
-                                    <li><a href="Gebruikersprofiel.php?QuerySoort=MijnVeilingenGesloten">Mijn
+                                    <li><a href="Gebruikersprofiel.php?QuerySoort=MijnVeilingenGesloten#Jump">Mijn
                                             veilingen(gesloten)</a></li><?php } ?>
-                                <li><a href="Gebruikersprofiel.php?QuerySoort=MijnBiedingenOpen">Mijn
+                                <li><a href="Gebruikersprofiel.php?QuerySoort=MijnBiedingenOpen#Jump">Mijn
                                         biedingen(open)</a>
                                 </li>
-                                <li><a href="Gebruikersprofiel.php?QuerySoort=MijnBiedingenGesloten">Mijn
+                                <li><a href="Gebruikersprofiel.php?QuerySoort=MijnBiedingenGesloten#Jump">Mijn
                                         biedingen(gesloten)</a></li>
-                                <li><a href="Gebruikersprofiel.php?QuerySoort=MijnFeedback">Mijn ontvangen feedback</a>
+                                <li><a href="Gebruikersprofiel.php?QuerySoort=MijnFeedback#Jump">Mijn ontvangen feedback</a>
                                 </li>
-                                <li><a href="Gebruikersprofiel.php?QuerySoort=FeedbackGeven">Feedback geven</a></li>
-                                <li><a href="Gebruikersprofiel.php?QuerySoort=MijnGewonnenVeilingen">Mijn gewonnen
+                                <li><a href="Gebruikersprofiel.php?QuerySoort=FeedbackGeven#Jump">Feedback geven</a></li>
+                                <li><a href="Gebruikersprofiel.php?QuerySoort=MijnGewonnenVeilingen#Jump">Mijn gewonnen
                                         veilingen</a></li>
                             </ul>
 
@@ -158,27 +166,47 @@ if (empty($_SESSION['user'])) {
                     <div class="row margin-top">
                         <div class="col-12">
                             <?php if (is_array($queryResultaat)) {
-
                                 ?>
-                                <h1 class="error-message text-center">Gevonden Veilingen</h1>
+                                <h1 class="error-message text-center" id="Jump">Gevonden Veiling(en)</h1>
                                 <?php
                                 $size = sizeof($queryResultaat);
                                 if ($size == 0) {
                                     ?>
+
                                     <p> Er zijn geen resultaten gevonden met deze specifieke zoekopdracht.</p>
                                     <?php
-                                } else {
+                                }
+
+                                else if ($text==false){
+
                                     echo '<div class="d-flex justify-content-around flex-wrap">';
                                     for($i =0; $i < sizeof($queryResultaat); $i++){
                                         echo '<div class="productblock">';
-                                        if($queryResultaat[$i]['Voorwerpnummer']>20 AND $queryResultaat[$i]['Voorwerpnummer']<110301827613){
-
+                                        if($queryResultaat[$i]['Voorwerpnummer']>=20 AND $queryResultaat[$i]['Voorwerpnummer']<110301827613){
+                                            $locatie = "http://iproject14.icasites.nl/uploads/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
+                                            echo '<img src="'.$locatie.'" alt="a" class="hardcoded-thumbnail"/>';
                                         }
-                                        echo '<img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>';
-                                        echo '<div><p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p></div></div>';
+                                        else if($queryResultaat[$i]['Voorwerpnummer']<20){
+                                            $locatie = "http://iproject14.icasites.nl/images/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
+                                            echo '<img src="'.$locatie.'" alt="a" class="hardcoded-thumbnail"/>';
+                                        }
+                                        else{
+                                            $locatie= "http://iproject14.icasites.nl/pics/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
+                                            echo '<img src="'.$locatie.'" alt="a"" class="hardcoded-thumbnail"/>';
+                                        }
+
+                                        echo '<div><p><a class="black-text" href="Veilingspagina.php?voorwerp='.$queryResultaat[$i]['Voorwerpnummer'].'"> '.$queryResultaat[$i]['Titel'].'</a></p></div></div>';
                                     }
+
+
                                     ?>
                                 <?php }
+
+                                else{
+                                    for($i=0; $i<sizeof($queryResultaat); $i++){
+
+                                    }
+                                }
                             } ?>
                         </div>
                     </div>

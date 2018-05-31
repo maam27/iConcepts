@@ -20,7 +20,7 @@ if(isset($_GET)){
     if(isset($_GET['search'])){
         if(!empty($_GET["search"])){
             $keywords = explode(' ',$_GET['search']);
-           $filter .= " and (Titel like '%".implode("%' or Titel like '%",$keywords)."%' or Beschrijving like '%".implode("%' or Beschrijving like '%",$keywords)."%')";
+            $filter .= " and (Titel like '%".implode("%' or Titel like '%",$keywords)."%')";// or Beschrijving like '%".implode("%' or Beschrijving like '%",$keywords)."%')";
         }
     }
     if(isset($_GET['rubriek'])){
@@ -43,14 +43,13 @@ if(isset($_GET)){
                 $maxval = $_GET['maxValue'];
             }
         }
-        //" and Startprijs between ".$minval." and ".$maxval;
         $filter .= " and
-    CASE WHEN EXISTS (SELECT * FROM Bod WHERE Voorwerp = Voorwerpnummer) THEN
-        (SELECT top 1 Bodbedrag FROM Bod WHERE Voorwerp = Voorwerpnummer order by Bodbedrag desc)
-  ELSE
-    Startprijs
-  END
-  between ".$minval." and ".$maxval;
+        CASE WHEN EXISTS (SELECT * FROM Bod WHERE Voorwerp = Voorwerpnummer) THEN
+            (SELECT top 1 Bodbedrag FROM Bod WHERE Voorwerp = Voorwerpnummer order by Bodbedrag desc)
+        ELSE
+            Startprijs
+        END
+        between ".$minval." and ".$maxval;
     }
 }
 ?>
@@ -63,17 +62,20 @@ if(isset($_GET)){
 $Rubriek = get_sub_categories(-1,$db);
 $Artikelen = get_category_view($db,$filter,$results_per_page);
 
-//for($i =0; $i < sizeof($Artikelen); $i++){
-//    $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
-//    $Artikelen[$i]['Beschrijving'] = str_replace(">","&gt;",$Artikelen[$i]['Beschrijving']);
-//    $Artikelen[$i]['Beschrijving'] = str_replace("\"","&quot;",$Artikelen[$i]['Beschrijving']);
-//    $Artikelen[$i]['Beschrijving'] = str_replace("\'","&#44",$Artikelen[$i]['Beschrijving']);
-//
-//    $Artikelen[$i]['Titel'] = str_replace("<","&lt;",$Artikelen[$i]['Titel']);
-//    $Artikelen[$i]['Titel'] = str_replace(">","&gt;",$Artikelen[$i]['Titel']);
-//    $Artikelen[$i]['Titel'] = str_replace("\"","&quot;",$Artikelen[$i]['Titel']);
-//    $Artikelen[$i]['Titel'] = str_replace("\'","&#44",$Artikelen[$i]['Titel']);
-//}
+}
+$Artikelen = get_category_view($db,$filter,$page);
+
+for($i =0; $i < sizeof($Artikelen); $i++){
+    $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
+    $Artikelen[$i]['Beschrijving'] = str_replace(">","&gt;",$Artikelen[$i]['Beschrijving']);
+    $Artikelen[$i]['Beschrijving'] = str_replace("\"","&quot;",$Artikelen[$i]['Beschrijving']);
+    $Artikelen[$i]['Beschrijving'] = str_replace("\'","&#44",$Artikelen[$i]['Beschrijving']);
+
+    $Artikelen[$i]['Titel'] = str_replace("<","&lt;",$Artikelen[$i]['Titel']);
+    $Artikelen[$i]['Titel'] = str_replace(">","&gt;",$Artikelen[$i]['Titel']);
+    $Artikelen[$i]['Titel'] = str_replace("\"","&quot;",$Artikelen[$i]['Titel']);
+    $Artikelen[$i]['Titel'] = str_replace("\'","&#44",$Artikelen[$i]['Titel']);
+}
 
 ?>
 
