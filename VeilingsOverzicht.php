@@ -59,7 +59,12 @@ if(isset($_GET)){
 
 <?php
 $Rubriek = get_sub_categories(-1,$db);
-$Artikelen = get_category_view($db,$filter);
+$page = 1;
+if (isset($_GET['page'])) {
+   $page = $_GET['page'];
+
+}
+$Artikelen = get_category_view($db,$filter,$page);
 
 //for($i =0; $i < sizeof($Artikelen); $i++){
 //    $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
