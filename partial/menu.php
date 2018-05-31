@@ -54,6 +54,7 @@ $Rubriek = get_catagory($db);
         <?php foreach($Rubriek as $row ):?>
             <li class="hoofd-rubriek"> <a href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
         <?php endforeach;?>
+        <li><a href="VeilingsOverzicht.php"> Veilings Overzicht</a></li>
     </ul>
 </div>
 
