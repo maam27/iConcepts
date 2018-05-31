@@ -18,7 +18,7 @@ if(isset($_GET)){
     if(isset($_GET['search'])){
         if(!empty($_GET["search"])){
             $keywords = explode(' ',$_GET['search']);
-            $filter .= " and (Titel like '%".implode("%' or Titel like '%",$keywords)."%' or Beschrijving like '%".implode("%' or Beschrijving like '%",$keywords)."%')";
+            $filter .= " and (Titel like '%".implode("%' or Titel like '%",$keywords)."%')";// or Beschrijving like '%".implode("%' or Beschrijving like '%",$keywords)."%')";
         }
     }
     if(isset($_GET['rubriek'])){
@@ -65,17 +65,17 @@ if (isset($_GET['page'])) {
 }
 $Artikelen = get_category_view($db,$filter,$page);
 
-//for($i =0; $i < sizeof($Artikelen); $i++){
-//    $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
-//    $Artikelen[$i]['Beschrijving'] = str_replace(">","&gt;",$Artikelen[$i]['Beschrijving']);
-//    $Artikelen[$i]['Beschrijving'] = str_replace("\"","&quot;",$Artikelen[$i]['Beschrijving']);
-//    $Artikelen[$i]['Beschrijving'] = str_replace("\'","&#44",$Artikelen[$i]['Beschrijving']);
-//
-//    $Artikelen[$i]['Titel'] = str_replace("<","&lt;",$Artikelen[$i]['Titel']);
-//    $Artikelen[$i]['Titel'] = str_replace(">","&gt;",$Artikelen[$i]['Titel']);
-//    $Artikelen[$i]['Titel'] = str_replace("\"","&quot;",$Artikelen[$i]['Titel']);
-//    $Artikelen[$i]['Titel'] = str_replace("\'","&#44",$Artikelen[$i]['Titel']);
-//}
+for($i =0; $i < sizeof($Artikelen); $i++){
+    $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
+    $Artikelen[$i]['Beschrijving'] = str_replace(">","&gt;",$Artikelen[$i]['Beschrijving']);
+    $Artikelen[$i]['Beschrijving'] = str_replace("\"","&quot;",$Artikelen[$i]['Beschrijving']);
+    $Artikelen[$i]['Beschrijving'] = str_replace("\'","&#44",$Artikelen[$i]['Beschrijving']);
+
+    $Artikelen[$i]['Titel'] = str_replace("<","&lt;",$Artikelen[$i]['Titel']);
+    $Artikelen[$i]['Titel'] = str_replace(">","&gt;",$Artikelen[$i]['Titel']);
+    $Artikelen[$i]['Titel'] = str_replace("\"","&quot;",$Artikelen[$i]['Titel']);
+    $Artikelen[$i]['Titel'] = str_replace("\'","&#44",$Artikelen[$i]['Titel']);
+}
 
 ?>
 
@@ -113,8 +113,8 @@ $Artikelen = get_category_view($db,$filter,$page);
                                         $img = get_images_for_item($kavel['Voorwerpnummer'],$db);
                                         $imgname = (!empty($img))? $imgname = $img[0]['filenaam']: $imgname = "";
                                         ?>
-                                        <img src="<?php echo get_image_path($imgname,false); ?>"
-                                             class="img-fluid"/>
+<!--                                        <img src="--><?php //echo get_image_path($imgname,false); ?><!--" class="img-fluid"/>-->
+                                        <img src="<?php echo get_image_path($imgname,false); ?>" onError="this.onerror=null;this.src='/images/noimage.gif';" class="img-fluid"/>
                                     </div>
                                     <div class="col-9">
                                         <div class="row">
