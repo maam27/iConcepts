@@ -62,7 +62,7 @@ if(isset($_GET)){
 $Rubriek = get_sub_categories(-1,$db);
 $Artikelen = get_category_view($db,$filter,$results_per_page);
 
-}
+
 $Artikelen = get_category_view($db,$filter,$page);
 
 for($i =0; $i < sizeof($Artikelen); $i++){
