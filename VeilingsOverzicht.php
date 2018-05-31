@@ -85,7 +85,7 @@ $Artikelen = get_category_view($db,$filter);
                                     <div class="col-3">
                                         <?php
                                         $img = get_images_for_item($kavel['Voorwerpnummer'],$db);
-                                        $imgname = $img[0]['filenaam'];
+                                        $imgname = (!empty($img))? $imgname = $img[0]['filenaam']: $imgname = "";
                                         ?>
                                         <img src="<?php echo get_image_path($imgname,false); ?>"
                                              class="img-fluid"/>

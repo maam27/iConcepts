@@ -1,7 +1,7 @@
 <form id="filters" method="get" action="VeilingsOverzicht.php">
     <div class="row">
         <div class="col-12">
-            <h5><strong>filters</strong></h5>
+            <h5 class="margin-top"><strong>filters</strong></h5>
         </div>
         <div class="col-12">
             <div class="row">
@@ -89,7 +89,7 @@
                 if(data.length <=0){
                     $(e).addClass('invisible');
                 }
-                $(e).parent().append(data);
+                $(data).hide().appendTo($(e).parent()).show('slow');
             }
         });
     }
@@ -100,6 +100,7 @@
         }else{
             $(e).find("i").addClass('fa-plus-square').removeClass('fa-minus-square');
         }
-        $("div.row",$(e).parent()).remove();
+        $remove = $("div.row",$(e).parent());
+        $remove.hide('slow', function(){ $remove.remove(); });
     }
 </script>
