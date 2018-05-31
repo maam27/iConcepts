@@ -32,14 +32,18 @@ if (!empty($_POST['voorwerp-titel']) AND $_POST['beschrijving'] != '') {
          *============================================================================================= */
 
         add_image('image-1', $voorwerpnummer, 'a');
+        add_image_to_database($db, 'uploads/'.$voorwerpnummer.'_a.'.pathinfo($_FILES['image-1']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
         if(!empty($_FILES['image-2']['name'])){
             add_image('image-2', $voorwerpnummer, 'b');
+            add_image_to_database($db, 'uploads/'.$voorwerpnummer.'_b.'.pathinfo($_FILES['image-2']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
         }
         if(!empty($_FILES['image-3']['name'])){
             add_image('image-3', $voorwerpnummer, 'c');
+            add_image_to_database($db, 'uploads/'.$voorwerpnummer.'_c.'.pathinfo($_FILES['image-3']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
         }
         if(!empty($_FILES['image-4']['name'])){
             add_image('image-4', $voorwerpnummer, 'd');
+            add_image_to_database($db, 'uploads/'.$voorwerpnummer.'_d.'.pathinfo($_FILES['image-4']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
         }
 
 
