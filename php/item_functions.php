@@ -471,3 +471,36 @@ function get_image_name($dbh, $itemId){
     }
 
 }
+
+function get_feedback_1($dbh, $user)
+{
+
+    try {
+        $statement = $dbh->prepare("select Voorwerp, Feedbacksoort, Commentaar,  Dag, Tijdstip, Titel, Koper from feedback f left join voorwerp v on f.voorwerp = v.voorwerpnummer where soortgebruiker = 'koper' and verkoper = :gebruiker");
+        $statement->execute(array(':gebruiker' => $user));
+        $result = $statement->fetchall();
+        return $result;
+    }
+
+    catch (PDOException $e) {
+        echo $e;
+
+    }
+
+}
+
+function get_feedback_2($dbh, $user){
+
+    try {
+        $statement = $dbh->prepare("select Voorwerp, Feedbacksoort, Commentaar,  Dag, Tijdstip, Titel, Verkoper  from feedback f left join voorwerp v on f.voorwerp = v.voorwerpnummer where soortgebruiker = 'verkoper' and koper=:gebruiker ");
+        $statement->execute(array(':gebruiker' => $user));
+        $result = $statement->fetchall();
+        return $result;
+    }
+
+    catch (PDOException $e) {
+        echo $e;
+
+    }
+
+}
