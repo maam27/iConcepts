@@ -9,7 +9,7 @@
                     Zoek op keywords
                 </div>
                 <div class="col-12">
-                    <input type="text" id="keywords" name="search" value="">
+                    <input type="text" id="keywords" name="search" value="<?php echo if_set("search","get")?>">
                 </div>
                 <div class="col-12">
                     <div class="row">
@@ -17,13 +17,13 @@
                             Prijs
                         </div>
                         <div class="col-5 col-md-12">
-                            <input type="number" name="minValue" value="" min="0">
+                            <input type="number" name="minValue" value="<?php echo if_set("minValue","get")?>" min="0">
                         </div>
                         <div class="col-2 col-md-12">
                             tot
                         </div>
                         <div class="col-5 col-md-12">
-                            <input type="number" name="maxValue" value="" min="0">
+                            <input type="number" name="maxValue" value="<?php echo if_set("maxValue","get")?>" min="0">
                         </div>
                     </div>
                 </div>

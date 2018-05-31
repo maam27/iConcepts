@@ -28,6 +28,28 @@ if(isset($_GET)){
         }
     }
 
+    if(isset($_GET['minValue'])||isset($_GET['maxValue'])) {
+        $minval = 0;
+        $maxval = 99999999999;
+        if (isset($_GET['minValue'])) {
+            if (is_numeric($_GET['minValue'])) {
+                $minval = $_GET['minValue'];
+            }
+        }
+        if (isset($_GET['maxValue'])) {
+            if (is_numeric($_GET['maxValue'])) {
+                $maxval = $_GET['maxValue'];
+            }
+        }
+        //" and Startprijs between ".$minval." and ".$maxval;
+        $filter .= " and
+    CASE WHEN EXISTS (SELECT * FROM Bod WHERE Voorwerp = Voorwerpnummer) THEN
+        (SELECT top 1 Bodbedrag FROM Bod WHERE Voorwerp = Voorwerpnummer order by Bodbedrag desc)
+  ELSE
+    Startprijs
+  END
+  between ".$minval." and ".$maxval;
+    }
 }
 ?>
 <!--end keywords-->
@@ -111,8 +133,16 @@ $Artikelen = get_category_view($db,$filter);
                                     </div>
                                 </div>
                             </a>
+                            <hr>
                         <?php endforeach;
                     }?>
+
+                    <div class="row">
+                        <div class="col-12">
+                            pagina nr's
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

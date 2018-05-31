@@ -230,7 +230,7 @@ function get_category_view($dbh, $filter){
 	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer".$filter."
 	)";
 
-    //echo $query;
+    echo $query;
 
     $statement = $dbh->query($query);
     $statement->execute();
