@@ -271,33 +271,20 @@ function get_all_sub_categories_of($category, $dbh){
     return $categories;
 }
 
-function get_category_view($dbh, $filter){
-      $query = "select distinct top 30 * from Voorwerp where Voorwerpnummer in (
+function get_category_view($dbh, $filter, $results_per_page){
+    if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
+    $start_from = ($page-1) * $results_per_page;
+    $query = "select distinct * from Voorwerp where Voorwerpnummer in (
 	select Voorwerpnummer from voorwerp v 
 	inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
-	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer".$filter."
-	)";
-//    expirimenting multiple page results
-    if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
-    $results_per_page = 30; //  offset number of results per page
-    $start_from = ($page-1) * $results_per_page;
-    $sql = "select v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v
-inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
-left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
-inner join Bestand B on v.Voorwerpnummer = b.Voorwerp  ORDER BY Voorwerpnummer asc offset " . $start_from . " ROWS FETCH NEXT " . $results_per_page . " ROWS ONLY";
+	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer " . $filter .") ORDER BY Voorwerpnummer asc offset " . $start_from . " ROWS FETCH NEXT " . $results_per_page . "ROWS ONLY" ;
 
 
-    //    end expiriment
-
-//$query = "select top 30 v.*, r.Rubrieknaam, r.Rubrieknummer, Filenaam from voorwerp v
-//inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
-//left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer
-//inner join Bestand B on v.Voorwerpnummer = b.Voorwerp" . $filter;
-
-    $statement = $dbh->query($sql);
+    $statement = $dbh->query($query);
     $statement->execute();
     return $result = $statement->fetchAll();
 }
+
 
 function get_highest_auction_number($dbh){
 
