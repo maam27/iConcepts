@@ -198,9 +198,15 @@ main > div.container{
     margin-bottom: 1em;
 }
 
+.productblock > .hardcoded-thumbnail,
 .productblock > .img-thumbnail{
     padding:0;
     border:none;
+}
+
+.hardcoded-thumbnail{
+    width:190px;
+    height:190px;
 }
 
 .productblock p {
@@ -440,6 +446,9 @@ a.hidden-link{
     color:white;
 }
 
+.black-text{
+    color:black;
+}
 .sub-categorie{
     padding-left:15px;
 }
