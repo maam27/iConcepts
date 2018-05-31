@@ -65,17 +65,17 @@ if (isset($_GET['page'])) {
 }
 $Artikelen = get_category_view($db,$filter,$page);
 
-//for($i =0; $i < sizeof($Artikelen); $i++){
-//    $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
-//    $Artikelen[$i]['Beschrijving'] = str_replace(">","&gt;",$Artikelen[$i]['Beschrijving']);
-//    $Artikelen[$i]['Beschrijving'] = str_replace("\"","&quot;",$Artikelen[$i]['Beschrijving']);
-//    $Artikelen[$i]['Beschrijving'] = str_replace("\'","&#44",$Artikelen[$i]['Beschrijving']);
-//
-//    $Artikelen[$i]['Titel'] = str_replace("<","&lt;",$Artikelen[$i]['Titel']);
-//    $Artikelen[$i]['Titel'] = str_replace(">","&gt;",$Artikelen[$i]['Titel']);
-//    $Artikelen[$i]['Titel'] = str_replace("\"","&quot;",$Artikelen[$i]['Titel']);
-//    $Artikelen[$i]['Titel'] = str_replace("\'","&#44",$Artikelen[$i]['Titel']);
-//}
+for($i =0; $i < sizeof($Artikelen); $i++){
+    $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
+    $Artikelen[$i]['Beschrijving'] = str_replace(">","&gt;",$Artikelen[$i]['Beschrijving']);
+    $Artikelen[$i]['Beschrijving'] = str_replace("\"","&quot;",$Artikelen[$i]['Beschrijving']);
+    $Artikelen[$i]['Beschrijving'] = str_replace("\'","&#44",$Artikelen[$i]['Beschrijving']);
+
+    $Artikelen[$i]['Titel'] = str_replace("<","&lt;",$Artikelen[$i]['Titel']);
+    $Artikelen[$i]['Titel'] = str_replace(">","&gt;",$Artikelen[$i]['Titel']);
+    $Artikelen[$i]['Titel'] = str_replace("\"","&quot;",$Artikelen[$i]['Titel']);
+    $Artikelen[$i]['Titel'] = str_replace("\'","&#44",$Artikelen[$i]['Titel']);
+}
 
 ?>
 

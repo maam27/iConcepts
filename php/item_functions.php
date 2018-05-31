@@ -283,7 +283,7 @@ function get_category_view($dbh, $filter, $pageNr, $rows = 20){
 	inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
 	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer".$filter.") ORDER BY Voorwerpnummer asc offset ".$offset." ROWS FETCH NEXT ".$rows." ROWS ONLY ";
 
-    echo $query;
+//    echo $query;
 
     $statement = $dbh->query($query);
     $statement->execute();
