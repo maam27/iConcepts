@@ -18,7 +18,7 @@ if(isset($_GET)){
     if(isset($_GET['search'])){
         if(!empty($_GET["search"])){
             $keywords = explode(' ',$_GET['search']);
-           $filter .= " and (Titel like '%".implode("%' or Titel like '%",$keywords)."%' or Beschrijving like '%".implode("%' or Beschrijving like '%",$keywords)."%')";
+            $filter .= " and (Titel like '%".implode("%' or Titel like '%",$keywords)."%' or Beschrijving like '%".implode("%' or Beschrijving like '%",$keywords)."%')";
         }
     }
     if(isset($_GET['rubriek'])){
@@ -41,14 +41,13 @@ if(isset($_GET)){
                 $maxval = $_GET['maxValue'];
             }
         }
-        //" and Startprijs between ".$minval." and ".$maxval;
         $filter .= " and
-    CASE WHEN EXISTS (SELECT * FROM Bod WHERE Voorwerp = Voorwerpnummer) THEN
-        (SELECT top 1 Bodbedrag FROM Bod WHERE Voorwerp = Voorwerpnummer order by Bodbedrag desc)
-  ELSE
-    Startprijs
-  END
-  between ".$minval." and ".$maxval;
+        CASE WHEN EXISTS (SELECT * FROM Bod WHERE Voorwerp = Voorwerpnummer) THEN
+            (SELECT top 1 Bodbedrag FROM Bod WHERE Voorwerp = Voorwerpnummer order by Bodbedrag desc)
+        ELSE
+            Startprijs
+        END
+        between ".$minval." and ".$maxval;
     }
 }
 ?>
