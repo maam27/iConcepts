@@ -427,7 +427,7 @@ function add_image($inputveld_naam, $voorwerpnummer, $letter){
         $uploadOk = 0;
     }
 // Check file size
-    if ($_FILES[$inputveld_naam]["size"] > 500000) {
+    if ($_FILES[$inputveld_naam]["size"] > 5000000) {
         echo "Sorry, your file is too large.";
         $uploadOk = 0;
     }
