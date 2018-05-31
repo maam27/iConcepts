@@ -271,14 +271,19 @@ function get_all_sub_categories_of($category, $dbh){
     return $categories;
 }
 
-function get_category_view($dbh, $filter){
-      $query = "select distinct top 30 * from Voorwerp where Voorwerpnummer in (
+function get_category_view($dbh, $filter, $pageNr, $rows = 20){
+    if(!is_numeric($pageNr))
+        $pageNr=0;
+    if(!is_numeric($rows))
+        $rows=20;
+    $offset = $pageNr*$rows;
+
+    $query = "select distinct * from Voorwerp where Voorwerpnummer in (
 	select Voorwerpnummer from voorwerp v 
 	inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
-	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer".$filter."
-	)";
+	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer".$filter.") ORDER BY Voorwerpnummer asc offset ".$offset." ROWS FETCH NEXT ".$rows." ROWS ONLY ";
 
-    echo $query;
+//    echo $query;
 
     $statement = $dbh->query($query);
     $statement->execute();
