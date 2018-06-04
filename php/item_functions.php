@@ -271,13 +271,17 @@ function get_all_sub_categories_of($category, $dbh){
     return $categories;
 }
 
-function get_category_view($dbh, $filter, $results_per_page){
-    if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
-    $start_from = ($page-1) * $results_per_page;
+function get_category_view($dbh, $filter, $pageNr, $rows = 20){
+    if(!is_numeric($pageNr))
+        $pageNr=1;
+    if(!is_numeric($rows))
+        $rows=20;
+    $offset = ($pageNr-1)*$rows;
+
     $query = "select distinct * from Voorwerp where Voorwerpnummer in (
 	select Voorwerpnummer from voorwerp v 
 	inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
-	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer " . $filter .") ORDER BY Voorwerpnummer asc offset " . $start_from . " ROWS FETCH NEXT " . $results_per_page . "ROWS ONLY" ;
+	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer".$filter.") ORDER BY Voorwerpnummer asc offset ".$offset." ROWS FETCH NEXT ".$rows." ROWS ONLY ";
 
 //    echo $query;
 

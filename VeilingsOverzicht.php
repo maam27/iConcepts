@@ -9,8 +9,6 @@ require_once 'php/item_functions.php';
 <?php
 include_once 'partial/menu.php';
 $dbh = $db;
-if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
-$results_per_page = 30; //  offset number of results per page
 ?>
 
 <!--keywords-->
@@ -60,9 +58,11 @@ if(isset($_GET)){
 
 <?php
 $Rubriek = get_sub_categories(-1,$db);
-$Artikelen = get_category_view($db,$filter,$results_per_page);
+$page = 1;
+if (isset($_GET['page'])) {
+   $page = $_GET['page'];
 
-
+}
 $Artikelen = get_category_view($db,$filter,$page);
 
 for($i =0; $i < sizeof($Artikelen); $i++){
@@ -143,7 +143,7 @@ for($i =0; $i < sizeof($Artikelen); $i++){
 
                     <div class="row">
                         <div class="col-12">
-                            pagina nr's:
+                            pagina nr's
                         </div>
                     </div>
 
