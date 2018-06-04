@@ -207,7 +207,9 @@ if (empty($_SESSION['user'])) {
                                     ?>
                                 <?php }
 
-                                else{echo '<div class="d-flex justify-content-around flex-wrap">';
+                                else{
+
+                                    echo '<div class="d-flex justify-content-around flex-wrap">';
                                     $size1 = sizeof($queryResultaat);
                                     $size2 = sizeof($queryResultaat2);
                                     if($size1 == 0 and $size2 == 0){
@@ -241,6 +243,7 @@ if (empty($_SESSION['user'])) {
                                 }
                                 echo '</div>';
                             } ?>
+
                         </div>
                     </div>
                 </div>
