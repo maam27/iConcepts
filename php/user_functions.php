@@ -460,7 +460,7 @@ function check_if_seller_has_feedback($dbh, $verkoper)
     }
 }
 
-function get_ungiven_feedback_koper($dbh, $user)
+function get_ungiven_feedback($dbh, $user)
 {
     try {
         $stmt = $dbh->prepare("Select * from voorwerp where voorwerpnummer not in (SELECT Voorwerpnummer FROM Voorwerp v full join feedback f on v.Voorwerpnummer = f.voorwerp where Koper = :gebruiker1 AND SoortGebruiker = 'Koper') and koper = :gebruiker2 and veilinggesloten = 1 OR Voorwerpnummer in 
@@ -474,17 +474,7 @@ function get_ungiven_feedback_koper($dbh, $user)
     }
 }
 
-function get_ungiven_feedback_seller($dbh, $user){
-    try {
-        $stmt = $dbh->prepare("Select * from voorwerp where voorwerpnummer not in (SELECT Voorwerpnummer FROM Voorwerp v full join feedback f on v.Voorwerpnummer = f.voorwerp where Verkoper = :gebruiker1 AND SoortGebruiker = 'Verkoper') and verkoper = :gebruiker2 and VeilingGesloten = 0");
-        $stmt->execute(array(':gebruiker1' => $user, ':gebruiker2' => $user));
-        return $result = $stmt->fetchAll();
 
-
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-}
 
 function get_feedback($dbh, $verkoper)
 {

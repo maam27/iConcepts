@@ -12,7 +12,7 @@ include_once 'partial/menu.php';
 if (isset($_SESSION['user'])) {
     $data1 = get_information_user($db, $_SESSION['user']);
     $queryResultaat = 1;
-
+    $feedbackGeven=false;
     if (isset($_GET['QuerySoort'])) {
         switch ($_GET['QuerySoort']) {
             case 'MijnVeilingenOpen':
@@ -32,12 +32,14 @@ if (isset($_SESSION['user'])) {
                 $text=false;
                 break;
             case 'MijnFeedback':
-                $queryResultaat = get_feedback($db, $_SESSION['user']);
+                $queryResultaat = get_feedback_1($db, $_SESSION['user']);
+                $queryResultaat2 = get_feedback_2($db, $_SESSION['user']);
                 $text=true;
                 break;
             case 'FeedbackGeven':
-                $queryResultaat = get_ungiven_feedback_koper($db, $_SESSION['user']);
+                $queryResultaat = get_ungiven_feedback($db, $_SESSION['user']);
                 $text = false;
+                $feedbackGeven = true;
                 break;
             case 'MijnGewonnenVeilingen':
                 $queryResultaat = get_won_auctions($db, $_SESSION['user']);
@@ -166,15 +168,41 @@ if (empty($_SESSION['user'])) {
                     <div class="row margin-top">
                         <div class="col-12">
                             <?php if (is_array($queryResultaat)) {
-                                ?>
+                                if($text == true){
+                                    echo '<h1 class="error-message text-center">Gevonden feedback</h1>';
+                                }
+                                else{?>
+
                                 <h1 class="error-message text-center" id="Jump">Gevonden Veiling(en)</h1>
-                                <?php
+                                <?php }
                                 $size = sizeof($queryResultaat);
-                                if ($size == 0) {
+                                if ($size == 0 AND $text==false) {
                                     ?>
 
                                     <p> Er zijn geen resultaten gevonden met deze specifieke zoekopdracht.</p>
                                     <?php
+                                }
+
+                                else if ($feedbackGeven==true){
+
+                                    echo '<div class="d-flex justify-content-around flex-wrap">';
+                                    for($i =0; $i < sizeof($queryResultaat); $i++){
+                                        echo '<div class="productblock">';
+                                        if($queryResultaat[$i]['Voorwerpnummer']>=20 AND $queryResultaat[$i]['Voorwerpnummer']<110301827613){
+                                            $locatie = "http://iproject14.icasites.nl/uploads/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
+                                            echo '<img src="'.$locatie.'" alt="a" class="hardcoded-thumbnail"/>';
+                                        }
+                                        else if($queryResultaat[$i]['Voorwerpnummer']<20){
+                                            $locatie = "http://iproject14.icasites.nl/images/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
+                                            echo '<img src="'.$locatie.'" alt="a" class="hardcoded-thumbnail"/>';
+                                        }
+                                        else{
+                                            $locatie= "http://iproject14.icasites.nl/pics/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
+                                            echo '<img src="'.$locatie.'" alt="a"" class="hardcoded-thumbnail"/>';
+                                        }
+
+                                        echo '<div><p><a class="black-text" href="Feedback.php?voorwerp='.$queryResultaat[$i]['Voorwerpnummer'].'"> '.$queryResultaat[$i]['Titel'].'</a></p></div></div>';
+                                    }
                                 }
 
                                 else if ($text==false){
@@ -197,17 +225,45 @@ if (empty($_SESSION['user'])) {
 
                                         echo '<div><p><a class="black-text" href="Veilingspagina.php?voorwerp='.$queryResultaat[$i]['Voorwerpnummer'].'"> '.$queryResultaat[$i]['Titel'].'</a></p></div></div>';
                                     }
-
-
-                                    ?>
-                                <?php }
+                                    }
 
                                 else{
+
+                                    echo '<div class="d-flex justify-content-around flex-wrap">';
+                                    $size1 = sizeof($queryResultaat);
+                                    $size2 = sizeof($queryResultaat2);
+                                    if($size1 == 0 and $size2 == 0){
+                                        echo '<p> Er zijn geen resultaten gevonden met deze specifieke zoekopdracht.</p>';
+                                    }
+
+                                    if(!empty($queryResultaat)){
+                                        echo '<div class="col-md-6 feedbackBlock seperator-bottom seperator-none-md seperator-right-md">';
+                                        echo '<h5>Van kopers ontvangen:</h5>';
                                     for($i=0; $i<sizeof($queryResultaat); $i++){
 
+
+                                        echo '<p class="text-center">"'.$queryResultaat[$i]['Commentaar'].'" - '.$queryResultaat[$i]['Feedbacksoort'].'/5 </p>';
+                                        echo '<p class="eindeFeedback text-center">'.'-'.$queryResultaat[$i]['Koper']. ',  ' . $queryResultaat[$i]['Dag'];
+                                        echo '<p class="margin-bottom"> </p>';
+                                        echo '</div>';
+                                        }
+                                    }
+
+                                    if(!empty($queryResultaat2)){
+                                        echo '<div class="col-md-6 feedbackBlock">';
+                                        echo '<h5>Van verkopers ontvangen:</h5>';
+                                        for($i=0; $i<sizeof($queryResultaat2); $i++){
+
+                                            echo '<p class="text-center">"'.$queryResultaat2[$i]['Commentaar'].'" - '.$queryResultaat2[$i]['Feedbacksoort'].'/5 </p>';
+                                            echo '<p class="text-center eindeFeedback">'.'-'.$queryResultaat2[$i]['Verkoper']. ',  ' . $queryResultaat2[$i]['Dag'];
+                                            echo '<p> </p>';
+                                            echo '</div>';
+                                        }
                                     }
                                 }
+                                echo '</div>';
                             } ?>
+
                         </div>
                     </div>
                 </div>
