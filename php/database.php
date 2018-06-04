@@ -10,3 +10,13 @@ function get_db_connection()
         echo 'Connection failed: ' . $e->getMessage();
     }
 }
+
+/* function update_auction ($dbh)
+{
+//  try{
+  //  require_once 'credentials.php';
+
+  }
+
+}
+8?
