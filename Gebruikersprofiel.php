@@ -74,6 +74,7 @@ if (empty($_SESSION['user'])) {
 
                             <ul class="hyperlinklijst d-md-block d-flex flex-column justify-content-center align-items-center">
                                 <?php if ($data1['Verkoper'] == 1) { ?>
+                                    <li><a href="VeilingStarten.php">Start veiling</a></li>
                                     <li><a href="Gebruikersprofiel.php?QuerySoort=MijnVeilingenOpen#Jump">Mijn
                                             veilingen(open)</a></li>
                                     <li><a href="Gebruikersprofiel.php?QuerySoort=MijnVeilingenGesloten#Jump">Mijn
