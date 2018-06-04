@@ -11,11 +11,12 @@ function get_db_connection()
     }
 }
 
-function update_auction ($dbh)
+/* function update_auction ($dbh)
 {
-  try{
-    require_once 'credentials.php';
-    
+//  try{
+  //  require_once 'credentials.php';
+
   }
 
 }
+8?
