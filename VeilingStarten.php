@@ -153,12 +153,12 @@ else{
                         ?>
                         <label for="voorwerp-titel"><strong>Titel*</strong></label>
                         <input id="voorwerp-titel" name="voorwerp-titel" type="text" pattern="([^<>])+"
-                               placeholder="Bureaustoel" value="a" maxlength="255" required>
+                               placeholder="Bureaustoel"  maxlength="255" required>
                         <label for="beschrijving"><strong>Beschrijving*</strong></label>
 
                         <textarea class="form-control" name="beschrijving"  id="beschrijving" required
                                   placeholder="Hier komt de door U geschreven beschrijving van het te veilen product staan."
-                                  pattern="([^<>])+" value="a" maxlength="4000"
+                                  pattern="([^<>])+"  maxlength="4000"
                                   rows="5"></textarea>
                         <label for="looptijd"><strong>Looptijd*</strong></label><br>
                         <select id="looptijd" name="looptijd">
@@ -186,7 +186,7 @@ else{
                         <input id="city" name="city" type="text" placeholder="Arnhem" pattern="([^<>])+"
                                value="<?php echo $verkoperdata['Plaatsnaam'] ?>" maxlength="100" required>
                         <label for="start-price"><strong>Startprijs*</strong></label><br>
-                        <input class="col-7" min="0" value="0" id="start-price" name="start-price" type="number" <?php
+                        <input class="col-7" min="1" value="1" id="start-price" name="start-price" type="number" <?php
                         post_set('start-price', 'post') ?> required><br>
                         <label for="paymentmethod"><strong>Betalingswijze*</strong></label><br>
                         <select name="paymentmethod" id="paymentmethod">

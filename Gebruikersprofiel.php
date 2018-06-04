@@ -150,7 +150,7 @@ if (empty($_SESSION['user'])) {
                    href="UpdateUserInformation.php">Pas gegevens aan</a>
 
                 <a class="btn btn-primary col-md-3 user-section-button-margin"
-                   href="UpdatePassword.php">Pas wachtwoord aan</a>
+                   href="WachtwoordVeranderen.php">Pas wachtwoord aan</a>
 
                 <?php
                 if ($data1['Verkoper'] == 1) {

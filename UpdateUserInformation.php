@@ -59,20 +59,20 @@ if(isset($_SESSION['user'])){
                 <div class="row">
                     <div class="col-md-6">
                         <p>Gebruikersnaam:</p>
-                        <input id="username" name="username" type="text" placeholder="BarryBadpak" value='<?php echo $data2['Gebruikersnaam'] ?>' required>
+                        <input id="username" name="username" type="text" placeholder="JohnDoe" pattern="([^<>])+" value='<?php echo $data2['Gebruikersnaam'] ?>' required>
                         <br>
                         <p>Voornaam:</p>
-                        <input id="first-name" name="first-name" type="text" placeholder="Barry" value='<?php echo $data2['Voornaam'] ?>' required>
+                        <input id="first-name" name="first-name" type="text" placeholder="John" pattern="([^<>])+" value='<?php echo $data2['Voornaam'] ?>' required>
                         <br>
                         <p>Achternaam:</p>
-                        <input id="last-name" name="last-name" type="text" placeholder="Badpak" value='<?php echo $data2['Achternaam'] ?>' required>
+                        <input id="last-name" name="last-name" type="text" placeholder="Doe" pattern="([^<>])+" value='<?php echo $data2['Achternaam'] ?>' required>
                         <br>
                         <p>Geboortedatum:</p>
                         <input id="birth-date" name="birth-date" type="date" value='<?php
                         echo $data2['GeboorteDag']; ?>' required>
                         <br>
                         <p>E-Mail:</p>
-                        <input id="e-mail" name="e-mail" type="email" placeholder="E-mail" value='<?php echo $data2['Mailbox'] ?>' required>
+                        <input id="e-mail" name="e-mail" type="email" placeholder="E-mail" pattern="([^<>])+" value='<?php echo $data2['Mailbox'] ?>' required>
                         <br>
                         <p>Veiligheidsvraag: </p>
                         <select name="security-question">
@@ -85,22 +85,22 @@ if(isset($_SESSION['user'])){
                     </div>
                     <div class="col-md-6">
                         <p>Land:</p>
-                        <input id="country" name="country" type="text" placeholder="Nederland" value='<?php echo $data2['Land'] ?>' required>
+                        <input id="country" name="country" type="text" placeholder="Nederland" pattern="([^<>])+" value='<?php echo $data2['Land'] ?>' required>
                         <br>
                         <p>Stad:</p>
-                        <input id="city" name="city" type="text" placeholder="Arnhem" value='<?php echo $data2['Plaatsnaam'] ?>' required>
+                        <input id="city" name="city" type="text" placeholder="Arnhem" pattern="([^<>])+" value='<?php echo $data2['Plaatsnaam'] ?>' required>
                         <br>
                         <p>Adresregel 1:</p>
-                        <input id="address-field" name="address-field" type="text" placeholder="Straatnaam 15" value='<?php echo $data2['Adresregel1'] ?>' required>
+                        <input id="address-field" name="address-field" type="text" pattern="([A-Za-z])+\s?([A-Za-z])+\s?([A-Za-z])+\s([0-9])+([A-Za-z])?" placeholder="Straatnaam 15" value='<?php echo $data2['Adresregel1'] ?>' required>
                         <br>
                         <p>Adresregel 2:</p>
-                        <input id="address-field2" name="address-field2" type="text" placeholder="Toevoeging adresregel" value='<?php echo $data2['Adresregel2'] ?>'>
+                        <input id="address-field2" name="address-field2" type="text" pattern="([A-Za-z])+\s?([A-Za-z])+\s?([A-Za-z])+\s([0-9])+([A-Za-z])?" placeholder="Toevoeging adresregel" value='<?php echo $data2['Adresregel2'] ?>'>
                         <br>
                         <p>Postcode: </p>
                         <input id="postcode" name="postcode" type="text" placeholder="4323DK" value='<?php echo $data2['Postcode'] ?>' required>
                         <br>
                         <p>Antwoord:</p>
-                        <input id="answer" name="answer" type="text" placeholder="Antwoord" value='<?php echo $data2['Antwoordtekst'] ?>' required>
+                        <input id="answer" name="answer" type="text" placeholder="Antwoord" pattern="([^<>])+" value='<?php echo $data2['Antwoordtekst'] ?>' required>
                         <br>
                         <button type="submit">Pas aan</button>
                     </div>

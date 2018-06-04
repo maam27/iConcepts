@@ -185,6 +185,22 @@ function register_user($dbh, $username, $firstname, $lastname, $addressfield, $a
     }
 }
 
+function change_password($dbh, $password, $mail){
+    try{
+        $statement = $dbh->prepare("update Gebruiker set Wachtwoord = :password where Mailbox = :email ");
+        $statement->execute(array(':password' => $password, ':email' => $mail));
+        $result = $statement->rowCount();
+        if ($result == '1')
+            return true;
+        return false;
+    }
+
+    catch (PDOException $e) {
+        echo $e;
+    }
+
+}
+
 function unvalidated_email_exists($dbh, $email)
 {
     $statement = $dbh->prepare("SELECT Gebruikersnaam FROM OngevalideerdeGebruiker where Mailbox = :mail");
