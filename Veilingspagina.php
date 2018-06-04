@@ -65,11 +65,14 @@ if(isset($_POST)){
                         <img id="bigImage" class="img-thumbnail margin-bottom product-image" src="<?php echo get_image_path($images[0]['filenaam'])?>"> </img>
                    </div>
                    <div class="col-12 d-flex justify-content-center margin-bottom">
+
                        <?php
-                            foreach($images as $img){
-                                echo '<img class="img-thumbnail miniature margin-bottom product-image" src="'. get_image_path($img['filenaam'],false) .'" onmouseover="moveToLarge(this);"/>';
-                            }
+                       foreach($images as $img){ ?>
+                            <img class="img-thumbnail miniature margin-bottom product-image"  src="<?php echo get_image_path($img['filenaam'],false)?>" onmouseover="moveToLarge(this);" />
+                       <?php }
                        ?>
+
+
                    </div>
                    <div class="col-12">
                         <p>
