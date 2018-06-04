@@ -114,7 +114,7 @@ for($i =0; $i < sizeof($Artikelen); $i++){
                                         $imgname = (!empty($img))? $imgname = $img[0]['filenaam']: $imgname = "";
                                         ?>
 <!--                                        <img src="--><?php //echo get_image_path($imgname,false); ?><!--" class="img-fluid"/>-->
-                                        <img src="<?php echo get_image_path($imgname,false); ?>" onError="this.onerror=null;this.src='/images/noimage.gif';" class="img-fluid"/>
+                                        <img src="<?php echo get_image_path($imgname,false); ?>" onError="this.onerror=null;this.src='/uploads/<?php echo $imgname; ?>';" class="img-fluid"/>
                                     </div>
                                     <div class="col-9">
                                         <div class="row">

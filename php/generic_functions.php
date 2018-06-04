@@ -47,11 +47,7 @@ function floor_with_precision($val, $precision)
 }
 
 function get_image_path($img,$thumbnail = false){
-    $path="";
-    if(file_exists("uploads/".$img)){
-        $path = "uploads/" . $img;
-    }
-    else if($thumbnail) {
+ if($thumbnail) {
         $path = "thumbnails/" . $img;
     } else{
         $path = "pics/".$img;

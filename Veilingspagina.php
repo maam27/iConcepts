@@ -67,7 +67,8 @@ if(isset($_POST)){
                    <div class="col-12 d-flex justify-content-center margin-bottom">
                        <?php
                             foreach($images as $img){
-                                echo '<img class="img-thumbnail miniature margin-bottom product-image" src="'. get_image_path($img['filenaam'],false) .'" onmouseover="moveToLarge(this);"/>';
+/*                                 onError="this.onerror=null;this.src='/uploads/<?php echo $imgname; ?>"*/
+                                echo '<img class="img-thumbnail miniature margin-bottom product-image"  src="'. get_image_path($img['filenaam'],false) .'" onmouseover="moveToLarge(this);"/>';
                             }
                        ?>
                    </div>
