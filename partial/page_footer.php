@@ -1,13 +1,4 @@
-<!-- start joke -->
-<div data-video="Aa-P9dfOVWc"
-     data-autoplay="1"
-     data-loop="1"
-     id="youtube-audio"
-     style="display:none"   >
-</div>
-<script src="https://www.youtube.com/iframe_api"></script>
-<script src="https://cdn.rawgit.com/labnol/files/master/yt.js"></script>
-<!-- end joke -->
+
 
         <footer class="container seperator-top">
             <p>&copy; Company 2017-2018</p>

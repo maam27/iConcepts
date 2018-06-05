@@ -104,12 +104,12 @@ if (!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST[
                             <br>
                             <p>Adresregel 1: *</p>
                             <input id="address-field" name="address-field" type="text"
-                                   placeholder="Straatnaam nummer" <?php echo post_set('address-field', 'post'); ?>
-                                   title="Straatnaam gevolgd door nummer." pattern="^([A-Za-z])+\s([0-9])+([A-Za-z])?" required>
+                                   placeholder="Voorbeeldstraat 14" <?php echo post_set('address-field', 'post'); ?>
+                                   title="Straatnaam gevolgd door nummer." pattern="([A-Za-z])+\s?([A-Za-z])+\s?([A-Za-z])+\s([0-9])+([A-Za-z])?" required>
                             <br>
                             <p>Adresregel 2:</p>
                             <input id="address-field2" name="address-field2" type="text"
-                                   placeholder="straatnaam nummer" pattern="^([A-Za-z])+\s([0-9])+([A-Za-z])?" <?php echo post_set('address-field2', 'post'); ?>>
+                                   placeholder="Voorbeelstraat 14" pattern="([A-Za-z])+\s?([A-Za-z])+\s?([A-Za-z])+\s([0-9])+([A-Za-z])?" <?php echo post_set('address-field2', 'post'); ?>>
                             <br>
                             <p>Postcode: *</p>
                             <input id="postcode" name="postcode" type="text"
@@ -180,7 +180,7 @@ else if ($registratie==true){
         echo "Failed to send.";
     }
 ?>
-    ?>
+
     <main>
         <div class="container error-box d-flex flex-row justify-content-center align-items-center">
             <div>
