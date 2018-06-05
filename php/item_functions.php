@@ -275,7 +275,7 @@ function get_category_view($dbh, $filter, $pageNr, $rows = 20){
     if(!is_numeric($pageNr))
         $pageNr=1;
     if(!is_numeric($rows))
-        $rows=20;
+        $rows=30;
     $offset = ($pageNr-1)*$rows;
 
     $query = "select distinct * from Voorwerp where Voorwerpnummer in (
