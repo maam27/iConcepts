@@ -63,7 +63,8 @@ if (isset($_GET['page'])) {
    $page = $_GET['page'];
 
 }
-$Artikelen = get_category_view($db,$filter,$page);
+$order = "order by LooptijdbeginDag desc, LooptijdbeginTijdstip desc";
+$Artikelen = get_category_view($db,$filter,$order,$page);
 
 for($i =0; $i < sizeof($Artikelen); $i++){
     $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
