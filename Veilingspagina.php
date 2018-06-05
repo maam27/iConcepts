@@ -65,14 +65,10 @@ if(isset($_POST)){
                         <img id="bigImage" class="img-thumbnail margin-bottom product-image" src="<?php echo get_image_path($images[0]['filenaam'])?>"> </img>
                    </div>
                    <div class="col-12 d-flex justify-content-center margin-bottom">
-
-                       <?php
-                       foreach($images as $img){ ?>
-                            <img class="img-thumbnail miniature margin-bottom product-image"  src="<?php echo get_image_path($img['filenaam'],false)?>" onmouseover="moveToLarge(this);" />
+                       <?php foreach($images as $img){ ?>
+                            <img class="img-thumbnail miniature margin-bottom product-image" onmouseover="moveToLarge(this);" src="<?php echo get_image_path($img['filenaam'],false)?>" >
                        <?php }
                        ?>
-
-
                    </div>
                    <div class="col-12">
                         <p>
@@ -157,7 +153,6 @@ if(isset($_POST)){
         </div>
     </div> <!-- /container -->
 </main>
-
 
 <?php
     require_once 'partial/page_footer.php';

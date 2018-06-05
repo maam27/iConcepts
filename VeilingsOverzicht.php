@@ -94,7 +94,7 @@ for($i =0; $i < sizeof($Artikelen); $i++){
                     if(sizeof($Artikelen) <= 0){?>
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center margin-top">
-                                <h2>Er zijn geen artiekelen gevonden.</h2>
+                                <h2>Er zijn geen artikelen gevonden.</h2>
                             </div>
                         </div>
                     <?php } else
