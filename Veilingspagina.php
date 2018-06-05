@@ -57,7 +57,11 @@ if(isset($_POST)){
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-12 d-flex justify-content-center">
-                        <span class="timer" data-auctionEnd="<?php echo $endDate->format("Y-m-d H:i:s");  ?>"></span>
+                        <h3>
+                            <strong>
+                                <span class="timer" data-auctionEnd="<?php echo $endDate->format("Y-m-d H:i:s");  ?>"></span>
+                            </strong>
+                        </h3>
                     </div>
                 </div>
                <div class="row margin-top">
@@ -72,7 +76,9 @@ if(isset($_POST)){
                    </div>
                    <div class="col-12">
                         <p>
-                            <strong>Hoofdcategory -> subcategory1 -> ... subcategory6</strong>
+                            <strong>
+<!--                                Hoofdcategory -> subcategory1 -> ... subcategory6-->
+                            </strong>
                         </p>
                    </div>
                    <div class="col-12">
@@ -89,7 +95,6 @@ if(isset($_POST)){
             </div>
             <div class="col-md-6 seperator-none seperator-left-md">
                 <div class="row">
-
                     <div class="col-12 verkoperSection margin-bottom seperator-bottom-md">
                         <h3>Verkoper: <?php echo '<a href="Verkoper.php?id='.$veilinginformatie['Gebruikersnaam'].'">'.$veilinginformatie['Gebruikersnaam'].'</a>';?></h3>
                         <p><strong>Voornaam:</strong> <?php echo $veilinginformatie['Voornaam'] ?></p>
