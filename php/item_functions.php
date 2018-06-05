@@ -283,7 +283,7 @@ function get_category_view($dbh, $filter, $order, $pageNr = 0, $rows = 20){
 	inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
 	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer".$filter.") ".$order." offset ".$offset." ROWS FETCH NEXT ".$rows." ROWS ONLY ";
 
-//    echo $query;
+//   echo $query;
 
     $statement = $dbh->query($query);
     $statement->execute();
@@ -501,5 +501,35 @@ function get_feedback_2($dbh, $user){
     }
 }
 
+function get_highlighted_products($dbh, $filter, $order, $amount = 5){
+    try {
+        $statement = $dbh->prepare("select top ".$amount." Voorwerpnummer,Titel from Voorwerp where VeilingGesloten = 0 ".$filter." order by ".$order);
+        $statement->execute(array());
+        foreach($statement->fetchall() as $product){
+            print_product_block_small($product, $dbh);
+        }
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
 
+function print_product_block_small($product, $dbh){
+    require_once 'php/generic_functions.php';
+    $productImg = get_image_path(get_image_name($dbh, $product['Voorwerpnummer']));
+    $titel = $product['Titel'];
+    $number = $product['Voorwerpnummer'];
+    $block = <<<Film
+ 
+    <div class="productblock">
+       <a href="Veilingspagina.php?voorwerp=$number" class="hidden-link">
+            <img src="$productImg" alt="" class="img-thumbnail no-padding seperator-none"/>
+            <div class="align-bottom">
+                <p class="white-text">$titel</p>
+            </div>
+        </a>
+    </div>
+Film;
+    echo $block;
+}
 
