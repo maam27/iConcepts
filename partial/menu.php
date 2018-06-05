@@ -13,7 +13,7 @@ $Rubriek = get_catagory($db);
     <div class="collapse navbar-collapse " id="navbarCollapse">
         <ul class="navbar-nav mr-auto d-flex justify-content-around align-items-center">
             <li class="nav-item">
-                <a href="index.php"><i class="fa fa-home"></i> Thuispagina<span class="sr-only">(current)</span></a>
+                <a href="VeilingsOverzicht.php"><i class="fa fa-th"></i> Onze Producten<span class="sr-only">(current)</span></a>
             </li>
             <li>
                 <form class="form-inline mt-2 mt-md-0 d-flex flex-row flex-nowrap" id="SearchEngine" method="get" action="VeilingsOverzicht.php">
