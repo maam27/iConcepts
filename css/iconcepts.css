@@ -38,6 +38,10 @@ nav a.paginatitel{
     font-weight:bold;
 }
 
+nav.beheeromgeving{
+    background-color: White;
+}
+
 nav{
     background-color: #F4512C;
 }
@@ -444,6 +448,10 @@ a.hidden-link{
 
 .white-text{
     color:white;
+}
+
+.no-margin{
+    margin:0;
 }
 
 .black-text{
