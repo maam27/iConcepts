@@ -11,12 +11,4 @@ function get_db_connection()
     }
 }
 
-/* function update_auction ($dbh)
-{
- try{
-    require_once 'credentials.php';
-
-  }
-
-}*/
 ?>
