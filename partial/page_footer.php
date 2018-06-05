@@ -1,12 +1,17 @@
-
-
         <footer class="container seperator-top">
-            <p>&copy; Company 2017-2018</p>
-            <ul class="navbar-nav mr-auto d-flex justify-content-around align-items-center">
-                <li class="nav-item">
-                    <a href="OverOns.php">Over Ons</a>
-                </li>
-            </ul>
+            <div class="row">
+                <div class="col-12 col-md-4 d-flex justify-content-center">
+
+                </div>
+                <div class="col-12 col-md-4 d-flex justify-content-center">
+                    <p>
+                        <a href="OverOns.php" class="hidden-link">Over Ons</a>
+                    </p>
+                </div>
+                <div class="col-12 col-md-4 d-flex justify-content-center">
+                    <p>&copy; EenmaalAndermaal 2018-2019</p>
+                </div>
+            </div>
         </footer>
         <?php
         include_once 'partial/scripts.php';

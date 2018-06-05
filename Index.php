@@ -3,119 +3,45 @@ require_once 'partial/page_head.php';
 ?>
         <title>Home | EenmaalAndermaal</title>
     </head>
-
     <body>
         <?php
             include_once 'partial/menu.php';
         ?>
-
         <main>
             <div class="container">
                 <div class="row">
-                    <h2>Veilingen die bijna verlopen.</h2>
-                    <div class="col-12">
-                        <div class="d-flex justify-content-around flex-wrap">
-                            <div class="productblock">
-                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
-                            <div class="productblock d-none d-sm-block">
-                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
-                            <div class="productblock d-none d-md-block">
-                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
-                            <div class="productblock d-none d-lg-block">
-                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
-                            <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
+                    <div class="col-12 margin-top">
+                        <h2>Veilingen die bijna verlopen.</h2>
+                    </div>
+                    <div class="col-12 seperator-bottom">
+                        <div class="d-flex flex-wrap justify-content-around">
+                            <?php get_highlighted_products($db,"","LooptijdeindeDag asc, LooptijdeindeTijdstip asc");?>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <h2>Meest recent gestarte veilingen.</h2>
-                    <div class="col-12">
-                        <div class="d-flex justify-content-around flex-wrap">
-                            <div class="productblock">
-                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
-                            <div class="productblock d-none d-sm-block">
-                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
-                            <div class="productblock d-none d-md-block">
-                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
-                            <div class="productblock d-none d-lg-block">
-                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
-                            <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
 
-                            <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
-                            <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
-                            <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
-                            <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
-                            <div class="productblock d-none d-xl-block">
-                                <img src="images/thumb/placeholder.jpg" class="img-thumbnail"/>
-                                <div>
-                                    <p>hier kan een product naam of titel komen maar de lengte is niet altijd even lang</p>
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-12 margin-top">
+                        <h2>Recent gestarte veilingen.</h2>
+                    </div>
+                    <div class="col-12 seperator-bottom">
+                        <div class="d-flex flex-wrap justify-content-around">
+                            <?php get_highlighted_products($db,"","LooptijdbeginDag desc, LooptijdbeginTijdstip desc");?>
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-12 margin-top">
+                        <h2>Opgelicht.</h2>
+                    </div>
+                    <div class="col-12 seperator-bottom">
+                        <div class="d-flex flex-wrap justify-content-around">
+                            <?php get_highlighted_products($db,"","NEWID()",15);?>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </main>
 <?php require_once 'partial/page_footer.php';?>
