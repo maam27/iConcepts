@@ -48,14 +48,3 @@ $Rubriek = get_catagory($db);
         </ul>
     </div>
 </nav>
-
-<div class="d-none d-lg-block submenu">
-    <ul class="navbar-nav sub-nav mr-auto d-flex flex-row flex-wrap justify-content-around">
-        <?php foreach($Rubriek as $row ):?>
-            <li class="hoofd-rubriek"> <a href="VeilingsOverzicht.php?rubriek=<?php echo $row ['Rubrieknaam'];?>"  > <?php echo $row ['Rubrieknaam'];?></a></li>
-        <?php endforeach;?>
-    </ul>
-</div>
-
-
-

@@ -10,3 +10,5 @@ function get_db_connection()
         echo 'Connection failed: ' . $e->getMessage();
     }
 }
+
+?>

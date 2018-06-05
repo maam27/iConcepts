@@ -63,7 +63,8 @@ if (isset($_GET['page'])) {
    $page = $_GET['page'];
 
 }
-$Artikelen = get_category_view($db,$filter,$page);
+$order = "order by LooptijdbeginDag desc, LooptijdbeginTijdstip desc";
+$Artikelen = get_category_view($db,$filter,$order,$page);
 
 for($i =0; $i < sizeof($Artikelen); $i++){
     $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
@@ -94,7 +95,7 @@ for($i =0; $i < sizeof($Artikelen); $i++){
                     if(sizeof($Artikelen) <= 0){?>
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center margin-top">
-                                <h2>Er zijn geen artiekelen gevonden.</h2>
+                                <h2>Er zijn geen artikelen gevonden.</h2>
                             </div>
                         </div>
                     <?php } else

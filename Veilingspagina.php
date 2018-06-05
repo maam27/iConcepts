@@ -57,7 +57,11 @@ if(isset($_POST)){
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-12 d-flex justify-content-center">
-                        <span class="timer" data-auctionEnd="<?php echo $endDate->format("Y-m-d H:i:s");  ?>"></span>
+                        <h3>
+                            <strong>
+                                <span class="timer" data-auctionEnd="<?php echo $endDate->format("Y-m-d H:i:s");  ?>"></span>
+                            </strong>
+                        </h3>
                     </div>
                 </div>
                <div class="row margin-top">
@@ -65,18 +69,16 @@ if(isset($_POST)){
                         <img id="bigImage" class="img-thumbnail margin-bottom product-image" src="<?php echo get_image_path($images[0]['filenaam'])?>"> </img>
                    </div>
                    <div class="col-12 d-flex justify-content-center margin-bottom">
-
-                       <?php
-                       foreach($images as $img){ ?>
-                            <img class="img-thumbnail miniature margin-bottom product-image"  src="<?php echo get_image_path($img['filenaam'],false)?>" onmouseover="moveToLarge(this);" />
+                       <?php foreach($images as $img){ ?>
+                            <img class="img-thumbnail miniature margin-bottom product-image" onmouseover="moveToLarge(this);" src="<?php echo get_image_path($img['filenaam'],false)?>" >
                        <?php }
                        ?>
-
-
                    </div>
                    <div class="col-12">
                         <p>
-                            <strong>Hoofdcategory -> subcategory1 -> ... subcategory6</strong>
+                            <strong>
+<!--                                Hoofdcategory -> subcategory1 -> ... subcategory6-->
+                            </strong>
                         </p>
                    </div>
                    <div class="col-12">
@@ -93,7 +95,6 @@ if(isset($_POST)){
             </div>
             <div class="col-md-6 seperator-none seperator-left-md">
                 <div class="row">
-
                     <div class="col-12 verkoperSection margin-bottom seperator-bottom-md">
                         <h3>Verkoper: <?php echo '<a href="Verkoper.php?id='.$veilinginformatie['Gebruikersnaam'].'">'.$veilinginformatie['Gebruikersnaam'].'</a>';?></h3>
                         <p><strong>Voornaam:</strong> <?php echo $veilinginformatie['Voornaam'] ?></p>
@@ -157,7 +158,6 @@ if(isset($_POST)){
         </div>
     </div> <!-- /container -->
 </main>
-
 
 <?php
     require_once 'partial/page_footer.php';
