@@ -33,7 +33,7 @@ require_once 'partial/page_head.php';
 
                 <div class="row">
                     <div class="col-12 margin-top">
-                        <h2>Opgelicht.</h2>
+                        <h2>Uitgelicht.</h2>
                     </div>
                     <div class="col-12 seperator-bottom">
                         <div class="d-flex flex-wrap">
