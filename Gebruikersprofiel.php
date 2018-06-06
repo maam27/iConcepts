@@ -189,47 +189,34 @@ if (empty($_SESSION['user'])) {
 
                                 else if ($feedbackGeven==true){
 
-                                    echo '<div class="d-flex justify-content-around flex-wrap">';
+                                    echo '<div class="d-flex flex-wrap">';
                                     for($i =0; $i < sizeof($queryResultaat); $i++){
-                                        echo '<div class="productblock">';
-                                        if($queryResultaat[$i]['Voorwerpnummer']>=20 AND $queryResultaat[$i]['Voorwerpnummer']<110301827613){
-                                            $locatie = "http://iproject14.icasites.nl/uploads/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
-                                            echo '<img src="'.$locatie.'" alt="a" class="hardcoded-thumbnail"/>';
-                                        }
-                                        else if($queryResultaat[$i]['Voorwerpnummer']<20){
-                                            $locatie = "http://iproject14.icasites.nl/images/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
-                                            echo '<img src="'.$locatie.'" alt="a" class="hardcoded-thumbnail"/>';
-                                        }
-                                        else{
-                                            $locatie= "http://iproject14.icasites.nl/pics/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
-                                            echo '<img src="'.$locatie.'" alt="a"" class="hardcoded-thumbnail"/>';
-                                        }
-
-                                        echo '<div><p><a class="black-text" href="Feedback.php?voorwerp='.$queryResultaat[$i]['Voorwerpnummer'].'"> '.$queryResultaat[$i]['Titel'].'</a></p></div></div>';
+                                        $productImg = get_image_path(get_image_name($dbh, $queryResultaat['Voorwerpnummer']));
+                                        $titel = return_html_safe($queryResultaat['Titel']);
+                                        $number = $queryResultaat['Voorwerpnummer'];
+                                        $block = <<<product
+                                        <div class="productblock">
+                                           <a href="Feedback.php?voorwerp=$number" class="hidden-link">
+                                                <div class="d-flex justify-content-center">
+                                                    <img src="$productImg" alt="" class="img-thumbnail no-padding seperator-none"/>
+                                                </div>
+                                                <div class="align-bottom">
+                                                    <p class="white-text" title="$titel">$titel</p>
+                                                </div>
+                                            </a>
+                                        </div>
+product;
+//                                        echo '<div><p><a class="black-text" href="Feedback.php?voorwerp='.$queryResultaat[$i]['Voorwerpnummer'].'"> '.$queryResultaat[$i]['Titel'].'</a></p></div></div>';
                                     }
                                 }
 
                                 else if ($text==false){
 
-                                    echo '<div class="d-flex justify-content-around flex-wrap">';
+                                    echo '<div class="d-flex flex-wrap">';
                                     for($i =0; $i < sizeof($queryResultaat); $i++){
-                                        echo '<div class="productblock">';
-                                        if($queryResultaat[$i]['Voorwerpnummer']>=20 AND $queryResultaat[$i]['Voorwerpnummer']<110301827613){
-                                            $locatie = "http://iproject14.icasites.nl/uploads/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
-                                            echo '<img src="'.$locatie.'" alt="a" class="hardcoded-thumbnail"/>';
-                                        }
-                                        else if($queryResultaat[$i]['Voorwerpnummer']<20){
-                                            $locatie = "http://iproject14.icasites.nl/images/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
-                                            echo '<img src="'.$locatie.'" alt="a" class="hardcoded-thumbnail"/>';
-                                        }
-                                        else{
-                                            $locatie= "http://iproject14.icasites.nl/pics/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
-                                            echo '<img src="'.$locatie.'" alt="a"" class="hardcoded-thumbnail"/>';
-                                        }
-
-                                        echo '<div><p><a class="black-text" href="Veilingspagina.php?voorwerp='.$queryResultaat[$i]['Voorwerpnummer'].'"> '.$queryResultaat[$i]['Titel'].'</a></p></div></div>';
+                                        print_product_block_small($queryResultaat[$i],$db);
                                     }
-                                    }
+                                }
 
                                 else{
 

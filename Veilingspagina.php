@@ -96,7 +96,7 @@ if(isset($_POST)){
             <div class="col-md-6 seperator-none seperator-left-md">
                 <div class="row">
                     <div class="col-12 verkoperSection margin-bottom seperator-bottom-md">
-                        <h3>Verkoper: <?php '<a href="Verkoper.php?id='. return_html_safe($veilinginformatie['Gebruikersnaam']).'">'.return_html_safe($veilinginformatie['Gebruikersnaam']).'</a>';?></h3>
+                        <h3>Verkoper: <?php echo '<a href="Verkoper.php?id='. return_html_safe($veilinginformatie['Gebruikersnaam']).'">'.return_html_safe($veilinginformatie['Gebruikersnaam']).'</a>';?></h3>
                         <p><strong>Voornaam:</strong> <?php echo_html_safe($veilinginformatie['Voornaam']); ?></p>
                         <p><strong>Achternaam:</strong> <?php echo_html_safe($veilinginformatie['Achternaam']); ?></p>
                         <p><strong>Land: </strong><?php echo_html_safe($veilinginformatie['Verkoopland']);?></p>

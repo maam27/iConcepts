@@ -73,12 +73,11 @@ else if(check_if_seller($db, $_GET['id'])){
                                 $date = new DateTime($data['GeboorteDag']);
                                 $result = $date->format('d-m-Y');
                                 echo $result ?></p>
-                            <p><strong>E-Mail: </strong><?php echo $data['Mailbox'];?></p>
+                            <p><strong>E-Mail: </strong><a class="hidden-link" href="mailto:<?php echo $data['Mailbox'];?>"><?php echo $data['Mailbox'];?></a></p>
                             <?php
                             if(check_if_phonenumber($db, $_GET['id'])){
-                                echo '<p><strong>Telefoon:</strong>'.$phone['Telefoon'].'</p>';
+                                echo '<p><strong>Telefoon: </strong><a class="hidden-link" href="tel:'.$phone['Telefoon'].'">'.$phone['Telefoon'].'</a></p>';
                             }
-
                             ?>
                         </div>
                     </div>
@@ -107,13 +106,10 @@ else if(check_if_seller($db, $_GET['id'])){
                 <div class="row margin-top">
                     <div class="col-12">
                     <h2>Actieve veilingen van deze verkoper.</h2>
-                                            <div class="d-flex justify-content-around flex-wrap">
+                        <div class="d-flex flex-wrap">
                             <?php
                             for($i = 0; $i <count($data); $i++){
-                                echo '<div class="productblock col-md-5 col-lg-2">';
-                                echo '<img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>';
-                                //  echo '<img src="images/thumb/'.$data['plaatje'].' class="img-thumbnail"/>';
-                                echo '<p>' .$data[$i]['Titel'].'</p></div>';
+                                print_product_block_small($data[$i],$db);
                             }
                             ?>
                         </div>
@@ -126,13 +122,10 @@ else if(check_if_seller($db, $_GET['id'])){
                     <div class="col-12">
                     <h2>Gesloten veilingen van deze verkoper.</h2>
 
-                        <div class="d-flex justify-content-around flex-wrap">
+                        <div class="d-flex flex-wrap">
                             <?php
                             for($i = 0; $i <count($data2); $i++) {
-                                echo '<div class="productblock col-md-5 col-lg-2">';
-                                echo '<img src="images/thumb/placeholder.jpg" alt="" class="img-thumbnail"/>';
-                                //  echo '<img src="images/thumb/'.$data['plaatje'].' class="img-thumbnail"/>';
-                                echo '<p>' . $data2[$i]['Titel'] . '</p></div>';
+                                print_product_block_small($data2[$i], $db);
                             }?>
                         </div>
                     </div>

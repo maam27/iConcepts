@@ -539,7 +539,7 @@ function print_product_block_small($product, $dbh){
     $productImg = get_image_path(get_image_name($dbh, $product['Voorwerpnummer']));
     $titel = return_html_safe($product['Titel']);
     $number = $product['Voorwerpnummer'];
-    $block = <<<Film
+    $block = <<<product
     <div class="productblock">
        <a href="Veilingspagina.php?voorwerp= $number" class="hidden-link">
             <div class="d-flex justify-content-center">
@@ -550,7 +550,7 @@ function print_product_block_small($product, $dbh){
             </div>
         </a>
     </div>
-Film;
+product;
     echo $block;
 }
 
