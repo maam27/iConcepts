@@ -371,11 +371,30 @@ function add_auction_to_category($dbh, $voorwerpnummer, $genre){
 
 function get_bottom_category($dbh){
     try{
-        $stmt = $dbh -> prepare("select * from rubriek r left join rubriek k on r.Rubrieknummer = k.volgnummer 
-where k.volgnummer IS NULL order by r.Rubrieknaam asc ");
+        $stmt = $dbh -> prepare("select r.Rubrieknummer, r.Rubrieknaam, k.Rubrieknaam  as Naam_Bovenliggende_Categorie
+	from rubriek r join rubriek k on r.volgnummer = k.rubrieknummer where r.Rubrieknummer in (
+	select r.rubrieknummer from rubriek r left join rubriek k on r.Rubrieknummer = k.volgnummer 
+	where k.volgnummer IS NULL) order by Naam_Bovenliggende_Categorie, Rubrieknaam");
         $stmt -> execute();
         $result = $stmt->fetchall();
         return $result;
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+
+function check_if_empty_bottom_category($dbh, $productnummer){
+    try {
+        $statement = $dbh->prepare("select * from rubriek where Rubrieknummer in 
+                                  (select r.rubrieknummer from rubriek r left join rubriek k on r.Rubrieknummer = k.volgnummer 
+                                   where k.volgnummer IS NULL) and rubrieknummer not in (select RubriekOpLaagsteNiveau from voorwerpinrubriek) 
+                                   and Rubrieknummer = :productnummer");
+        $statement->execute(array(':productnummer' => $productnummer));
+        $result=$statement->fetch();
+        if($result['aantal']==1){
+            return true;
+        }
     }
     catch (PDOException $e) {
         echo $e;
@@ -406,6 +425,7 @@ function get_extension($filename)
 }
 
 function add_image($inputveld_naam, $voorwerpnummer, $letter){
+    //Based on: https://www.w3schools.com/Php/php_file_upload.asp
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES[$inputveld_naam]["name"]);
     $uploadOk = 1;
