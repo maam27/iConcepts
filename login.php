@@ -39,7 +39,7 @@ if(empty($_SESSION['user'])){
                 ?>
                 <div class="col-12 error-message">
                     <i class="fas fa-exclamation-circle"></i>
-                    De combinatie van gebruikersnaam en wachtwoord is onjuist.
+                    De combinatie van gebruikersnaam en wachtwoord is onjuist. Of u bent geblokkeerd, neem hiervoor <a href ="OverOns.php">contact</a> met ons op.
                 </div>
                 <?php } ?>
                 <div class="col-12 col-sm-6">
