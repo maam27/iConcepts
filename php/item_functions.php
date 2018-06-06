@@ -533,3 +533,43 @@ Film;
     echo $block;
 }
 
+function check_if_veiling($dbh, $productnummer){
+    try {
+        $statement = $dbh->prepare("select count(*) as aantal from Voorwerp where Productnummer = :productnummer ");
+        $statement->execute(array(':productnummer' => $productnummer));
+        $result=$statement->fetch();
+        if($result['aantal']==1){
+            return true;
+        }
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+    return false;
+}
+
+function verwijder_veiling($dbh, $productnummer){
+if(check_if_veiling($dbh, $productnummer)){
+    try{
+        $statement = $dbh -> prepare("DELETE FROM VoorwerpInRubriek where Voorwerp = :product");
+        $statement -> execute(array(':product' => $productnummer));
+
+        $statement = $dbh -> prepare("DELETE FROM Bestand where Voorwerp = :product");
+        $statement -> execute(array(':product' => $productnummer));
+
+        $statement = $dbh -> prepare("DELETE FROM Bod where Voorwerp = :product");
+        $statement -> execute(array(':product' => $productnummer));
+
+        $stmt = $dbh -> prepare("DELETE FROM Voorwerp where Voorwerpnummer = :product");
+        $stmt -> execute(array(':product' => $productnummer));
+        return true;
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+else{
+    return false;
+}
+}
+
