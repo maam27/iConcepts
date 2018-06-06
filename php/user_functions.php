@@ -704,3 +704,66 @@ function get_mail_with_code($dbh, $code){
         echo $e->getMessage();
     }
 }
+
+function check_if_user($dbh, $username){
+    try {
+        $statement = $dbh->prepare("select count(*) as aantal from Gebruiker where Gebruikersnaam = :username ");
+        $statement->execute(array(':username' => $username));
+        $result=$statement->fetch();
+       if($result['aantal']==1){
+           return true;
+           }
+
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+    return false;
+}
+
+
+function block_user($dbh, $username)
+{
+    if(check_if_user($dbh, $username)) {
+        $username = strtolower($username);
+
+        if ($username == 'admin') {
+            return false;
+        }
+        try {
+            $statement = $dbh->prepare("update Gebruiker set Geblokkeerd = 1 where Gebruikersnaam = :username ");
+            $statement->execute(array(':username' => $username));
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+    else{
+        return false;
+    }
+}
+
+function unblock_user($dbh, $username)
+{
+    if(check_if_user($dbh, $username)){
+    $username = strtolower($username);
+
+    if ($username == 'admin') {
+        return false;
+    }
+    try {
+        $statement = $dbh->prepare("update Gebruiker set Geblokkeerd = 0 where Gebruikersnaam = :username ");
+        $statement->execute(array(':username' => $username));
+        return true;
+    }
+
+    catch (PDOException $e) {
+        echo $e;
+    }
+    }
+    else{
+        return false;
+    }
+}
+
+
