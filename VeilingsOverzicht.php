@@ -65,19 +65,6 @@ if (isset($_GET['page'])) {
 }
 $order = "order by LooptijdbeginDag desc, LooptijdbeginTijdstip desc";
 $Artikelen = get_category_view($db,$filter,$order,$page);
-
-for($i =0; $i < sizeof($Artikelen); $i++){
-    $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
-    $Artikelen[$i]['Beschrijving'] = str_replace(">","&gt;",$Artikelen[$i]['Beschrijving']);
-    $Artikelen[$i]['Beschrijving'] = str_replace("\"","&quot;",$Artikelen[$i]['Beschrijving']);
-    $Artikelen[$i]['Beschrijving'] = str_replace("\'","&#44",$Artikelen[$i]['Beschrijving']);
-
-    $Artikelen[$i]['Titel'] = str_replace("<","&lt;",$Artikelen[$i]['Titel']);
-    $Artikelen[$i]['Titel'] = str_replace(">","&gt;",$Artikelen[$i]['Titel']);
-    $Artikelen[$i]['Titel'] = str_replace("\"","&quot;",$Artikelen[$i]['Titel']);
-    $Artikelen[$i]['Titel'] = str_replace("\'","&#44",$Artikelen[$i]['Titel']);
-}
-
 ?>
 
 <div class="container">
@@ -119,7 +106,7 @@ for($i =0; $i < sizeof($Artikelen); $i++){
                                     <div class="col-9">
                                         <div class="row">
                                             <div class="col-8">
-                                                <strong><?php echo $kavel['Titel']; ?></strong>
+                                                <strong><?php echo_html_safe($kavel['Titel']); ?></strong>
                                             </div>
                                             <div class="col-4">
                                                 <span class="timer float-right"
@@ -128,7 +115,7 @@ for($i =0; $i < sizeof($Artikelen); $i++){
                                         </div>
                                         <div class="row">
                                             <div class="col-8 no-overflow">
-                                                <span><?php echo $kavel['Beschrijving']; ?></span>
+                                                <span><?php echo_html_safe($kavel['Beschrijving']); ?></span>
                                             </div>
                                             <div class="col-4">
                                                 <span class="float-right">€<?php echo number_format($currentPrice, 2, ',', '.'); ?></span>
@@ -167,8 +154,8 @@ require_once 'partial/timer.php';
         function(form){
             form.preventDefault();
             $value = $("#search").val();
-           $filters = $("#filters");
-           $filters.find("#keywords").val($value);
+            $filters = $("#filters");
+            $filters.find("#keywords").val($value);
             $($filters).submit();
         }
     );

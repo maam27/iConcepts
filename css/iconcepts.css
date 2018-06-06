@@ -150,13 +150,13 @@ main > div.container{
 
 @media (min-width: 992px) {
     main > div.container{
-        margin-top: 108px;
+        margin-top: 62px;
     }
 }
 
 @media (min-width: 1200px) {
     main > div.container{
-        margin-top: 108px;
+        margin-top: 62px;
     }
 }
 /* ======================================================================================
@@ -200,12 +200,17 @@ main > div.container{
     width:200px;
     padding:0.2em;
     margin-bottom: 1em;
+    margin-right: 22px;
 }
 
 .productblock > .hardcoded-thumbnail,
-.productblock > .img-thumbnail{
+.productblock  .img-thumbnail{
     padding:0;
     border:none;
+    max-height: 200px;
+}
+.productblock  div:first-child{
+    height:200px;
 }
 
 .hardcoded-thumbnail{
@@ -594,3 +599,4 @@ margin-left: 200px;
 {
     border-radius: 0
 }
+
