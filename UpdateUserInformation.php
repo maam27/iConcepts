@@ -102,7 +102,8 @@ if(isset($_SESSION['user'])){
                         <p>Antwoord:</p>
                         <input id="answer" name="answer" type="text" placeholder="Antwoord" pattern="([^<>])+" value='<?php echo $data2['Antwoordtekst'] ?>' required>
                         <br>
-                        <button type="submit">Pas aan</button>
+                        <button type="submit" class= 'btn btn-primary'>Pas aan</button>
+                        <div class = "margin-top"><a href = 'Gebruikersprofiel.php' class = 'btn btn-primary'>Annuleren</a></div>
                     </div>
                 </div>
             </form>
