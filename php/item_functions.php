@@ -536,7 +536,7 @@ product;
 
 function check_if_veiling($dbh, $productnummer){
     try {
-        $statement = $dbh->prepare("select count(*) as aantal from Voorwerp where Productnummer = :productnummer ");
+        $statement = $dbh->prepare("select count(*) as aantal from Voorwerp where Voorwerpnummer = :productnummer ");
         $statement->execute(array(':productnummer' => $productnummer));
         $result=$statement->fetch();
         if($result['aantal']==1){

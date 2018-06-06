@@ -110,8 +110,6 @@ else{
                                role="tab" aria-controls="nav-Gebruiker" aria-selected="false">Gebruiker</a>
                             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-Veiling"
                                role="tab" aria-controls="nav-Veiling" aria-selected="false">Veiling</a>
-                            <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-Verkoper"
-                               role="tab" aria-controls="nav-Verkoper" aria-selected="false">Verkoper</a>
                         </div>
                     </nav>
                 </div>
@@ -171,21 +169,6 @@ else{
                             <input id="beheertype" name="beheertype" type="hidden" required
                                    value="Veiling">
                             <button class="btn btn-primary" type="submit">Verwijder veiling</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="nav-Verkoper" role="tabpanel" aria-labelledby="nav-Verkoper-tab">
-                    <h2 class="error-message">Verkoperstatus ontnemen</h2>
-                    <p>Op deze pagina kunt U de verkoperstatus van een gebruiker ontnemen.</p>
-                    <p> Vul in het onderstaande formulier een gebruikersnaam in.</p>
-                    <div class="register-section">
-                        <form method="Post" action="#" class="col-6">
-                            <label for="Gebruikersnaam"><strong>Gebruiker</strong></label>
-                            <input id="Gebruikersnaam" name="Gebruikersnaam" type="text" pattern="([^<>])+"
-                                   placeholder="Gebruikersnaam" maxlength="100" required>
-                            <input id="beheertype" name="beheertype" type="hidden" required
-                                   value="Verkoper">
-                            <button class="btn btn-primary" type="submit">Status wijzigen</button>
                         </form>
                     </div>
                 </div>
