@@ -14,7 +14,7 @@ require_once 'partial/page_head.php';
                         <h2>Veilingen die bijna verlopen.</h2>
                     </div>
                     <div class="col-12 seperator-bottom">
-                        <div class="d-flex flex-wrap justify-content-around">
+                        <div class="d-flex flex-wrap">
                             <?php get_highlighted_products($db,"","LooptijdeindeDag asc, LooptijdeindeTijdstip asc");?>
                         </div>
                     </div>
@@ -25,7 +25,7 @@ require_once 'partial/page_head.php';
                         <h2>Recent gestarte veilingen.</h2>
                     </div>
                     <div class="col-12 seperator-bottom">
-                        <div class="d-flex flex-wrap justify-content-around">
+                        <div class="d-flex flex-wrap ">
                             <?php get_highlighted_products($db,"","LooptijdbeginDag desc, LooptijdbeginTijdstip desc");?>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ require_once 'partial/page_head.php';
                         <h2>Opgelicht.</h2>
                     </div>
                     <div class="col-12 seperator-bottom">
-                        <div class="d-flex flex-wrap justify-content-around">
+                        <div class="d-flex flex-wrap">
                             <?php get_highlighted_products($db,"","NEWID()",15);?>
                         </div>
                     </div>

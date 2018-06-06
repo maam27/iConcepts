@@ -517,15 +517,16 @@ function get_highlighted_products($dbh, $filter, $order, $amount = 5){
 function print_product_block_small($product, $dbh){
     require_once 'php/generic_functions.php';
     $productImg = get_image_path(get_image_name($dbh, $product['Voorwerpnummer']));
-    $titel = $product['Titel'];
+    $titel = return_html_safe($product['Titel']);
     $number = $product['Voorwerpnummer'];
     $block = <<<Film
- 
     <div class="productblock">
-       <a href="Veilingspagina.php?voorwerp=$number" class="hidden-link">
-            <img src="$productImg" alt="" class="img-thumbnail no-padding seperator-none"/>
+       <a href="Veilingspagina.php?voorwerp= $number" class="hidden-link">
+            <div class="d-flex justify-content-center">
+                <img src="$productImg" alt="" class="img-thumbnail no-padding seperator-none"/>
+            </div>
             <div class="align-bottom">
-                <p class="white-text">$titel</p>
+                <p class="white-text" title="$titel">$titel</p>
             </div>
         </a>
     </div>
