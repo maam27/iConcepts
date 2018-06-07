@@ -147,15 +147,14 @@ $Artikelen = get_category_view($db,$filter,$order,$page);
                                 $totalPages = get_NPages($dbh, $filter, $rows_per_page);
                                  $minPage = ($currentPage-$showPagination>=1)?$currentPage-$showPagination:1;
                                  $maxPage = ($currentPage+$showPagination<=$totalPages)?$currentPage+$showPagination:$totalPages;
-                        ?>
-                                <ul class="pagination">
-                                    <?php
-                                    for($i=$minPage; $i<=$maxPage; $i++) {
-                                        echo "<li class='page-item'><a class='page-link' href='VeilingsOverzicht.php?page=".$i . $currentFilterPageless."'>$i</a></li>";
-                                    }
-                                    ?>
-                                </ul>
-
+                            ?>
+                            <ul class="pagination">
+                                <?php
+                                for($i=$minPage; $i<=$maxPage; $i++) {
+                                    echo "<li class='page-item'><a class='page-link' href='VeilingsOverzicht.php?page=".$i . $currentFilterPageless."'>$i</a></li>";
+                                }
+                                ?>
+                            </ul>
                         </div>
                     </div>
 
