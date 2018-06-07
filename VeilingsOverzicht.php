@@ -57,7 +57,7 @@ if(isset($_GET)){
 <!--    SideNavigation Bar    -->
 
 <?php
-$rows_per_page = 20;
+$rows_per_page = 30;
 $Rubriek = get_sub_categories(-1,$db);
 $page = 1;
 if (isset($_GET['page'])) {
@@ -65,7 +65,7 @@ if (isset($_GET['page'])) {
 
 }
 $order = "order by LooptijdbeginDag desc, LooptijdbeginTijdstip desc";
-$Artikelen = get_category_view($db,$filter,$order,$page);
+$Artikelen = get_category_view($db,$filter,$order,$page,$rows_per_page);
 ?>
 
 <div class="container">
@@ -131,26 +131,26 @@ $Artikelen = get_category_view($db,$filter,$order,$page);
 
                     <div class="row">
                         <div class="col-12">
-                            pagina nr's:
+                            <div class="pagination-sm"> pagina nr's:
                             <?php
-$currentPage=1;
-if( isset($_GET['page'])){
-    if(!empty($_GET['page'])){
-        if(is_numeric($_GET['page'])){
-    $currentPage = $_GET['page'];
-}
-    }
-}
-//echo $currentPage;
-
-$showPagination = 3;
-$totalPages = get_NPages($dbh, $filter, $rows_per_page);
-                             $minPage = ($currentPage-$showPagination>=1)?$currentPage-$showPagination:1;
-                             $maxPage = ($currentPage+$showPagination<=$totalPages)?$currentPage+$showPagination:$totalPages;
+//pagination // paginanummers //
+                            $currentPage=1;
+                            if( isset($_GET['page'])){
+                                if(!empty($_GET['page'])){
+                                    if(is_numeric($_GET['page'])){
+                                $currentPage = $_GET['page'];
+                                    }
+                                }
+                            }
+                            $showPagination = 3;
+                            $totalPages = get_NPages($dbh, $filter, $rows_per_page);
+                            $minPage = ($currentPage-$showPagination>=1)?$currentPage-$showPagination:1;
+                            $maxPage = ($currentPage+$showPagination<=$totalPages)?$currentPage+$showPagination:$totalPages;
                            for($i=$minPage; $i<=$maxPage; $i++){
                                echo"<a href='VeilingsOverzicht.php?page=$i'> $i </a>";
                            }
                         ?>
+                            </div>
 
                         </div>
                     </div>
