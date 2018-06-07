@@ -1,3 +1,5 @@
+
+<!-- https://stackoverflow.com/questions/27546071/how-to-toggle-div-visibility-using-radio-buttons -->
 <?php
 require_once 'partial/page_head.php';
 require_once 'php/database.php';
@@ -5,7 +7,7 @@ require_once 'php/item_functions.php';
 require_once 'php/user_functions.php';
 ?>
 
-    <title>Verkoper | EenmaalAndermaal</title>
+    <title>Beheeromgeving | EenmaalAndermaal</title>
     </head>
 
     <body>
