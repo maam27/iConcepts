@@ -15,33 +15,33 @@ if (isset($_SESSION['user'])) {
     $feedbackGeven=false;
     if (isset($_GET['QuerySoort'])) {
         switch ($_GET['QuerySoort']) {
-            case 'MijnVeilingenOpen':
+            case 'Mijn_Veilingen_Open':
                 $queryResultaat = get_sellers_open_auctions($db, $_SESSION['user']);
                 $text=false;
                 break;
-            case 'MijnVeilingenGesloten':
+            case 'Mijn_Veilingen_Gesloten':
                 $queryResultaat = get_sellers_closed_auctions($db, $_SESSION['user']);
                 $text=false;
                 break;
-            case 'MijnBiedingenOpen':
+            case 'Mijn_Biedingen_Open':
                 $queryResultaat = get_auctions_with_open_bid($db, $_SESSION['user']);
                 $text=false;
                 break;
-            case 'MijnBiedingenGesloten':
+            case 'Mijn_Biedingen_Gesloten':
                 $queryResultaat = get_auctions_with_closed_bid($db, $_SESSION['user']);
                 $text=false;
                 break;
-            case 'MijnFeedback':
+            case 'Mijn_Feedback':
                 $queryResultaat = get_feedback_1($db, $_SESSION['user']);
                 $queryResultaat2 = get_feedback_2($db, $_SESSION['user']);
                 $text=true;
                 break;
-            case 'FeedbackGeven':
+            case 'Feedback_Geven':
                 $queryResultaat = get_ungiven_feedback($db, $_SESSION['user']);
                 $text = false;
                 $feedbackGeven = true;
                 break;
-            case 'MijnGewonnenVeilingen':
+            case 'Mijn_Gewonnen_Veilingen':
                 $queryResultaat = get_won_auctions($db, $_SESSION['user']);
                 $text=false;
                 break;
@@ -64,7 +64,6 @@ if (empty($_SESSION['user'])) {
 
 <?php } else {
     ?>
-
     <main>
         <div class="container">
             <div class="row">
@@ -73,21 +72,27 @@ if (empty($_SESSION['user'])) {
                         <div class="col-md-6 margin-top">
 
                             <ul class="hyperlinklijst d-md-block d-flex flex-column justify-content-center align-items-center">
-                                <?php if ($data1['Verkoper'] == 1) { ?>
+                                <?php
+                                if($data1['Beheerder'] == 1){
+                                    ?>
+                                    <li><a href="beheeromgeving.php">De Beheeromgeving</a></li>
+                                    <?php
+                                }
+                                if ($data1['Verkoper'] == 1) { ?>
                                     <li><a href="VeilingStarten.php">Start veiling</a></li>
-                                    <li><a href="Gebruikersprofiel.php?QuerySoort=MijnVeilingenOpen#Jump">Mijn
+                                    <li><a href="Gebruikersprofiel.php?QuerySoort=Mijn_Veilingen_Open#Jump">Mijn
                                             veilingen(open)</a></li>
-                                    <li><a href="Gebruikersprofiel.php?QuerySoort=MijnVeilingenGesloten#Jump">Mijn
+                                    <li><a href="Gebruikersprofiel.php?QuerySoort=Mijn_Veilingen_Gesloten#Jump">Mijn
                                             veilingen(gesloten)</a></li><?php } ?>
-                                <li><a href="Gebruikersprofiel.php?QuerySoort=MijnBiedingenOpen#Jump">Mijn
+                                <li><a href="Gebruikersprofiel.php?QuerySoort=Mijn_Biedingen_Open#Jump">Mijn
                                         biedingen(open)</a>
                                 </li>
-                                <li><a href="Gebruikersprofiel.php?QuerySoort=MijnBiedingenGesloten#Jump">Mijn
+                                <li><a href="Gebruikersprofiel.php?QuerySoort=Mijn_Biedingen_Gesloten#Jump">Mijn
                                         biedingen(gesloten)</a></li>
-                                <li><a href="Gebruikersprofiel.php?QuerySoort=MijnFeedback#Jump">Mijn ontvangen feedback</a>
+                                <li><a href="Gebruikersprofiel.php?QuerySoort=Mijn_Feedback#Jump">Mijn ontvangen feedback</a>
                                 </li>
-                                <li><a href="Gebruikersprofiel.php?QuerySoort=FeedbackGeven#Jump">Feedback geven</a></li>
-                                <li><a href="Gebruikersprofiel.php?QuerySoort=MijnGewonnenVeilingen#Jump">Mijn gewonnen
+                                <li><a href="Gebruikersprofiel.php?QuerySoort=Feedback_Geven#Jump">Feedback geven</a></li>
+                                <li><a href="Gebruikersprofiel.php?QuerySoort=Mijn_Gewonnen_Veilingen#Jump">Mijn gewonnen
                                         veilingen</a></li>
                             </ul>
 
@@ -154,16 +159,14 @@ if (empty($_SESSION['user'])) {
                    href="WachtwoordVeranderen.php">Pas wachtwoord aan</a>
 
                 <?php
-                if ($data1['Verkoper'] == 1) {
-                    echo '<a class="btn btn-primary col-md-3 user-section-button-margin" href="Verkoper.php"> Mijn advertenties </a>';
-
-                } else if (check_if_unvalidated_seller($db, $_SESSION['user'])) {
+                if (check_if_unvalidated_seller($db, $_SESSION['user'])) {
                     echo '<a class="col-md-3 btn btn-primary user-section-button-margin" href="AfrondenVerkoperstatus.php">Invullen verificatiecode</a>   ';
                 } else {
                     echo '<a class="col-md-3 btn btn-primary user-section-button-margin" href="AanvraagVerkoperstatus.php"> Word Verkoper </a>   ';
                 }
                 ?>
             </form>
+
             <div class="row seperator-bottom">
                 <div class="col-12">
                     <div class="row margin-top">
@@ -174,7 +177,7 @@ if (empty($_SESSION['user'])) {
                                 }
                                 else{?>
 
-                                <h1 class="error-message text-center" id="Jump">Gevonden Veiling(en)</h1>
+                                <h1 class="error-message text-center" id="Jump"><?php echo str_replace('_', ' ' , $_GET['QuerySoort']) ?></h1>
                                 <?php }
                                 $size = sizeof($queryResultaat);
                                 if ($size == 0 AND $text==false) {
@@ -186,47 +189,34 @@ if (empty($_SESSION['user'])) {
 
                                 else if ($feedbackGeven==true){
 
-                                    echo '<div class="d-flex justify-content-around flex-wrap">';
+                                    echo '<div class="d-flex flex-wrap">';
                                     for($i =0; $i < sizeof($queryResultaat); $i++){
-                                        echo '<div class="productblock">';
-                                        if($queryResultaat[$i]['Voorwerpnummer']>=20 AND $queryResultaat[$i]['Voorwerpnummer']<110301827613){
-                                            $locatie = "http://iproject14.icasites.nl/uploads/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
-                                            echo '<img src="'.$locatie.'" alt="a" class="hardcoded-thumbnail"/>';
-                                        }
-                                        else if($queryResultaat[$i]['Voorwerpnummer']<20){
-                                            $locatie = "http://iproject14.icasites.nl/images/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
-                                            echo '<img src="'.$locatie.'" alt="a" class="hardcoded-thumbnail"/>';
-                                        }
-                                        else{
-                                            $locatie= "http://iproject14.icasites.nl/pics/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
-                                            echo '<img src="'.$locatie.'" alt="a"" class="hardcoded-thumbnail"/>';
-                                        }
-
-                                        echo '<div><p><a class="black-text" href="Feedback.php?voorwerp='.$queryResultaat[$i]['Voorwerpnummer'].'"> '.$queryResultaat[$i]['Titel'].'</a></p></div></div>';
+                                        $productImg = get_image_path(get_image_name($dbh, $queryResultaat['Voorwerpnummer']));
+                                        $titel = return_html_safe($queryResultaat['Titel']);
+                                        $number = $queryResultaat['Voorwerpnummer'];
+                                        $block = <<<product
+                                        <div class="productblock">
+                                           <a href="Feedback.php?voorwerp=$number" class="hidden-link">
+                                                <div class="d-flex justify-content-center">
+                                                    <img src="$productImg" alt="" class="img-thumbnail no-padding seperator-none"/>
+                                                </div>
+                                                <div class="align-bottom">
+                                                    <p class="white-text" title="$titel">$titel</p>
+                                                </div>
+                                            </a>
+                                        </div>
+product;
+//                                        echo '<div><p><a class="black-text" href="Feedback.php?voorwerp='.$queryResultaat[$i]['Voorwerpnummer'].'"> '.$queryResultaat[$i]['Titel'].'</a></p></div></div>';
                                     }
                                 }
 
                                 else if ($text==false){
 
-                                    echo '<div class="d-flex justify-content-around flex-wrap">';
+                                    echo '<div class="d-flex flex-wrap">';
                                     for($i =0; $i < sizeof($queryResultaat); $i++){
-                                        echo '<div class="productblock">';
-                                        if($queryResultaat[$i]['Voorwerpnummer']>=20 AND $queryResultaat[$i]['Voorwerpnummer']<110301827613){
-                                            $locatie = "http://iproject14.icasites.nl/uploads/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
-                                            echo '<img src="'.$locatie.'" alt="a" class="hardcoded-thumbnail"/>';
-                                        }
-                                        else if($queryResultaat[$i]['Voorwerpnummer']<20){
-                                            $locatie = "http://iproject14.icasites.nl/images/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
-                                            echo '<img src="'.$locatie.'" alt="a" class="hardcoded-thumbnail"/>';
-                                        }
-                                        else{
-                                            $locatie= "http://iproject14.icasites.nl/pics/".get_image_name($db, $queryResultaat[$i]['Voorwerpnummer']);
-                                            echo '<img src="'.$locatie.'" alt="a"" class="hardcoded-thumbnail"/>';
-                                        }
-
-                                        echo '<div><p><a class="black-text" href="Veilingspagina.php?voorwerp='.$queryResultaat[$i]['Voorwerpnummer'].'"> '.$queryResultaat[$i]['Titel'].'</a></p></div></div>';
+                                        print_product_block_small($queryResultaat[$i],$db);
                                     }
-                                    }
+                                }
 
                                 else{
 

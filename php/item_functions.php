@@ -283,7 +283,7 @@ function get_category_view($dbh, $filter, $order, $pageNr , $rows ){
 	inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
 	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer".$filter.") ".$order." offset ".$offset." ROWS FETCH NEXT ".$rows." ROWS ONLY ";
 
-//    echo $query;
+//   echo $query;
 
     $statement = $dbh->query($query);
     $statement->execute();
@@ -388,11 +388,30 @@ function add_auction_to_category($dbh, $voorwerpnummer, $genre){
 
 function get_bottom_category($dbh){
     try{
-        $stmt = $dbh -> prepare("select * from rubriek r left join rubriek k on r.Rubrieknummer = k.volgnummer 
-where k.volgnummer IS NULL order by r.Rubrieknaam asc ");
+        $stmt = $dbh -> prepare("select r.Rubrieknummer, r.Rubrieknaam, k.Rubrieknaam  as Naam_Bovenliggende_Categorie
+	from rubriek r join rubriek k on r.volgnummer = k.rubrieknummer where r.Rubrieknummer in (
+	select r.rubrieknummer from rubriek r left join rubriek k on r.Rubrieknummer = k.volgnummer 
+	where k.volgnummer IS NULL) order by Naam_Bovenliggende_Categorie, Rubrieknaam");
         $stmt -> execute();
         $result = $stmt->fetchall();
         return $result;
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+
+function check_if_empty_bottom_category($dbh, $productnummer){
+    try {
+        $statement = $dbh->prepare("select * from rubriek where Rubrieknummer in 
+                                  (select r.rubrieknummer from rubriek r left join rubriek k on r.Rubrieknummer = k.volgnummer 
+                                   where k.volgnummer IS NULL) and rubrieknummer not in (select RubriekOpLaagsteNiveau from voorwerpinrubriek) 
+                                   and Rubrieknummer = :productnummer");
+        $statement->execute(array(':productnummer' => $productnummer));
+        $result=$statement->fetch();
+        if($result['aantal']==1){
+            return true;
+        }
     }
     catch (PDOException $e) {
         echo $e;
@@ -423,6 +442,7 @@ function get_extension($filename)
 }
 
 function add_image($inputveld_naam, $voorwerpnummer, $letter){
+    //Based on: https://www.w3schools.com/Php/php_file_upload.asp
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES[$inputveld_naam]["name"]);
     $uploadOk = 1;
@@ -507,17 +527,87 @@ function get_feedback_1($dbh, $user)
 }
 
 function get_feedback_2($dbh, $user){
-
     try {
         $statement = $dbh->prepare("select Voorwerp, Feedbacksoort, Commentaar,  Dag, Tijdstip, Titel, Verkoper  from feedback f left join voorwerp v on f.voorwerp = v.voorwerpnummer where soortgebruiker = 'verkoper' and koper=:gebruiker ");
         $statement->execute(array(':gebruiker' => $user));
         $result = $statement->fetchall();
         return $result;
     }
-
     catch (PDOException $e) {
         echo $e;
-
     }
-
 }
+
+function get_highlighted_products($dbh, $filter, $order, $amount = 5){
+    try {
+        $statement = $dbh->prepare("select top ".$amount." Voorwerpnummer,Titel from Voorwerp where VeilingGesloten = 0 ".$filter." order by ".$order);
+        $statement->execute(array());
+        foreach($statement->fetchall() as $product){
+            print_product_block_small($product, $dbh);
+        }
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+
+function print_product_block_small($product, $dbh){
+    require_once 'php/generic_functions.php';
+    $productImg = get_image_path(get_image_name($dbh, $product['Voorwerpnummer']));
+    $titel = return_html_safe($product['Titel']);
+    $number = $product['Voorwerpnummer'];
+    $block = <<<product
+    <div class="productblock">
+       <a href="Veilingspagina.php?voorwerp= $number" class="hidden-link">
+            <div class="d-flex justify-content-center">
+                <img src="$productImg" alt="" class="img-thumbnail no-padding seperator-none"/>
+            </div>
+            <div class="align-bottom">
+                <p class="white-text" title="$titel">$titel</p>
+            </div>
+        </a>
+    </div>
+product;
+    echo $block;
+}
+
+function check_if_veiling($dbh, $productnummer){
+    try {
+        $statement = $dbh->prepare("select count(*) as aantal from Voorwerp where Voorwerpnummer = :productnummer ");
+        $statement->execute(array(':productnummer' => $productnummer));
+        $result=$statement->fetch();
+        if($result['aantal']==1){
+            return true;
+        }
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+    return false;
+}
+
+function verwijder_veiling($dbh, $productnummer){
+if(check_if_veiling($dbh, $productnummer)){
+    try{
+        $statement = $dbh -> prepare("DELETE FROM VoorwerpInRubriek where Voorwerp = :product");
+        $statement -> execute(array(':product' => $productnummer));
+
+        $statement = $dbh -> prepare("DELETE FROM Bestand where Voorwerp = :product");
+        $statement -> execute(array(':product' => $productnummer));
+
+        $statement = $dbh -> prepare("DELETE FROM Bod where Voorwerp = :product");
+        $statement -> execute(array(':product' => $productnummer));
+
+        $stmt = $dbh -> prepare("DELETE FROM Voorwerp where Voorwerpnummer = :product");
+        $stmt -> execute(array(':product' => $productnummer));
+        return true;
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+else{
+    return false;
+}
+}
+

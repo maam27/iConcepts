@@ -98,3 +98,10 @@ function http_file_exists($url, $followRedirects = true)
     fclose($fp);
     return false;
 }
+
+function echo_html_safe($string){
+    echo return_html_safe($string);
+}
+function return_html_safe($string){
+    return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+}

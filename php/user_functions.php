@@ -2,7 +2,7 @@
 function login_user($dbh, $user, $pass)
 {
     try {
-        $statement = $dbh->prepare("SELECT [Gebruikersnaam] FROM Gebruiker where Gebruikersnaam = :name and Wachtwoord = :pass ");
+        $statement = $dbh->prepare("SELECT [Gebruikersnaam] FROM Gebruiker where Gebruikersnaam = :name and Wachtwoord = :pass  and Geblokkeerd != 1");
         $statement->execute(array(':name' => $user,
             ':pass' => $pass));
         $result = $statement->fetch();
@@ -309,7 +309,7 @@ function update_user($dbh, $username, $firstname, $lastname, $addressfield, $add
     try {
         $stmt = $dbh->prepare("UPDATE Gebruiker SET Gebruikersnaam = :gebruiker, Voornaam = :voornaam, Achternaam = :achternaam, Adresregel1 = :adresregel1, Adresregel2 = :adresregel2,
                       Postcode = :postcode, Plaatsnaam = :plaatsnaam, Land = :land, GeboorteDag = :geboortedag, Mailbox = :mailbox,
-                      Vraag = :vraag, Antwoordtekst = :antwoordtekst 
+                      Vraag = :vraag, Antwoordtekst = :antwoordtekst
                       WHERE Gebruikersnaam = :ingelogdeUser");
         $stmt->execute(
             [
@@ -479,7 +479,7 @@ function check_if_seller_has_feedback($dbh, $verkoper)
 function get_ungiven_feedback($dbh, $user)
 {
     try {
-        $stmt = $dbh->prepare("Select * from voorwerp where voorwerpnummer not in (SELECT Voorwerpnummer FROM Voorwerp v full join feedback f on v.Voorwerpnummer = f.voorwerp where Koper = :gebruiker1 AND SoortGebruiker = 'Koper') and koper = :gebruiker2 and veilinggesloten = 1 OR Voorwerpnummer in 
+        $stmt = $dbh->prepare("Select * from voorwerp where voorwerpnummer not in (SELECT Voorwerpnummer FROM Voorwerp v full join feedback f on v.Voorwerpnummer = f.voorwerp where Koper = :gebruiker1 AND SoortGebruiker = 'Koper') and koper = :gebruiker2 and veilinggesloten = 1 OR Voorwerpnummer in
   (Select Voorwerpnummer from voorwerp where voorwerpnummer not in (SELECT Voorwerpnummer FROM Voorwerp v full join feedback f on v.Voorwerpnummer = f.voorwerp where Verkoper = :gebruiker3 AND SoortGebruiker = 'Verkoper') and verkoper = :gebruiker4 and VeilingGesloten = 0)");
         $stmt->execute(array(':gebruiker1' => $user, ':gebruiker2' => $user, ':gebruiker3' => $user, ':gebruiker4' => $user));
         return $result = $stmt->fetchAll();
@@ -702,6 +702,67 @@ function get_mail_with_code($dbh, $code){
 
     catch (PDOException $e) {
         echo $e->getMessage();
+    }
+}
+
+function check_if_user($dbh, $username){
+    try {
+        $statement = $dbh->prepare("select count(*) as aantal from Gebruiker where Gebruikersnaam = :username ");
+        $statement->execute(array(':username' => $username));
+        $result=$statement->fetch();
+       if($result['aantal']==1){
+           return true;
+           }
+
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+    return false;
+}
+
+
+function block_user($dbh, $username)
+{
+    if(check_if_user($dbh, $username)) {
+        $username = strtolower($username);
+
+        if ($username == 'admin') {
+            return false;
+        }
+        try {
+            $statement = $dbh->prepare("update Gebruiker set Geblokkeerd = 1 where Gebruikersnaam = :username ");
+            $statement->execute(array(':username' => $username));
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+    else{
+        return false;
+    }
+}
+
+function unblock_user($dbh, $username)
+{
+    if(check_if_user($dbh, $username)){
+    $username = strtolower($username);
+
+    if ($username == 'admin') {
+        return false;
+    }
+    try {
+        $statement = $dbh->prepare("update Gebruiker set Geblokkeerd = 0 where Gebruikersnaam = :username ");
+        $statement->execute(array(':username' => $username));
+        return true;
+    }
+
+    catch (PDOException $e) {
+        echo $e;
+    }
+    }
+    else{
+        return false;
     }
 }
 

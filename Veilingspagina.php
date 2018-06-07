@@ -50,14 +50,18 @@ if(isset($_POST)){
 <main>
     <div class="container">
         <div class="row justify-content-center">
-            <h2 class="text-center"><?php echo $item['Titel'];?></h2>
+            <h2 class="text-center"><?php echo_html_safe($item['Titel']);?></h2>
         </div>
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-12 d-flex justify-content-center">
-                        <span class="timer" data-auctionEnd="<?php echo $endDate->format("Y-m-d H:i:s");  ?>"></span>
+                        <h3>
+                            <strong>
+                                <span class="timer" data-auctionEnd="<?php echo $endDate->format("Y-m-d H:i:s");  ?>"></span>
+                            </strong>
+                        </h3>
                     </div>
                 </div>
                <div class="row margin-top">
@@ -72,7 +76,9 @@ if(isset($_POST)){
                    </div>
                    <div class="col-12">
                         <p>
-                            <strong>Hoofdcategory -> subcategory1 -> ... subcategory6</strong>
+                            <strong>
+<!--                                Hoofdcategory -> subcategory1 -> ... subcategory6-->
+                            </strong>
                         </p>
                    </div>
                    <div class="col-12">
@@ -82,26 +88,25 @@ if(isset($_POST)){
                    </div>
                    <div class="col-12">
                         <p>
-                            <strong>Productomschrijving :</strong><?php echo $item['Beschrijving']; ?>
+                            <strong>Productomschrijving :</strong><?php echo_html_safe($item['Beschrijving']); ?>
                         </p>
                    </div>
                </div>
             </div>
             <div class="col-md-6 seperator-none seperator-left-md">
                 <div class="row">
-
                     <div class="col-12 verkoperSection margin-bottom seperator-bottom-md">
-                        <h3>Verkoper: <?php echo '<a href="Verkoper.php?id='.$veilinginformatie['Gebruikersnaam'].'">'.$veilinginformatie['Gebruikersnaam'].'</a>';?></h3>
-                        <p><strong>Voornaam:</strong> <?php echo $veilinginformatie['Voornaam'] ?></p>
-                        <p><strong>Achternaam:</strong> <?php echo $veilinginformatie['Achternaam'] ?></p>
-                        <p><strong>Land: </strong><?php echo $veilinginformatie['Verkoopland']?></p>
-                        <p><strong>Plaats: </strong><?php echo $veilinginformatie['Verkoopplaats']?></p>
-                        <p><strong>Betalingswijze: </strong><?php echo $veilinginformatie['Betalingswijze']?></p>
+                        <h3>Verkoper: <?php echo '<a href="Verkoper.php?id='. return_html_safe($veilinginformatie['Gebruikersnaam']).'">'.return_html_safe($veilinginformatie['Gebruikersnaam']).'</a>';?></h3>
+                        <p><strong>Voornaam:</strong> <?php echo_html_safe($veilinginformatie['Voornaam']); ?></p>
+                        <p><strong>Achternaam:</strong> <?php echo_html_safe($veilinginformatie['Achternaam']); ?></p>
+                        <p><strong>Land: </strong><?php echo_html_safe($veilinginformatie['Verkoopland']);?></p>
+                        <p><strong>Plaats: </strong><?php echo_html_safe($veilinginformatie['Verkoopplaats']);?></p>
+                        <p><strong>Betalingswijze: </strong><?php echo_html_safe($veilinginformatie['Betalingswijze']);?></p>
                         <?php if(!empty($veilinginformatie['Betalingsinstructie'])){
-                            echo '<p><strong>Betalingsinstructie:</strong> '.$veilinginformatie['Betalingsinstructie'].'</p>';
+                            echo '<p><strong>Betalingsinstructie:</strong> '.return_html_safe($veilinginformatie['Betalingsinstructie']).'</p>';
                         } ?>
                         <p><strong>Gemiddelde beoordeling:</strong> <?php echo calculate_average_feedback_seller($db, $veilinginformatie['Gebruikersnaam'])?></p>
-                        <a class="btn btn-primary" href="mailto:<?php echo $veilinginformatie['Mailbox']?>?Subject=Veiling%20<?php echo $item['Titel']?>">Mail de verkoper</a>
+                        <a class="btn btn-primary" href="mailto:<?php echo_html_safe($veilinginformatie['Mailbox']);?>?Subject=Veiling%20<?php echo_html_safe($item['Titel']);?>">Mail de verkoper</a>
                     </div>
                     <div id="biddings" class="col-12 auction-section">
                         <div class="row">

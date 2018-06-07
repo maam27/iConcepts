@@ -97,12 +97,13 @@ if(isset($_SESSION['user'])){
                         <input id="address-field2" name="address-field2" type="text" pattern="([A-Za-z])+\s?([A-Za-z])+\s?([A-Za-z])+\s([0-9])+([A-Za-z])?" placeholder="Toevoeging adresregel" value='<?php echo $data2['Adresregel2'] ?>'>
                         <br>
                         <p>Postcode: </p>
-                        <input id="postcode" name="postcode" type="text" placeholder="4323DK" value='<?php echo $data2['Postcode'] ?>' required>
+                        <input id="postcode" name="postcode" type="text" placeholder="4323DK" value='<?php echo $data2['Postcode'] ?>' pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" required>
                         <br>
                         <p>Antwoord:</p>
                         <input id="answer" name="answer" type="text" placeholder="Antwoord" pattern="([^<>])+" value='<?php echo $data2['Antwoordtekst'] ?>' required>
                         <br>
-                        <button type="submit">Pas aan</button>
+                        <button type="submit" class= 'btn btn-primary'>Pas aan</button>
+                        <div class = "margin-top"><a href = 'Gebruikersprofiel.php' class = 'btn btn-primary'>Annuleren</a></div>
                     </div>
                 </div>
             </form>

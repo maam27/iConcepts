@@ -132,7 +132,7 @@ else{
                                 <?php
                                 foreach($categorieën as $key => $value){
 
-                                    echo '<option value="'.$value[0].'">'.$value['1'].'</option>';
+                                    echo '<option value="'.$value[0].'">'.$value[2].' --> '.$value['1'].'</option>';
                                 }
                                 ?>
                             </select>
@@ -142,8 +142,7 @@ else{
                                 <option value="Geen">n.v.t.</option>
                                 <?php
                                 foreach($categorieën as $key => $value){
-
-                                    echo '<option value="'.$value[0].'">'.$value['1'].'</option>';
+                                    echo '<option value="'.$value[0].'">'.$value[2].' --> '.$value['1'].'</option>';
                                 }
                                 ?>
                             </select>
