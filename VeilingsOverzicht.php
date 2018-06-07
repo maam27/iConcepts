@@ -150,9 +150,9 @@ $Artikelen = get_category_view($db,$filter,$order,$page);
                             ?>
                             <ul class="pagination">
                                 <?php
-                                for($i=$minPage; $i<=$maxPage; $i++) {
-                                    echo "<li class='page-item'><a class='page-link' href='VeilingsOverzicht.php?page=".$i . $currentFilterPageless."'>$i</a></li>";
-                                }
+                                for($i=$minPage; $i<=$maxPage; $i++) {?>
+                                    <li class='page-item <?php if($i == $currentPage) echo "bold"; ?>'><a class='page-link' href='VeilingsOverzicht.php?page="<?=$i?><?=$currentFilterPageless?>"'><?=$i?></a></li>
+                                <?php }
                                 ?>
                             </ul>
                         </div>
