@@ -271,7 +271,7 @@ function get_all_sub_categories_of($category, $dbh){
     return $categories;
 }
 
-function get_category_view($dbh, $filter, $order, $pageNr = 0, $rows = 20){
+function get_category_view($dbh, $filter, $order, $pageNr , $rows =20 ){
     if(!is_numeric($pageNr))
         $pageNr=1;
     if(!is_numeric($rows))
@@ -289,6 +289,23 @@ function get_category_view($dbh, $filter, $order, $pageNr = 0, $rows = 20){
     $statement->execute();
     return $result = $statement->fetchAll();
 }
+
+function get_NPages($dbh, $filter, $rows){
+    $query = "select Count(DISTINCT [Voorwerpnummer]) /". $rows ." as rows from Voorwerp where Voorwerpnummer in (
+	select Voorwerpnummer from voorwerp v
+	inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
+	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer".$filter.")";
+
+
+    $statement = $dbh->query($query);
+    $statement->execute();
+    $result = $statement ->fetch();
+
+    $NPages = $result["rows"];
+
+    return $NPages;
+}
+
 
 function get_highest_auction_number($dbh){
 
