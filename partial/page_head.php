@@ -21,3 +21,11 @@ require_once 'php/generic_functions.php';
 $db = get_db_connection();
 include 'php/Function.php';
 ?>
+
+<noscript>
+    <div class="noscript">
+        <h4 class=" margin-top margin-bottom">
+            U heeft javascript uitgeschakeld, hierdoor kunnen delen van de site mogelijk niet zoals bedoelt werken.
+        </h4>
+    </div>
+</noscript>
