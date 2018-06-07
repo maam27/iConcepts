@@ -78,6 +78,11 @@ if (empty($_SESSION['user'])) {
                                     <li><a href="beheeromgeving.php">De Beheeromgeving</a></li>
                                     <?php
                                 }
+                                if($data1['Beheerder'] == 1){
+                                    ?>
+                                    <li><a href="statistieken.php">Statistieken</a></li>
+                                    <?php
+                                }
                                 if ($data1['Verkoper'] == 1) { ?>
                                     <li><a href="VeilingStarten.php">Start veiling</a></li>
                                     <li><a href="Gebruikersprofiel.php?QuerySoort=Mijn_Veilingen_Open#Jump">Mijn
