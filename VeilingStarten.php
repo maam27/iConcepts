@@ -13,7 +13,7 @@ require_once 'php/generic_functions.php';
 <body>
 <?php
 include_once 'partial/menu.php';
-$categorieën = get_bottom_category($db);
+$categorieën =  get_auctionable_bottom_category($db);
 if (!empty($_SESSION['user'])) {
     $verkoperdata = get_information_user($db, $_SESSION['user']);
 }

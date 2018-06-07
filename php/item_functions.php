@@ -369,6 +369,7 @@ function add_auction_to_category($dbh, $voorwerpnummer, $genre){
     }
 }
 
+
 function get_bottom_category($dbh){
     try{
         $stmt = $dbh -> prepare("select r.Rubrieknummer, r.Rubrieknaam, k.Rubrieknaam  as Naam_Bovenliggende_Categorie
@@ -384,21 +385,166 @@ function get_bottom_category($dbh){
     }
 }
 
-function check_if_empty_bottom_category($dbh, $productnummer){
-    try {
-        $statement = $dbh->prepare("select * from rubriek where Rubrieknummer in 
-                                  (select r.rubrieknummer from rubriek r left join rubriek k on r.Rubrieknummer = k.volgnummer 
-                                   where k.volgnummer IS NULL) and rubrieknummer not in (select RubriekOpLaagsteNiveau from voorwerpinrubriek) 
-                                   and Rubrieknummer = :productnummer");
-        $statement->execute(array(':productnummer' => $productnummer));
-        $result=$statement->fetch();
-        if($result['aantal']==1){
+function get_auctionable_bottom_category($dbh){
+    try{
+        $stmt = $dbh -> prepare("select r.Rubrieknummer, r.Rubrieknaam, k.Rubrieknaam, r.Uitfaseren  as Naam_Bovenliggende_Categorie
+	                            from rubriek r join rubriek k on r.volgnummer = k.rubrieknummer where r.Rubrieknummer in (
+	                            select r.rubrieknummer from rubriek r left join rubriek k on r.Rubrieknummer = k.volgnummer 
+	                            where k.volgnummer IS NULL) AND r.Uitfaseren = 0 AND r.Verbergen = 0 order by Naam_Bovenliggende_Categorie, Rubrieknaam");
+        $stmt -> execute();
+        $result = $stmt->fetchall();
+        return $result;
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+
+function get_empty_category($dbh){
+    try{
+        $stmt = $dbh -> prepare("select r.Rubrieknummer, r.Rubrieknaam, k.Rubrieknaam  as Naam_Bovenliggende_Categorie
+	from rubriek r join rubriek k on r.volgnummer = k.rubrieknummer and r.rubrieknummer 
+	not in (select RubriekOpLaagsteNiveau from voorwerpinrubriek)  
+");
+        $stmt -> execute();
+        $result = $stmt->fetchall();
+        return $result;
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+
+function get_highest_category_nummer($dbh){
+    try{
+        $stmt = $dbh -> prepare("select top 1 rubrieknummer from rubriek order by rubrieknummer desc");
+        $stmt -> execute();
+        $result = $stmt->fetch();
+        return $result[0];
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+
+function add_category($dbh, $naam, $volgnummer){
+    $hoogsteNummer = get_highest_category_nummer($dbh);
+    try{
+        $stmt = $dbh -> prepare("Insert into rubriek VALUES (:hoogstenummer, :rubrieknaam, NULL, :volgnummer, 0, 0)");
+        $stmt -> execute([
+            ':hoogstenummer' => $hoogsteNummer+1,
+            ':rubrieknaam' => $naam,
+            ':volgnummer' => $volgnummer
+        ]);
+
+        if (check_if_category($dbh, $hoogsteNummer+1)) {
             return true;
+        } else {
+            return false;
         }
     }
     catch (PDOException $e) {
         echo $e;
     }
+}
+
+    function check_if_category($dbh, $rubrieknummer){
+    try{
+    $statement = $dbh->prepare("select count(Rubrieknummer) as aantal from rubriek where rubrieknummer = :nummer");
+    $statement->execute(array(':nummer' => $rubrieknummer));
+    $result = $statement -> fetch();
+
+    if($result['aantal'] == 1){
+        return true;
+    }
+    else{
+        return false;
+    }
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+
+    function check_if_fased($dbh, $rubrieknummer){
+        try{
+            $statement = $dbh->prepare("select count(rubrieknummer) as aantal from rubriek where rubrieknummer = :nummer and Uitfaseren = 1");
+            $statement->execute(array(':nummer' => $rubrieknummer));
+            $result = $statement -> fetch();
+
+            if($result['aantal'] == 1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function fase_out_category($dbh, $rubrieknummer){
+    try{
+        $statement = $dbh->prepare("update Rubriek set Uitfaseren = 1 where Rubrieknummer = :nummer");
+        $statement->execute(array(':nummer' => $rubrieknummer));
+        if(check_if_fased($dbh, $rubrieknummer)){
+            return true;
+        }
+        else{return false;}
+    }
+
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+
+function check_if_deleted_category($dbh, $rubrieknummer){
+    try{
+        $statement = $dbh->prepare("select count(rubrieknummer) as aantal from rubriek where rubrieknummer = :nummer and Verbergen = 1");
+        $statement->execute(array(':nummer' => $rubrieknummer));
+        $result = $statement -> fetch();
+
+        if($result['aantal'] == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+function delete_category($dbh, $rubrieknummer){
+    try{
+        $statement = $dbh->prepare("update Rubriek set Verbergen = 1 where Rubrieknummer = :nummer");
+        $statement->execute(array(':nummer' => $rubrieknummer));
+        if(check_if_deleted_category($dbh, $rubrieknummer)){
+            return true;
+        }
+        else{return false;}
+    }
+
+    catch (PDOException $e) {
+        echo $e;
+    }
+}
+
+function rename_category($dbh, $rubrieknummer, $nieuwenaam){
+    try{
+        $statement = $dbh->prepare("update Rubriek set rubrieknaam = :naam where Rubrieknummer = :nummer");
+        $statement->execute(array(':naam' => $nieuwenaam, ':nummer' => $rubrieknummer));
+        if(check_if_category($dbh, $rubrieknummer)){
+            return true;
+        }
+        else{return false;}
+    }
+
+    catch (PDOException $e) {
+        echo $e;
+    }
+
 }
 
 function add_image_to_database($dbh, $filenaam, $voorwerpnummer){
