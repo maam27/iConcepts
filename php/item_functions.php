@@ -271,7 +271,7 @@ function get_all_sub_categories_of($category, $dbh){
     return $categories;
 }
 
-function get_category_view($dbh, $filter, $order, $pageNr , $rows ){
+function get_category_view($dbh, $filter, $order, $pageNr , $rows =20 ){
     if(!is_numeric($pageNr))
         $pageNr=1;
     if(!is_numeric($rows))
