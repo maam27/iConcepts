@@ -57,6 +57,7 @@ if(isset($_GET)){
 <!--    SideNavigation Bar    -->
 
 <?php
+$rows_per_page = 20;
 $Rubriek = get_sub_categories(-1,$db);
 $page = 1;
 if (isset($_GET['page'])) {
@@ -64,7 +65,7 @@ if (isset($_GET['page'])) {
 
 }
 $order = "order by LooptijdbeginDag desc, LooptijdbeginTijdstip desc";
-$Artikelen = get_category_view($db,$filter,$order,$page);
+$Artikelen = get_category_view($db,$filter,$order,$page,$rows_per_page);
 
 for($i =0; $i < sizeof($Artikelen); $i++){
     $Artikelen[$i]['Beschrijving'] = str_replace("<","&lt;",$Artikelen[$i]['Beschrijving']);
@@ -143,7 +144,27 @@ for($i =0; $i < sizeof($Artikelen); $i++){
 
                     <div class="row">
                         <div class="col-12">
-                            pagina nr's
+                            pagina nr's:
+                            <?php
+$currentPage=1;
+if( isset($_GET['page'])){
+    if(!empty($_GET['page'])){
+        if(is_numeric($_GET['page'])){
+    $currentPage = $_GET['page'];
+}
+    }
+}
+//echo $currentPage;
+
+$showPagination = 3;
+$totalPages = get_NPages($dbh, $filter, $rows_per_page);
+                             $minPage = ($currentPage-$showPagination>=1)?$currentPage-$showPagination:1;
+                             $maxPage = ($currentPage+$showPagination<=$totalPages)?$currentPage+$showPagination:$totalPages;
+                           for($i=$minPage; $i<=$maxPage; $i++){
+                               echo"<a href='VeilingsOverzicht.php?page=$i'> $i </a>";
+                           }
+                        ?>
+
                         </div>
                     </div>
 
