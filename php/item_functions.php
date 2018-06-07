@@ -404,10 +404,10 @@ function get_bottom_category($dbh){
 
 function get_auctionable_bottom_category($dbh){
     try{
-        $stmt = $dbh -> prepare("select r.Rubrieknummer, r.Rubrieknaam, k.Rubrieknaam, r.Uitfaseren  as Naam_Bovenliggende_Categorie
+        $stmt = $dbh -> prepare("select r.Rubrieknummer, r.Rubrieknaam, k.Rubrieknaam as Naam_Bovenliggende_Categorie, r.Uitfaseren  
 	                            from rubriek r join rubriek k on r.volgnummer = k.rubrieknummer where r.Rubrieknummer in (
 	                            select r.rubrieknummer from rubriek r left join rubriek k on r.Rubrieknummer = k.volgnummer 
-	                            where k.volgnummer IS NULL) AND r.Uitfaseren = 0 AND r.Verbergen = 0 order by Naam_Bovenliggende_Categorie, Rubrieknaam");
+	                            where k.volgnummer IS NULL) AND r.Uitfaseren = 0 AND r.Verbergen = 0 order by Naam_Bovenliggende_Categorie, r.Rubrieknaam");
         $stmt -> execute();
         $result = $stmt->fetchall();
         return $result;
