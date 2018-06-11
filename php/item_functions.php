@@ -278,7 +278,7 @@ function get_category_view($dbh, $filter, $order, $pageNr , $rows =20 ){
         $rows=20;
     $offset = ($pageNr-1)*$rows;
 
-    $query = "select distinct * from Voorwerp where Voorwerpnummer in (
+    $query = "select distinct * from Voorwerp where Voorwerpnummer in(
 	select Voorwerpnummer from voorwerp v 
 	inner join VoorwerpInRubriek k on v.Voorwerpnummer = k.Voorwerp
 	left join Rubriek r on k.RubriekOpLaagsteNiveau = r.Rubrieknummer".$filter.") ".$order." offset ".$offset." ROWS FETCH NEXT ".$rows." ROWS ONLY ";
