@@ -78,6 +78,11 @@ if (empty($_SESSION['user'])) {
                                     <li><a href="beheeromgeving.php">De Beheeromgeving</a></li>
                                     <?php
                                 }
+                                if($data1['Beheerder'] == 1){
+                                    ?>
+                                    <li><a href="statistieken.php">Statistieken</a></li>
+                                    <?php
+                                }
                                 if ($data1['Verkoper'] == 1) { ?>
                                     <li><a href="VeilingStarten.php">Start veiling</a></li>
                                     <li><a href="Gebruikersprofiel.php?QuerySoort=Mijn_Veilingen_Open#Jump">Mijn
@@ -161,7 +166,9 @@ if (empty($_SESSION['user'])) {
                 <?php
                 if (check_if_unvalidated_seller($db, $_SESSION['user'])) {
                     echo '<a class="col-md-3 btn btn-primary user-section-button-margin" href="AfrondenVerkoperstatus.php">Invullen verificatiecode</a>   ';
-                } else {
+                }
+                else if(check_if_seller($db, $_SESSION['user'])){}
+                else {
                     echo '<a class="col-md-3 btn btn-primary user-section-button-margin" href="AanvraagVerkoperstatus.php"> Word Verkoper </a>   ';
                 }
                 ?>
