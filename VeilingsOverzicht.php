@@ -143,6 +143,7 @@ $Artikelen = get_category_view($db,$filter,$order,$page);
                                         }
                                     }
                                 }
+                                $currentPage = ($currentPage > 0)?$currentPage : 1;
                                 $showPagination = 3;
                                 $totalPages = get_NPages($dbh, $filter, $rows_per_page);
                                  $minPage = ($currentPage-$showPagination>=1)?$currentPage-$showPagination:1;
@@ -157,7 +158,7 @@ $Artikelen = get_category_view($db,$filter,$order,$page);
                                     <li class='page-item <?php if($i == $currentPage) echo "bold"; ?>'><a class='page-link' href='VeilingsOverzicht.php?page=<?=$i?><?=$currentFilterPageless?>'><?=$i?></a></li>
                                 <?php }
                                 if ($maxPage != $totalPages) {
-                                    echo "<li class='page-item'><a class='page-link' href='VeilingsOverzicht.php?page=". $totalPages . $currentFilterPageless . "'>Last Page</a></li>";
+                                    echo "<li class='page-item'><a class='page-link' href='VeilingsOverzicht.php?page=". $totalPages . $currentFilterPageless . "'><i class='fa fa-angle-double-right'></i></a></li>";
                                 }
                                 ?>
                             </ul>
