@@ -132,6 +132,7 @@ $Artikelen = get_category_view($db,$filter,$order,$page);
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
                             <?php
+                                $showPagination = 3;
                                 $currentUrl = basename($_SERVER['REQUEST_URI']);;
                                 $currentFilter = preg_replace('%.*?\?%','',$currentUrl,1);
                                 $currentFilterPageless = "&". preg_replace('%page=\d*&?%','',$currentFilter,1);
@@ -143,11 +144,9 @@ $Artikelen = get_category_view($db,$filter,$order,$page);
                                         }
                                     }
                                 }
-                                $currentPage = ($currentPage > 0)?$currentPage : 1;
-                                $showPagination = 3;
                                 $totalPages = get_NPages($dbh, $filter, $rows_per_page);
-                                 $minPage = ($currentPage-$showPagination>=1)?$currentPage-$showPagination:1;
-                                 $maxPage = ($currentPage+$showPagination<=$totalPages)?$currentPage+$showPagination:$totalPages;
+                                $minPage = ($currentPage-$showPagination>=1)?$currentPage-$showPagination:1;
+                                $maxPage = ($currentPage+$showPagination<=$totalPages)?$currentPage+$showPagination:$totalPages;
                             ?>
                             <ul class="pagination">
                                 <?php

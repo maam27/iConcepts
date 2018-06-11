@@ -491,6 +491,10 @@ div.noscript{
     color:#f2552c;
     border: 1px solid #F2552C;
 }
+.page-link:hover{
+    color:#F2552C;
+    border: 1px solid #F2552C;
+}
 
 .bold{
     font-weight: bold;
