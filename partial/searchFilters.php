@@ -14,13 +14,13 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12">
-                            Prijs
+                            Prijs tussen
                         </div>
                         <div class="col-5 col-md-12">
                             <input type="number" class="form-control" name="minValue" value="<?php echo if_set("minValue","get")?>" min="0">
                         </div>
                         <div class="col-2 col-md-12">
-                            tot
+                            en
                         </div>
                         <div class="col-5 col-md-12">
                             <input type="number" class="form-control" name="maxValue" value="<?php echo if_set("maxValue","get")?>" min="0">

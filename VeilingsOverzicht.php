@@ -41,6 +41,13 @@ if(isset($_GET)){
                 $maxval = $_GET['maxValue'];
             }
         }
+
+        if($minval>$maxval){
+            $tempval = $minval;
+            $minval = $maxval;
+            $maxval = $tempval;
+        }
+
         $filter .= " and
         CASE WHEN EXISTS (SELECT * FROM Bod WHERE Voorwerp = Voorwerpnummer) THEN
             (SELECT top 1 Bodbedrag FROM Bod WHERE Voorwerp = Voorwerpnummer order by Bodbedrag desc)
