@@ -43,7 +43,7 @@ if (isset($_SESSION['user'])){
                 <form method="Post" action="#">
                     <div class="row">
                         <div class="col-md-6">
-                            <p>Oude wachtwoord:</p>
+                            <p>Huidig wachtwoord:</p>
                             <input id="old-password" name="old-password" type="password" placeholder="" required>
                             <br>
                             <p>Nieuwe wachtwoord:</p>
