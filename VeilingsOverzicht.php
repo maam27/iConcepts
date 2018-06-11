@@ -153,9 +153,9 @@ $Artikelen = get_category_view($db,$filter,$order,$page);
                                 if ($minPage != 1) {
                                     echo "<li class='page-item'><a class='page-link' href='VeilingsOverzicht.php?page=". 1 . $currentFilterPageless . "'>First page</a></li>";
                                 }
-                                for($i=$minPage; $i<=$maxPage; $i++) {
-                                    echo "<li class='page-item'><a class='page-link' href='VeilingsOverzicht.php?page=".$i . $currentFilterPageless."'>$i</a></li>";
-                                }
+                                for($i=$minPage; $i<=$maxPage; $i++) {?>
+                                    <li class='page-item <?php if($i == $currentPage) echo "bold"; ?>'><a class='page-link' href='VeilingsOverzicht.php?page="<?=$i?><?=$currentFilterPageless?>"'><?=$i?></a></li>
+                                <?php }
                                 if ($maxPage != $totalPages) {
                                     echo "<li class='page-item'><a class='page-link' href='VeilingsOverzicht.php?page=". $totalPages . $currentFilterPageless . "'>Last Page</a></li>";
                                 }

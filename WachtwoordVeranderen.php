@@ -52,7 +52,7 @@ if (isset($_SESSION['user'])){
                             <p>Confirmatie nieuwe wachtwoord:</p>
                             <input id="new-password2" name="new-password2" type="password" placeholder="" required>
                             <br>
-                            <button type="submit">Pas aan</button>
+                            <button class="btn btn-primary" type="submit">Pas aan</button>
                             <?php
                             if (isset($message)) {
                                 echo '<p class="error-message">' . $message . '</p>';

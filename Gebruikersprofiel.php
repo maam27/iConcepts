@@ -161,7 +161,9 @@ if (empty($_SESSION['user'])) {
                 <?php
                 if (check_if_unvalidated_seller($db, $_SESSION['user'])) {
                     echo '<a class="col-md-3 btn btn-primary user-section-button-margin" href="AfrondenVerkoperstatus.php">Invullen verificatiecode</a>   ';
-                } else {
+                }
+                else if(check_if_seller($db, $_SESSION['user'])){}
+                else {
                     echo '<a class="col-md-3 btn btn-primary user-section-button-margin" href="AanvraagVerkoperstatus.php"> Word Verkoper </a>   ';
                 }
                 ?>
