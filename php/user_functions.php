@@ -273,7 +273,7 @@ function check_user_answer($email, $answer, $dbh)
 function reset_password($email, $password, $dbh, $code)
 {
     try {
-        $stmt = $dbh->prepare("DELETE FROM WachtwoordVergeten where code = :code");
+        $stmt = $dbh->prepare("DELETE FROM WachtwoordVergeten where Activeringscode = :code");
         $stmt -> execute([
             ':code' => $code
         ]);

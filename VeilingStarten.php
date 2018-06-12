@@ -46,11 +46,6 @@ if (!empty($_POST['voorwerp-titel']) AND $_POST['beschrijving'] != '') {
             add_image_to_database($db, $voorwerpnummer.'_d.'.pathinfo($_FILES['image-4']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
         }
 
-
-
-
-
-
     add_auction_to_category($db, $voorwerpnummer, $_POST['Rubriek']);
         if ($_POST['Rubriek2'] != 'Geen' AND $_POST['Rubriek'] != $_POST['Rubriek2']) {
             add_auction_to_category($db, $voorwerpnummer, $_POST['Rubriek2']);
@@ -162,10 +157,10 @@ else{
                         <label for="looptijd"><strong>Looptijd*</strong></label><br>
                         <select id="looptijd" name="looptijd">
                             <option value="1">1 Dag</option>
-                            <option value="1">3 Dagen</option>
-                            <option value="1">5 Dagen</option>
-                            <option value="1">7 Dagen</option>
-                            <option value="1">10 Dagen</option>
+                            <option value="3">3 Dagen</option>
+                            <option value="5">5 Dagen</option>
+                            <option value="7">7 Dagen</option>
+                            <option value="10">10 Dagen</option>
                         </select><br>
                         <label for="image-1"><strong>Afbeelding 1*</strong></label>
                         <input type="file" name="image-1" id="image-1" required>
