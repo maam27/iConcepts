@@ -18,41 +18,65 @@ if (!empty($_SESSION['user'])) {
     $verkoperdata = get_information_user($db, $_SESSION['user']);
 }
 $succesvolletoevoeging = false;
-if (!empty($_POST['voorwerp-titel']) AND $_POST['beschrijving'] != '') {
-    echo print_r($_POST);
+$SuccesvolleUpload1 = true;
+$SuccesvolleUpload2 = true;
+$SuccesvolleUpload3 = true;
+$SuccesvolleUpload4 = true;
 
-    if (add_auction($db, $_POST['voorwerp-titel'], $_POST['beschrijving'], $_POST['looptijd'], $_POST['country'], $_POST['city'], $_POST['start-price'], $_POST['paymentmethod'], $_POST['payment-instructions'],
-        $_POST['shipment-cost'], $_POST['shipment-instructions'], $_SESSION['user'], ($voorwerpnummer = get_highest_auction_number($db) + 1))) {
-        $succesvolletoevoeging = true;
+if (isset($_POST['voorwerp-titel']) AND $_POST['beschrijving'] != '') {
 
-        /*=============================================================================================
-         *
-         *                                UPLOADEN VAN EEN IMAGEBESTAND
-         *
-         *============================================================================================= */
+if (add_auction($db, $_POST['voorwerp-titel'], $_POST['beschrijving'], $_POST['looptijd'], $_POST['country'], $_POST['city'], $_POST['start-price'], $_POST['paymentmethod'], $_POST['payment-instructions'],
+    $_POST['shipment-cost'], $_POST['shipment-instructions'], $_SESSION['user'], ($voorwerpnummer = get_highest_auction_number($db) + 1))) {
+    $succesvolletoevoeging = true;
 
-        add_image('image-1', $voorwerpnummer, 'a');
-        add_image_to_database($db, $voorwerpnummer.'_a.'.pathinfo($_FILES['image-1']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
-        if(!empty($_FILES['image-2']['name'])){
-            add_image('image-2', $voorwerpnummer, 'b');
-            add_image_to_database($db, $voorwerpnummer.'_b.'.pathinfo($_FILES['image-2']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
-        }
-        if(!empty($_FILES['image-3']['name'])){
-            add_image('image-3', $voorwerpnummer, 'c');
-            add_image_to_database($db, $voorwerpnummer.'_c.'.pathinfo($_FILES['image-3']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
-        }
-        if(!empty($_FILES['image-4']['name'])){
-            add_image('image-4', $voorwerpnummer, 'd');
-            add_image_to_database($db, $voorwerpnummer.'_d.'.pathinfo($_FILES['image-4']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
-        }
+    /*=============================================================================================
+     *
+     *                                UPLOADEN VAN EEN IMAGEBESTAND
+     *
+     *============================================================================================= */
+
 
     add_auction_to_category($db, $voorwerpnummer, $_POST['Rubriek']);
-        if ($_POST['Rubriek2'] != 'Geen' AND $_POST['Rubriek'] != $_POST['Rubriek2']) {
-            add_auction_to_category($db, $voorwerpnummer, $_POST['Rubriek2']);
+    if ($_POST['Rubriek2'] != 'Geen' AND $_POST['Rubriek'] != $_POST['Rubriek2']) {
+        add_auction_to_category($db, $voorwerpnummer, $_POST['Rubriek2']);
+    }
+
+    if (add_image('image-1', $voorwerpnummer, 'a')) {
+        add_image_to_database($db, $voorwerpnummer . '_a.' . pathinfo($_FILES['image-1']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
+    } else {
+        $SuccesvolleUpload1 = false;
+    }
+
+
+    if (!empty($_FILES['image-2']['name'])) {
+        if (add_image('image-2', $voorwerpnummer, 'b')) {
+            add_image_to_database($db, $voorwerpnummer . '_b.' . pathinfo($_FILES['image-2']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
+        } else {
+            $SuccesvolleUpload2 = false;
+
         }
     }
-}
 
+    if (!empty($_FILES['image-3']['name'])) {
+        if (add_image('image-3', $voorwerpnummer, 'c')) {
+            add_image_to_database($db, $voorwerpnummer . '_c.' . pathinfo($_FILES['image-3']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
+        } else {
+            $SuccesvolleUpload3 = false;
+        }
+
+    }
+    if (!empty($_FILES['image-4']['name'])) {
+        if (add_image('image-4', $voorwerpnummer, 'd')) {
+            add_image_to_database($db, $voorwerpnummer . '_d.' . pathinfo($_FILES['image-4']['name'], PATHINFO_EXTENSION), $voorwerpnummer);
+        } else {
+            $SuccesvolleUpload4 = false;
+
+        }
+    } else {
+        $failed_auction = true;
+    }
+  }
+}
 
 if (empty($_SESSION['user'])){
     ?>
@@ -86,7 +110,23 @@ else if (!check_if_seller($db, $_SESSION['user'])){ ?>
 
     <?php
 }
+else if ($SuccesvolleUpload1 == false OR $SuccesvolleUpload2 == false OR $SuccesvolleUpload3 == false OR $SuccesvolleUpload4 == false){
+    verwijder_veiling($db, get_highest_auction_number($db));
+    ?>
 
+    <main>
+        <div class="container error-box d-flex flex-row justify-content-center align-items-center">
+            <div>
+                <h2 class="error-message text-center">Er is iets fout gegaan met het uploaden!</h2>
+                <p class="text-center">Het bestand is te groot, of het verkeerde bestandsnummer.</p>
+                <p class="text-center">Als u denkt dat dit een fout is neem <a href="OverOns.php">contact</a> op met de
+                    beheerders.</p>
+            </div>
+        </div>
+    </main>
+
+    <?php
+}
 else if ($succesvolletoevoeging){
     ?>
     <main>
@@ -125,9 +165,9 @@ else{
                             <label for="Rubriek"><strong>Category 1</strong></label> <br>
                             <select id="Rubriek" name="Rubriek">
                                 <?php
-                                foreach($categorieën as $key => $value){
+                                foreach ($categorieën as $key => $value) {
 
-                                    echo '<option value="'.$value[0].'">'.$value[2].' --> '.$value['1'].'</option>';
+                                    echo '<option value="' . $value[0] . '">' . $value[2] . ' --> ' . $value['1'] . '</option>';
                                 }
                                 ?>
                             </select>
@@ -136,8 +176,8 @@ else{
                             <select id="Rubriek2" name="Rubriek2">
                                 <option value="Geen">n.v.t.</option>
                                 <?php
-                                foreach($categorieën as $key => $value){
-                                    echo '<option value="'.$value[0].'">'.$value[2].' --> '.$value['1'].'</option>';
+                                foreach ($categorieën as $key => $value) {
+                                    echo '<option value="' . $value[0] . '">' . $value[2] . ' --> ' . $value['1'] . '</option>';
                                 }
                                 ?>
                             </select>
@@ -147,12 +187,12 @@ else{
                         ?>
                         <label for="voorwerp-titel"><strong>Titel*</strong></label>
                         <input id="voorwerp-titel" name="voorwerp-titel" type="text" pattern="([^<>])+"
-                               placeholder="Bureaustoel"  maxlength="255" required>
+                               placeholder="Bureaustoel" maxlength="255" required>
                         <label for="beschrijving"><strong>Beschrijving*</strong></label>
 
-                        <textarea class="form-control" name="beschrijving"  id="beschrijving" required
+                        <textarea class="form-control" name="beschrijving" id="beschrijving" required
                                   placeholder="Hier komt de door U geschreven beschrijving van het te veilen product staan."
-                                  pattern="([^<>])+"  maxlength="4000"
+                                  pattern="([^<>])+" maxlength="4000"
                                   rows="5"></textarea>
                         <label for="looptijd"><strong>Looptijd*</strong></label><br>
                         <select id="looptijd" name="looptijd">
@@ -170,7 +210,7 @@ else{
                         <input type="file" name="image-3" id="image-3">
                         <label for="image-4"><strong>Afbeelding 4</strong></label>
                         <input type="file" name="image-4" id="image-4">
-                    <p class="error-message">Velden met een * zijn verplicht</p>
+                        <p class="error-message">Velden met een * zijn verplicht</p>
                     </div>
                     <div class="col-md-6">
                         <label for="country"><strong>Land*</strong></label>
@@ -201,7 +241,7 @@ else{
 
                         <input id="Rubriek" name="Rubriek" type="hidden" required
                                value="<?php echo $_POST['Rubriek']; ?>">
-                        <input id="Rubriek2" name="Rubriek2" type="hidden"  required
+                        <input id="Rubriek2" name="Rubriek2" type="hidden" required
                                value="<?php echo $_POST['Rubriek2']; ?>">
                         <?php } ?>
                         <button class="btn btn-primary" type="submit">Start veiling</button>

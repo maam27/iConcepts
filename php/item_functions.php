@@ -621,10 +621,9 @@ function add_image($inputveld_naam, $voorwerpnummer, $letter){
         $uploadOk = 0;
     }
 
-    echo print_r($_FILES);
 // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
+        return false;
 // if everything is ok, try to upload file
     }
 
@@ -633,6 +632,7 @@ function add_image($inputveld_naam, $voorwerpnummer, $letter){
         $imageName = $voorwerpnummer.'_'.$letter.'.'. pathinfo($_FILES[$inputveld_naam]['name'], PATHINFO_EXTENSION);
         if (move_uploaded_file($_FILES[$inputveld_naam]["tmp_name"], $target_dir.$imageName)) {
             echo "The file ". $imageName. " has been uploaded.";
+            return true;
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
