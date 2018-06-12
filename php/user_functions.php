@@ -60,6 +60,8 @@ function aanvraag_register_user($dbh, $username, $firstname, $lastname, $address
     }
 }
 
+
+
 function check_for_validatiecode_registratie($dbh, $code)
 {
     try {
@@ -189,15 +191,13 @@ function change_password($dbh, $password, $mail){
     try{
         $statement = $dbh->prepare("update Gebruiker set Wachtwoord = :password where Mailbox = :email ");
         $statement->execute(array(':password' => $password, ':email' => $mail));
-        $result = $statement->rowCount();
-        if ($result == '1')
-            return true;
-        return false;
+        return true;
     }
 
     catch (PDOException $e) {
         echo $e;
     }
+    return false;
 
 }
 
@@ -282,9 +282,7 @@ function reset_password($email, $password, $dbh, $code)
         $statement = $dbh->prepare("update Gebruiker set Wachtwoord = :password where Mailbox = :email ");
         $statement->execute(array(':password' => $password, ':email' => $email));
         $result = $statement->rowCount();
-        if ($result == '1')
-            return true;
-        return false;
+        return true;
     } catch (PDOException $e) {
         echo $e;
     }
@@ -302,7 +300,7 @@ function get_user($dbh, $username)
     }
 }
 
-function update_user($dbh, $username, $firstname, $lastname, $addressfield, $addressfield2, $postcode, $city, $country, $birthdate, $email, $securityquestion, $answer)
+function update_user($dbh, $username, $firstname, $lastname, $addressfield, $addressfield2, $postcode, $city, $country, $birthdate, $email, $securityquestion, $answer, $oudenaam)
 {
 
 
@@ -325,7 +323,7 @@ function update_user($dbh, $username, $firstname, $lastname, $addressfield, $add
                 ':mailbox' => $email,
                 ':vraag' => $securityquestion,
                 ':antwoordtekst' => $answer,
-                ':ingelogdeUser' => $_SESSION['user']
+                ':ingelogdeUser' => $oudenaam
             ]);
 
     } catch (PDOException $e) {
@@ -703,6 +701,21 @@ function get_mail_with_code($dbh, $code){
     catch (PDOException $e) {
         echo $e->getMessage();
     }
+}
+
+function check_if_mail($dbh, $mail){
+    try {
+        $statement = $dbh->prepare("select count(*) as aantal from Gebruiker where Mailbox = :mail ");
+        $statement->execute(array(':mail' => $mail));
+        $result=$statement->fetch();
+        if($result['aantal']==1){
+            return true;
+        }
+    }
+    catch (PDOException $e) {
+        echo $e;
+    }
+    return false;
 }
 
 function check_if_user($dbh, $username){

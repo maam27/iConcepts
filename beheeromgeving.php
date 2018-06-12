@@ -186,8 +186,8 @@ if ($_SESSION['user'] == 'Admin') {
                             mogelijkheid om een veiling te sluiten, op basis van een veilingnummer.</p>
                         <p class="no-margin">U hoeft hiervoor enkel een veilingsnummer te weten.</p>
                         <br>
-                        <p class="margin-bottom no-margin">Ten slotte hebben we nog een verkoper tabblad. In dit tabblad
-                            kunt U de verkoperstatus van een gebruiker ontnemen.</p>
+                        <p class="margin-bottom no-margin">Ten slotte hebben we nog een Rubrieken tabblad. In dit tabblad
+                            kunt U kleine aanpassingen aan de rubriekenboom maken.</p>
                         <br>
                     </div>
                     <div class="tab-pane fade" id="nav-Gebruiker" role="tabpanel" aria-labelledby="nav-gebruiker-tab">

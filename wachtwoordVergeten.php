@@ -13,6 +13,9 @@ $question = null;
 $questionCorrect = false;
 $openverzoek = false;
 if(isset($_POST['email'])){
+    if(check_if_mail($db, $_POST['email']) == false){
+        $foutmessage = 'Er bestaat geen account met dit email.';
+    }
     $question = get_user_question($_POST['email'],$db);
     $openverzoek = check_if_open_request_forgotten_password($db, $_POST['email']);
 }
@@ -20,7 +23,6 @@ if(isset($_POST['answer'])) {
     if (check_user_answer($_POST['email'], $_POST['answer'], $db) == true) {
         $questionCorrect = true;
         insert_password_forgotten_code($db, $_POST['email']);
-
     }
 }
 $code_matches=false;
@@ -145,6 +147,9 @@ else{
                 <?php } ?>
                 <div class="col-12">
                     <button class="btn btn-primary float-right">Verzenden</button>
+                    <?php if (isset($foutmessage)){
+                        echo '<p class="error-message">'.$foutmessage.'</p>';
+                    }?>
                 </div>
             </div>
         <?php } else if ($code_matches) { ?>

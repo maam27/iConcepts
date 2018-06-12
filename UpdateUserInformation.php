@@ -42,8 +42,7 @@ if(!empty($_POST['username']) AND !empty($_POST['first-name'])
             $_POST['address-field'], $_POST['address-field2'], $_POST['postcode'], $_POST['city'],
             $_POST['country'], $_POST['birth-date'], $_POST['e-mail'], $_POST['security-question'], $_POST['answer']
             );
-            $_SESSION['user'] = $_POST['username'];
-            redirect('gebruikersprofiel.php');
+        redirect('Gebruikersprofiel.php');
         }
 
 }
@@ -58,8 +57,8 @@ if(isset($_SESSION['user'])){
             <form method="Post" action="#">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>Gebruikersnaam:</p>
-                        <input id="username" name="username" type="text" placeholder="JohnDoe" pattern="([^<>])+" value='<?php echo $data2['Gebruikersnaam'] ?>' required>
+                        <p>Gebruikersnaam:*</p>
+                        <input id="username" name="username" type="text" placeholder="JohnDoe" pattern="([^<>])+" value='<?php echo $data2['Gebruikersnaam'] ?>' readonly required>
                         <br>
                         <p>Voornaam:</p>
                         <input id="first-name" name="first-name" type="text" placeholder="John" pattern="([^<>])+" value='<?php echo $data2['Voornaam'] ?>' required>
@@ -71,8 +70,8 @@ if(isset($_SESSION['user'])){
                         <input id="birth-date" name="birth-date" type="date" value='<?php
                         echo $data2['GeboorteDag']; ?>' required>
                         <br>
-                        <p>E-Mail:</p>
-                        <input id="e-mail" name="e-mail" type="email" placeholder="E-mail" pattern="([^<>])+" value='<?php echo $data2['Mailbox'] ?>' required>
+                        <p>E-Mail:*</p>
+                        <input id="e-mail" name="e-mail" type="email" placeholder="E-mail" pattern="([^<>])+" value='<?php echo $data2['Mailbox'] ?>' readonly required>
                         <br>
                         <p>Veiligheidsvraag: </p>
                         <select name="security-question">
@@ -82,6 +81,7 @@ if(isset($_SESSION['user'])){
                             }
                             ?>
                         </select>
+                        <p>Velden met een * kun je niet aanpassen.</p>
                     </div>
                     <div class="col-md-6">
                         <p>Land:</p>
