@@ -19,7 +19,7 @@ if (!empty($_SESSION['user'])) {
 }
 $succesvolletoevoeging = false;
 if (!empty($_POST['voorwerp-titel']) AND $_POST['beschrijving'] != '') {
-    echo print_r($_POST);
+//    print_r($_POST);
 
     if (add_auction($db, $_POST['voorwerp-titel'], $_POST['beschrijving'], $_POST['looptijd'], $_POST['country'], $_POST['city'], $_POST['start-price'], $_POST['paymentmethod'], $_POST['payment-instructions'],
         $_POST['shipment-cost'], $_POST['shipment-instructions'], $_SESSION['user'], ($voorwerpnummer = get_highest_auction_number($db) + 1))) {

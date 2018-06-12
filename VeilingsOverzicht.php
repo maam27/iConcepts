@@ -113,7 +113,7 @@ $Artikelen = get_category_view($db,$filter,$order,$page);
                                     </div>
                                     <div class="col-9">
                                         <div class="row">
-                                            <div class="col-8">
+                                            <div class="col-8 no-overflow">
                                                 <strong><?php echo_html_safe($kavel['Titel']); ?></strong>
                                             </div>
                                             <div class="col-4">
@@ -160,8 +160,14 @@ $Artikelen = get_category_view($db,$filter,$order,$page);
                                 if ($minPage != 1) {
                                     echo "<li class='page-item'><a class='page-link' href='VeilingsOverzicht.php?page=". 1 . $currentFilterPageless . "'><i class='fas fa-angle-double-left'></i></a></li>";
                                 }
-                                for($i=$minPage; $i<=$maxPage; $i++) {?>
-                                    <li class='page-item <?php if($i == $currentPage) echo "bold"; ?>'><a class='page-link' href='VeilingsOverzicht.php?page=<?=$i?><?=$currentFilterPageless?>'><?=$i?></a></li>
+                                for($i=$minPage; $i<=$maxPage; $i++) {
+                                    $additionalCss = "";
+                                    if($i == $currentPage)
+                                        $additionalCss .= " bold";
+                                    if($i > $currentPage+1 || $i < $currentPage -1)
+                                        $additionalCss .= ' d-none';
+                                    ?>
+                                    <li class='page-item d-md-block <?=$additionalCss?>'><a class='page-link' href='VeilingsOverzicht.php?page=<?=$i?><?=$currentFilterPageless?>'><?=$i?></a></li>
                                 <?php }
                                 if ($maxPage != $totalPages) {
                                     echo "<li class='page-item'><a class='page-link' href='VeilingsOverzicht.php?page=". $totalPages . $currentFilterPageless . "'><i class='fa fa-angle-double-right'></i></a></li>";

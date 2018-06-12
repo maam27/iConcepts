@@ -704,7 +704,7 @@ function print_product_block_small($product, $dbh){
     $number = $product['Voorwerpnummer'];
     $block = <<<product
     <div class="productblock">
-       <a href="Veilingspagina.php?voorwerp= $number" class="hidden-link">
+       <a href="Veilingspagina.php?voorwerp=$number" class="hidden-link">
             <div class="d-flex justify-content-center">
                 <img src="$productImg" alt="" class="img-thumbnail no-padding seperator-none"/>
             </div>
