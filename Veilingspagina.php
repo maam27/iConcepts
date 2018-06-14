@@ -105,6 +105,13 @@ if(isset($_POST)){
                         <?php if(!empty($veilinginformatie['Betalingsinstructie'])){
                             echo '<p><strong>Betalingsinstructie:</strong> '.return_html_safe($veilinginformatie['Betalingsinstructie']).'</p>';
                         } ?>
+                        <?php if(!empty($veilinginformatie['Verzendkosten'])){
+                            echo '<p><strong>Verzendkosten: </strong>'.return_html_safe($veilinginformatie['Verzendkosten']).' €</p>';
+                        }
+                        if(!empty($veilinginformatie['Verzendinstructies'])){
+                            echo '<p><strong>Verzendinstructies: </strong>'.return_html_safe($veilinginformatie['Verzendinstructies']).'</p>';
+                        }
+                        ?>
                         <p><strong>Gemiddelde beoordeling:</strong> <?php echo calculate_average_feedback_seller($db, $veilinginformatie['Gebruikersnaam'])?></p>
                         <a class="btn btn-primary" href="mailto:<?php echo_html_safe($veilinginformatie['Mailbox']);?>?Subject=Veiling%20<?php echo_html_safe($item['Titel']);?>">Mail de verkoper</a>
                     </div>

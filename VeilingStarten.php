@@ -235,7 +235,7 @@ else{
                         <label for="shipment-cost"><strong>Verzendkosten</strong></label><br>
                         <input class="col-7" <?php post_set('shipment-cost', 'post') ?>id="shipment-cost"
                                name="shipment-cost" type="number" min="0" value="0"><br>
-                        <label for="shipment-instructions"><strong>Betaalinstructie</strong></label>
+                        <label for="shipment-instructions"><strong>Verzendinstructie</strong></label>
                         <input id="shipment-instructions" name="shipment-instructions" type="text"
                                placeholder="Zelf ophalen" pattern="([^<>])+" maxlength="100">
 
