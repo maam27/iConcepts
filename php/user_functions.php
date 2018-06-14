@@ -300,7 +300,7 @@ function get_user($dbh, $username)
     }
 }
 
-function update_user($dbh, $username, $firstname, $lastname, $addressfield, $addressfield2, $postcode, $city, $country, $birthdate, $email, $securityquestion, $answer, $oudenaam)
+function update_user($dbh, $username, $firstname, $lastname, $addressfield, $addressfield2, $postcode, $city, $country, $birthdate, $email, $securityquestion, $answer)
 {
 
 
@@ -323,7 +323,7 @@ function update_user($dbh, $username, $firstname, $lastname, $addressfield, $add
                 ':mailbox' => $email,
                 ':vraag' => $securityquestion,
                 ':antwoordtekst' => $answer,
-                ':ingelogdeUser' => $oudenaam
+                ':ingelogdeUser' => $_SESSION['user']
             ]);
 
     } catch (PDOException $e) {
